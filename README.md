@@ -1,1 +1,1 @@
-This is the WebApp to control Jalousie on the windows at Room 709.
+This is the WebApp to control Jalousie on the windows at Room 709 in Optima Plaza Business center, Lviv, Ukraine ;)
