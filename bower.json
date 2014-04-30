@@ -1,0 +1,11 @@
+{
+  "name": "jalousie-remote",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass-official": "~3.1.0",
+    "fontawesome": "~4.0.3",
+    "jquery": "~1.11.0",
+    "underscore": "~1.6.0"
+  },
+  "devDependencies": {}
+}
