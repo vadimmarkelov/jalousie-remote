@@ -38,7 +38,7 @@ $(function(){
 				}
 			})
 			.always(function(){
-				_.defer(update);
+				setTimeout(update,500);
 			});
 	};
 
