@@ -29,7 +29,20 @@ $(function(){
 		});
 	});
 
+	//control if user is on the page
+	var pageHasBeenActive;
+	var AFhandler= function() {
+	  pageHasBeenActive=true;
+	  requestAnimationFrame(AFhandler);
+	};
+	AFhandler();
+
 	var update=function(){
+	    if(!pageHasBeenActive){
+	    	setTimeout(update,500);
+	    	return;
+	    }
+	    pageHasBeenActive=!pageHasBeenActive;
 		TheLog.getLog()
 			.done(function(data){
 				TheLogDisplay.show(data);

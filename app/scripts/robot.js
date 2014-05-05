@@ -5,7 +5,20 @@ $(function(){
 
   var tickIndicator=$('.progress .progress-bar');
   var timer=0;
+
+  //control if user is on the page
+  var pageHasBeenActive;
+  var AFhandler= function() {
+    pageHasBeenActive=true;
+    requestAnimationFrame(AFhandler);
+  };
+  AFhandler();
+
   var updateTick=function(){
+    if(!pageHasBeenActive){
+      return;
+    }
+    pageHasBeenActive=!pageHasBeenActive;
     timer+=5;
     tickIndicator.css('width',timer+'%');
     tickIndicator.attr('aria-valuenow',timer);
@@ -32,5 +45,4 @@ $(function(){
   };
 
   setInterval(updateTick,100);
-
 });
