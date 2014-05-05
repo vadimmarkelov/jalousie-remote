@@ -4,3 +4,5 @@ dist
 .sass-cache
 bower_components
 test/bower_components
+backend/config.php
+backend/e46525cb4e25b5fe64bce690b25989e35788df49-privatekey.p12
