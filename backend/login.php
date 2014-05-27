@@ -26,4 +26,7 @@
     $welcomeText="Hello!";
   }
 
+
+  $memcache = new Memcache;
+  
 ?>
