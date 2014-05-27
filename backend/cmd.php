@@ -29,7 +29,7 @@ switch($command){
 		
 		if($count==1){
 			$lastState=$memcache->get("lastState");
-			if($lastCommand===false)
+			if($lastState===false)
 				echo(jalousieModel::getLast($count, true));
 			else 
 				echo($lastState);				
