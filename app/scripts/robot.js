@@ -37,7 +37,8 @@ $(function(){
             $('body').css('background-color', 'green');
             break;
 
-        }
+        };
+        $('.user').html(data[0].user);
     })
     .fail(function(){
         console.log('Error: con not get the log');
