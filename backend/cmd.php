@@ -19,6 +19,7 @@ switch($command){
 		$model = new jalousieModel($command, $author);
 		$model->put(); // save the instance to the datastore
 		$memcache->set("lastState", '[{"currentState": "'.$command.'", "user": "'.$author.'"}]');
+		$memcache->delete("thelog");
 		return;
 	break;
 
@@ -34,7 +35,13 @@ switch($command){
 			else 
 				echo($lastState);				
 		} else {
-			echo(jalousieModel::getLast($count, true));
+			$cachedlog=$memcache->get("thelog");
+			if($cachedlog===false) {
+				$response=jalousieModel::getLast($count, true);
+				$memcache->set("thelog", $response);
+			} else 
+				$response=$cachedlog;
+			echo($response);
 		}
 
 		return;
