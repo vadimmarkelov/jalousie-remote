@@ -2,8 +2,10 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
+    <meta name="description" content="jalousie-remote">
+    <meta name="author" content="Vadim Markelov">
+
+    <title>Jalousie Remote by Vadim Markelov</title>
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
@@ -23,29 +25,30 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
+          <!-- <li><a ng-href="#/about">About</a></li> -->
+          <li><a href="https://plus.google.com/113499352046144719336" target="_blank">About</a></li>
+          <li><a class="loginbutton" ng-href="#">Login</a></li>
         </ul>
-        <h3 class="text-muted">jalousieRemote</h3>
+        <h3 class="text-muted">Jalousie Remote</h3>
       </div>
 
       <div ng-view=""></div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p>&copy; Vadim Markelov 2014</p>
+        <a href="https://plus.google.com/113499352046144719336" rel="publisher">Google+</a>
       </div>
     </div>
 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!-- Google Analytics -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
+       ga('create', 'UA-49618193-1');
        ga('send', 'pageview');
     </script>
 

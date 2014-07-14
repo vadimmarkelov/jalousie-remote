@@ -1,23 +1,25 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<div class="jumbotron user-not-logged">
+    <h1>Hello<span id="username"></span>!</h1>
+    <p class="lead">This is the WebApp to control Jalousie on the windows at Room 709.</p>
+    <p>
+        <div class="for-not-logged-user">
+            <p class="lead">Please login to get access on jalouse ;)</p>
+            <p><a class="btn btn-lg btn-success loginbutton" href="" role="button">Login with Googgle account</a></p>
+        </div>
+        <div class="for-logged-user">
+            <fieldset class="btn-group cmd-buttons">
+              <button href="#" class="btn btn-success cmd-button" role="button" data-cmd="open"><i class="fa fa-arrow-up"></i> Open up</button>
+              <button href="#" class="btn btn-warning cmd-button" role="button" data-cmd="close">Close down <i class="fa fa-arrow-down"></i></button>
+            </fieldset>
+        </div>
+    </p>
+    <div class="flex-video widescreen for-not-logged-user" style="margin: 0 auto;text-align:center;">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/SyHpKROwxLU?rel=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="flex-video widescreen for-logged-user" style="margin: 0 auto;text-align:center;">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/O-RPSf7oP98?rel=0" frameborder="0" allowfullscreen></iframe>
+    </div>
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+<div id="thelog" class="for-logged-user"></div>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
