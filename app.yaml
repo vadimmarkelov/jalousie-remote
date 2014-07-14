@@ -1,0 +1,34 @@
+application: jalousie-remote
+version: 20
+runtime: php
+api_version: 1
+
+handlers:
+- url: /styles
+  static_dir: dist/styles
+
+- url: /styles/fonts
+  static_dir: dist/styles/fonts
+
+- url: /scripts
+  static_dir: dist/scripts
+
+- url: /login
+  script: backend/loginCheck.php
+
+- url: /cmd
+  script: backend/cmd.php
+
+- url: /robot
+  script: dist/robot.html
+
+- url: .*
+  script: dist/index.html
+
+skip_files:
+- ^(test/.*)
+- ^(node_modules/.*)
+- ^(bower_componets/.*)
+- ^(app/.*)
+- ^(.tmp/.*)
+- ^(.sass-cache/.*)
