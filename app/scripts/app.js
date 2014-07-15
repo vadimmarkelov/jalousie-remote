@@ -8,14 +8,15 @@
  *
  * Main module of the application.
  */
-angular
+var jalousieRemoteApp=angular
   .module('jalousieRemoteApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'jm.i18next'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -23,11 +24,15 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .when('/loggeduser', {
+        templateUrl: 'views/loggeduser.html',
+        controller: 'MainCtrl'
       })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .run(['$rootScope', '$location', function ($rootScope, $location) {
+
+  }])
+;
