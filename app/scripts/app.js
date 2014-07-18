@@ -8,8 +8,7 @@
  *
  * Main module of the application.
  */
-var jalousieRemoteApp=angular
-  .module('jalousieRemoteApp', [
+angular.module('jalousieRemoteApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

@@ -1,0 +1,19 @@
+{
+    "authenticate": {
+        "hello" : "Hello",
+        "login": "Login with Googgle account",
+        "logout": "Logout"
+    },
+    "menu" : {
+        "about": "About"
+    },
+    "commands": {
+        "open": "Open up",
+        "close": "Close down"
+    },
+    "messages": {
+        "info": "This is the WebApp to control Jalousie on the windows at Room 709.",
+        "pleaselogin": "Please login to get access on jalouse ;)",
+        "loading": "Loading..."
+    }
+}
