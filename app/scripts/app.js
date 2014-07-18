@@ -15,17 +15,23 @@ angular.module('jalousieRemoteApp', [
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'jm.i18next'
+    'jm.i18next',
+    'RAFpolyfill'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+          userData: function (authenticate){
+            return authenticate.getUserData();
+          }
+        },
+        templateUrl: 'views/main.html'
       })
-      .when('/loggeduser', {
-        templateUrl: 'views/loggeduser.html',
-        controller: 'MainCtrl'
+      .when('/error', {
+        templateUrl: 'views/error.html',
+        controller: 'ErrorCtrl'
       })
       .otherwise({
         redirectTo: '/'

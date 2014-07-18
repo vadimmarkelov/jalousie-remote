@@ -8,7 +8,7 @@
  * Controller of the jalousieRemoteApp
  */
 angular.module('jalousieRemoteApp')
-  .controller('MainCtrl', function ($scope) {
-    
-    
-  });
+  .controller('MainCtrl',['$scope', 'userData', function ($scope, userData) {
+	$scope.userName = userData.author;
+	$scope.logged = userData.author !== '';
+  }]);
