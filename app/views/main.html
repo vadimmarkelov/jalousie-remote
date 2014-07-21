@@ -1,14 +1,14 @@
 <div class="jumbotron">
     <h1 ng-if="!logged">{{'authenticate.hello' | i18next}}!</h1>
-    <h1 ng-if="logged">{{'authenticate.hello' | i18next}},{{userName}}!</h1>
-    <p class="lead">{{'messages.info' | i18next}}</p>
-    <p>
+    <h1 ng-if="logged">{{'authenticate.hello' | i18next}}, {{userName}}!</h1>
+    <div class="lead">{{'messages.info' | i18next}}</div>
+    <div class="lead">
         <div ng-if="!logged">
-            <p class="lead">{{'messages.pleaselogin' | i18next}}</p>
-            <p><login-button class="btn btn-lg btn-success loginbutton" /></p>
+            <div class="lead">{{'messages.pleaselogin' | i18next}}</div>
+            <div><login-button class="btn btn-lg btn-success loginbutton" /></div>
         </div>
-        <commands ng-if="logged"/>
-    </p>
+        <commands ng-if="logged" />
+    </div>
     <div ng-if="!logged" class="flex-video widescreen" style="margin: 0 auto;text-align:center;">
         <iframe width="560" height="315" src="//www.youtube.com/embed/SyHpKROwxLU?rel=0" frameborder="0" allowfullscreen></iframe>
     </div>

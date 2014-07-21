@@ -16,30 +16,30 @@ angular.module('jalousieRemoteApp')
             author: null,
             //author: 'Vadim',
             url: '#'
-          };
+          },
+          def=$q.defer();
 
       var getUserData = function() {
         if(userData.author !== null){
-          var def=$q.defer();
           def.resolve(userData);
           return  def.promise;
         } else {
           if(request) {
-            return request;
+            return def.promise;
           } else {
             request = $http.get(httpUri)
               .success(function (data) {
                 angular.extend(userData,data);
-                return userData;
+                def.resolve(userData);
               })
               .error(function (error, status, headers) {
                 console.log('Login error');
                 request=null;
                 $location.path('/error');
-                return error;
+                def.reject(error);
               });
             }
-            return request;
+            return def.promise;
           }
       };
 

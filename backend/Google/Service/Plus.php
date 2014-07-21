@@ -37,7 +37,7 @@ class Google_Service_Plus extends Google_Service
   const PLUS_ME = "https://www.googleapis.com/auth/plus.me";
   /** View your email address. */
   const USERINFO_EMAIL = "https://www.googleapis.com/auth/userinfo.email";
-  /** View basic information about your account. */
+  /** View your basic profile info. */
   const USERINFO_PROFILE = "https://www.googleapis.com/auth/userinfo.profile";
 
   public $activities;
@@ -475,11 +475,11 @@ class Google_Service_Plus_Moments_Resource extends Google_Service_Resource
 {
 
   /**
-   * Record a moment representing a user's activity such as making a purchase or
+   * Record a moment representing a user's action such as making a purchase or
    * commenting on a blog. (moments.insert)
    *
    * @param string $userId
-   * The ID of the user to record activities for. The only valid values are "me" and the ID of the
+   * The ID of the user to record actions for. The only valid values are "me" and the ID of the
     * authenticated user.
    * @param string $collection
    * The collection to which to write moments.
@@ -2702,6 +2702,8 @@ class Google_Service_Plus_Moment extends Google_Model
 {
   public $id;
   public $kind;
+  protected $objectType = 'Google_Service_Plus_ItemScope';
+  protected $objectDataType = '';
   protected $resultType = 'Google_Service_Plus_ItemScope';
   protected $resultDataType = '';
   public $startDate;
@@ -2727,6 +2729,16 @@ class Google_Service_Plus_Moment extends Google_Model
   public function getKind()
   {
     return $this->kind;
+  }
+
+  public function setObject(Google_Service_Plus_ItemScope $object)
+  {
+    $this->object = $object;
+  }
+
+  public function getObject()
+  {
+    return $this->object;
   }
 
   public function setResult(Google_Service_Plus_ItemScope $result)
@@ -3443,7 +3455,18 @@ class Google_Service_Plus_PersonEmails extends Google_Model
 
 class Google_Service_Plus_PersonImage extends Google_Model
 {
+  public $isDefault;
   public $url;
+
+  public function setIsDefault($isDefault)
+  {
+    $this->isDefault = $isDefault;
+  }
+
+  public function getIsDefault()
+  {
+    return $this->isDefault;
+  }
 
   public function setUrl($url)
   {
@@ -3697,6 +3720,7 @@ class Google_Service_Plus_Place extends Google_Model
   protected $addressType = 'Google_Service_Plus_PlaceAddress';
   protected $addressDataType = '';
   public $displayName;
+  public $id;
   public $kind;
   protected $positionType = 'Google_Service_Plus_PlacePosition';
   protected $positionDataType = '';
@@ -3719,6 +3743,16 @@ class Google_Service_Plus_Place extends Google_Model
   public function getDisplayName()
   {
     return $this->displayName;
+  }
+
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+
+  public function getId()
+  {
+    return $this->id;
   }
 
   public function setKind($kind)

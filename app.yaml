@@ -13,6 +13,12 @@ handlers:
 - url: /scripts
   static_dir: dist/scripts
 
+- url: /views
+  static_dir: dist/views
+
+- url: /locales
+  static_dir: dist/locales
+
 - url: /login
   script: backend/loginCheck.php
 

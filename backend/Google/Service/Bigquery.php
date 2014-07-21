@@ -33,6 +33,8 @@ class Google_Service_Bigquery extends Google_Service
 {
   /** View and manage your data in Google BigQuery. */
   const BIGQUERY = "https://www.googleapis.com/auth/bigquery";
+  /** Insert data into Google BigQuery. */
+  const BIGQUERY_INSERTDATA = "https://www.googleapis.com/auth/bigquery.insertdata";
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM = "https://www.googleapis.com/auth/cloud-platform";
   /** Manage your data and permissions in Google Cloud Storage. */
@@ -775,7 +777,8 @@ class Google_Service_Bigquery_Tabledata_Resource extends Google_Service_Resource
 {
 
   /**
-   * Inserts the supplied rows into the table. (tabledata.insertAll)
+   * Streams data into BigQuery one record at a time without needing to run a load
+   * job. (tabledata.insertAll)
    *
    * @param string $projectId
    * Project ID of the destination table.
@@ -1581,6 +1584,7 @@ class Google_Service_Bigquery_JobConfiguration extends Google_Model
 
 class Google_Service_Bigquery_JobConfigurationExtract extends Google_Collection
 {
+  public $compression;
   public $destinationFormat;
   public $destinationUri;
   public $destinationUris;
@@ -1588,6 +1592,16 @@ class Google_Service_Bigquery_JobConfigurationExtract extends Google_Collection
   public $printHeader;
   protected $sourceTableType = 'Google_Service_Bigquery_TableReference';
   protected $sourceTableDataType = '';
+
+  public function setCompression($compression)
+  {
+    $this->compression = $compression;
+  }
+
+  public function getCompression()
+  {
+    return $this->compression;
+  }
 
   public function setDestinationFormat($destinationFormat)
   {
@@ -1889,6 +1903,7 @@ class Google_Service_Bigquery_JobConfigurationQuery extends Google_Model
   protected $defaultDatasetDataType = '';
   protected $destinationTableType = 'Google_Service_Bigquery_TableReference';
   protected $destinationTableDataType = '';
+  public $flattenResults;
   public $preserveNulls;
   public $priority;
   public $query;
@@ -1933,6 +1948,16 @@ class Google_Service_Bigquery_JobConfigurationQuery extends Google_Model
   public function getDestinationTable()
   {
     return $this->destinationTable;
+  }
+
+  public function setFlattenResults($flattenResults)
+  {
+    $this->flattenResults = $flattenResults;
+  }
+
+  public function getFlattenResults()
+  {
+    return $this->flattenResults;
   }
 
   public function setPreserveNulls($preserveNulls)
@@ -1986,13 +2011,15 @@ class Google_Service_Bigquery_JobConfigurationQuery extends Google_Model
   }
 }
 
-class Google_Service_Bigquery_JobConfigurationTableCopy extends Google_Model
+class Google_Service_Bigquery_JobConfigurationTableCopy extends Google_Collection
 {
   public $createDisposition;
   protected $destinationTableType = 'Google_Service_Bigquery_TableReference';
   protected $destinationTableDataType = '';
   protected $sourceTableType = 'Google_Service_Bigquery_TableReference';
   protected $sourceTableDataType = '';
+  protected $sourceTablesType = 'Google_Service_Bigquery_TableReference';
+  protected $sourceTablesDataType = 'array';
   public $writeDisposition;
 
   public function setCreateDisposition($createDisposition)
@@ -2023,6 +2050,16 @@ class Google_Service_Bigquery_JobConfigurationTableCopy extends Google_Model
   public function getSourceTable()
   {
     return $this->sourceTable;
+  }
+
+  public function setSourceTables($sourceTables)
+  {
+    $this->sourceTables = $sourceTables;
+  }
+
+  public function getSourceTables()
+  {
+    return $this->sourceTables;
   }
 
   public function setWriteDisposition($writeDisposition)

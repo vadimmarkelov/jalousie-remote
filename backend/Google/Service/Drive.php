@@ -119,7 +119,20 @@ class Google_Service_Drive extends Google_Service
             ),'list' => array(
               'path' => 'apps',
               'httpMethod' => 'GET',
-              'parameters' => array(),
+              'parameters' => array(
+                'languageCode' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'appFilterExtensions' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'appFilterMimeTypes' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
             ),
           )
         )
@@ -444,6 +457,10 @@ class Google_Service_Drive extends Google_Service
                   'required' => true,
                 ),
               ),
+            ),'emptyTrash' => array(
+              'path' => 'files/trash',
+              'httpMethod' => 'DELETE',
+              'parameters' => array(),
             ),'get' => array(
               'path' => 'files/{fileId}',
               'httpMethod' => 'GET',
@@ -511,6 +528,10 @@ class Google_Service_Drive extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
+                'corpus' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'projection' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -529,15 +550,23 @@ class Google_Service_Drive extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'convert' => array(
+                'addParents' => array(
                   'location' => 'query',
-                  'type' => 'boolean',
+                  'type' => 'string',
                 ),
                 'updateViewedDate' => array(
                   'location' => 'query',
                   'type' => 'boolean',
                 ),
+                'removeParents' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'setModifiedDate' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+                'convert' => array(
                   'location' => 'query',
                   'type' => 'boolean',
                 ),
@@ -609,15 +638,23 @@ class Google_Service_Drive extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'convert' => array(
+                'addParents' => array(
                   'location' => 'query',
-                  'type' => 'boolean',
+                  'type' => 'string',
                 ),
                 'updateViewedDate' => array(
                   'location' => 'query',
                   'type' => 'boolean',
                 ),
+                'removeParents' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'setModifiedDate' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+                'convert' => array(
                   'location' => 'query',
                   'type' => 'boolean',
                 ),
@@ -969,6 +1006,10 @@ class Google_Service_Drive extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'revision' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
               ),
             ),'update' => array(
               'path' => 'files/{fileId}/realtime',
@@ -1226,9 +1267,9 @@ class Google_Service_Drive_About_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool includeSubscribed
-   * When calculating the number of remaining change IDs, whether to include shared files and public
-    * files the user has opened. When set to false, this counts only change IDs for owned files and
-    * any shared or public files that the user has explictly added to a folder in Drive.
+   * When calculating the number of remaining change IDs, whether to include public files the user
+    * has opened and shared files. When set to false, this counts only change IDs for owned files and
+    * any shared or public files that the user has explicitly added to a folder they own.
    * @opt_param string maxChangeIdCount
    * Maximum number of remaining change IDs to count
    * @opt_param string startChangeId
@@ -1272,6 +1313,18 @@ class Google_Service_Drive_Apps_Resource extends Google_Service_Resource
    * Lists a user's installed apps. (apps.listApps)
    *
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param string languageCode
+   * A language or locale code, as defined by BCP 47, with some extensions from Unicode's LDML format
+    * (http://www.unicode.org/reports/tr35/).
+   * @opt_param string appFilterExtensions
+   * A comma-separated list of file extensions for open with filtering. All apps within the given app
+    * query scope which can open any of the given file extensions will be included in the response. If
+    * appFilterMimeTypes are provided as well, the result is a union of the two resulting app lists.
+   * @opt_param string appFilterMimeTypes
+   * A comma-separated list of MIME types for open with filtering. All apps within the given app
+    * query scope which can open any of the given MIME types will be included in the response. If
+    * appFilterExtensions are provided as well, the result is a union of the two resulting app lists.
    * @return Google_Service_Drive_AppList
    */
   public function listApps($optParams = array())
@@ -1313,9 +1366,9 @@ class Google_Service_Drive_Changes_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool includeSubscribed
-   * Whether to include shared files and public files the user has opened. When set to false, the
-    * list will include owned files plus any shared or public files the user has explictly added to a
-    * folder in Drive.
+   * Whether to include public files the user has opened and shared files. When set to false, the
+    * list only includes owned files plus any shared or public files the user has explicitly added to
+    * a folder they own.
    * @opt_param string startChangeId
    * Change ID to start listing changes from.
    * @opt_param bool includeDeleted
@@ -1339,9 +1392,9 @@ class Google_Service_Drive_Changes_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool includeSubscribed
-   * Whether to include shared files and public files the user has opened. When set to false, the
-    * list will include owned files plus any shared or public files the user has explictly added to a
-    * folder in Drive.
+   * Whether to include public files the user has opened and shared files. When set to false, the
+    * list only includes owned files plus any shared or public files the user has explicitly added to
+    * a folder they own.
    * @opt_param string startChangeId
    * Change ID to start listing changes from.
    * @opt_param bool includeDeleted
@@ -1645,6 +1698,17 @@ class Google_Service_Drive_Files_Resource extends Google_Service_Resource
     return $this->call('delete', array($params));
   }
   /**
+   * Permanently deletes all of the user's trashed files. (files.emptyTrash)
+   *
+   * @param array $optParams Optional parameters.
+   */
+  public function emptyTrash($optParams = array())
+  {
+    $params = array();
+    $params = array_merge($params, $optParams);
+    return $this->call('emptyTrash', array($params));
+  }
+  /**
    * Gets a file's metadata by ID. (files.get)
    *
    * @param string $fileId
@@ -1702,6 +1766,8 @@ class Google_Service_Drive_Files_Resource extends Google_Service_Resource
    * Query string for searching files.
    * @opt_param string pageToken
    * Page token for files.
+   * @opt_param string corpus
+   * The body of items (files/documents) to which the query applies.
    * @opt_param string projection
    * This parameter is deprecated and has no function.
    * @opt_param int maxResults
@@ -1723,12 +1789,16 @@ class Google_Service_Drive_Files_Resource extends Google_Service_Resource
    * @param Google_DriveFile $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool convert
-   * Whether to convert this file to the corresponding Google Docs format.
+   * @opt_param string addParents
+   * Comma-separated list of parent IDs to add.
    * @opt_param bool updateViewedDate
    * Whether to update the view date after successfully updating the file.
+   * @opt_param string removeParents
+   * Comma-separated list of parent IDs to remove.
    * @opt_param bool setModifiedDate
    * Whether to set the modified date with the supplied modified date.
+   * @opt_param bool convert
+   * Whether to convert this file to the corresponding Google Docs format.
    * @opt_param bool useContentAsIndexableText
    * Whether to use the content as indexable text.
    * @opt_param string ocrLanguage
@@ -1803,12 +1873,16 @@ class Google_Service_Drive_Files_Resource extends Google_Service_Resource
    * @param Google_DriveFile $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool convert
-   * Whether to convert this file to the corresponding Google Docs format.
+   * @opt_param string addParents
+   * Comma-separated list of parent IDs to add.
    * @opt_param bool updateViewedDate
    * Whether to update the view date after successfully updating the file.
+   * @opt_param string removeParents
+   * Comma-separated list of parent IDs to remove.
    * @opt_param bool setModifiedDate
    * Whether to set the modified date with the supplied modified date.
+   * @opt_param bool convert
+   * Whether to convert this file to the corresponding Google Docs format.
    * @opt_param bool useContentAsIndexableText
    * Whether to use the content as indexable text.
    * @opt_param string ocrLanguage
@@ -1995,7 +2069,8 @@ class Google_Service_Drive_Permissions_Resource extends Google_Service_Resource
    * @opt_param string emailMessage
    * A custom message to include in notification emails.
    * @opt_param bool sendNotificationEmails
-   * Whether to send notification emails when sharing to users or groups.
+   * Whether to send notification emails when sharing to users or groups. This parameter is ignored
+    * and an email is sent if the role is owner.
    * @return Google_Service_Drive_Permission
    */
   public function insert($fileId, Google_Service_Drive_Permission $postBody, $optParams = array())
@@ -2198,6 +2273,11 @@ class Google_Service_Drive_Realtime_Resource extends Google_Service_Resource
    * @param string $fileId
    * The ID of the file that the Realtime API data model is associated with.
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param int revision
+   * The revision of the Realtime API data model to export. Revisions start at 1 (the initial empty
+    * data model) and are incremented with each change. If this parameter is excluded, the most recent
+    * data model will be returned.
    */
   public function get($fileId, $optParams = array())
   {
@@ -2467,15 +2547,19 @@ class Google_Service_Drive_About extends Google_Collection
   protected $importFormatsDataType = 'array';
   public $isCurrentAppInstalled;
   public $kind;
+  public $languageCode;
   public $largestChangeId;
   protected $maxUploadSizesType = 'Google_Service_Drive_AboutMaxUploadSizes';
   protected $maxUploadSizesDataType = 'array';
   public $name;
   public $permissionId;
+  protected $quotaBytesByServiceType = 'Google_Service_Drive_AboutQuotaBytesByService';
+  protected $quotaBytesByServiceDataType = 'array';
   public $quotaBytesTotal;
   public $quotaBytesUsed;
   public $quotaBytesUsedAggregate;
   public $quotaBytesUsedInTrash;
+  public $quotaType;
   public $remainingChangeIds;
   public $rootFolderId;
   public $selfLink;
@@ -2562,6 +2646,16 @@ class Google_Service_Drive_About extends Google_Collection
     return $this->kind;
   }
 
+  public function setLanguageCode($languageCode)
+  {
+    $this->languageCode = $languageCode;
+  }
+
+  public function getLanguageCode()
+  {
+    return $this->languageCode;
+  }
+
   public function setLargestChangeId($largestChangeId)
   {
     $this->largestChangeId = $largestChangeId;
@@ -2602,6 +2696,16 @@ class Google_Service_Drive_About extends Google_Collection
     return $this->permissionId;
   }
 
+  public function setQuotaBytesByService($quotaBytesByService)
+  {
+    $this->quotaBytesByService = $quotaBytesByService;
+  }
+
+  public function getQuotaBytesByService()
+  {
+    return $this->quotaBytesByService;
+  }
+
   public function setQuotaBytesTotal($quotaBytesTotal)
   {
     $this->quotaBytesTotal = $quotaBytesTotal;
@@ -2640,6 +2744,16 @@ class Google_Service_Drive_About extends Google_Collection
   public function getQuotaBytesUsedInTrash()
   {
     return $this->quotaBytesUsedInTrash;
+  }
+
+  public function setQuotaType($quotaType)
+  {
+    $this->quotaType = $quotaType;
+  }
+
+  public function getQuotaType()
+  {
+    return $this->quotaType;
   }
 
   public function setRemainingChangeIds($remainingChangeIds)
@@ -2840,11 +2954,38 @@ class Google_Service_Drive_AboutMaxUploadSizes extends Google_Model
   }
 }
 
+class Google_Service_Drive_AboutQuotaBytesByService extends Google_Model
+{
+  public $bytesUsed;
+  public $serviceName;
+
+  public function setBytesUsed($bytesUsed)
+  {
+    $this->bytesUsed = $bytesUsed;
+  }
+
+  public function getBytesUsed()
+  {
+    return $this->bytesUsed;
+  }
+
+  public function setServiceName($serviceName)
+  {
+    $this->serviceName = $serviceName;
+  }
+
+  public function getServiceName()
+  {
+    return $this->serviceName;
+  }
+}
+
 class Google_Service_Drive_App extends Google_Collection
 {
   public $authorized;
   public $createInFolderTemplate;
   public $createUrl;
+  public $hasDriveWideScope;
   protected $iconsType = 'Google_Service_Drive_AppIcons';
   protected $iconsDataType = 'array';
   public $id;
@@ -2864,6 +3005,7 @@ class Google_Service_Drive_App extends Google_Collection
   public $supportsCreate;
   public $supportsImport;
   public $supportsMultiOpen;
+  public $supportsOfflineCreate;
   public $useByDefault;
 
   public function setAuthorized($authorized)
@@ -2894,6 +3036,16 @@ class Google_Service_Drive_App extends Google_Collection
   public function getCreateUrl()
   {
     return $this->createUrl;
+  }
+
+  public function setHasDriveWideScope($hasDriveWideScope)
+  {
+    $this->hasDriveWideScope = $hasDriveWideScope;
+  }
+
+  public function getHasDriveWideScope()
+  {
+    return $this->hasDriveWideScope;
   }
 
   public function setIcons($icons)
@@ -3076,6 +3228,16 @@ class Google_Service_Drive_App extends Google_Collection
     return $this->supportsMultiOpen;
   }
 
+  public function setSupportsOfflineCreate($supportsOfflineCreate)
+  {
+    $this->supportsOfflineCreate = $supportsOfflineCreate;
+  }
+
+  public function getSupportsOfflineCreate()
+  {
+    return $this->supportsOfflineCreate;
+  }
+
   public function setUseByDefault($useByDefault)
   {
     $this->useByDefault = $useByDefault;
@@ -3126,11 +3288,22 @@ class Google_Service_Drive_AppIcons extends Google_Model
 
 class Google_Service_Drive_AppList extends Google_Collection
 {
+  public $defaultAppIds;
   public $etag;
   protected $itemsType = 'Google_Service_Drive_App';
   protected $itemsDataType = 'array';
   public $kind;
   public $selfLink;
+
+  public function setDefaultAppIds($defaultAppIds)
+  {
+    $this->defaultAppIds = $defaultAppIds;
+  }
+
+  public function getDefaultAppIds()
+  {
+    return $this->defaultAppIds;
+  }
 
   public function setEtag($etag)
   {
@@ -4022,6 +4195,7 @@ class Google_Service_Drive_DriveFile extends Google_Collection
   protected $lastModifyingUserDataType = '';
   public $lastModifyingUserName;
   public $lastViewedByMeDate;
+  public $markedViewedByMeDate;
   public $md5Checksum;
   public $mimeType;
   public $modifiedByMeDate;
@@ -4033,18 +4207,23 @@ class Google_Service_Drive_DriveFile extends Google_Collection
   protected $ownersDataType = 'array';
   protected $parentsType = 'Google_Service_Drive_ParentReference';
   protected $parentsDataType = 'array';
+  protected $permissionsType = 'Google_Service_Drive_Permission';
+  protected $permissionsDataType = 'array';
   protected $propertiesType = 'Google_Service_Drive_Property';
   protected $propertiesDataType = 'array';
   public $quotaBytesUsed;
   public $selfLink;
   public $shared;
   public $sharedWithMeDate;
+  protected $sharingUserType = 'Google_Service_Drive_User';
+  protected $sharingUserDataType = '';
   protected $thumbnailType = 'Google_Service_Drive_DriveFileThumbnail';
   protected $thumbnailDataType = '';
   public $thumbnailLink;
   public $title;
   protected $userPermissionType = 'Google_Service_Drive_Permission';
   protected $userPermissionDataType = '';
+  public $version;
   public $webContentLink;
   public $webViewLink;
   public $writersCanShare;
@@ -4289,6 +4468,16 @@ class Google_Service_Drive_DriveFile extends Google_Collection
     return $this->lastViewedByMeDate;
   }
 
+  public function setMarkedViewedByMeDate($markedViewedByMeDate)
+  {
+    $this->markedViewedByMeDate = $markedViewedByMeDate;
+  }
+
+  public function getMarkedViewedByMeDate()
+  {
+    return $this->markedViewedByMeDate;
+  }
+
   public function setMd5Checksum($md5Checksum)
   {
     $this->md5Checksum = $md5Checksum;
@@ -4379,6 +4568,16 @@ class Google_Service_Drive_DriveFile extends Google_Collection
     return $this->parents;
   }
 
+  public function setPermissions($permissions)
+  {
+    $this->permissions = $permissions;
+  }
+
+  public function getPermissions()
+  {
+    return $this->permissions;
+  }
+
   public function setProperties($properties)
   {
     $this->properties = $properties;
@@ -4429,6 +4628,16 @@ class Google_Service_Drive_DriveFile extends Google_Collection
     return $this->sharedWithMeDate;
   }
 
+  public function setSharingUser(Google_Service_Drive_User $sharingUser)
+  {
+    $this->sharingUser = $sharingUser;
+  }
+
+  public function getSharingUser()
+  {
+    return $this->sharingUser;
+  }
+
   public function setThumbnail(Google_Service_Drive_DriveFileThumbnail $thumbnail)
   {
     $this->thumbnail = $thumbnail;
@@ -4467,6 +4676,16 @@ class Google_Service_Drive_DriveFile extends Google_Collection
   public function getUserPermission()
   {
     return $this->userPermission;
+  }
+
+  public function setVersion($version)
+  {
+    $this->version = $version;
+  }
+
+  public function getVersion()
+  {
+    return $this->version;
   }
 
   public function setWebContentLink($webContentLink)
@@ -5659,6 +5878,7 @@ class Google_Service_Drive_RevisionList extends Google_Collection
 class Google_Service_Drive_User extends Google_Model
 {
   public $displayName;
+  public $emailAddress;
   public $isAuthenticatedUser;
   public $kind;
   public $permissionId;
@@ -5673,6 +5893,16 @@ class Google_Service_Drive_User extends Google_Model
   public function getDisplayName()
   {
     return $this->displayName;
+  }
+
+  public function setEmailAddress($emailAddress)
+  {
+    $this->emailAddress = $emailAddress;
+  }
+
+  public function getEmailAddress()
+  {
+    return $this->emailAddress;
   }
 
   public function setIsAuthenticatedUser($isAuthenticatedUser)

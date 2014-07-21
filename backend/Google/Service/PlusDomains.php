@@ -33,7 +33,7 @@ class Google_Service_PlusDomains extends Google_Service
 {
   /** View your circles and the people and pages in them. */
   const PLUS_CIRCLES_READ = "https://www.googleapis.com/auth/plus.circles.read";
-  /** Manage your circles and add people and pages, who will be notified and may appear on your public Google+ profile. */
+  /** Manage your circles and add people and pages. People and pages you add to your circles will be notified. Others may see this information publicly. People you add to circles can use Hangouts with you.. */
   const PLUS_CIRCLES_WRITE = "https://www.googleapis.com/auth/plus.circles.write";
   /** Know your basic profile info and list of people in your circles.. */
   const PLUS_LOGIN = "https://www.googleapis.com/auth/plus.login";
@@ -49,7 +49,7 @@ class Google_Service_PlusDomains extends Google_Service
   const PLUS_STREAM_WRITE = "https://www.googleapis.com/auth/plus.stream.write";
   /** View your email address. */
   const USERINFO_EMAIL = "https://www.googleapis.com/auth/userinfo.email";
-  /** View basic information about your account. */
+  /** View your basic profile info. */
   const USERINFO_PROFILE = "https://www.googleapis.com/auth/userinfo.profile";
 
   public $activities;
@@ -3562,7 +3562,18 @@ class Google_Service_PlusDomains_PersonEmails extends Google_Model
 
 class Google_Service_PlusDomains_PersonImage extends Google_Model
 {
+  public $isDefault;
   public $url;
+
+  public function setIsDefault($isDefault)
+  {
+    $this->isDefault = $isDefault;
+  }
+
+  public function getIsDefault()
+  {
+    return $this->isDefault;
+  }
 
   public function setUrl($url)
   {
@@ -3816,6 +3827,7 @@ class Google_Service_PlusDomains_Place extends Google_Model
   protected $addressType = 'Google_Service_PlusDomains_PlaceAddress';
   protected $addressDataType = '';
   public $displayName;
+  public $id;
   public $kind;
   protected $positionType = 'Google_Service_PlusDomains_PlacePosition';
   protected $positionDataType = '';
@@ -3838,6 +3850,16 @@ class Google_Service_PlusDomains_Place extends Google_Model
   public function getDisplayName()
   {
     return $this->displayName;
+  }
+
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+
+  public function getId()
+  {
+    return $this->id;
   }
 
   public function setKind($kind)

@@ -1958,8 +1958,8 @@ class Google_Service_Directory_Tokens_Resource extends Google_Service_Resource
     return $this->call('get', array($params), "Google_Service_Directory_Token");
   }
   /**
-   * Returns the set of current, valid verification codes for the specified user.
-   * (tokens.listTokens)
+   * Returns the set of tokens specified user has issued to 3rd party
+   * applications. (tokens.listTokens)
    *
    * @param string $userKey
    * Identifies the user in the API request. The value can be the user's primary email address, alias
@@ -2696,13 +2696,14 @@ class Google_Service_Directory_Channel extends Google_Model
   }
 }
 
-class Google_Service_Directory_ChromeOsDevice extends Google_Model
+class Google_Service_Directory_ChromeOsDevice extends Google_Collection
 {
   public $annotatedLocation;
   public $annotatedUser;
   public $bootMode;
   public $deviceId;
   public $etag;
+  public $ethernetMacAddress;
   public $firmwareVersion;
   public $kind;
   public $lastEnrollmentTime;
@@ -2715,6 +2716,8 @@ class Google_Service_Directory_ChromeOsDevice extends Google_Model
   public $orgUnitPath;
   public $osVersion;
   public $platformVersion;
+  protected $recentUsersType = 'Google_Service_Directory_ChromeOsDeviceRecentUsers';
+  protected $recentUsersDataType = 'array';
   public $serialNumber;
   public $status;
   public $supportEndDate;
@@ -2768,6 +2771,16 @@ class Google_Service_Directory_ChromeOsDevice extends Google_Model
   public function getEtag()
   {
     return $this->etag;
+  }
+
+  public function setEthernetMacAddress($ethernetMacAddress)
+  {
+    $this->ethernetMacAddress = $ethernetMacAddress;
+  }
+
+  public function getEthernetMacAddress()
+  {
+    return $this->ethernetMacAddress;
   }
 
   public function setFirmwareVersion($firmwareVersion)
@@ -2890,6 +2903,16 @@ class Google_Service_Directory_ChromeOsDevice extends Google_Model
     return $this->platformVersion;
   }
 
+  public function setRecentUsers($recentUsers)
+  {
+    $this->recentUsers = $recentUsers;
+  }
+
+  public function getRecentUsers()
+  {
+    return $this->recentUsers;
+  }
+
   public function setSerialNumber($serialNumber)
   {
     $this->serialNumber = $serialNumber;
@@ -2928,6 +2951,32 @@ class Google_Service_Directory_ChromeOsDevice extends Google_Model
   public function getWillAutoRenew()
   {
     return $this->willAutoRenew;
+  }
+}
+
+class Google_Service_Directory_ChromeOsDeviceRecentUsers extends Google_Model
+{
+  public $email;
+  public $type;
+
+  public function setEmail($email)
+  {
+    $this->email = $email;
+  }
+
+  public function getEmail()
+  {
+    return $this->email;
+  }
+
+  public function setType($type)
+  {
+    $this->type = $type;
+  }
+
+  public function getType()
+  {
+    return $this->type;
   }
 }
 
@@ -3266,20 +3315,31 @@ class Google_Service_Directory_MobileDevice extends Google_Collection
 {
   protected $applicationsType = 'Google_Service_Directory_MobileDeviceApplications';
   protected $applicationsDataType = 'array';
+  public $basebandVersion;
+  public $buildNumber;
+  public $defaultLanguage;
+  public $deviceCompromisedStatus;
   public $deviceId;
   public $email;
   public $etag;
   public $firstSync;
   public $hardwareId;
+  public $imei;
+  public $kernelVersion;
   public $kind;
   public $lastSync;
+  public $managedAccountIsOnOwnerProfile;
+  public $meid;
   public $model;
   public $name;
+  public $networkOperator;
   public $os;
   public $resourceId;
+  public $serialNumber;
   public $status;
   public $type;
   public $userAgent;
+  public $wifiMacAddress;
 
   public function setApplications($applications)
   {
@@ -3289,6 +3349,46 @@ class Google_Service_Directory_MobileDevice extends Google_Collection
   public function getApplications()
   {
     return $this->applications;
+  }
+
+  public function setBasebandVersion($basebandVersion)
+  {
+    $this->basebandVersion = $basebandVersion;
+  }
+
+  public function getBasebandVersion()
+  {
+    return $this->basebandVersion;
+  }
+
+  public function setBuildNumber($buildNumber)
+  {
+    $this->buildNumber = $buildNumber;
+  }
+
+  public function getBuildNumber()
+  {
+    return $this->buildNumber;
+  }
+
+  public function setDefaultLanguage($defaultLanguage)
+  {
+    $this->defaultLanguage = $defaultLanguage;
+  }
+
+  public function getDefaultLanguage()
+  {
+    return $this->defaultLanguage;
+  }
+
+  public function setDeviceCompromisedStatus($deviceCompromisedStatus)
+  {
+    $this->deviceCompromisedStatus = $deviceCompromisedStatus;
+  }
+
+  public function getDeviceCompromisedStatus()
+  {
+    return $this->deviceCompromisedStatus;
   }
 
   public function setDeviceId($deviceId)
@@ -3341,6 +3441,26 @@ class Google_Service_Directory_MobileDevice extends Google_Collection
     return $this->hardwareId;
   }
 
+  public function setImei($imei)
+  {
+    $this->imei = $imei;
+  }
+
+  public function getImei()
+  {
+    return $this->imei;
+  }
+
+  public function setKernelVersion($kernelVersion)
+  {
+    $this->kernelVersion = $kernelVersion;
+  }
+
+  public function getKernelVersion()
+  {
+    return $this->kernelVersion;
+  }
+
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3359,6 +3479,26 @@ class Google_Service_Directory_MobileDevice extends Google_Collection
   public function getLastSync()
   {
     return $this->lastSync;
+  }
+
+  public function setManagedAccountIsOnOwnerProfile($managedAccountIsOnOwnerProfile)
+  {
+    $this->managedAccountIsOnOwnerProfile = $managedAccountIsOnOwnerProfile;
+  }
+
+  public function getManagedAccountIsOnOwnerProfile()
+  {
+    return $this->managedAccountIsOnOwnerProfile;
+  }
+
+  public function setMeid($meid)
+  {
+    $this->meid = $meid;
+  }
+
+  public function getMeid()
+  {
+    return $this->meid;
   }
 
   public function setModel($model)
@@ -3381,6 +3521,16 @@ class Google_Service_Directory_MobileDevice extends Google_Collection
     return $this->name;
   }
 
+  public function setNetworkOperator($networkOperator)
+  {
+    $this->networkOperator = $networkOperator;
+  }
+
+  public function getNetworkOperator()
+  {
+    return $this->networkOperator;
+  }
+
   public function setOs($os)
   {
     $this->os = $os;
@@ -3399,6 +3549,16 @@ class Google_Service_Directory_MobileDevice extends Google_Collection
   public function getResourceId()
   {
     return $this->resourceId;
+  }
+
+  public function setSerialNumber($serialNumber)
+  {
+    $this->serialNumber = $serialNumber;
+  }
+
+  public function getSerialNumber()
+  {
+    return $this->serialNumber;
   }
 
   public function setStatus($status)
@@ -3429,6 +3589,16 @@ class Google_Service_Directory_MobileDevice extends Google_Collection
   public function getUserAgent()
   {
     return $this->userAgent;
+  }
+
+  public function setWifiMacAddress($wifiMacAddress)
+  {
+    $this->wifiMacAddress = $wifiMacAddress;
+  }
+
+  public function getWifiMacAddress()
+  {
+    return $this->wifiMacAddress;
   }
 }
 
@@ -3958,23 +4128,19 @@ class Google_Service_Directory_Tokens extends Google_Collection
 
 class Google_Service_Directory_User extends Google_Collection
 {
-  protected $addressesType = 'Google_Service_Directory_UserAddress';
-  protected $addressesDataType = 'array';
+  public $addresses;
   public $agreedToTerms;
   public $aliases;
   public $changePasswordAtNextLogin;
   public $creationTime;
   public $customerId;
   public $deletionTime;
-  protected $emailsType = 'Google_Service_Directory_UserEmail';
-  protected $emailsDataType = 'array';
+  public $emails;
   public $etag;
-  protected $externalIdsType = 'Google_Service_Directory_UserExternalId';
-  protected $externalIdsDataType = 'array';
+  public $externalIds;
   public $hashFunction;
   public $id;
-  protected $imsType = 'Google_Service_Directory_UserIm';
-  protected $imsDataType = 'array';
+  public $ims;
   public $includeInGlobalAddressList;
   public $ipWhitelisted;
   public $isAdmin;
@@ -3986,14 +4152,11 @@ class Google_Service_Directory_User extends Google_Collection
   protected $nameDataType = '';
   public $nonEditableAliases;
   public $orgUnitPath;
-  protected $organizationsType = 'Google_Service_Directory_UserOrganization';
-  protected $organizationsDataType = 'array';
+  public $organizations;
   public $password;
-  protected $phonesType = 'Google_Service_Directory_UserPhone';
-  protected $phonesDataType = 'array';
+  public $phones;
   public $primaryEmail;
-  protected $relationsType = 'Google_Service_Directory_UserRelation';
-  protected $relationsDataType = 'array';
+  public $relations;
   public $suspended;
   public $suspensionReason;
   public $thumbnailPhotoUrl;

@@ -18,14 +18,14 @@ angular.module('jalousieRemoteApp', [
     'jm.i18next',
     'RAFpolyfill'
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
         controller: 'MainCtrl',
         resolve: {
-          userData: function (authenticate){
+          userData: ['authenticate', function (authenticate){
             return authenticate.getUserData();
-          }
+          }]
         },
         templateUrl: 'views/main.html'
       })
@@ -36,7 +36,7 @@ angular.module('jalousieRemoteApp', [
       .otherwise({
         redirectTo: '/'
       });
-  })
+  }])
   .run(['$rootScope', '$location', function ($rootScope, $location) {
 
   }])
