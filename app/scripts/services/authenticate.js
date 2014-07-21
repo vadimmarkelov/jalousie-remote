@@ -16,6 +16,7 @@ angular.module('jalousieRemoteApp')
             author: null,
             //author: 'Vadim',
             url: '#'
+            //url: 'abc'
           },
           def=$q.defer();
 
