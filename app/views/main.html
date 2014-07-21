@@ -17,5 +17,22 @@
     </div>
 </div>
 
-<div ng-if="logged" ng-controller="ThelogCtrl"></div>
+<div ng-if="logged" ng-controller="ThelogCtrl">
+    <table class="table table-striped" id="thelog">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Command</th>
+                <th>Time <i class="fa fa-spinner fa-spin" style="float: right;" title="Watching changes..."></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="command in commands">
+                <td>{{command.user}}</td>
+                <td>{{command.currentState}}</td>
+                <td>{{command.time}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 

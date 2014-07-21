@@ -26,6 +26,10 @@ angular.module('jm.i18next').config(['$i18nextProvider', function ($i18nextProvi
 // MIT license
 
 angular.module('RAFpolyfill',[])
+.factory('requestAnimationFrame',[function(){
+    'use strict';
+    return window.requestAnimationFrame;
+}])
 .run([function ()
 {
     'use strict';

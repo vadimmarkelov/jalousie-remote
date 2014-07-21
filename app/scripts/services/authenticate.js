@@ -13,8 +13,8 @@ angular.module('jalousieRemoteApp')
       var httpUri = RESTbase+'login',
           request = null,
           userData= {
-            //author: null,
-            author: 'Vadim',
+            author: null,
+            //author: 'Vadim',
             url: '#'
           };
 
