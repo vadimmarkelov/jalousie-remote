@@ -16,7 +16,8 @@ angular.module('jalousieRemoteApp', [
     'ngSanitize',
     'ngTouch',
     'jm.i18next',
-    'RAFpolyfill'
+    'RAFpolyfill',
+    'd3'
   ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider

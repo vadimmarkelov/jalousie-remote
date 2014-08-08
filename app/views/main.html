@@ -12,8 +12,9 @@
     <div ng-if="!logged" class="flex-video widescreen" style="margin: 0 auto;text-align:center;">
         <iframe width="560" height="315" src="//www.youtube.com/embed/SyHpKROwxLU?rel=0" frameborder="0" allowfullscreen></iframe>
     </div>
-    <div ng-if="logged" class="flex-video widescreen" style="margin: 0 auto;text-align:center;">
-        <iframe width="560" height="315" src="//www.youtube.com/embed/O-RPSf7oP98?rel=0" frameborder="0" allowfullscreen></iframe>
+    <div ng-if="logged">
+        <div class="lead">{{'messages.stats' | i18next}}</div>
+        <d3-bars data="d3Data" label="label" line-height="lineHeight"></d3-bars>
     </div>
 </div>
 
