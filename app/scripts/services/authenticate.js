@@ -13,10 +13,10 @@ angular.module('jalousieRemoteApp')
       var httpUri = RESTbase+'login',
           request = null,
           userData= {
-            author: null,
-            //author: 'Vadim',
-            url: '#'
-            //url: 'abc'
+            //author: null,
+            author: 'Vadim',
+            //url: '#'
+            url: 'abc'
           },
           def=$q.defer();
 

@@ -100,7 +100,7 @@ angular.module('jalousieRemoteApp')
                 .attr("x", function(d){
                 	return (d.up/(d.up+d.down))<0.3?(width):(15);
                 })
-                .text(function(d,i){return d[scope.label];});
+                .text(function(d,i){return '\uf007 '+d[scope.label];});
 
                 t1.append("text")
                 .attr('font-family', 'FontAwesome')
@@ -111,7 +111,7 @@ angular.module('jalousieRemoteApp')
                     return 5 + ((d.up/(d.up+d.down)))/(max/width);
                   })
                 .text(function(d,i){
-                	return ((d.up/(d.up+d.down))/(max/width))<0.3?'':'\uf062'+(d.up);
+                	return ((d.up/(d.up+d.down))/(max/width))<30?'':'\uf062 '+(d.up);
                 });
 
                 t1.append("text")
@@ -123,7 +123,7 @@ angular.module('jalousieRemoteApp')
                     return 15 + ((d.up/(d.up+d.down)))/(max/width);
                   })
                 .text(function(d,i){
-                	return ((1-(d.up/(d.up+d.down)))/(max/width))<0.3?'':(d.down)+'\uf063';
+                	return ((1-(d.up/(d.up+d.down)))/(max/width))<30?'':(d.down)+' \uf063';
                 });
 
           };
