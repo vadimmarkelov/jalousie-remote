@@ -17,7 +17,6 @@ angular.module('jalousieRemoteApp')
           onClick: "&"
         },
         link: function(scope, iElement, iAttrs) {
-        	console.log(scope);
           var svg = d3.select(iElement[0])
               .append("svg")
               .attr("width", "100%");

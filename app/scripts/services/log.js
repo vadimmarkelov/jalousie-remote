@@ -34,6 +34,10 @@ angular.module('jalousieRemoteApp')
         $http.get(httpUri+(commandCount?('&count='+commandCount):''))
                 .success(function (data) {
                   var newItems = getNewItems(data);
+                  if(newItems.length) {
+                      //send notification about some new activity of users
+                    });
+                  }
                   logCollection = data.slice(0,logLength);
                   if(newItems.length) {
                     def.notify(newItems);
