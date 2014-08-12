@@ -21,7 +21,6 @@ require_once 'Google/Cache/Memcache.php';
 require_once 'Google/Config.php';
 require_once 'Google/Collection.php';
 require_once 'Google/Exception.php';
-require_once 'Google/IO/Curl.php';
 require_once 'Google/IO/Stream.php';
 require_once 'Google/Model.php';
 require_once 'Google/Service.php';
@@ -36,8 +35,7 @@ require_once 'Google/Service/Resource.php';
  */
 class Google_Client
 {
-  const LIBVER = "1.0.5-beta";
-  const USER_AGENT_SUFFIX = "google-api-php-client/";
+  const LIBVER = "1.0.0-alpha";
   /**
    * @var Google_Auth_Abstract $auth
    */
@@ -62,6 +60,9 @@ class Google_Client
    * @var boolean $deferExecution
    */
   private $deferExecution = false;
+
+  // Scopes available for the added services
+  protected $availableScopes = array();
 
   /** @var array $scopes */
   // Scopes requested by the client
@@ -90,26 +91,25 @@ class Google_Client
     } else if ( !($config instanceof Google_Config)) {
       $config = new Google_Config();
 
+      // Automatically use Memcache if we're in AppEngine.
       if ($this->isAppEngine()) {
-        // Automatically use Memcache if we're in AppEngine.
         $config->setCacheClass('Google_Cache_Memcache');
-      }
-
-      if (version_compare(phpversion(), "5.3.4", "<=") || $this->isAppEngine()) {
-        // Automatically disable compress.zlib, as currently unsupported.
-        $config->setClassConfig('Google_Http_Request', 'disable_gzip', true);
-      }
-    }
-
-    if ($config->getIoClass() == Google_Config::USE_AUTO_IO_SELECTION) {
-      if (function_exists('curl_version') && function_exists('curl_exec')) {
-        $config->setIoClass("Google_IO_Curl");
-      } else {
-        $config->setIoClass("Google_IO_Stream");
       }
     }
 
     $this->config = $config;
+  }
+
+  /**
+   * Adds the scopes available for a service
+   */
+  public function addService($service, $version = false, $availableScopes = array())
+  {
+    if ($this->authenticated) {
+      throw new Google_Exception('Cant add services after having authenticated');
+    } else {
+      $this->availableScopes[$service] = $availableScopes;
+    }
   }
 
   /**
@@ -175,14 +175,16 @@ class Google_Client
   public function prepareScopes()
   {
     if (empty($this->requestedScopes)) {
-      throw new Google_Auth_Exception("No scopes specified");
+      foreach ($this->availableScopes as $service => $serviceScopes) {
+        array_push($this->requestedScopes, $serviceScopes[0]);
+      }
     }
     $scopes = implode(' ', $this->requestedScopes);
     return $scopes;
   }
 
   /**
-   * Set the OAuth 2.0 access token using the string that resulted from calling createAuthUrl()
+   * Set the OAuth 2.0 access token using the string that resulted from calling authenticate()
    * or Google_Client#getAccessToken().
    * @param string $accessToken JSON encoded string containing in the following format:
    * {"access_token":"TOKEN", "refresh_token":"TOKEN", "token_type":"Bearer",
@@ -190,7 +192,7 @@ class Google_Client
    */
   public function setAccessToken($accessToken)
   {
-    if ($accessToken == 'null') {
+    if ($accessToken == null || 'null' == $accessToken) {
       $accessToken = null;
     }
     $this->getAuth()->setAccessToken($accessToken);
@@ -250,7 +252,7 @@ class Google_Client
     // The response is json encoded, so could be the string null.
     // It is arguable whether this check should be here or lower
     // in the library.
-    return (null == $token || 'null' == $token || '[]' == $token) ? null : $token;
+    return (null == $token || 'null' == $token) ? null : $token;
   }
 
   /**
@@ -274,7 +276,7 @@ class Google_Client
 
   /**
    * @param string $accessType Possible values for access_type include:
-   *  {@code "offline"} to request offline access from the user.
+   *  {@code "offline"} to request offline access from the user. (This is the default value)
    *  {@code "online"} to request online access from the user.
    */
   public function setAccessType($accessType)
@@ -290,15 +292,6 @@ class Google_Client
   public function setApprovalPrompt($approvalPrompt)
   {
     $this->config->setApprovalPrompt($approvalPrompt);
-  }
-
-  /**
-   * Set the login hint, email address or sub id.
-   * @param string $loginHint
-   */
-  public function setLoginHint($loginHint)
-  {
-      $this->config->setLoginHint($loginHint);
   }
 
   /**
@@ -399,15 +392,15 @@ class Google_Client
   }
 
   /**
-   * Verify a JWT that was signed with your own certificates.
-   *
-   * @param $jwt the token
-   * @param $certs array of certificates
-   * @param $required_audience the expected consumer of the token
-   * @param [$issuer] the expected issues, defaults to Google
-   * @param [$max_expiry] the max lifetime of a token, defaults to MAX_TOKEN_LIFETIME_SECS
-   * @return token information if valid, false if not
-   */
+	 * Verify a JWT that was signed with your own certificates.
+	 *
+	 * @param $jwt the token
+	 * @param $certs array of certificates
+	 * @param $required_audience the expected consumer of the token
+	 * @param [$issuer] the expected issues, defaults to Google
+	 * @param [$max_expiry] the max lifetime of a token, defaults to MAX_TOKEN_LIFETIME_SECS
+	 * @return token information if valid, false if not
+	 */
   public function verifySignedJwt($id_token, $cert_location, $audience, $issuer, $max_expiry = null)
   {
     $auth = new Google_Auth_OAuth2($this);
@@ -425,33 +418,15 @@ class Google_Client
   }
 
   /**
-   * Set the scopes to be requested. Must be called before createAuthUrl().
-   * Will remove any previously configured scopes.
-   * @param array $scopes, ie: array('https://www.googleapis.com/auth/plus.login',
+   * This function allows you to overrule the automatically generated scopes,
+   * so that you can ask for more or less permission in the auth flow
+   * Set this before you call authenticate() though!
+   * @param array $scopes, ie: array('https://www.googleapis.com/auth/plus.me',
    * 'https://www.googleapis.com/auth/moderator')
    */
   public function setScopes($scopes)
   {
-    $this->requestedScopes = array();
-    $this->addScope($scopes);
-  }
-
-  /**
-   * This functions adds a scope to be requested as part of the OAuth2.0 flow.
-   * Will append any scopes not previously requested to the scope parameter.
-   * A single string will be treated as a scope to request. An array of strings
-   * will each be appended.
-   * @param $scope_or_scopes string|array e.g. "profile"
-   */
-  public function addScope($scope_or_scopes)
-  {
-    if (is_string($scope_or_scopes) && !in_array($scope_or_scopes, $this->requestedScopes)) {
-      $this->requestedScopes[] = $scope_or_scopes;
-    } else if (is_array($scope_or_scopes)) {
-      foreach ($scope_or_scopes as $scope) {
-        $this->addScope($scope);
-      }
-    }
+    $this->requestedScopes = is_string($scopes) ? explode(" ", $scopes) : $scopes;
   }
 
   /**
@@ -486,31 +461,6 @@ class Google_Client
   public function setDefer($defer)
   {
     $this->deferExecution = $defer;
-  }
-
-  /**
-   * Helper method to execute deferred HTTP requests.
-   *
-   * @returns object of the type of the expected class or array.
-   */
-  public function execute($request)
-  {
-    if ($request instanceof Google_Http_Request) {
-      $request->setUserAgent(
-          $this->getApplicationName()
-          . " " . self::USER_AGENT_SUFFIX
-          . $this->getLibraryVersion()
-      );
-      if (!$this->getClassConfig("Google_Http_Request", "disable_gzip")) {
-        $request->enableGzip();
-      }
-      $request->maybeMoveParametersToBody();
-      return Google_Http_REST::execute($this, $request);
-    } else if ($request instanceof Google_Http_Batch) {
-      return $request->execute();
-    } else {
-      throw new Google_Exception("Do not know how to execute this type of object.");
-    }
   }
 
   /**

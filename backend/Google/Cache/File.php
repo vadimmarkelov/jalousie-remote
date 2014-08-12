@@ -48,14 +48,14 @@ class Google_Cache_File extends Google_Cache_Abstract
 
     if ($expiration) {
       $mtime = filemtime($storageFile);
-      if ((time() - $mtime) >= $expiration) {
+      if (($now - $mtime) >= $expiration) {
         $this->delete($key);
         return false;
       }
     }
 
     if ($this->acquireReadLock($storageFile)) {
-      $data = fread($this->fh, filesize($storageFile));
+      $data = file_get_contents($storageFile);
       $data =  unserialize($data);
       $this->unlock($storageFile);
     }
@@ -70,7 +70,7 @@ class Google_Cache_File extends Google_Cache_Abstract
       // We serialize the whole request object, since we don't only want the
       // responseContent but also the postBody used, headers, size, etc.
       $data = serialize($value);
-      $result = fwrite($this->fh, $data);
+      $result = file_put_contents($storageFile, $data);
       $this->unlock($storageFile);
     }
   }

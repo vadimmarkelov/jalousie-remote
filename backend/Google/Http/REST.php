@@ -29,7 +29,8 @@ require_once 'Google/Utils/URITemplate.php';
 class Google_Http_REST
 {
   /**
-   * Executes a Google_Http_Request
+   * Executes a apiServiceRequest using a RESTful call by transforming it into
+   * an apiHttpRequest, and executed via apiIO::authenticatedRequest().
    *
    * @param Google_Client $client
    * @param Google_Http_Request $req
@@ -44,6 +45,7 @@ class Google_Http_REST
     return self::decodeHttpResponse($httpRequest);
   }
 
+  
   /**
    * Decode an HTTP Response.
    * @static
@@ -56,7 +58,7 @@ class Google_Http_REST
     $code = $response->getResponseHttpCode();
     $body = $response->getResponseBody();
     $decoded = null;
-
+    
     if ((intVal($code)) >= 300) {
       $decoded = json_decode($body, true);
       $err = 'Error calling ' . $response->getRequestMethod() . ' ' . $response->getUrl();
@@ -70,21 +72,17 @@ class Google_Http_REST
         $err .= ": ($code) $body";
       }
 
-      $errors = null;
-      // Specific check for APIs which don't return error details, such as Blogger.
-      if (isset($decoded['error']) && isset($decoded['error']['errors'])) {
-        $errors = $decoded['error']['errors'];
-      }
-
-      throw new Google_Service_Exception($err, $code, null, $errors);
+      throw new Google_Service_Exception($err, $code, null, $decoded['error']['errors']);
     }
-
+    
     // Only attempt to decode the response, if the response code wasn't (204) 'no content'
     if ($code != '204') {
       $decoded = json_decode($body, true);
       if ($decoded === null || $decoded === "") {
         throw new Google_Service_Exception("Invalid json in service response: $body");
       }
+
+      $decoded = isset($decoded['data']) ? $decoded['data'] : $decoded;
 
       if ($response->getExpectedClass()) {
         $class = $response->getExpectedClass();

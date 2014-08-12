@@ -13,7 +13,6 @@ angular.module('jalousieRemoteApp')
 	$scope.commands=[];
 
 	log.getLog().then(null, null, function(newItems){
-		console.log(newItems);
 		$scope.commands.unshift.apply($scope.commands, newItems);
 		$scope.commands.length = logLength;
 	});

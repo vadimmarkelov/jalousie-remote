@@ -31,24 +31,10 @@
  */
 class Google_Service_YouTube extends Google_Service
 {
-  /** Manage your YouTube account. */
-  const YOUTUBE = "https://www.googleapis.com/auth/youtube";
-  /** View your YouTube account. */
-  const YOUTUBE_READONLY = "https://www.googleapis.com/auth/youtube.readonly";
-  /** Manage your YouTube videos. */
-  const YOUTUBE_UPLOAD = "https://www.googleapis.com/auth/youtube.upload";
-  /** View and manage your assets and associated content on YouTube. */
-  const YOUTUBEPARTNER = "https://www.googleapis.com/auth/youtubepartner";
-  /** View private information of your YouTube channel relevant during the audit process with a YouTube partner. */
-  const YOUTUBEPARTNER_CHANNEL_AUDIT = "https://www.googleapis.com/auth/youtubepartner-channel-audit";
-
   public $activities;
   public $channelBanners;
-  public $channelSections;
   public $channels;
   public $guideCategories;
-  public $i18nLanguages;
-  public $i18nRegions;
   public $liveBroadcasts;
   public $liveStreams;
   public $playlistItems;
@@ -71,1227 +57,1044 @@ class Google_Service_YouTube extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'youtube/v3/';
     $this->version = 'v3';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/youtubepartner-channel-audit",
+      "https://www.googleapis.com/auth/youtube.readonly",
+      "https://www.googleapis.com/auth/youtube",
+      "https://www.googleapis.com/auth/youtubepartner",
+      "https://www.googleapis.com/auth/youtube.upload"
+    );
+    
     $this->serviceName = 'youtube';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->activities = new Google_Service_YouTube_Activities_Resource(
         $this,
         $this->serviceName,
         'activities',
         array(
-          'methods' => array(
-            'insert' => array(
-              'path' => 'activities',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "insert" => array(
+            'path' => "activities",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'activities',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+          ),"list" => array(
+            'path' => "activities",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'regionCode' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'publishedBefore' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'channelId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mine' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'home' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'publishedAfter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "regionCode" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "publishedBefore" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "channelId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "mine" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "home" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "publishedAfter" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->channelBanners = new Google_Service_YouTube_ChannelBanners_Resource(
         $this,
         $this->serviceName,
         'channelBanners',
         array(
-          'methods' => array(
-            'insert' => array(
-              'path' => 'channelBanners/insert',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
+    'methods' => array(
+          "insert" => array(
+            'path' => "channelBanners/insert",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),
-          )
+              ),
+          ),
         )
-    );
-    $this->channelSections = new Google_Service_YouTube_ChannelSections_Resource(
-        $this,
-        $this->serviceName,
-        'channelSections',
-        array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'channelSections',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'insert' => array(
-              'path' => 'channelSections',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-              ),
-            ),'list' => array(
-              'path' => 'channelSections',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'channelId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mine' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-              ),
-            ),'update' => array(
-              'path' => 'channelSections',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),
-          )
-        )
+    )
     );
     $this->channels = new Google_Service_YouTube_Channels_Resource(
         $this,
         $this->serviceName,
         'channels',
         array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'channels',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "list" => array(
+            'path' => "channels",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'managedByMe' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'forUsername' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mine' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mySubscribers' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'categoryId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'update' => array(
-              'path' => 'channels',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "managedByMe" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "forUsername" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "mine" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "mySubscribers" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "categoryId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "channels",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->guideCategories = new Google_Service_YouTube_GuideCategories_Resource(
         $this,
         $this->serviceName,
         'guideCategories',
         array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'guideCategories',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "list" => array(
+            'path' => "guideCategories",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'regionCode' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'hl' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
-        )
-    );
-    $this->i18nLanguages = new Google_Service_YouTube_I18nLanguages_Resource(
-        $this,
-        $this->serviceName,
-        'i18nLanguages',
-        array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'i18nLanguages',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'hl' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
+                "regionCode" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),
-          )
-        )
-    );
-    $this->i18nRegions = new Google_Service_YouTube_I18nRegions_Resource(
-        $this,
-        $this->serviceName,
-        'i18nRegions',
-        array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'i18nRegions',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'hl' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),
-          )
+                "hl" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->liveBroadcasts = new Google_Service_YouTube_LiveBroadcasts_Resource(
         $this,
         $this->serviceName,
         'liveBroadcasts',
         array(
-          'methods' => array(
-            'bind' => array(
-              'path' => 'liveBroadcasts/bind',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "bind" => array(
+            'path' => "liveBroadcasts/bind",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'streamId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'control' => array(
-              'path' => 'liveBroadcasts/control',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'displaySlate' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'offsetTimeMs' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'walltime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'delete' => array(
-              'path' => 'liveBroadcasts',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'insert' => array(
-              'path' => 'liveBroadcasts',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
+                "streamId" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'list' => array(
-              'path' => 'liveBroadcasts',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'broadcastStatus' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mine' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'transition' => array(
-              'path' => 'liveBroadcasts/transition',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'broadcastStatus' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+          ),"control" => array(
+            'path' => "liveBroadcasts/control",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'update' => array(
-              'path' => 'liveBroadcasts',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "offsetTimeMs" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "displaySlate" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"delete" => array(
+            'path' => "liveBroadcasts",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"insert" => array(
+            'path' => "liveBroadcasts",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"list" => array(
+            'path' => "liveBroadcasts",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "broadcastStatus" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "mine" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"transition" => array(
+            'path' => "liveBroadcasts/transition",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "broadcastStatus" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "liveBroadcasts",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->liveStreams = new Google_Service_YouTube_LiveStreams_Resource(
         $this,
         $this->serviceName,
         'liveStreams',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'liveStreams',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "liveStreams",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'liveStreams',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+          ),"insert" => array(
+            'path' => "liveStreams",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'liveStreams',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+          ),"list" => array(
+            'path' => "liveStreams",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mine' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'update' => array(
-              'path' => 'liveStreams',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "mine" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "liveStreams",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
     $this->playlistItems = new Google_Service_YouTube_PlaylistItems_Resource(
         $this,
         $this->serviceName,
         'playlistItems',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'playlistItems',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "playlistItems",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'playlistItems',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+          ),"insert" => array(
+            'path' => "playlistItems",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'playlistItems',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"list" => array(
+            'path' => "playlistItems",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'playlistId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'update' => array(
-              'path' => 'playlistItems',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "playlistId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "playlistItems",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
     $this->playlists = new Google_Service_YouTube_Playlists_Resource(
         $this,
         $this->serviceName,
         'playlists',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'playlists',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "playlists",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'playlists',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"insert" => array(
+            'path' => "playlists",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'playlists',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "onBehalfOfContentOwnerChannel" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"list" => array(
+            'path' => "playlists",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'channelId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mine' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'update' => array(
-              'path' => 'playlists',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "onBehalfOfContentOwnerChannel" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "channelId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "mine" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "playlists",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->search = new Google_Service_YouTube_Search_Resource(
         $this,
         $this->serviceName,
         'search',
         array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'search',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "list" => array(
+            'path' => "search",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'eventType' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'channelId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoSyndicated' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'channelType' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoCaption' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'publishedAfter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'forContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'regionCode' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'location' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'locationRadius' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoType' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'type' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'topicId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'publishedBefore' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoDimension' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoLicense' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'relatedToVideoId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoDefinition' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoDuration' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'forMine' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'q' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'safeSearch' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoEmbeddable' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoCategoryId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'order' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "eventType" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "channelId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoSyndicated" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "channelType" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoCaption" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "publishedAfter" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "forContentOwner" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "regionCode" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoType" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "type" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "topicId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "publishedBefore" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoDimension" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoLicense" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "relatedToVideoId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoDefinition" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoDuration" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "forMine" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "q" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "safeSearch" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoEmbeddable" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoCategoryId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "order" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->subscriptions = new Google_Service_YouTube_Subscriptions_Resource(
         $this,
         $this->serviceName,
         'subscriptions',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'subscriptions',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "subscriptions",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'subscriptions',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+          ),"insert" => array(
+            'path' => "subscriptions",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'subscriptions',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+          ),"list" => array(
+            'path' => "subscriptions",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'channelId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mine' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'forChannelId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mySubscribers' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'order' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "onBehalfOfContentOwnerChannel" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "channelId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "mine" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "forChannelId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "mySubscribers" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "order" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->thumbnails = new Google_Service_YouTube_Thumbnails_Resource(
         $this,
         $this->serviceName,
         'thumbnails',
         array(
-          'methods' => array(
-            'set' => array(
-              'path' => 'thumbnails/set',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'videoId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "set" => array(
+            'path' => "thumbnails/set",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "videoId" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->videoCategories = new Google_Service_YouTube_VideoCategories_Resource(
         $this,
         $this->serviceName,
         'videoCategories',
         array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'videoCategories',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "list" => array(
+            'path' => "videoCategories",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'regionCode' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'hl' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "regionCode" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "hl" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->videos = new Google_Service_YouTube_Videos_Resource(
         $this,
         $this->serviceName,
         'videos',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'videos',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "videos",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'getRating' => array(
-              'path' => 'videos/getRating',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'insert' => array(
-              'path' => 'videos',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'stabilize' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'notifySubscribers' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'autoLevels' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'videos',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+          ),"getRating" => array(
+            'path' => "videos/getRating",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'regionCode' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'locale' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'videoCategoryId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'chart' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'myRating' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'rate' => array(
-              'path' => 'videos/rate',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'rating' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'update' => array(
-              'path' => 'videos',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+          ),"insert" => array(
+            'path' => "videos",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "stabilize" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "onBehalfOfContentOwnerChannel" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "notifySubscribers" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "autoLevels" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"list" => array(
+            'path' => "videos",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "regionCode" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "locale" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "videoCategoryId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "chart" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "myRating" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"rate" => array(
+            'path' => "videos/rate",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "rating" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "videos",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "part" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->watermarks = new Google_Service_YouTube_Watermarks_Resource(
         $this,
         $this->serviceName,
         'watermarks',
         array(
-          'methods' => array(
-            'set' => array(
-              'path' => 'watermarks/set',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'channelId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "set" => array(
+            'path' => "watermarks/set",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "channelId" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'unset' => array(
-              'path' => 'watermarks/unset',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'channelId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"unset" => array(
+            'path' => "watermarks/unset",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "channelId" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "onBehalfOfContentOwner" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -1338,8 +1141,7 @@ class Google_Service_YouTube_Activities_Resource extends Google_Service_Resource
    * Returns a list of channel activity events that match the request criteria.
    * For example, you can retrieve events associated with a particular channel,
    * events associated with the user's subscriptions and Google+ friends, or the
-   * YouTube home page feed, which is customized for each user.
-   * (activities.listActivities)
+   * YouTube home page feed, which is customized for each user. (activities.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more activity resource properties
@@ -1438,139 +1240,6 @@ class Google_Service_YouTube_ChannelBanners_Resource extends Google_Service_Reso
 }
 
 /**
- * The "channelSections" collection of methods.
- * Typical usage is:
- *  <code>
- *   $youtubeService = new Google_Service_YouTube(...);
- *   $channelSections = $youtubeService->channelSections;
- *  </code>
- */
-class Google_Service_YouTube_ChannelSections_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Deletes a channelSection. (channelSections.delete)
-   *
-   * @param string $id
-   * The id parameter specifies the YouTube channelSection ID for the resource that is being deleted.
-    * In a channelSection resource, the id property specifies the YouTube channelSection ID.
-   * @param array $optParams Optional parameters.
-   */
-  public function delete($id, $optParams = array())
-  {
-    $params = array('id' => $id);
-    $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params));
-  }
-  /**
-   * Adds a channelSection for the authenticated user's channel.
-   * (channelSections.insert)
-   *
-   * @param string $part
-   * The part parameter serves two purposes in this operation. It identifies the properties that the
-    * write operation will set as well as the properties that the API response will include.
-  The part
-    * names that you can include in the parameter value are snippet and contentDetails.
-   * @param Google_ChannelSection $postBody
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
-   * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
-   * @return Google_Service_YouTube_ChannelSection
-   */
-  public function insert($part, Google_Service_YouTube_ChannelSection $postBody, $optParams = array())
-  {
-    $params = array('part' => $part, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_YouTube_ChannelSection");
-  }
-  /**
-   * Returns channelSection resources that match the API request criteria.
-   * (channelSections.listChannelSections)
-   *
-   * @param string $part
-   * The part parameter specifies a comma-separated list of one or more channelSection resource
-    * properties that the API response will include. The part names that you can include in the
-    * parameter value are id, snippet, and contentDetails.
-  If the parameter identifies a property
-    * that contains child properties, the child properties will be included in the response. For
-    * example, in a channelSection resource, the snippet property contains other properties, such as a
-    * display title for the channelSection. If you set part=snippet, the API response will also
-    * contain all of those nested properties.
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
-   * @opt_param string channelId
-   * The channelId parameter specifies a YouTube channel ID. The API will only return that channel's
-    * channelSections.
-   * @opt_param string id
-   * The id parameter specifies a comma-separated list of the YouTube channelSection ID(s) for the
-    * resource(s) that are being retrieved. In a channelSection resource, the id property specifies
-    * the YouTube channelSection ID.
-   * @opt_param bool mine
-   * Set this parameter's value to true to retrieve a feed of the authenticated user's
-    * channelSections.
-   * @return Google_Service_YouTube_ChannelSectionListResponse
-   */
-  public function listChannelSections($part, $optParams = array())
-  {
-    $params = array('part' => $part);
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTube_ChannelSectionListResponse");
-  }
-  /**
-   * Update a channelSection. (channelSections.update)
-   *
-   * @param string $part
-   * The part parameter serves two purposes in this operation. It identifies the properties that the
-    * write operation will set as well as the properties that the API response will include.
-  The part
-    * names that you can include in the parameter value are snippet and contentDetails.
-   * @param Google_ChannelSection $postBody
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_YouTube_ChannelSection
-   */
-  public function update($part, Google_Service_YouTube_ChannelSection $postBody, $optParams = array())
-  {
-    $params = array('part' => $part, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_YouTube_ChannelSection");
-  }
-}
-
-/**
  * The "channels" collection of methods.
  * Typical usage is:
  *  <code>
@@ -1583,7 +1252,7 @@ class Google_Service_YouTube_Channels_Resource extends Google_Service_Resource
 
   /**
    * Returns a collection of zero or more channel resources that match the request
-   * criteria. (channels.listChannels)
+   * criteria. (channels.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more channel resource properties
@@ -1683,7 +1352,7 @@ class Google_Service_YouTube_GuideCategories_Resource extends Google_Service_Res
 
   /**
    * Returns a list of categories that can be associated with YouTube channels.
-   * (guideCategories.listGuideCategories)
+   * (guideCategories.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more guideCategory resource
@@ -1716,70 +1385,6 @@ class Google_Service_YouTube_GuideCategories_Resource extends Google_Service_Res
 }
 
 /**
- * The "i18nLanguages" collection of methods.
- * Typical usage is:
- *  <code>
- *   $youtubeService = new Google_Service_YouTube(...);
- *   $i18nLanguages = $youtubeService->i18nLanguages;
- *  </code>
- */
-class Google_Service_YouTube_I18nLanguages_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Returns a list of supported languages. (i18nLanguages.listI18nLanguages)
-   *
-   * @param string $part
-   * The part parameter specifies a comma-separated list of one or more i18nLanguage resource
-    * properties that the API response will include. The part names that you can include in the
-    * parameter value are id and snippet.
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string hl
-   * The hl parameter specifies the language that should be used for text values in the API response.
-   * @return Google_Service_YouTube_I18nLanguageListResponse
-   */
-  public function listI18nLanguages($part, $optParams = array())
-  {
-    $params = array('part' => $part);
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTube_I18nLanguageListResponse");
-  }
-}
-
-/**
- * The "i18nRegions" collection of methods.
- * Typical usage is:
- *  <code>
- *   $youtubeService = new Google_Service_YouTube(...);
- *   $i18nRegions = $youtubeService->i18nRegions;
- *  </code>
- */
-class Google_Service_YouTube_I18nRegions_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Returns a list of supported regions. (i18nRegions.listI18nRegions)
-   *
-   * @param string $part
-   * The part parameter specifies a comma-separated list of one or more i18nRegion resource
-    * properties that the API response will include. The part names that you can include in the
-    * parameter value are id and snippet.
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string hl
-   * The hl parameter specifies the language that should be used for text values in the API response.
-   * @return Google_Service_YouTube_I18nRegionListResponse
-   */
-  public function listI18nRegions($part, $optParams = array())
-  {
-    $params = array('part' => $part);
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTube_I18nRegionListResponse");
-  }
-}
-
-/**
  * The "liveBroadcasts" collection of methods.
  * Typical usage is:
  *  <code>
@@ -1803,21 +1408,6 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
     * parameter value are id, snippet, contentDetails, and status.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
    * @opt_param string onBehalfOfContentOwner
    * Note: This parameter is intended exclusively for YouTube content partners.
   The
@@ -1863,23 +1453,6 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
     * their video and channel data, without having to provide authentication credentials for each
     * individual channel. The CMS account that the user authenticates with must be linked to the
     * specified YouTube content owner.
-   * @opt_param bool displaySlate
-   * The displaySlate parameter specifies whether the slate is being enabled or disabled.
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
    * @opt_param string offsetTimeMs
    * The offsetTimeMs parameter specifies a positive time offset when the specified slate change will
     * occur. The value is measured in milliseconds from the beginning of the broadcast's monitor
@@ -1891,9 +1464,8 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
     * for more details.
   Important: You should only specify a value for this parameter if your
     * broadcast stream is delayed.
-   * @opt_param string walltime
-   * The walltime parameter specifies the wall clock time at which the specified slate change will
-    * occur. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+   * @opt_param bool displaySlate
+   * The displaySlate parameter specifies whether the slate is being enabled or disabled.
    * @return Google_Service_YouTube_LiveBroadcast
    */
   public function control($id, $part, $optParams = array())
@@ -1909,21 +1481,6 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
    * The id parameter specifies the YouTube live broadcast ID for the resource that is being deleted.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
    * @opt_param string onBehalfOfContentOwner
    * Note: This parameter is intended exclusively for YouTube content partners.
   The
@@ -1953,21 +1510,6 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
    * @param Google_LiveBroadcast $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
    * @opt_param string onBehalfOfContentOwner
    * Note: This parameter is intended exclusively for YouTube content partners.
   The
@@ -1988,7 +1530,7 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
   }
   /**
    * Returns a list of YouTube broadcasts that match the API request parameters.
-   * (liveBroadcasts.listLiveBroadcasts)
+   * (liveBroadcasts.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more liveBroadcast resource
@@ -1999,31 +1541,6 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
    * @opt_param string broadcastStatus
    * The broadcastStatus parameter filters the API response to only include broadcasts with the
     * specified status.
-   * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
    * @opt_param bool mine
    * The mine parameter can be used to instruct the API to only return broadcasts owned by the
     * authenticated user. Set the parameter value to true to only retrieve your own broadcasts.
@@ -2067,21 +1584,6 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
     * parameter value are id, snippet, contentDetails, and status.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
    * @opt_param string onBehalfOfContentOwner
    * Note: This parameter is intended exclusively for YouTube content partners.
   The
@@ -2121,21 +1623,6 @@ class Google_Service_YouTube_LiveBroadcasts_Resource extends Google_Service_Reso
    * @param Google_LiveBroadcast $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
    * @opt_param string onBehalfOfContentOwner
    * Note: This parameter is intended exclusively for YouTube content partners.
   The
@@ -2173,32 +1660,6 @@ class Google_Service_YouTube_LiveStreams_Resource extends Google_Service_Resourc
    * @param string $id
    * The id parameter specifies the YouTube live stream ID for the resource that is being deleted.
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
-   * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
    */
   public function delete($id, $optParams = array())
   {
@@ -2217,32 +1678,6 @@ class Google_Service_YouTube_LiveStreams_Resource extends Google_Service_Resourc
     * properties that you can include in the parameter value are id, snippet, cdn, and status.
    * @param Google_LiveStream $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
-   * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
    * @return Google_Service_YouTube_LiveStream
    */
   public function insert($part, Google_Service_YouTube_LiveStream $postBody, $optParams = array())
@@ -2253,7 +1688,7 @@ class Google_Service_YouTube_LiveStreams_Resource extends Google_Service_Resourc
   }
   /**
    * Returns a list of video streams that match the API request parameters.
-   * (liveStreams.listLiveStreams)
+   * (liveStreams.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more liveStream resource
@@ -2261,37 +1696,6 @@ class Google_Service_YouTube_LiveStreams_Resource extends Google_Service_Resourc
     * parameter value are id, snippet, cdn, and status.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
-   * @opt_param bool mine
-   * The mine parameter can be used to instruct the API to only return streams owned by the
-    * authenticated user. Set the parameter value to true to only retrieve your own streams.
-   * @opt_param string maxResults
-   * The maxResults parameter specifies the maximum number of items that should be returned in the
-    * result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
    * @opt_param string pageToken
    * The pageToken parameter identifies a specific page in the result set that should be returned. In
     * an API response, the nextPageToken and prevPageToken properties identify other pages that could
@@ -2299,6 +1703,12 @@ class Google_Service_YouTube_LiveStreams_Resource extends Google_Service_Resourc
    * @opt_param string id
    * The id parameter specifies a comma-separated list of YouTube stream IDs that identify the
     * streams being retrieved. In a liveStream resource, the id property specifies the stream's ID.
+   * @opt_param string maxResults
+   * The maxResults parameter specifies the maximum number of items that should be returned in the
+    * result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
+   * @opt_param bool mine
+   * The mine parameter can be used to instruct the API to only return streams owned by the
+    * authenticated user. Set the parameter value to true to only retrieve your own streams.
    * @return Google_Service_YouTube_LiveStreamListResponse
    */
   public function listLiveStreams($part, $optParams = array())
@@ -2323,32 +1733,6 @@ class Google_Service_YouTube_LiveStreams_Resource extends Google_Service_Resourc
     * a value for a mutable property, the existing value for that property will be removed.
    * @param Google_LiveStream $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
-   * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
    * @return Google_Service_YouTube_LiveStream
    */
   public function update($part, Google_Service_YouTube_LiveStream $postBody, $optParams = array())
@@ -2396,15 +1780,7 @@ class Google_Service_YouTube_PlaylistItems_Resource extends Google_Service_Resou
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
+   * USE_DESCRIPTION --- channels:list:onBehalfOfContentOwner
    * @return Google_Service_YouTube_PlaylistItem
    */
   public function insert($part, Google_Service_YouTube_PlaylistItem $postBody, $optParams = array())
@@ -2416,8 +1792,7 @@ class Google_Service_YouTube_PlaylistItems_Resource extends Google_Service_Resou
   /**
    * Returns a collection of playlist items that match the API request parameters.
    * You can retrieve all of the playlist items in a specified playlist or
-   * retrieve one or more playlist items by their unique IDs.
-   * (playlistItems.listPlaylistItems)
+   * retrieve one or more playlist items by their unique IDs. (playlistItems.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more playlistItem resource
@@ -2431,15 +1806,7 @@ class Google_Service_YouTube_PlaylistItems_Resource extends Google_Service_Resou
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
+   * USE_DESCRIPTION --- channels:list:onBehalfOfContentOwner
    * @opt_param string playlistId
    * The playlistId parameter specifies the unique ID of the playlist for which you want to retrieve
     * playlist items. Note that even though this is an optional parameter, every request to retrieve
@@ -2514,15 +1881,7 @@ class Google_Service_YouTube_Playlists_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
+   * USE_DESCRIPTION --- videos:insert:onBehalfOfContentOwner
    */
   public function delete($id, $optParams = array())
   {
@@ -2542,30 +1901,9 @@ class Google_Service_YouTube_Playlists_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
+   * USE_DESCRIPTION --- videos:insert:onBehalfOfContentOwnerChannel
    * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
+   * USE_DESCRIPTION --- videos:insert:onBehalfOfContentOwner
    * @return Google_Service_YouTube_Playlist
    */
   public function insert($part, Google_Service_YouTube_Playlist $postBody, $optParams = array())
@@ -2577,45 +1915,23 @@ class Google_Service_YouTube_Playlists_Resource extends Google_Service_Resource
   /**
    * Returns a collection of playlists that match the API request parameters. For
    * example, you can retrieve all playlists that the authenticated user owns, or
-   * you can retrieve one or more playlists by their unique IDs.
-   * (playlists.listPlaylists)
+   * you can retrieve one or more playlists by their unique IDs. (playlists.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more playlist resource properties
     * that the API response will include. The part names that you can include in the parameter value
-    * are id, snippet, status, and contentDetails.
-  If the parameter identifies a property that
-    * contains child properties, the child properties will be included in the response. For example,
-    * in a playlist resource, the snippet property contains properties like author, title,
-    * description, tags, and timeCreated. As such, if you set part=snippet, the API response will
-    * contain all of those properties.
+    * are id, snippet, and status.
+  If the parameter identifies a property that contains child
+    * properties, the child properties will be included in the response. For example, in a playlist
+    * resource, the snippet property contains properties like author, title, description, tags, and
+    * timeCreated. As such, if you set part=snippet, the API response will contain all of those
+    * properties.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
+   * USE_DESCRIPTION --- videos:insert:onBehalfOfContentOwner
    * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
+   * USE_DESCRIPTION --- videos:insert:onBehalfOfContentOwnerChannel
    * @opt_param string channelId
    * This value indicates that the API should only return the specified channel's playlists.
    * @opt_param bool mine
@@ -2661,15 +1977,7 @@ class Google_Service_YouTube_Playlists_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
-   * Note: This parameter is intended exclusively for YouTube content partners.
-  The
-    * onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
-    * a YouTube CMS user who is acting on behalf of the content owner specified in the parameter
-    * value. This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and get access to all
-    * their video and channel data, without having to provide authentication credentials for each
-    * individual channel. The CMS account that the user authenticates with must be linked to the
-    * specified YouTube content owner.
+   * USE_DESCRIPTION --- videos:insert:onBehalfOfContentOwner
    * @return Google_Service_YouTube_Playlist
    */
   public function update($part, Google_Service_YouTube_Playlist $postBody, $optParams = array())
@@ -2695,7 +2003,7 @@ class Google_Service_YouTube_Search_Resource extends Google_Service_Resource
    * Returns a collection of search results that match the query parameters
    * specified in the API request. By default, a search result set identifies
    * matching video, channel, and playlist resources, but you can also configure
-   * queries to only retrieve a specific type of resource. (search.listSearch)
+   * queries to only retrieve a specific type of resource. (search.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more search resource properties
@@ -2747,17 +2055,6 @@ class Google_Service_YouTube_Search_Resource extends Google_Service_Resource
    * @opt_param string regionCode
    * The regionCode parameter instructs the API to return search results for the specified country.
     * The parameter value is an ISO 3166-1 alpha-2 country code.
-   * @opt_param string location
-   * The location parameter restricts a search to videos that have a geographical location specified
-    * in their metadata. The value is a string that specifies geographic latitude/longitude
-    * coordinates e.g. (37.42307,-122.08427)
-   * @opt_param string locationRadius
-   * The locationRadius, in conjunction with the location parameter, defines a geographic area. If
-    * the geographic coordinates associated with a video fall within that area, then the video may be
-    * included in search results. This parameter value must be a floating point number followed by a
-    * measurement unit. Valid measurement units are m, km, ft, and mi. For example, valid parameter
-    * values include 1500m, 5km, 10000ft, and 0.75mi. The API does not support locationRadius
-    * parameter values larger than 1000 kilometers.
    * @opt_param string videoType
    * The videoType parameter lets you restrict a search to a particular type of videos.
    * @opt_param string type
@@ -2862,7 +2159,7 @@ class Google_Service_YouTube_Subscriptions_Resource extends Google_Service_Resou
   }
   /**
    * Returns subscription resources that match the API request criteria.
-   * (subscriptions.listSubscriptions)
+   * (subscriptions.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more subscription resource
@@ -2886,20 +2183,7 @@ class Google_Service_YouTube_Subscriptions_Resource extends Google_Service_Resou
     * individual channel. The CMS account that the user authenticates with must be linked to the
     * specified YouTube content owner.
    * @opt_param string onBehalfOfContentOwnerChannel
-   * This parameter can only be used in a properly authorized request. Note: This parameter is
-    * intended exclusively for YouTube content partners.
-  The onBehalfOfContentOwnerChannel parameter
-    * specifies the YouTube channel ID of the channel to which a video is being added. This parameter
-    * is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it
-    * can only be used in conjunction with that parameter. In addition, the request must be authorized
-    * using a CMS account that is linked to the content owner that the onBehalfOfContentOwner
-    * parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value
-    * specifies must be linked to the content owner that the onBehalfOfContentOwner parameter
-    * specifies.
-  This parameter is intended for YouTube content partners that own and manage many
-    * different YouTube channels. It allows content owners to authenticate once and perform actions on
-    * behalf of the channel specified in the parameter value, without having to provide authentication
-    * credentials for each separate channel.
+   * USE_DESCRIPTION --- videos:insert:onBehalfOfContentOwnerChannel
    * @opt_param string channelId
    * The channelId parameter specifies a YouTube channel ID. The API will only return that channel's
     * subscriptions.
@@ -2956,12 +2240,7 @@ class Google_Service_YouTube_Thumbnails_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
-   * The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf
-    * of the content owner specified in the parameter value. This parameter is intended for YouTube
-    * content partners that own and manage many different YouTube channels. It allows content owners
-    * to authenticate once and get access to all their video and channel data, without having to
-    * provide authentication credentials for each individual channel. The actual CMS account that the
-    * user authenticates with needs to be linked to the specified YouTube content owner.
+   * USE_DESCRIPTION --- channels:list:onBehalfOfContentOwner
    * @return Google_Service_YouTube_ThumbnailSetResponse
    */
   public function set($videoId, $optParams = array())
@@ -2985,7 +2264,7 @@ class Google_Service_YouTube_VideoCategories_Resource extends Google_Service_Res
 
   /**
    * Returns a list of categories that can be associated with YouTube videos.
-   * (videoCategories.listVideoCategories)
+   * (videoCategories.list)
    *
    * @param string $part
    * The part parameter specifies the videoCategory resource parts that the API response will
@@ -3083,12 +2362,12 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
     * write operation will set as well as the properties that the API response will include.
   The part
     * names that you can include in the parameter value are snippet, contentDetails, fileDetails,
-    * liveStreamingDetails, player, processingDetails, recordingDetails, statistics, status,
-    * suggestions, and topicDetails. However, not all of those parts contain properties that can be
-    * set when setting or updating a video's metadata. For example, the statistics object encapsulates
-    * statistics that YouTube calculates for a video and does not contain values that you can set or
-    * modify. If the parameter value specifies a part that does not contain mutable values, that part
-    * will still be included in the API response.
+    * player, processingDetails, recordingDetails, statistics, status, suggestions, and topicDetails.
+    * However, not all of those parts contain properties that can be set when setting or updating a
+    * video's metadata. For example, the statistics object encapsulates statistics that YouTube
+    * calculates for a video and does not contain values that you can set or modify. If the parameter
+    * value specifies a part that does not contain mutable values, that part will still be included in
+    * the API response.
    * @param Google_Video $postBody
    * @param array $optParams Optional parameters.
    *
@@ -3135,19 +2414,18 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_YouTube_Video");
   }
   /**
-   * Returns a list of videos that match the API request parameters.
-   * (videos.listVideos)
+   * Returns a list of videos that match the API request parameters. (videos.list)
    *
    * @param string $part
    * The part parameter specifies a comma-separated list of one or more video resource properties
     * that the API response will include. The part names that you can include in the parameter value
-    * are id, snippet, contentDetails, fileDetails, liveStreamingDetails, player, processingDetails,
-    * recordingDetails, statistics, status, suggestions, and topicDetails.
-  If the parameter
-    * identifies a property that contains child properties, the child properties will be included in
-    * the response. For example, in a video resource, the snippet property contains the channelId,
-    * title, description, tags, and categoryId properties. As such, if you set part=snippet, the API
-    * response will contain all of those properties.
+    * are id, snippet, contentDetails, fileDetails, player, processingDetails, recordingDetails,
+    * statistics, status, suggestions, and topicDetails.
+  If the parameter identifies a property that
+    * contains child properties, the child properties will be included in the response. For example,
+    * in a video resource, the snippet property contains the channelId, title, description, tags, and
+    * categoryId properties. As such, if you set part=snippet, the API response will contain all of
+    * those properties.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
@@ -3162,8 +2440,8 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
     * specified YouTube content owner.
    * @opt_param string regionCode
    * The regionCode parameter instructs the API to select a video chart available in the specified
-    * region. This parameter can only be used in conjunction with the chart parameter. The parameter
-    * value is an ISO 3166-1 alpha-2 country code.
+    * region. If using this parameter, chart must also be set. The parameter value is an ISO 3166-1
+    * alpha-2 country code.
    * @opt_param string locale
    * DEPRECATED
    * @opt_param string videoCategoryId
@@ -3233,20 +2511,19 @@ class Google_Service_YouTube_Videos_Resource extends Google_Service_Resource
     * write operation will set as well as the properties that the API response will include.
   The part
     * names that you can include in the parameter value are snippet, contentDetails, fileDetails,
-    * liveStreamingDetails, player, processingDetails, recordingDetails, statistics, status,
-    * suggestions, and topicDetails.
-  Note that this method will override the existing values for all
-    * of the mutable properties that are contained in any parts that the parameter value specifies.
-    * For example, a video's privacy setting is contained in the status part. As such, if your request
-    * is updating a private video, and the request's part parameter value includes the status part,
-    * the video's privacy setting will be updated to whatever value the request body specifies. If the
-    * request body does not specify a value, the existing privacy setting will be removed and the
-    * video will revert to the default privacy setting.
-  In addition, not all of those parts contain
-    * properties that can be set when setting or updating a video's metadata. For example, the
-    * statistics object encapsulates statistics that YouTube calculates for a video and does not
-    * contain values that you can set or modify. If the parameter value specifies a part that does not
-    * contain mutable values, that part will still be included in the API response.
+    * player, processingDetails, recordingDetails, statistics, status, suggestions, and topicDetails.
+    * Note that this method will override the existing values for all of the mutable properties that
+    * are contained in any parts that the parameter value specifies. For example, a video's privacy
+    * setting is contained in the status part. As such, if your request is updating a private video,
+    * and the request's part parameter value includes the status part, the video's privacy setting
+    * will be updated to whatever value the request body specifies. If the request body does not
+    * specify a value, the existing privacy setting will be removed and the video will revert to the
+    * default privacy setting.
+  In addition, not all of those parts contain properties that can be set
+    * when setting or updating a video's metadata. For example, the statistics object encapsulates
+    * statistics that YouTube calculates for a video and does not contain values that you can set or
+    * modify. If the parameter value specifies a part that does not contain mutable values, that part
+    * will still be included in the API response.
    * @param Google_Video $postBody
    * @param array $optParams Optional parameters.
    *
@@ -3292,12 +2569,7 @@ class Google_Service_YouTube_Watermarks_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
-   * The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf
-    * of the content owner specified in the parameter value. This parameter is intended for YouTube
-    * content partners that own and manage many different YouTube channels. It allows content owners
-    * to authenticate once and get access to all their video and channel data, without having to
-    * provide authentication credentials for each individual channel. The actual CMS account that the
-    * user authenticates with needs to be linked to the specified YouTube content owner.
+   * USE_DESCRIPTION --- channels:list:onBehalfOfContentOwner
    */
   public function set($channelId, Google_Service_YouTube_InvideoBranding $postBody, $optParams = array())
   {
@@ -3306,19 +2578,14 @@ class Google_Service_YouTube_Watermarks_Resource extends Google_Service_Resource
     return $this->call('set', array($params));
   }
   /**
-   * Deletes a watermark. (watermarks.unsetWatermarks)
+   * Deletes a watermark. (watermarks.unset)
    *
    * @param string $channelId
    * The channelId parameter specifies a YouTube channel ID for which the watermark is being unset.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string onBehalfOfContentOwner
-   * The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf
-    * of the content owner specified in the parameter value. This parameter is intended for YouTube
-    * content partners that own and manage many different YouTube channels. It allows content owners
-    * to authenticate once and get access to all their video and channel data, without having to
-    * provide authentication credentials for each individual channel. The actual CMS account that the
-    * user authenticates with needs to be linked to the specified YouTube content owner.
+   * USE_DESCRIPTION --- channels:list:onBehalfOfContentOwner
    */
   public function unsetWatermarks($channelId, $optParams = array())
   {
@@ -3345,7 +2612,7 @@ class Google_Service_YouTube_AccessPolicy extends Google_Collection
   {
     return $this->allowed;
   }
-
+  
   public function setException($exception)
   {
     $this->exception = $exception;
@@ -3355,6 +2622,7 @@ class Google_Service_YouTube_AccessPolicy extends Google_Collection
   {
     return $this->exception;
   }
+  
 }
 
 class Google_Service_YouTube_Activity extends Google_Model
@@ -3376,7 +2644,7 @@ class Google_Service_YouTube_Activity extends Google_Model
   {
     return $this->contentDetails;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -3386,7 +2654,7 @@ class Google_Service_YouTube_Activity extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -3396,7 +2664,7 @@ class Google_Service_YouTube_Activity extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3406,7 +2674,7 @@ class Google_Service_YouTube_Activity extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_ActivitySnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -3416,6 +2684,7 @@ class Google_Service_YouTube_Activity extends Google_Model
   {
     return $this->snippet;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetails extends Google_Model
@@ -3452,7 +2721,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->bulletin;
   }
-
+  
   public function setChannelItem(Google_Service_YouTube_ActivityContentDetailsChannelItem $channelItem)
   {
     $this->channelItem = $channelItem;
@@ -3462,7 +2731,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->channelItem;
   }
-
+  
   public function setComment(Google_Service_YouTube_ActivityContentDetailsComment $comment)
   {
     $this->comment = $comment;
@@ -3472,7 +2741,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->comment;
   }
-
+  
   public function setFavorite(Google_Service_YouTube_ActivityContentDetailsFavorite $favorite)
   {
     $this->favorite = $favorite;
@@ -3482,7 +2751,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->favorite;
   }
-
+  
   public function setLike(Google_Service_YouTube_ActivityContentDetailsLike $like)
   {
     $this->like = $like;
@@ -3492,7 +2761,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->like;
   }
-
+  
   public function setPlaylistItem(Google_Service_YouTube_ActivityContentDetailsPlaylistItem $playlistItem)
   {
     $this->playlistItem = $playlistItem;
@@ -3502,7 +2771,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->playlistItem;
   }
-
+  
   public function setPromotedItem(Google_Service_YouTube_ActivityContentDetailsPromotedItem $promotedItem)
   {
     $this->promotedItem = $promotedItem;
@@ -3512,7 +2781,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->promotedItem;
   }
-
+  
   public function setRecommendation(Google_Service_YouTube_ActivityContentDetailsRecommendation $recommendation)
   {
     $this->recommendation = $recommendation;
@@ -3522,7 +2791,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->recommendation;
   }
-
+  
   public function setSocial(Google_Service_YouTube_ActivityContentDetailsSocial $social)
   {
     $this->social = $social;
@@ -3532,7 +2801,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->social;
   }
-
+  
   public function setSubscription(Google_Service_YouTube_ActivityContentDetailsSubscription $subscription)
   {
     $this->subscription = $subscription;
@@ -3542,7 +2811,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->subscription;
   }
-
+  
   public function setUpload(Google_Service_YouTube_ActivityContentDetailsUpload $upload)
   {
     $this->upload = $upload;
@@ -3552,6 +2821,7 @@ class Google_Service_YouTube_ActivityContentDetails extends Google_Model
   {
     return $this->upload;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsBulletin extends Google_Model
@@ -3568,6 +2838,7 @@ class Google_Service_YouTube_ActivityContentDetailsBulletin extends Google_Model
   {
     return $this->resourceId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsChannelItem extends Google_Model
@@ -3584,6 +2855,7 @@ class Google_Service_YouTube_ActivityContentDetailsChannelItem extends Google_Mo
   {
     return $this->resourceId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsComment extends Google_Model
@@ -3600,6 +2872,7 @@ class Google_Service_YouTube_ActivityContentDetailsComment extends Google_Model
   {
     return $this->resourceId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsFavorite extends Google_Model
@@ -3616,6 +2889,7 @@ class Google_Service_YouTube_ActivityContentDetailsFavorite extends Google_Model
   {
     return $this->resourceId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsLike extends Google_Model
@@ -3632,6 +2906,7 @@ class Google_Service_YouTube_ActivityContentDetailsLike extends Google_Model
   {
     return $this->resourceId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsPlaylistItem extends Google_Model
@@ -3650,7 +2925,7 @@ class Google_Service_YouTube_ActivityContentDetailsPlaylistItem extends Google_M
   {
     return $this->playlistId;
   }
-
+  
   public function setPlaylistItemId($playlistItemId)
   {
     $this->playlistItemId = $playlistItemId;
@@ -3660,7 +2935,7 @@ class Google_Service_YouTube_ActivityContentDetailsPlaylistItem extends Google_M
   {
     return $this->playlistItemId;
   }
-
+  
   public function setResourceId(Google_Service_YouTube_ResourceId $resourceId)
   {
     $this->resourceId = $resourceId;
@@ -3670,6 +2945,7 @@ class Google_Service_YouTube_ActivityContentDetailsPlaylistItem extends Google_M
   {
     return $this->resourceId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_Collection
@@ -3681,8 +2957,8 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   public $customCtaButtonText;
   public $descriptionText;
   public $destinationUrl;
-  public $forecastingUrl;
-  public $impressionUrl;
+  public $forecastingUrls;
+  public $impressionUrls;
   public $videoId;
 
   public function setAdTag($adTag)
@@ -3694,7 +2970,7 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   {
     return $this->adTag;
   }
-
+  
   public function setClickTrackingUrl($clickTrackingUrl)
   {
     $this->clickTrackingUrl = $clickTrackingUrl;
@@ -3704,7 +2980,7 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   {
     return $this->clickTrackingUrl;
   }
-
+  
   public function setCreativeViewUrl($creativeViewUrl)
   {
     $this->creativeViewUrl = $creativeViewUrl;
@@ -3714,7 +2990,7 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   {
     return $this->creativeViewUrl;
   }
-
+  
   public function setCtaType($ctaType)
   {
     $this->ctaType = $ctaType;
@@ -3724,7 +3000,7 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   {
     return $this->ctaType;
   }
-
+  
   public function setCustomCtaButtonText($customCtaButtonText)
   {
     $this->customCtaButtonText = $customCtaButtonText;
@@ -3734,7 +3010,7 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   {
     return $this->customCtaButtonText;
   }
-
+  
   public function setDescriptionText($descriptionText)
   {
     $this->descriptionText = $descriptionText;
@@ -3744,7 +3020,7 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   {
     return $this->descriptionText;
   }
-
+  
   public function setDestinationUrl($destinationUrl)
   {
     $this->destinationUrl = $destinationUrl;
@@ -3754,27 +3030,27 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   {
     return $this->destinationUrl;
   }
-
-  public function setForecastingUrl($forecastingUrl)
+  
+  public function setForecastingUrls($forecastingUrls)
   {
-    $this->forecastingUrl = $forecastingUrl;
+    $this->forecastingUrls = $forecastingUrls;
   }
 
-  public function getForecastingUrl()
+  public function getForecastingUrls()
   {
-    return $this->forecastingUrl;
+    return $this->forecastingUrls;
+  }
+  
+  public function setImpressionUrls($impressionUrls)
+  {
+    $this->impressionUrls = $impressionUrls;
   }
 
-  public function setImpressionUrl($impressionUrl)
+  public function getImpressionUrls()
   {
-    $this->impressionUrl = $impressionUrl;
+    return $this->impressionUrls;
   }
-
-  public function getImpressionUrl()
-  {
-    return $this->impressionUrl;
-  }
-
+  
   public function setVideoId($videoId)
   {
     $this->videoId = $videoId;
@@ -3784,6 +3060,7 @@ class Google_Service_YouTube_ActivityContentDetailsPromotedItem extends Google_C
   {
     return $this->videoId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsRecommendation extends Google_Model
@@ -3803,7 +3080,7 @@ class Google_Service_YouTube_ActivityContentDetailsRecommendation extends Google
   {
     return $this->reason;
   }
-
+  
   public function setResourceId(Google_Service_YouTube_ResourceId $resourceId)
   {
     $this->resourceId = $resourceId;
@@ -3813,7 +3090,7 @@ class Google_Service_YouTube_ActivityContentDetailsRecommendation extends Google
   {
     return $this->resourceId;
   }
-
+  
   public function setSeedResourceId(Google_Service_YouTube_ResourceId $seedResourceId)
   {
     $this->seedResourceId = $seedResourceId;
@@ -3823,6 +3100,7 @@ class Google_Service_YouTube_ActivityContentDetailsRecommendation extends Google
   {
     return $this->seedResourceId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsSocial extends Google_Model
@@ -3843,7 +3121,7 @@ class Google_Service_YouTube_ActivityContentDetailsSocial extends Google_Model
   {
     return $this->author;
   }
-
+  
   public function setImageUrl($imageUrl)
   {
     $this->imageUrl = $imageUrl;
@@ -3853,7 +3131,7 @@ class Google_Service_YouTube_ActivityContentDetailsSocial extends Google_Model
   {
     return $this->imageUrl;
   }
-
+  
   public function setReferenceUrl($referenceUrl)
   {
     $this->referenceUrl = $referenceUrl;
@@ -3863,7 +3141,7 @@ class Google_Service_YouTube_ActivityContentDetailsSocial extends Google_Model
   {
     return $this->referenceUrl;
   }
-
+  
   public function setResourceId(Google_Service_YouTube_ResourceId $resourceId)
   {
     $this->resourceId = $resourceId;
@@ -3873,7 +3151,7 @@ class Google_Service_YouTube_ActivityContentDetailsSocial extends Google_Model
   {
     return $this->resourceId;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -3883,6 +3161,7 @@ class Google_Service_YouTube_ActivityContentDetailsSocial extends Google_Model
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsSubscription extends Google_Model
@@ -3899,6 +3178,7 @@ class Google_Service_YouTube_ActivityContentDetailsSubscription extends Google_M
   {
     return $this->resourceId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityContentDetailsUpload extends Google_Model
@@ -3914,6 +3194,7 @@ class Google_Service_YouTube_ActivityContentDetailsUpload extends Google_Model
   {
     return $this->videoId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivityListResponse extends Google_Collection
@@ -3940,7 +3221,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -3950,7 +3231,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -3960,7 +3241,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3970,7 +3251,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -3980,7 +3261,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -3990,7 +3271,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -4000,7 +3281,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -4010,7 +3291,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -4020,6 +3301,7 @@ class Google_Service_YouTube_ActivityListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_ActivitySnippet extends Google_Model
@@ -4043,7 +3325,7 @@ class Google_Service_YouTube_ActivitySnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setChannelTitle($channelTitle)
   {
     $this->channelTitle = $channelTitle;
@@ -4053,7 +3335,7 @@ class Google_Service_YouTube_ActivitySnippet extends Google_Model
   {
     return $this->channelTitle;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -4063,7 +3345,7 @@ class Google_Service_YouTube_ActivitySnippet extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setGroupId($groupId)
   {
     $this->groupId = $groupId;
@@ -4073,7 +3355,7 @@ class Google_Service_YouTube_ActivitySnippet extends Google_Model
   {
     return $this->groupId;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -4083,7 +3365,7 @@ class Google_Service_YouTube_ActivitySnippet extends Google_Model
   {
     return $this->publishedAt;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -4093,7 +3375,7 @@ class Google_Service_YouTube_ActivitySnippet extends Google_Model
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -4103,7 +3385,7 @@ class Google_Service_YouTube_ActivitySnippet extends Google_Model
   {
     return $this->title;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -4113,6 +3395,7 @@ class Google_Service_YouTube_ActivitySnippet extends Google_Model
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_YouTube_CdnSettings extends Google_Model
@@ -4131,7 +3414,7 @@ class Google_Service_YouTube_CdnSettings extends Google_Model
   {
     return $this->format;
   }
-
+  
   public function setIngestionInfo(Google_Service_YouTube_IngestionInfo $ingestionInfo)
   {
     $this->ingestionInfo = $ingestionInfo;
@@ -4141,7 +3424,7 @@ class Google_Service_YouTube_CdnSettings extends Google_Model
   {
     return $this->ingestionInfo;
   }
-
+  
   public function setIngestionType($ingestionType)
   {
     $this->ingestionType = $ingestionType;
@@ -4151,6 +3434,7 @@ class Google_Service_YouTube_CdnSettings extends Google_Model
   {
     return $this->ingestionType;
   }
+  
 }
 
 class Google_Service_YouTube_Channel extends Google_Model
@@ -4161,8 +3445,6 @@ class Google_Service_YouTube_Channel extends Google_Model
   protected $brandingSettingsDataType = '';
   protected $contentDetailsType = 'Google_Service_YouTube_ChannelContentDetails';
   protected $contentDetailsDataType = '';
-  protected $contentOwnerDetailsType = 'Google_Service_YouTube_ChannelContentOwnerDetails';
-  protected $contentOwnerDetailsDataType = '';
   protected $conversionPingsType = 'Google_Service_YouTube_ChannelConversionPings';
   protected $conversionPingsDataType = '';
   public $etag;
@@ -4188,7 +3470,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->auditDetails;
   }
-
+  
   public function setBrandingSettings(Google_Service_YouTube_ChannelBrandingSettings $brandingSettings)
   {
     $this->brandingSettings = $brandingSettings;
@@ -4198,7 +3480,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->brandingSettings;
   }
-
+  
   public function setContentDetails(Google_Service_YouTube_ChannelContentDetails $contentDetails)
   {
     $this->contentDetails = $contentDetails;
@@ -4208,17 +3490,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->contentDetails;
   }
-
-  public function setContentOwnerDetails(Google_Service_YouTube_ChannelContentOwnerDetails $contentOwnerDetails)
-  {
-    $this->contentOwnerDetails = $contentOwnerDetails;
-  }
-
-  public function getContentOwnerDetails()
-  {
-    return $this->contentOwnerDetails;
-  }
-
+  
   public function setConversionPings(Google_Service_YouTube_ChannelConversionPings $conversionPings)
   {
     $this->conversionPings = $conversionPings;
@@ -4228,7 +3500,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->conversionPings;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -4238,7 +3510,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -4248,7 +3520,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setInvideoPromotion(Google_Service_YouTube_InvideoPromotion $invideoPromotion)
   {
     $this->invideoPromotion = $invideoPromotion;
@@ -4258,7 +3530,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->invideoPromotion;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -4268,7 +3540,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_ChannelSnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -4278,7 +3550,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->snippet;
   }
-
+  
   public function setStatistics(Google_Service_YouTube_ChannelStatistics $statistics)
   {
     $this->statistics = $statistics;
@@ -4288,7 +3560,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->statistics;
   }
-
+  
   public function setStatus(Google_Service_YouTube_ChannelStatus $status)
   {
     $this->status = $status;
@@ -4298,7 +3570,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->status;
   }
-
+  
   public function setTopicDetails(Google_Service_YouTube_ChannelTopicDetails $topicDetails)
   {
     $this->topicDetails = $topicDetails;
@@ -4308,6 +3580,7 @@ class Google_Service_YouTube_Channel extends Google_Model
   {
     return $this->topicDetails;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelAuditDetails extends Google_Model
@@ -4326,7 +3599,7 @@ class Google_Service_YouTube_ChannelAuditDetails extends Google_Model
   {
     return $this->communityGuidelinesGoodStanding;
   }
-
+  
   public function setContentIdClaimsGoodStanding($contentIdClaimsGoodStanding)
   {
     $this->contentIdClaimsGoodStanding = $contentIdClaimsGoodStanding;
@@ -4336,7 +3609,7 @@ class Google_Service_YouTube_ChannelAuditDetails extends Google_Model
   {
     return $this->contentIdClaimsGoodStanding;
   }
-
+  
   public function setCopyrightStrikesGoodStanding($copyrightStrikesGoodStanding)
   {
     $this->copyrightStrikesGoodStanding = $copyrightStrikesGoodStanding;
@@ -4346,7 +3619,7 @@ class Google_Service_YouTube_ChannelAuditDetails extends Google_Model
   {
     return $this->copyrightStrikesGoodStanding;
   }
-
+  
   public function setOverallGoodStanding($overallGoodStanding)
   {
     $this->overallGoodStanding = $overallGoodStanding;
@@ -4356,6 +3629,7 @@ class Google_Service_YouTube_ChannelAuditDetails extends Google_Model
   {
     return $this->overallGoodStanding;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelBannerResource extends Google_Model
@@ -4373,7 +3647,7 @@ class Google_Service_YouTube_ChannelBannerResource extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -4383,7 +3657,7 @@ class Google_Service_YouTube_ChannelBannerResource extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -4393,6 +3667,7 @@ class Google_Service_YouTube_ChannelBannerResource extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelBrandingSettings extends Google_Collection
@@ -4415,7 +3690,7 @@ class Google_Service_YouTube_ChannelBrandingSettings extends Google_Collection
   {
     return $this->channel;
   }
-
+  
   public function setHints($hints)
   {
     $this->hints = $hints;
@@ -4425,7 +3700,7 @@ class Google_Service_YouTube_ChannelBrandingSettings extends Google_Collection
   {
     return $this->hints;
   }
-
+  
   public function setImage(Google_Service_YouTube_ImageSettings $image)
   {
     $this->image = $image;
@@ -4435,7 +3710,7 @@ class Google_Service_YouTube_ChannelBrandingSettings extends Google_Collection
   {
     return $this->image;
   }
-
+  
   public function setWatch(Google_Service_YouTube_WatchSettings $watch)
   {
     $this->watch = $watch;
@@ -4445,6 +3720,7 @@ class Google_Service_YouTube_ChannelBrandingSettings extends Google_Collection
   {
     return $this->watch;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelContentDetails extends Google_Model
@@ -4462,7 +3738,7 @@ class Google_Service_YouTube_ChannelContentDetails extends Google_Model
   {
     return $this->googlePlusUserId;
   }
-
+  
   public function setRelatedPlaylists(Google_Service_YouTube_ChannelContentDetailsRelatedPlaylists $relatedPlaylists)
   {
     $this->relatedPlaylists = $relatedPlaylists;
@@ -4472,6 +3748,7 @@ class Google_Service_YouTube_ChannelContentDetails extends Google_Model
   {
     return $this->relatedPlaylists;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelContentDetailsRelatedPlaylists extends Google_Model
@@ -4491,7 +3768,7 @@ class Google_Service_YouTube_ChannelContentDetailsRelatedPlaylists extends Googl
   {
     return $this->favorites;
   }
-
+  
   public function setLikes($likes)
   {
     $this->likes = $likes;
@@ -4501,7 +3778,7 @@ class Google_Service_YouTube_ChannelContentDetailsRelatedPlaylists extends Googl
   {
     return $this->likes;
   }
-
+  
   public function setUploads($uploads)
   {
     $this->uploads = $uploads;
@@ -4511,7 +3788,7 @@ class Google_Service_YouTube_ChannelContentDetailsRelatedPlaylists extends Googl
   {
     return $this->uploads;
   }
-
+  
   public function setWatchHistory($watchHistory)
   {
     $this->watchHistory = $watchHistory;
@@ -4521,7 +3798,7 @@ class Google_Service_YouTube_ChannelContentDetailsRelatedPlaylists extends Googl
   {
     return $this->watchHistory;
   }
-
+  
   public function setWatchLater($watchLater)
   {
     $this->watchLater = $watchLater;
@@ -4531,32 +3808,7 @@ class Google_Service_YouTube_ChannelContentDetailsRelatedPlaylists extends Googl
   {
     return $this->watchLater;
   }
-}
-
-class Google_Service_YouTube_ChannelContentOwnerDetails extends Google_Model
-{
-  public $contentOwner;
-  public $timeLinked;
-
-  public function setContentOwner($contentOwner)
-  {
-    $this->contentOwner = $contentOwner;
-  }
-
-  public function getContentOwner()
-  {
-    return $this->contentOwner;
-  }
-
-  public function setTimeLinked($timeLinked)
-  {
-    $this->timeLinked = $timeLinked;
-  }
-
-  public function getTimeLinked()
-  {
-    return $this->timeLinked;
-  }
+  
 }
 
 class Google_Service_YouTube_ChannelConversionPing extends Google_Model
@@ -4573,7 +3825,7 @@ class Google_Service_YouTube_ChannelConversionPing extends Google_Model
   {
     return $this->context;
   }
-
+  
   public function setConversionUrl($conversionUrl)
   {
     $this->conversionUrl = $conversionUrl;
@@ -4583,6 +3835,7 @@ class Google_Service_YouTube_ChannelConversionPing extends Google_Model
   {
     return $this->conversionUrl;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelConversionPings extends Google_Collection
@@ -4599,6 +3852,7 @@ class Google_Service_YouTube_ChannelConversionPings extends Google_Collection
   {
     return $this->pings;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelListResponse extends Google_Collection
@@ -4625,7 +3879,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -4635,7 +3889,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -4645,7 +3899,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -4655,7 +3909,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -4665,7 +3919,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -4675,7 +3929,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -4685,7 +3939,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -4695,7 +3949,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -4705,212 +3959,7 @@ class Google_Service_YouTube_ChannelListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
-}
-
-class Google_Service_YouTube_ChannelSection extends Google_Model
-{
-  protected $contentDetailsType = 'Google_Service_YouTube_ChannelSectionContentDetails';
-  protected $contentDetailsDataType = '';
-  public $etag;
-  public $id;
-  public $kind;
-  protected $snippetType = 'Google_Service_YouTube_ChannelSectionSnippet';
-  protected $snippetDataType = '';
-
-  public function setContentDetails(Google_Service_YouTube_ChannelSectionContentDetails $contentDetails)
-  {
-    $this->contentDetails = $contentDetails;
-  }
-
-  public function getContentDetails()
-  {
-    return $this->contentDetails;
-  }
-
-  public function setEtag($etag)
-  {
-    $this->etag = $etag;
-  }
-
-  public function getEtag()
-  {
-    return $this->etag;
-  }
-
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setSnippet(Google_Service_YouTube_ChannelSectionSnippet $snippet)
-  {
-    $this->snippet = $snippet;
-  }
-
-  public function getSnippet()
-  {
-    return $this->snippet;
-  }
-}
-
-class Google_Service_YouTube_ChannelSectionContentDetails extends Google_Collection
-{
-  public $channels;
-  public $playlists;
-
-  public function setChannels($channels)
-  {
-    $this->channels = $channels;
-  }
-
-  public function getChannels()
-  {
-    return $this->channels;
-  }
-
-  public function setPlaylists($playlists)
-  {
-    $this->playlists = $playlists;
-  }
-
-  public function getPlaylists()
-  {
-    return $this->playlists;
-  }
-}
-
-class Google_Service_YouTube_ChannelSectionListResponse extends Google_Collection
-{
-  public $etag;
-  public $eventId;
-  protected $itemsType = 'Google_Service_YouTube_ChannelSection';
-  protected $itemsDataType = 'array';
-  public $kind;
-  public $visitorId;
-
-  public function setEtag($etag)
-  {
-    $this->etag = $etag;
-  }
-
-  public function getEtag()
-  {
-    return $this->etag;
-  }
-
-  public function setEventId($eventId)
-  {
-    $this->eventId = $eventId;
-  }
-
-  public function getEventId()
-  {
-    return $this->eventId;
-  }
-
-  public function setItems($items)
-  {
-    $this->items = $items;
-  }
-
-  public function getItems()
-  {
-    return $this->items;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setVisitorId($visitorId)
-  {
-    $this->visitorId = $visitorId;
-  }
-
-  public function getVisitorId()
-  {
-    return $this->visitorId;
-  }
-}
-
-class Google_Service_YouTube_ChannelSectionSnippet extends Google_Model
-{
-  public $channelId;
-  public $position;
-  public $style;
-  public $title;
-  public $type;
-
-  public function setChannelId($channelId)
-  {
-    $this->channelId = $channelId;
-  }
-
-  public function getChannelId()
-  {
-    return $this->channelId;
-  }
-
-  public function setPosition($position)
-  {
-    $this->position = $position;
-  }
-
-  public function getPosition()
-  {
-    return $this->position;
-  }
-
-  public function setStyle($style)
-  {
-    $this->style = $style;
-  }
-
-  public function getStyle()
-  {
-    return $this->style;
-  }
-
-  public function setTitle($title)
-  {
-    $this->title = $title;
-  }
-
-  public function getTitle()
-  {
-    return $this->title;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
+  
 }
 
 class Google_Service_YouTube_ChannelSettings extends Google_Collection
@@ -4937,7 +3986,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->defaultTab;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -4947,7 +3996,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->description;
   }
-
+  
   public function setFeaturedChannelsTitle($featuredChannelsTitle)
   {
     $this->featuredChannelsTitle = $featuredChannelsTitle;
@@ -4957,7 +4006,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->featuredChannelsTitle;
   }
-
+  
   public function setFeaturedChannelsUrls($featuredChannelsUrls)
   {
     $this->featuredChannelsUrls = $featuredChannelsUrls;
@@ -4967,7 +4016,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->featuredChannelsUrls;
   }
-
+  
   public function setKeywords($keywords)
   {
     $this->keywords = $keywords;
@@ -4977,7 +4026,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->keywords;
   }
-
+  
   public function setModerateComments($moderateComments)
   {
     $this->moderateComments = $moderateComments;
@@ -4987,7 +4036,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->moderateComments;
   }
-
+  
   public function setProfileColor($profileColor)
   {
     $this->profileColor = $profileColor;
@@ -4997,7 +4046,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->profileColor;
   }
-
+  
   public function setShowBrowseView($showBrowseView)
   {
     $this->showBrowseView = $showBrowseView;
@@ -5007,7 +4056,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->showBrowseView;
   }
-
+  
   public function setShowRelatedChannels($showRelatedChannels)
   {
     $this->showRelatedChannels = $showRelatedChannels;
@@ -5017,7 +4066,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->showRelatedChannels;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -5027,7 +4076,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->title;
   }
-
+  
   public function setTrackingAnalyticsAccountId($trackingAnalyticsAccountId)
   {
     $this->trackingAnalyticsAccountId = $trackingAnalyticsAccountId;
@@ -5037,7 +4086,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->trackingAnalyticsAccountId;
   }
-
+  
   public function setUnsubscribedTrailer($unsubscribedTrailer)
   {
     $this->unsubscribedTrailer = $unsubscribedTrailer;
@@ -5047,6 +4096,7 @@ class Google_Service_YouTube_ChannelSettings extends Google_Collection
   {
     return $this->unsubscribedTrailer;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelSnippet extends Google_Model
@@ -5066,7 +4116,7 @@ class Google_Service_YouTube_ChannelSnippet extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -5076,7 +4126,7 @@ class Google_Service_YouTube_ChannelSnippet extends Google_Model
   {
     return $this->publishedAt;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -5086,7 +4136,7 @@ class Google_Service_YouTube_ChannelSnippet extends Google_Model
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -5096,6 +4146,7 @@ class Google_Service_YouTube_ChannelSnippet extends Google_Model
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelStatistics extends Google_Model
@@ -5115,7 +4166,7 @@ class Google_Service_YouTube_ChannelStatistics extends Google_Model
   {
     return $this->commentCount;
   }
-
+  
   public function setHiddenSubscriberCount($hiddenSubscriberCount)
   {
     $this->hiddenSubscriberCount = $hiddenSubscriberCount;
@@ -5125,7 +4176,7 @@ class Google_Service_YouTube_ChannelStatistics extends Google_Model
   {
     return $this->hiddenSubscriberCount;
   }
-
+  
   public function setSubscriberCount($subscriberCount)
   {
     $this->subscriberCount = $subscriberCount;
@@ -5135,7 +4186,7 @@ class Google_Service_YouTube_ChannelStatistics extends Google_Model
   {
     return $this->subscriberCount;
   }
-
+  
   public function setVideoCount($videoCount)
   {
     $this->videoCount = $videoCount;
@@ -5145,7 +4196,7 @@ class Google_Service_YouTube_ChannelStatistics extends Google_Model
   {
     return $this->videoCount;
   }
-
+  
   public function setViewCount($viewCount)
   {
     $this->viewCount = $viewCount;
@@ -5155,6 +4206,7 @@ class Google_Service_YouTube_ChannelStatistics extends Google_Model
   {
     return $this->viewCount;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelStatus extends Google_Model
@@ -5171,7 +4223,7 @@ class Google_Service_YouTube_ChannelStatus extends Google_Model
   {
     return $this->isLinked;
   }
-
+  
   public function setPrivacyStatus($privacyStatus)
   {
     $this->privacyStatus = $privacyStatus;
@@ -5181,6 +4233,7 @@ class Google_Service_YouTube_ChannelStatus extends Google_Model
   {
     return $this->privacyStatus;
   }
+  
 }
 
 class Google_Service_YouTube_ChannelTopicDetails extends Google_Collection
@@ -5196,71 +4249,28 @@ class Google_Service_YouTube_ChannelTopicDetails extends Google_Collection
   {
     return $this->topicIds;
   }
+  
 }
 
 class Google_Service_YouTube_ContentRating extends Google_Model
 {
   public $acbRating;
-  public $agcomRating;
-  public $anatelRating;
   public $bbfcRating;
-  public $bfvcRating;
-  public $bmukkRating;
   public $catvRating;
   public $catvfrRating;
   public $cbfcRating;
-  public $cccRating;
-  public $cceRating;
-  public $chfilmRating;
   public $chvrsRating;
-  public $cicfRating;
-  public $cnaRating;
-  public $csaRating;
-  public $cscfRating;
-  public $czfilmRating;
   public $djctqRating;
-  public $eefilmRating;
-  public $egfilmRating;
   public $eirinRating;
-  public $fcbmRating;
-  public $fcoRating;
   public $fmocRating;
-  public $fpbRating;
   public $fskRating;
-  public $grfilmRating;
   public $icaaRating;
-  public $ifcoRating;
-  public $ilfilmRating;
-  public $incaaRating;
-  public $kfcbRating;
-  public $kijkwijzerRating;
   public $kmrbRating;
-  public $lsfRating;
-  public $mccaaRating;
-  public $mccypRating;
-  public $mdaRating;
-  public $medietilsynetRating;
-  public $mekuRating;
   public $mibacRating;
-  public $mocRating;
-  public $moctwRating;
   public $mpaaRating;
-  public $mtrcbRating;
-  public $nbcRating;
-  public $nbcplRating;
-  public $nfrcRating;
-  public $nfvcbRating;
-  public $nkclvRating;
   public $oflcRating;
-  public $pefilmRating;
-  public $rcnofRating;
-  public $resorteviolenciaRating;
   public $rtcRating;
-  public $rteRating;
   public $russiaRating;
-  public $skfilmRating;
-  public $smaisRating;
-  public $smsaRating;
   public $tvpgRating;
   public $ytRating;
 
@@ -5273,27 +4283,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->acbRating;
   }
-
-  public function setAgcomRating($agcomRating)
-  {
-    $this->agcomRating = $agcomRating;
-  }
-
-  public function getAgcomRating()
-  {
-    return $this->agcomRating;
-  }
-
-  public function setAnatelRating($anatelRating)
-  {
-    $this->anatelRating = $anatelRating;
-  }
-
-  public function getAnatelRating()
-  {
-    return $this->anatelRating;
-  }
-
+  
   public function setBbfcRating($bbfcRating)
   {
     $this->bbfcRating = $bbfcRating;
@@ -5303,27 +4293,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->bbfcRating;
   }
-
-  public function setBfvcRating($bfvcRating)
-  {
-    $this->bfvcRating = $bfvcRating;
-  }
-
-  public function getBfvcRating()
-  {
-    return $this->bfvcRating;
-  }
-
-  public function setBmukkRating($bmukkRating)
-  {
-    $this->bmukkRating = $bmukkRating;
-  }
-
-  public function getBmukkRating()
-  {
-    return $this->bmukkRating;
-  }
-
+  
   public function setCatvRating($catvRating)
   {
     $this->catvRating = $catvRating;
@@ -5333,7 +4303,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->catvRating;
   }
-
+  
   public function setCatvfrRating($catvfrRating)
   {
     $this->catvfrRating = $catvfrRating;
@@ -5343,7 +4313,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->catvfrRating;
   }
-
+  
   public function setCbfcRating($cbfcRating)
   {
     $this->cbfcRating = $cbfcRating;
@@ -5353,37 +4323,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->cbfcRating;
   }
-
-  public function setCccRating($cccRating)
-  {
-    $this->cccRating = $cccRating;
-  }
-
-  public function getCccRating()
-  {
-    return $this->cccRating;
-  }
-
-  public function setCceRating($cceRating)
-  {
-    $this->cceRating = $cceRating;
-  }
-
-  public function getCceRating()
-  {
-    return $this->cceRating;
-  }
-
-  public function setChfilmRating($chfilmRating)
-  {
-    $this->chfilmRating = $chfilmRating;
-  }
-
-  public function getChfilmRating()
-  {
-    return $this->chfilmRating;
-  }
-
+  
   public function setChvrsRating($chvrsRating)
   {
     $this->chvrsRating = $chvrsRating;
@@ -5393,57 +4333,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->chvrsRating;
   }
-
-  public function setCicfRating($cicfRating)
-  {
-    $this->cicfRating = $cicfRating;
-  }
-
-  public function getCicfRating()
-  {
-    return $this->cicfRating;
-  }
-
-  public function setCnaRating($cnaRating)
-  {
-    $this->cnaRating = $cnaRating;
-  }
-
-  public function getCnaRating()
-  {
-    return $this->cnaRating;
-  }
-
-  public function setCsaRating($csaRating)
-  {
-    $this->csaRating = $csaRating;
-  }
-
-  public function getCsaRating()
-  {
-    return $this->csaRating;
-  }
-
-  public function setCscfRating($cscfRating)
-  {
-    $this->cscfRating = $cscfRating;
-  }
-
-  public function getCscfRating()
-  {
-    return $this->cscfRating;
-  }
-
-  public function setCzfilmRating($czfilmRating)
-  {
-    $this->czfilmRating = $czfilmRating;
-  }
-
-  public function getCzfilmRating()
-  {
-    return $this->czfilmRating;
-  }
-
+  
   public function setDjctqRating($djctqRating)
   {
     $this->djctqRating = $djctqRating;
@@ -5453,27 +4343,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->djctqRating;
   }
-
-  public function setEefilmRating($eefilmRating)
-  {
-    $this->eefilmRating = $eefilmRating;
-  }
-
-  public function getEefilmRating()
-  {
-    return $this->eefilmRating;
-  }
-
-  public function setEgfilmRating($egfilmRating)
-  {
-    $this->egfilmRating = $egfilmRating;
-  }
-
-  public function getEgfilmRating()
-  {
-    return $this->egfilmRating;
-  }
-
+  
   public function setEirinRating($eirinRating)
   {
     $this->eirinRating = $eirinRating;
@@ -5483,27 +4353,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->eirinRating;
   }
-
-  public function setFcbmRating($fcbmRating)
-  {
-    $this->fcbmRating = $fcbmRating;
-  }
-
-  public function getFcbmRating()
-  {
-    return $this->fcbmRating;
-  }
-
-  public function setFcoRating($fcoRating)
-  {
-    $this->fcoRating = $fcoRating;
-  }
-
-  public function getFcoRating()
-  {
-    return $this->fcoRating;
-  }
-
+  
   public function setFmocRating($fmocRating)
   {
     $this->fmocRating = $fmocRating;
@@ -5513,17 +4363,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->fmocRating;
   }
-
-  public function setFpbRating($fpbRating)
-  {
-    $this->fpbRating = $fpbRating;
-  }
-
-  public function getFpbRating()
-  {
-    return $this->fpbRating;
-  }
-
+  
   public function setFskRating($fskRating)
   {
     $this->fskRating = $fskRating;
@@ -5533,17 +4373,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->fskRating;
   }
-
-  public function setGrfilmRating($grfilmRating)
-  {
-    $this->grfilmRating = $grfilmRating;
-  }
-
-  public function getGrfilmRating()
-  {
-    return $this->grfilmRating;
-  }
-
+  
   public function setIcaaRating($icaaRating)
   {
     $this->icaaRating = $icaaRating;
@@ -5553,57 +4383,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->icaaRating;
   }
-
-  public function setIfcoRating($ifcoRating)
-  {
-    $this->ifcoRating = $ifcoRating;
-  }
-
-  public function getIfcoRating()
-  {
-    return $this->ifcoRating;
-  }
-
-  public function setIlfilmRating($ilfilmRating)
-  {
-    $this->ilfilmRating = $ilfilmRating;
-  }
-
-  public function getIlfilmRating()
-  {
-    return $this->ilfilmRating;
-  }
-
-  public function setIncaaRating($incaaRating)
-  {
-    $this->incaaRating = $incaaRating;
-  }
-
-  public function getIncaaRating()
-  {
-    return $this->incaaRating;
-  }
-
-  public function setKfcbRating($kfcbRating)
-  {
-    $this->kfcbRating = $kfcbRating;
-  }
-
-  public function getKfcbRating()
-  {
-    return $this->kfcbRating;
-  }
-
-  public function setKijkwijzerRating($kijkwijzerRating)
-  {
-    $this->kijkwijzerRating = $kijkwijzerRating;
-  }
-
-  public function getKijkwijzerRating()
-  {
-    return $this->kijkwijzerRating;
-  }
-
+  
   public function setKmrbRating($kmrbRating)
   {
     $this->kmrbRating = $kmrbRating;
@@ -5613,67 +4393,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->kmrbRating;
   }
-
-  public function setLsfRating($lsfRating)
-  {
-    $this->lsfRating = $lsfRating;
-  }
-
-  public function getLsfRating()
-  {
-    return $this->lsfRating;
-  }
-
-  public function setMccaaRating($mccaaRating)
-  {
-    $this->mccaaRating = $mccaaRating;
-  }
-
-  public function getMccaaRating()
-  {
-    return $this->mccaaRating;
-  }
-
-  public function setMccypRating($mccypRating)
-  {
-    $this->mccypRating = $mccypRating;
-  }
-
-  public function getMccypRating()
-  {
-    return $this->mccypRating;
-  }
-
-  public function setMdaRating($mdaRating)
-  {
-    $this->mdaRating = $mdaRating;
-  }
-
-  public function getMdaRating()
-  {
-    return $this->mdaRating;
-  }
-
-  public function setMedietilsynetRating($medietilsynetRating)
-  {
-    $this->medietilsynetRating = $medietilsynetRating;
-  }
-
-  public function getMedietilsynetRating()
-  {
-    return $this->medietilsynetRating;
-  }
-
-  public function setMekuRating($mekuRating)
-  {
-    $this->mekuRating = $mekuRating;
-  }
-
-  public function getMekuRating()
-  {
-    return $this->mekuRating;
-  }
-
+  
   public function setMibacRating($mibacRating)
   {
     $this->mibacRating = $mibacRating;
@@ -5683,27 +4403,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->mibacRating;
   }
-
-  public function setMocRating($mocRating)
-  {
-    $this->mocRating = $mocRating;
-  }
-
-  public function getMocRating()
-  {
-    return $this->mocRating;
-  }
-
-  public function setMoctwRating($moctwRating)
-  {
-    $this->moctwRating = $moctwRating;
-  }
-
-  public function getMoctwRating()
-  {
-    return $this->moctwRating;
-  }
-
+  
   public function setMpaaRating($mpaaRating)
   {
     $this->mpaaRating = $mpaaRating;
@@ -5713,67 +4413,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->mpaaRating;
   }
-
-  public function setMtrcbRating($mtrcbRating)
-  {
-    $this->mtrcbRating = $mtrcbRating;
-  }
-
-  public function getMtrcbRating()
-  {
-    return $this->mtrcbRating;
-  }
-
-  public function setNbcRating($nbcRating)
-  {
-    $this->nbcRating = $nbcRating;
-  }
-
-  public function getNbcRating()
-  {
-    return $this->nbcRating;
-  }
-
-  public function setNbcplRating($nbcplRating)
-  {
-    $this->nbcplRating = $nbcplRating;
-  }
-
-  public function getNbcplRating()
-  {
-    return $this->nbcplRating;
-  }
-
-  public function setNfrcRating($nfrcRating)
-  {
-    $this->nfrcRating = $nfrcRating;
-  }
-
-  public function getNfrcRating()
-  {
-    return $this->nfrcRating;
-  }
-
-  public function setNfvcbRating($nfvcbRating)
-  {
-    $this->nfvcbRating = $nfvcbRating;
-  }
-
-  public function getNfvcbRating()
-  {
-    return $this->nfvcbRating;
-  }
-
-  public function setNkclvRating($nkclvRating)
-  {
-    $this->nkclvRating = $nkclvRating;
-  }
-
-  public function getNkclvRating()
-  {
-    return $this->nkclvRating;
-  }
-
+  
   public function setOflcRating($oflcRating)
   {
     $this->oflcRating = $oflcRating;
@@ -5783,37 +4423,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->oflcRating;
   }
-
-  public function setPefilmRating($pefilmRating)
-  {
-    $this->pefilmRating = $pefilmRating;
-  }
-
-  public function getPefilmRating()
-  {
-    return $this->pefilmRating;
-  }
-
-  public function setRcnofRating($rcnofRating)
-  {
-    $this->rcnofRating = $rcnofRating;
-  }
-
-  public function getRcnofRating()
-  {
-    return $this->rcnofRating;
-  }
-
-  public function setResorteviolenciaRating($resorteviolenciaRating)
-  {
-    $this->resorteviolenciaRating = $resorteviolenciaRating;
-  }
-
-  public function getResorteviolenciaRating()
-  {
-    return $this->resorteviolenciaRating;
-  }
-
+  
   public function setRtcRating($rtcRating)
   {
     $this->rtcRating = $rtcRating;
@@ -5823,17 +4433,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->rtcRating;
   }
-
-  public function setRteRating($rteRating)
-  {
-    $this->rteRating = $rteRating;
-  }
-
-  public function getRteRating()
-  {
-    return $this->rteRating;
-  }
-
+  
   public function setRussiaRating($russiaRating)
   {
     $this->russiaRating = $russiaRating;
@@ -5843,37 +4443,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->russiaRating;
   }
-
-  public function setSkfilmRating($skfilmRating)
-  {
-    $this->skfilmRating = $skfilmRating;
-  }
-
-  public function getSkfilmRating()
-  {
-    return $this->skfilmRating;
-  }
-
-  public function setSmaisRating($smaisRating)
-  {
-    $this->smaisRating = $smaisRating;
-  }
-
-  public function getSmaisRating()
-  {
-    return $this->smaisRating;
-  }
-
-  public function setSmsaRating($smsaRating)
-  {
-    $this->smsaRating = $smsaRating;
-  }
-
-  public function getSmsaRating()
-  {
-    return $this->smsaRating;
-  }
-
+  
   public function setTvpgRating($tvpgRating)
   {
     $this->tvpgRating = $tvpgRating;
@@ -5883,7 +4453,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->tvpgRating;
   }
-
+  
   public function setYtRating($ytRating)
   {
     $this->ytRating = $ytRating;
@@ -5893,6 +4463,7 @@ class Google_Service_YouTube_ContentRating extends Google_Model
   {
     return $this->ytRating;
   }
+  
 }
 
 class Google_Service_YouTube_GeoPoint extends Google_Model
@@ -5910,7 +4481,7 @@ class Google_Service_YouTube_GeoPoint extends Google_Model
   {
     return $this->altitude;
   }
-
+  
   public function setLatitude($latitude)
   {
     $this->latitude = $latitude;
@@ -5920,7 +4491,7 @@ class Google_Service_YouTube_GeoPoint extends Google_Model
   {
     return $this->latitude;
   }
-
+  
   public function setLongitude($longitude)
   {
     $this->longitude = $longitude;
@@ -5930,6 +4501,7 @@ class Google_Service_YouTube_GeoPoint extends Google_Model
   {
     return $this->longitude;
   }
+  
 }
 
 class Google_Service_YouTube_GuideCategory extends Google_Model
@@ -5949,7 +4521,7 @@ class Google_Service_YouTube_GuideCategory extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -5959,7 +4531,7 @@ class Google_Service_YouTube_GuideCategory extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -5969,7 +4541,7 @@ class Google_Service_YouTube_GuideCategory extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_GuideCategorySnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -5979,6 +4551,7 @@ class Google_Service_YouTube_GuideCategory extends Google_Model
   {
     return $this->snippet;
   }
+  
 }
 
 class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
@@ -6005,7 +4578,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -6015,7 +4588,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -6025,7 +4598,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -6035,7 +4608,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -6045,7 +4618,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -6055,7 +4628,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -6065,7 +4638,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -6075,7 +4648,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -6085,6 +4658,7 @@ class Google_Service_YouTube_GuideCategoryListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_GuideCategorySnippet extends Google_Model
@@ -6101,7 +4675,7 @@ class Google_Service_YouTube_GuideCategorySnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -6111,276 +4685,7 @@ class Google_Service_YouTube_GuideCategorySnippet extends Google_Model
   {
     return $this->title;
   }
-}
-
-class Google_Service_YouTube_I18nLanguage extends Google_Model
-{
-  public $etag;
-  public $id;
-  public $kind;
-  protected $snippetType = 'Google_Service_YouTube_I18nLanguageSnippet';
-  protected $snippetDataType = '';
-
-  public function setEtag($etag)
-  {
-    $this->etag = $etag;
-  }
-
-  public function getEtag()
-  {
-    return $this->etag;
-  }
-
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setSnippet(Google_Service_YouTube_I18nLanguageSnippet $snippet)
-  {
-    $this->snippet = $snippet;
-  }
-
-  public function getSnippet()
-  {
-    return $this->snippet;
-  }
-}
-
-class Google_Service_YouTube_I18nLanguageListResponse extends Google_Collection
-{
-  public $etag;
-  public $eventId;
-  protected $itemsType = 'Google_Service_YouTube_I18nLanguage';
-  protected $itemsDataType = 'array';
-  public $kind;
-  public $visitorId;
-
-  public function setEtag($etag)
-  {
-    $this->etag = $etag;
-  }
-
-  public function getEtag()
-  {
-    return $this->etag;
-  }
-
-  public function setEventId($eventId)
-  {
-    $this->eventId = $eventId;
-  }
-
-  public function getEventId()
-  {
-    return $this->eventId;
-  }
-
-  public function setItems($items)
-  {
-    $this->items = $items;
-  }
-
-  public function getItems()
-  {
-    return $this->items;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setVisitorId($visitorId)
-  {
-    $this->visitorId = $visitorId;
-  }
-
-  public function getVisitorId()
-  {
-    return $this->visitorId;
-  }
-}
-
-class Google_Service_YouTube_I18nLanguageSnippet extends Google_Model
-{
-  public $hl;
-  public $name;
-
-  public function setHl($hl)
-  {
-    $this->hl = $hl;
-  }
-
-  public function getHl()
-  {
-    return $this->hl;
-  }
-
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-
-  public function getName()
-  {
-    return $this->name;
-  }
-}
-
-class Google_Service_YouTube_I18nRegion extends Google_Model
-{
-  public $etag;
-  public $id;
-  public $kind;
-  protected $snippetType = 'Google_Service_YouTube_I18nRegionSnippet';
-  protected $snippetDataType = '';
-
-  public function setEtag($etag)
-  {
-    $this->etag = $etag;
-  }
-
-  public function getEtag()
-  {
-    return $this->etag;
-  }
-
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setSnippet(Google_Service_YouTube_I18nRegionSnippet $snippet)
-  {
-    $this->snippet = $snippet;
-  }
-
-  public function getSnippet()
-  {
-    return $this->snippet;
-  }
-}
-
-class Google_Service_YouTube_I18nRegionListResponse extends Google_Collection
-{
-  public $etag;
-  public $eventId;
-  protected $itemsType = 'Google_Service_YouTube_I18nRegion';
-  protected $itemsDataType = 'array';
-  public $kind;
-  public $visitorId;
-
-  public function setEtag($etag)
-  {
-    $this->etag = $etag;
-  }
-
-  public function getEtag()
-  {
-    return $this->etag;
-  }
-
-  public function setEventId($eventId)
-  {
-    $this->eventId = $eventId;
-  }
-
-  public function getEventId()
-  {
-    return $this->eventId;
-  }
-
-  public function setItems($items)
-  {
-    $this->items = $items;
-  }
-
-  public function getItems()
-  {
-    return $this->items;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setVisitorId($visitorId)
-  {
-    $this->visitorId = $visitorId;
-  }
-
-  public function getVisitorId()
-  {
-    return $this->visitorId;
-  }
-}
-
-class Google_Service_YouTube_I18nRegionSnippet extends Google_Model
-{
-  public $gl;
-  public $name;
-
-  public function setGl($gl)
-  {
-    $this->gl = $gl;
-  }
-
-  public function getGl()
-  {
-    return $this->gl;
-  }
-
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-
-  public function getName()
-  {
-    return $this->name;
-  }
+  
 }
 
 class Google_Service_YouTube_ImageSettings extends Google_Model
@@ -6422,7 +4727,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->backgroundImageUrl;
   }
-
+  
   public function setBannerExternalUrl($bannerExternalUrl)
   {
     $this->bannerExternalUrl = $bannerExternalUrl;
@@ -6432,7 +4737,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerExternalUrl;
   }
-
+  
   public function setBannerImageUrl($bannerImageUrl)
   {
     $this->bannerImageUrl = $bannerImageUrl;
@@ -6442,7 +4747,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerImageUrl;
   }
-
+  
   public function setBannerMobileExtraHdImageUrl($bannerMobileExtraHdImageUrl)
   {
     $this->bannerMobileExtraHdImageUrl = $bannerMobileExtraHdImageUrl;
@@ -6452,7 +4757,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerMobileExtraHdImageUrl;
   }
-
+  
   public function setBannerMobileHdImageUrl($bannerMobileHdImageUrl)
   {
     $this->bannerMobileHdImageUrl = $bannerMobileHdImageUrl;
@@ -6462,7 +4767,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerMobileHdImageUrl;
   }
-
+  
   public function setBannerMobileImageUrl($bannerMobileImageUrl)
   {
     $this->bannerMobileImageUrl = $bannerMobileImageUrl;
@@ -6472,7 +4777,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerMobileImageUrl;
   }
-
+  
   public function setBannerMobileLowImageUrl($bannerMobileLowImageUrl)
   {
     $this->bannerMobileLowImageUrl = $bannerMobileLowImageUrl;
@@ -6482,7 +4787,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerMobileLowImageUrl;
   }
-
+  
   public function setBannerMobileMediumHdImageUrl($bannerMobileMediumHdImageUrl)
   {
     $this->bannerMobileMediumHdImageUrl = $bannerMobileMediumHdImageUrl;
@@ -6492,7 +4797,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerMobileMediumHdImageUrl;
   }
-
+  
   public function setBannerTabletExtraHdImageUrl($bannerTabletExtraHdImageUrl)
   {
     $this->bannerTabletExtraHdImageUrl = $bannerTabletExtraHdImageUrl;
@@ -6502,7 +4807,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerTabletExtraHdImageUrl;
   }
-
+  
   public function setBannerTabletHdImageUrl($bannerTabletHdImageUrl)
   {
     $this->bannerTabletHdImageUrl = $bannerTabletHdImageUrl;
@@ -6512,7 +4817,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerTabletHdImageUrl;
   }
-
+  
   public function setBannerTabletImageUrl($bannerTabletImageUrl)
   {
     $this->bannerTabletImageUrl = $bannerTabletImageUrl;
@@ -6522,7 +4827,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerTabletImageUrl;
   }
-
+  
   public function setBannerTabletLowImageUrl($bannerTabletLowImageUrl)
   {
     $this->bannerTabletLowImageUrl = $bannerTabletLowImageUrl;
@@ -6532,7 +4837,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerTabletLowImageUrl;
   }
-
+  
   public function setBannerTvHighImageUrl($bannerTvHighImageUrl)
   {
     $this->bannerTvHighImageUrl = $bannerTvHighImageUrl;
@@ -6542,7 +4847,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerTvHighImageUrl;
   }
-
+  
   public function setBannerTvImageUrl($bannerTvImageUrl)
   {
     $this->bannerTvImageUrl = $bannerTvImageUrl;
@@ -6552,7 +4857,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerTvImageUrl;
   }
-
+  
   public function setBannerTvLowImageUrl($bannerTvLowImageUrl)
   {
     $this->bannerTvLowImageUrl = $bannerTvLowImageUrl;
@@ -6562,7 +4867,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerTvLowImageUrl;
   }
-
+  
   public function setBannerTvMediumImageUrl($bannerTvMediumImageUrl)
   {
     $this->bannerTvMediumImageUrl = $bannerTvMediumImageUrl;
@@ -6572,7 +4877,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->bannerTvMediumImageUrl;
   }
-
+  
   public function setLargeBrandedBannerImageImapScript(Google_Service_YouTube_LocalizedProperty $largeBrandedBannerImageImapScript)
   {
     $this->largeBrandedBannerImageImapScript = $largeBrandedBannerImageImapScript;
@@ -6582,7 +4887,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->largeBrandedBannerImageImapScript;
   }
-
+  
   public function setLargeBrandedBannerImageUrl(Google_Service_YouTube_LocalizedProperty $largeBrandedBannerImageUrl)
   {
     $this->largeBrandedBannerImageUrl = $largeBrandedBannerImageUrl;
@@ -6592,7 +4897,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->largeBrandedBannerImageUrl;
   }
-
+  
   public function setSmallBrandedBannerImageImapScript(Google_Service_YouTube_LocalizedProperty $smallBrandedBannerImageImapScript)
   {
     $this->smallBrandedBannerImageImapScript = $smallBrandedBannerImageImapScript;
@@ -6602,7 +4907,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->smallBrandedBannerImageImapScript;
   }
-
+  
   public function setSmallBrandedBannerImageUrl(Google_Service_YouTube_LocalizedProperty $smallBrandedBannerImageUrl)
   {
     $this->smallBrandedBannerImageUrl = $smallBrandedBannerImageUrl;
@@ -6612,7 +4917,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->smallBrandedBannerImageUrl;
   }
-
+  
   public function setTrackingImageUrl($trackingImageUrl)
   {
     $this->trackingImageUrl = $trackingImageUrl;
@@ -6622,7 +4927,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->trackingImageUrl;
   }
-
+  
   public function setWatchIconImageUrl($watchIconImageUrl)
   {
     $this->watchIconImageUrl = $watchIconImageUrl;
@@ -6632,6 +4937,7 @@ class Google_Service_YouTube_ImageSettings extends Google_Model
   {
     return $this->watchIconImageUrl;
   }
+  
 }
 
 class Google_Service_YouTube_IngestionInfo extends Google_Model
@@ -6649,7 +4955,7 @@ class Google_Service_YouTube_IngestionInfo extends Google_Model
   {
     return $this->backupIngestionAddress;
   }
-
+  
   public function setIngestionAddress($ingestionAddress)
   {
     $this->ingestionAddress = $ingestionAddress;
@@ -6659,7 +4965,7 @@ class Google_Service_YouTube_IngestionInfo extends Google_Model
   {
     return $this->ingestionAddress;
   }
-
+  
   public function setStreamName($streamName)
   {
     $this->streamName = $streamName;
@@ -6669,6 +4975,7 @@ class Google_Service_YouTube_IngestionInfo extends Google_Model
   {
     return $this->streamName;
   }
+  
 }
 
 class Google_Service_YouTube_InvideoBranding extends Google_Model
@@ -6690,7 +4997,7 @@ class Google_Service_YouTube_InvideoBranding extends Google_Model
   {
     return $this->imageBytes;
   }
-
+  
   public function setImageUrl($imageUrl)
   {
     $this->imageUrl = $imageUrl;
@@ -6700,7 +5007,7 @@ class Google_Service_YouTube_InvideoBranding extends Google_Model
   {
     return $this->imageUrl;
   }
-
+  
   public function setPosition(Google_Service_YouTube_InvideoPosition $position)
   {
     $this->position = $position;
@@ -6710,7 +5017,7 @@ class Google_Service_YouTube_InvideoBranding extends Google_Model
   {
     return $this->position;
   }
-
+  
   public function setTargetChannelId($targetChannelId)
   {
     $this->targetChannelId = $targetChannelId;
@@ -6720,7 +5027,7 @@ class Google_Service_YouTube_InvideoBranding extends Google_Model
   {
     return $this->targetChannelId;
   }
-
+  
   public function setTiming(Google_Service_YouTube_InvideoTiming $timing)
   {
     $this->timing = $timing;
@@ -6730,6 +5037,7 @@ class Google_Service_YouTube_InvideoBranding extends Google_Model
   {
     return $this->timing;
   }
+  
 }
 
 class Google_Service_YouTube_InvideoPosition extends Google_Model
@@ -6746,7 +5054,7 @@ class Google_Service_YouTube_InvideoPosition extends Google_Model
   {
     return $this->cornerPosition;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -6756,6 +5064,7 @@ class Google_Service_YouTube_InvideoPosition extends Google_Model
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_YouTube_InvideoPromotion extends Google_Collection
@@ -6776,7 +5085,7 @@ class Google_Service_YouTube_InvideoPromotion extends Google_Collection
   {
     return $this->defaultTiming;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -6786,7 +5095,7 @@ class Google_Service_YouTube_InvideoPromotion extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setPosition(Google_Service_YouTube_InvideoPosition $position)
   {
     $this->position = $position;
@@ -6796,6 +5105,7 @@ class Google_Service_YouTube_InvideoPromotion extends Google_Collection
   {
     return $this->position;
   }
+  
 }
 
 class Google_Service_YouTube_InvideoTiming extends Google_Model
@@ -6813,7 +5123,7 @@ class Google_Service_YouTube_InvideoTiming extends Google_Model
   {
     return $this->durationMs;
   }
-
+  
   public function setOffsetMs($offsetMs)
   {
     $this->offsetMs = $offsetMs;
@@ -6823,7 +5133,7 @@ class Google_Service_YouTube_InvideoTiming extends Google_Model
   {
     return $this->offsetMs;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -6833,6 +5143,7 @@ class Google_Service_YouTube_InvideoTiming extends Google_Model
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_YouTube_LiveBroadcast extends Google_Model
@@ -6856,7 +5167,7 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   {
     return $this->contentDetails;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -6866,7 +5177,7 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -6876,7 +5187,7 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -6886,7 +5197,7 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_LiveBroadcastSnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -6896,7 +5207,7 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   {
     return $this->snippet;
   }
-
+  
   public function setStatus(Google_Service_YouTube_LiveBroadcastStatus $status)
   {
     $this->status = $status;
@@ -6906,6 +5217,7 @@ class Google_Service_YouTube_LiveBroadcast extends Google_Model
   {
     return $this->status;
   }
+  
 }
 
 class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
@@ -6929,7 +5241,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   {
     return $this->boundStreamId;
   }
-
+  
   public function setEnableClosedCaptions($enableClosedCaptions)
   {
     $this->enableClosedCaptions = $enableClosedCaptions;
@@ -6939,7 +5251,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   {
     return $this->enableClosedCaptions;
   }
-
+  
   public function setEnableContentEncryption($enableContentEncryption)
   {
     $this->enableContentEncryption = $enableContentEncryption;
@@ -6949,7 +5261,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   {
     return $this->enableContentEncryption;
   }
-
+  
   public function setEnableDvr($enableDvr)
   {
     $this->enableDvr = $enableDvr;
@@ -6959,7 +5271,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   {
     return $this->enableDvr;
   }
-
+  
   public function setEnableEmbed($enableEmbed)
   {
     $this->enableEmbed = $enableEmbed;
@@ -6969,7 +5281,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   {
     return $this->enableEmbed;
   }
-
+  
   public function setMonitorStream(Google_Service_YouTube_MonitorStreamInfo $monitorStream)
   {
     $this->monitorStream = $monitorStream;
@@ -6979,7 +5291,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   {
     return $this->monitorStream;
   }
-
+  
   public function setRecordFromStart($recordFromStart)
   {
     $this->recordFromStart = $recordFromStart;
@@ -6989,7 +5301,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   {
     return $this->recordFromStart;
   }
-
+  
   public function setStartWithSlate($startWithSlate)
   {
     $this->startWithSlate = $startWithSlate;
@@ -6999,6 +5311,7 @@ class Google_Service_YouTube_LiveBroadcastContentDetails extends Google_Model
   {
     return $this->startWithSlate;
   }
+  
 }
 
 class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
@@ -7025,7 +5338,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -7035,7 +5348,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -7045,7 +5358,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -7055,7 +5368,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -7065,7 +5378,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -7075,7 +5388,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -7085,7 +5398,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -7095,7 +5408,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -7105,6 +5418,7 @@ class Google_Service_YouTube_LiveBroadcastListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
@@ -7129,7 +5443,7 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->actualEndTime;
   }
-
+  
   public function setActualStartTime($actualStartTime)
   {
     $this->actualStartTime = $actualStartTime;
@@ -7139,7 +5453,7 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->actualStartTime;
   }
-
+  
   public function setChannelId($channelId)
   {
     $this->channelId = $channelId;
@@ -7149,7 +5463,7 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -7159,7 +5473,7 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -7169,7 +5483,7 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->publishedAt;
   }
-
+  
   public function setScheduledEndTime($scheduledEndTime)
   {
     $this->scheduledEndTime = $scheduledEndTime;
@@ -7179,7 +5493,7 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->scheduledEndTime;
   }
-
+  
   public function setScheduledStartTime($scheduledStartTime)
   {
     $this->scheduledStartTime = $scheduledStartTime;
@@ -7189,7 +5503,7 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->scheduledStartTime;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -7199,7 +5513,7 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -7209,12 +5523,12 @@ class Google_Service_YouTube_LiveBroadcastSnippet extends Google_Model
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_LiveBroadcastStatus extends Google_Model
 {
   public $lifeCycleStatus;
-  public $liveBroadcastPriority;
   public $privacyStatus;
   public $recordingStatus;
 
@@ -7227,17 +5541,7 @@ class Google_Service_YouTube_LiveBroadcastStatus extends Google_Model
   {
     return $this->lifeCycleStatus;
   }
-
-  public function setLiveBroadcastPriority($liveBroadcastPriority)
-  {
-    $this->liveBroadcastPriority = $liveBroadcastPriority;
-  }
-
-  public function getLiveBroadcastPriority()
-  {
-    return $this->liveBroadcastPriority;
-  }
-
+  
   public function setPrivacyStatus($privacyStatus)
   {
     $this->privacyStatus = $privacyStatus;
@@ -7247,7 +5551,7 @@ class Google_Service_YouTube_LiveBroadcastStatus extends Google_Model
   {
     return $this->privacyStatus;
   }
-
+  
   public function setRecordingStatus($recordingStatus)
   {
     $this->recordingStatus = $recordingStatus;
@@ -7257,6 +5561,7 @@ class Google_Service_YouTube_LiveBroadcastStatus extends Google_Model
   {
     return $this->recordingStatus;
   }
+  
 }
 
 class Google_Service_YouTube_LiveStream extends Google_Model
@@ -7282,7 +5587,7 @@ class Google_Service_YouTube_LiveStream extends Google_Model
   {
     return $this->cdn;
   }
-
+  
   public function setContentDetails(Google_Service_YouTube_LiveStreamContentDetails $contentDetails)
   {
     $this->contentDetails = $contentDetails;
@@ -7292,7 +5597,7 @@ class Google_Service_YouTube_LiveStream extends Google_Model
   {
     return $this->contentDetails;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -7302,7 +5607,7 @@ class Google_Service_YouTube_LiveStream extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -7312,7 +5617,7 @@ class Google_Service_YouTube_LiveStream extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -7322,7 +5627,7 @@ class Google_Service_YouTube_LiveStream extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_LiveStreamSnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -7332,7 +5637,7 @@ class Google_Service_YouTube_LiveStream extends Google_Model
   {
     return $this->snippet;
   }
-
+  
   public function setStatus(Google_Service_YouTube_LiveStreamStatus $status)
   {
     $this->status = $status;
@@ -7342,6 +5647,7 @@ class Google_Service_YouTube_LiveStream extends Google_Model
   {
     return $this->status;
   }
+  
 }
 
 class Google_Service_YouTube_LiveStreamContentDetails extends Google_Model
@@ -7357,6 +5663,7 @@ class Google_Service_YouTube_LiveStreamContentDetails extends Google_Model
   {
     return $this->closedCaptionsIngestionUrl;
   }
+  
 }
 
 class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
@@ -7383,7 +5690,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -7393,7 +5700,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -7403,7 +5710,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -7413,7 +5720,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -7423,7 +5730,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -7433,7 +5740,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -7443,7 +5750,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -7453,7 +5760,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -7463,6 +5770,7 @@ class Google_Service_YouTube_LiveStreamListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_LiveStreamSnippet extends Google_Model
@@ -7481,7 +5789,7 @@ class Google_Service_YouTube_LiveStreamSnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -7491,7 +5799,7 @@ class Google_Service_YouTube_LiveStreamSnippet extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -7501,7 +5809,7 @@ class Google_Service_YouTube_LiveStreamSnippet extends Google_Model
   {
     return $this->publishedAt;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -7511,6 +5819,7 @@ class Google_Service_YouTube_LiveStreamSnippet extends Google_Model
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_LiveStreamStatus extends Google_Model
@@ -7526,6 +5835,7 @@ class Google_Service_YouTube_LiveStreamStatus extends Google_Model
   {
     return $this->streamStatus;
   }
+  
 }
 
 class Google_Service_YouTube_LocalizedProperty extends Google_Collection
@@ -7543,7 +5853,7 @@ class Google_Service_YouTube_LocalizedProperty extends Google_Collection
   {
     return $this->default;
   }
-
+  
   public function setLocalized($localized)
   {
     $this->localized = $localized;
@@ -7553,6 +5863,7 @@ class Google_Service_YouTube_LocalizedProperty extends Google_Collection
   {
     return $this->localized;
   }
+  
 }
 
 class Google_Service_YouTube_LocalizedString extends Google_Model
@@ -7569,7 +5880,7 @@ class Google_Service_YouTube_LocalizedString extends Google_Model
   {
     return $this->language;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -7579,6 +5890,7 @@ class Google_Service_YouTube_LocalizedString extends Google_Model
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_YouTube_MonitorStreamInfo extends Google_Model
@@ -7596,7 +5908,7 @@ class Google_Service_YouTube_MonitorStreamInfo extends Google_Model
   {
     return $this->broadcastStreamDelayMs;
   }
-
+  
   public function setEmbedHtml($embedHtml)
   {
     $this->embedHtml = $embedHtml;
@@ -7606,7 +5918,7 @@ class Google_Service_YouTube_MonitorStreamInfo extends Google_Model
   {
     return $this->embedHtml;
   }
-
+  
   public function setEnableMonitorStream($enableMonitorStream)
   {
     $this->enableMonitorStream = $enableMonitorStream;
@@ -7616,6 +5928,7 @@ class Google_Service_YouTube_MonitorStreamInfo extends Google_Model
   {
     return $this->enableMonitorStream;
   }
+  
 }
 
 class Google_Service_YouTube_PageInfo extends Google_Model
@@ -7632,7 +5945,7 @@ class Google_Service_YouTube_PageInfo extends Google_Model
   {
     return $this->resultsPerPage;
   }
-
+  
   public function setTotalResults($totalResults)
   {
     $this->totalResults = $totalResults;
@@ -7642,6 +5955,7 @@ class Google_Service_YouTube_PageInfo extends Google_Model
   {
     return $this->totalResults;
   }
+  
 }
 
 class Google_Service_YouTube_Playlist extends Google_Model
@@ -7667,7 +5981,7 @@ class Google_Service_YouTube_Playlist extends Google_Model
   {
     return $this->contentDetails;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -7677,7 +5991,7 @@ class Google_Service_YouTube_Playlist extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -7687,7 +6001,7 @@ class Google_Service_YouTube_Playlist extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -7697,7 +6011,7 @@ class Google_Service_YouTube_Playlist extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPlayer(Google_Service_YouTube_PlaylistPlayer $player)
   {
     $this->player = $player;
@@ -7707,7 +6021,7 @@ class Google_Service_YouTube_Playlist extends Google_Model
   {
     return $this->player;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_PlaylistSnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -7717,7 +6031,7 @@ class Google_Service_YouTube_Playlist extends Google_Model
   {
     return $this->snippet;
   }
-
+  
   public function setStatus(Google_Service_YouTube_PlaylistStatus $status)
   {
     $this->status = $status;
@@ -7727,6 +6041,7 @@ class Google_Service_YouTube_Playlist extends Google_Model
   {
     return $this->status;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistContentDetails extends Google_Model
@@ -7742,6 +6057,7 @@ class Google_Service_YouTube_PlaylistContentDetails extends Google_Model
   {
     return $this->itemCount;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistItem extends Google_Model
@@ -7765,7 +6081,7 @@ class Google_Service_YouTube_PlaylistItem extends Google_Model
   {
     return $this->contentDetails;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -7775,7 +6091,7 @@ class Google_Service_YouTube_PlaylistItem extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -7785,7 +6101,7 @@ class Google_Service_YouTube_PlaylistItem extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -7795,7 +6111,7 @@ class Google_Service_YouTube_PlaylistItem extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_PlaylistItemSnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -7805,7 +6121,7 @@ class Google_Service_YouTube_PlaylistItem extends Google_Model
   {
     return $this->snippet;
   }
-
+  
   public function setStatus(Google_Service_YouTube_PlaylistItemStatus $status)
   {
     $this->status = $status;
@@ -7815,6 +6131,7 @@ class Google_Service_YouTube_PlaylistItem extends Google_Model
   {
     return $this->status;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistItemContentDetails extends Google_Model
@@ -7833,7 +6150,7 @@ class Google_Service_YouTube_PlaylistItemContentDetails extends Google_Model
   {
     return $this->endAt;
   }
-
+  
   public function setNote($note)
   {
     $this->note = $note;
@@ -7843,7 +6160,7 @@ class Google_Service_YouTube_PlaylistItemContentDetails extends Google_Model
   {
     return $this->note;
   }
-
+  
   public function setStartAt($startAt)
   {
     $this->startAt = $startAt;
@@ -7853,7 +6170,7 @@ class Google_Service_YouTube_PlaylistItemContentDetails extends Google_Model
   {
     return $this->startAt;
   }
-
+  
   public function setVideoId($videoId)
   {
     $this->videoId = $videoId;
@@ -7863,6 +6180,7 @@ class Google_Service_YouTube_PlaylistItemContentDetails extends Google_Model
   {
     return $this->videoId;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
@@ -7889,7 +6207,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -7899,7 +6217,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -7909,7 +6227,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -7919,7 +6237,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -7929,7 +6247,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -7939,7 +6257,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -7949,7 +6267,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -7959,7 +6277,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -7969,6 +6287,7 @@ class Google_Service_YouTube_PlaylistItemListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
@@ -7994,7 +6313,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setChannelTitle($channelTitle)
   {
     $this->channelTitle = $channelTitle;
@@ -8004,7 +6323,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->channelTitle;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -8014,7 +6333,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setPlaylistId($playlistId)
   {
     $this->playlistId = $playlistId;
@@ -8024,7 +6343,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->playlistId;
   }
-
+  
   public function setPosition($position)
   {
     $this->position = $position;
@@ -8034,7 +6353,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->position;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -8044,7 +6363,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->publishedAt;
   }
-
+  
   public function setResourceId(Google_Service_YouTube_ResourceId $resourceId)
   {
     $this->resourceId = $resourceId;
@@ -8054,7 +6373,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->resourceId;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -8064,7 +6383,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -8074,6 +6393,7 @@ class Google_Service_YouTube_PlaylistItemSnippet extends Google_Model
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistItemStatus extends Google_Model
@@ -8089,6 +6409,7 @@ class Google_Service_YouTube_PlaylistItemStatus extends Google_Model
   {
     return $this->privacyStatus;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
@@ -8115,7 +6436,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -8125,7 +6446,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -8135,7 +6456,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -8145,7 +6466,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -8155,7 +6476,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -8165,7 +6486,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -8175,7 +6496,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -8185,7 +6506,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -8195,6 +6516,7 @@ class Google_Service_YouTube_PlaylistListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistPlayer extends Google_Model
@@ -8210,6 +6532,7 @@ class Google_Service_YouTube_PlaylistPlayer extends Google_Model
   {
     return $this->embedHtml;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistSnippet extends Google_Collection
@@ -8232,7 +6555,7 @@ class Google_Service_YouTube_PlaylistSnippet extends Google_Collection
   {
     return $this->channelId;
   }
-
+  
   public function setChannelTitle($channelTitle)
   {
     $this->channelTitle = $channelTitle;
@@ -8242,7 +6565,7 @@ class Google_Service_YouTube_PlaylistSnippet extends Google_Collection
   {
     return $this->channelTitle;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -8252,7 +6575,7 @@ class Google_Service_YouTube_PlaylistSnippet extends Google_Collection
   {
     return $this->description;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -8262,7 +6585,7 @@ class Google_Service_YouTube_PlaylistSnippet extends Google_Collection
   {
     return $this->publishedAt;
   }
-
+  
   public function setTags($tags)
   {
     $this->tags = $tags;
@@ -8272,7 +6595,7 @@ class Google_Service_YouTube_PlaylistSnippet extends Google_Collection
   {
     return $this->tags;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -8282,7 +6605,7 @@ class Google_Service_YouTube_PlaylistSnippet extends Google_Collection
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -8292,6 +6615,7 @@ class Google_Service_YouTube_PlaylistSnippet extends Google_Collection
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_PlaylistStatus extends Google_Model
@@ -8307,6 +6631,7 @@ class Google_Service_YouTube_PlaylistStatus extends Google_Model
   {
     return $this->privacyStatus;
   }
+  
 }
 
 class Google_Service_YouTube_PromotedItem extends Google_Model
@@ -8327,7 +6652,7 @@ class Google_Service_YouTube_PromotedItem extends Google_Model
   {
     return $this->customMessage;
   }
-
+  
   public function setId(Google_Service_YouTube_PromotedItemId $id)
   {
     $this->id = $id;
@@ -8337,7 +6662,7 @@ class Google_Service_YouTube_PromotedItem extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setPromotedByContentOwner($promotedByContentOwner)
   {
     $this->promotedByContentOwner = $promotedByContentOwner;
@@ -8347,7 +6672,7 @@ class Google_Service_YouTube_PromotedItem extends Google_Model
   {
     return $this->promotedByContentOwner;
   }
-
+  
   public function setTiming(Google_Service_YouTube_InvideoTiming $timing)
   {
     $this->timing = $timing;
@@ -8357,6 +6682,7 @@ class Google_Service_YouTube_PromotedItem extends Google_Model
   {
     return $this->timing;
   }
+  
 }
 
 class Google_Service_YouTube_PromotedItemId extends Google_Model
@@ -8375,7 +6701,7 @@ class Google_Service_YouTube_PromotedItemId extends Google_Model
   {
     return $this->recentlyUploadedBy;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -8385,7 +6711,7 @@ class Google_Service_YouTube_PromotedItemId extends Google_Model
   {
     return $this->type;
   }
-
+  
   public function setVideoId($videoId)
   {
     $this->videoId = $videoId;
@@ -8395,7 +6721,7 @@ class Google_Service_YouTube_PromotedItemId extends Google_Model
   {
     return $this->videoId;
   }
-
+  
   public function setWebsiteUrl($websiteUrl)
   {
     $this->websiteUrl = $websiteUrl;
@@ -8405,6 +6731,7 @@ class Google_Service_YouTube_PromotedItemId extends Google_Model
   {
     return $this->websiteUrl;
   }
+  
 }
 
 class Google_Service_YouTube_PropertyValue extends Google_Model
@@ -8421,7 +6748,7 @@ class Google_Service_YouTube_PropertyValue extends Google_Model
   {
     return $this->property;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -8431,6 +6758,7 @@ class Google_Service_YouTube_PropertyValue extends Google_Model
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_YouTube_ResourceId extends Google_Model
@@ -8449,7 +6777,7 @@ class Google_Service_YouTube_ResourceId extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -8459,7 +6787,7 @@ class Google_Service_YouTube_ResourceId extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPlaylistId($playlistId)
   {
     $this->playlistId = $playlistId;
@@ -8469,7 +6797,7 @@ class Google_Service_YouTube_ResourceId extends Google_Model
   {
     return $this->playlistId;
   }
-
+  
   public function setVideoId($videoId)
   {
     $this->videoId = $videoId;
@@ -8479,6 +6807,7 @@ class Google_Service_YouTube_ResourceId extends Google_Model
   {
     return $this->videoId;
   }
+  
 }
 
 class Google_Service_YouTube_SearchListResponse extends Google_Collection
@@ -8505,7 +6834,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -8515,7 +6844,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -8525,7 +6854,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -8535,7 +6864,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -8545,7 +6874,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -8555,7 +6884,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -8565,7 +6894,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -8575,7 +6904,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -8585,6 +6914,7 @@ class Google_Service_YouTube_SearchListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_SearchResult extends Google_Model
@@ -8605,7 +6935,7 @@ class Google_Service_YouTube_SearchResult extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId(Google_Service_YouTube_ResourceId $id)
   {
     $this->id = $id;
@@ -8615,7 +6945,7 @@ class Google_Service_YouTube_SearchResult extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -8625,7 +6955,7 @@ class Google_Service_YouTube_SearchResult extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_SearchResultSnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -8635,6 +6965,7 @@ class Google_Service_YouTube_SearchResult extends Google_Model
   {
     return $this->snippet;
   }
+  
 }
 
 class Google_Service_YouTube_SearchResultSnippet extends Google_Model
@@ -8657,7 +6988,7 @@ class Google_Service_YouTube_SearchResultSnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setChannelTitle($channelTitle)
   {
     $this->channelTitle = $channelTitle;
@@ -8667,7 +6998,7 @@ class Google_Service_YouTube_SearchResultSnippet extends Google_Model
   {
     return $this->channelTitle;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -8677,7 +7008,7 @@ class Google_Service_YouTube_SearchResultSnippet extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setLiveBroadcastContent($liveBroadcastContent)
   {
     $this->liveBroadcastContent = $liveBroadcastContent;
@@ -8687,7 +7018,7 @@ class Google_Service_YouTube_SearchResultSnippet extends Google_Model
   {
     return $this->liveBroadcastContent;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -8697,7 +7028,7 @@ class Google_Service_YouTube_SearchResultSnippet extends Google_Model
   {
     return $this->publishedAt;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -8707,7 +7038,7 @@ class Google_Service_YouTube_SearchResultSnippet extends Google_Model
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -8717,6 +7048,7 @@ class Google_Service_YouTube_SearchResultSnippet extends Google_Model
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_Subscription extends Google_Model
@@ -8740,7 +7072,7 @@ class Google_Service_YouTube_Subscription extends Google_Model
   {
     return $this->contentDetails;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -8750,7 +7082,7 @@ class Google_Service_YouTube_Subscription extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -8760,7 +7092,7 @@ class Google_Service_YouTube_Subscription extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -8770,7 +7102,7 @@ class Google_Service_YouTube_Subscription extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_SubscriptionSnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -8780,7 +7112,7 @@ class Google_Service_YouTube_Subscription extends Google_Model
   {
     return $this->snippet;
   }
-
+  
   public function setSubscriberSnippet(Google_Service_YouTube_SubscriptionSubscriberSnippet $subscriberSnippet)
   {
     $this->subscriberSnippet = $subscriberSnippet;
@@ -8790,6 +7122,7 @@ class Google_Service_YouTube_Subscription extends Google_Model
   {
     return $this->subscriberSnippet;
   }
+  
 }
 
 class Google_Service_YouTube_SubscriptionContentDetails extends Google_Model
@@ -8807,7 +7140,7 @@ class Google_Service_YouTube_SubscriptionContentDetails extends Google_Model
   {
     return $this->activityType;
   }
-
+  
   public function setNewItemCount($newItemCount)
   {
     $this->newItemCount = $newItemCount;
@@ -8817,7 +7150,7 @@ class Google_Service_YouTube_SubscriptionContentDetails extends Google_Model
   {
     return $this->newItemCount;
   }
-
+  
   public function setTotalItemCount($totalItemCount)
   {
     $this->totalItemCount = $totalItemCount;
@@ -8827,6 +7160,7 @@ class Google_Service_YouTube_SubscriptionContentDetails extends Google_Model
   {
     return $this->totalItemCount;
   }
+  
 }
 
 class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
@@ -8853,7 +7187,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -8863,7 +7197,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -8873,7 +7207,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -8883,7 +7217,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -8893,7 +7227,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -8903,7 +7237,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -8913,7 +7247,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -8923,7 +7257,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -8933,6 +7267,7 @@ class Google_Service_YouTube_SubscriptionListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_SubscriptionSnippet extends Google_Model
@@ -8956,7 +7291,7 @@ class Google_Service_YouTube_SubscriptionSnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setChannelTitle($channelTitle)
   {
     $this->channelTitle = $channelTitle;
@@ -8966,7 +7301,7 @@ class Google_Service_YouTube_SubscriptionSnippet extends Google_Model
   {
     return $this->channelTitle;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -8976,7 +7311,7 @@ class Google_Service_YouTube_SubscriptionSnippet extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -8986,7 +7321,7 @@ class Google_Service_YouTube_SubscriptionSnippet extends Google_Model
   {
     return $this->publishedAt;
   }
-
+  
   public function setResourceId(Google_Service_YouTube_ResourceId $resourceId)
   {
     $this->resourceId = $resourceId;
@@ -8996,7 +7331,7 @@ class Google_Service_YouTube_SubscriptionSnippet extends Google_Model
   {
     return $this->resourceId;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -9006,7 +7341,7 @@ class Google_Service_YouTube_SubscriptionSnippet extends Google_Model
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -9016,6 +7351,7 @@ class Google_Service_YouTube_SubscriptionSnippet extends Google_Model
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_SubscriptionSubscriberSnippet extends Google_Model
@@ -9035,7 +7371,7 @@ class Google_Service_YouTube_SubscriptionSubscriberSnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -9045,7 +7381,7 @@ class Google_Service_YouTube_SubscriptionSubscriberSnippet extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -9055,7 +7391,7 @@ class Google_Service_YouTube_SubscriptionSubscriberSnippet extends Google_Model
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -9065,6 +7401,7 @@ class Google_Service_YouTube_SubscriptionSubscriberSnippet extends Google_Model
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_Thumbnail extends Google_Model
@@ -9082,7 +7419,7 @@ class Google_Service_YouTube_Thumbnail extends Google_Model
   {
     return $this->height;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -9092,7 +7429,7 @@ class Google_Service_YouTube_Thumbnail extends Google_Model
   {
     return $this->url;
   }
-
+  
   public function setWidth($width)
   {
     $this->width = $width;
@@ -9102,6 +7439,7 @@ class Google_Service_YouTube_Thumbnail extends Google_Model
   {
     return $this->width;
   }
+  
 }
 
 class Google_Service_YouTube_ThumbnailDetails extends Google_Model
@@ -9126,7 +7464,7 @@ class Google_Service_YouTube_ThumbnailDetails extends Google_Model
   {
     return $this->default;
   }
-
+  
   public function setHigh(Google_Service_YouTube_Thumbnail $high)
   {
     $this->high = $high;
@@ -9136,7 +7474,7 @@ class Google_Service_YouTube_ThumbnailDetails extends Google_Model
   {
     return $this->high;
   }
-
+  
   public function setMaxres(Google_Service_YouTube_Thumbnail $maxres)
   {
     $this->maxres = $maxres;
@@ -9146,7 +7484,7 @@ class Google_Service_YouTube_ThumbnailDetails extends Google_Model
   {
     return $this->maxres;
   }
-
+  
   public function setMedium(Google_Service_YouTube_Thumbnail $medium)
   {
     $this->medium = $medium;
@@ -9156,7 +7494,7 @@ class Google_Service_YouTube_ThumbnailDetails extends Google_Model
   {
     return $this->medium;
   }
-
+  
   public function setStandard(Google_Service_YouTube_Thumbnail $standard)
   {
     $this->standard = $standard;
@@ -9166,6 +7504,7 @@ class Google_Service_YouTube_ThumbnailDetails extends Google_Model
   {
     return $this->standard;
   }
+  
 }
 
 class Google_Service_YouTube_ThumbnailSetResponse extends Google_Collection
@@ -9186,7 +7525,7 @@ class Google_Service_YouTube_ThumbnailSetResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -9196,7 +7535,7 @@ class Google_Service_YouTube_ThumbnailSetResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -9206,7 +7545,7 @@ class Google_Service_YouTube_ThumbnailSetResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -9216,7 +7555,7 @@ class Google_Service_YouTube_ThumbnailSetResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -9226,10 +7565,12 @@ class Google_Service_YouTube_ThumbnailSetResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_TokenPagination extends Google_Model
 {
+
 
 }
 
@@ -9278,7 +7619,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->ageGating;
   }
-
+  
   public function setContentDetails(Google_Service_YouTube_VideoContentDetails $contentDetails)
   {
     $this->contentDetails = $contentDetails;
@@ -9288,7 +7629,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->contentDetails;
   }
-
+  
   public function setConversionPings(Google_Service_YouTube_VideoConversionPings $conversionPings)
   {
     $this->conversionPings = $conversionPings;
@@ -9298,7 +7639,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->conversionPings;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -9308,7 +7649,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setFileDetails(Google_Service_YouTube_VideoFileDetails $fileDetails)
   {
     $this->fileDetails = $fileDetails;
@@ -9318,7 +7659,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->fileDetails;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -9328,7 +7669,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -9338,7 +7679,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setLiveStreamingDetails(Google_Service_YouTube_VideoLiveStreamingDetails $liveStreamingDetails)
   {
     $this->liveStreamingDetails = $liveStreamingDetails;
@@ -9348,7 +7689,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->liveStreamingDetails;
   }
-
+  
   public function setMonetizationDetails(Google_Service_YouTube_VideoMonetizationDetails $monetizationDetails)
   {
     $this->monetizationDetails = $monetizationDetails;
@@ -9358,7 +7699,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->monetizationDetails;
   }
-
+  
   public function setPlayer(Google_Service_YouTube_VideoPlayer $player)
   {
     $this->player = $player;
@@ -9368,7 +7709,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->player;
   }
-
+  
   public function setProcessingDetails(Google_Service_YouTube_VideoProcessingDetails $processingDetails)
   {
     $this->processingDetails = $processingDetails;
@@ -9378,7 +7719,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->processingDetails;
   }
-
+  
   public function setProjectDetails(Google_Service_YouTube_VideoProjectDetails $projectDetails)
   {
     $this->projectDetails = $projectDetails;
@@ -9388,7 +7729,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->projectDetails;
   }
-
+  
   public function setRecordingDetails(Google_Service_YouTube_VideoRecordingDetails $recordingDetails)
   {
     $this->recordingDetails = $recordingDetails;
@@ -9398,7 +7739,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->recordingDetails;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_VideoSnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -9408,7 +7749,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->snippet;
   }
-
+  
   public function setStatistics(Google_Service_YouTube_VideoStatistics $statistics)
   {
     $this->statistics = $statistics;
@@ -9418,7 +7759,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->statistics;
   }
-
+  
   public function setStatus(Google_Service_YouTube_VideoStatus $status)
   {
     $this->status = $status;
@@ -9428,7 +7769,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->status;
   }
-
+  
   public function setSuggestions(Google_Service_YouTube_VideoSuggestions $suggestions)
   {
     $this->suggestions = $suggestions;
@@ -9438,7 +7779,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->suggestions;
   }
-
+  
   public function setTopicDetails(Google_Service_YouTube_VideoTopicDetails $topicDetails)
   {
     $this->topicDetails = $topicDetails;
@@ -9448,6 +7789,7 @@ class Google_Service_YouTube_Video extends Google_Model
   {
     return $this->topicDetails;
   }
+  
 }
 
 class Google_Service_YouTube_VideoAgeGating extends Google_Model
@@ -9465,7 +7807,7 @@ class Google_Service_YouTube_VideoAgeGating extends Google_Model
   {
     return $this->alcoholContent;
   }
-
+  
   public function setRestricted($restricted)
   {
     $this->restricted = $restricted;
@@ -9475,7 +7817,7 @@ class Google_Service_YouTube_VideoAgeGating extends Google_Model
   {
     return $this->restricted;
   }
-
+  
   public function setVideoGameRating($videoGameRating)
   {
     $this->videoGameRating = $videoGameRating;
@@ -9485,6 +7827,7 @@ class Google_Service_YouTube_VideoAgeGating extends Google_Model
   {
     return $this->videoGameRating;
   }
+  
 }
 
 class Google_Service_YouTube_VideoCategory extends Google_Model
@@ -9504,7 +7847,7 @@ class Google_Service_YouTube_VideoCategory extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -9514,7 +7857,7 @@ class Google_Service_YouTube_VideoCategory extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -9524,7 +7867,7 @@ class Google_Service_YouTube_VideoCategory extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSnippet(Google_Service_YouTube_VideoCategorySnippet $snippet)
   {
     $this->snippet = $snippet;
@@ -9534,6 +7877,7 @@ class Google_Service_YouTube_VideoCategory extends Google_Model
   {
     return $this->snippet;
   }
+  
 }
 
 class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
@@ -9560,7 +7904,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -9570,7 +7914,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -9580,7 +7924,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -9590,7 +7934,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -9600,7 +7944,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -9610,7 +7954,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -9620,7 +7964,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -9630,7 +7974,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -9640,6 +7984,7 @@ class Google_Service_YouTube_VideoCategoryListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_VideoCategorySnippet extends Google_Model
@@ -9657,7 +8002,7 @@ class Google_Service_YouTube_VideoCategorySnippet extends Google_Model
   {
     return $this->assignable;
   }
-
+  
   public function setChannelId($channelId)
   {
     $this->channelId = $channelId;
@@ -9667,7 +8012,7 @@ class Google_Service_YouTube_VideoCategorySnippet extends Google_Model
   {
     return $this->channelId;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -9677,6 +8022,7 @@ class Google_Service_YouTube_VideoCategorySnippet extends Google_Model
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_VideoContentDetails extends Google_Model
@@ -9702,7 +8048,7 @@ class Google_Service_YouTube_VideoContentDetails extends Google_Model
   {
     return $this->caption;
   }
-
+  
   public function setContentRating(Google_Service_YouTube_ContentRating $contentRating)
   {
     $this->contentRating = $contentRating;
@@ -9712,7 +8058,7 @@ class Google_Service_YouTube_VideoContentDetails extends Google_Model
   {
     return $this->contentRating;
   }
-
+  
   public function setCountryRestriction(Google_Service_YouTube_AccessPolicy $countryRestriction)
   {
     $this->countryRestriction = $countryRestriction;
@@ -9722,7 +8068,7 @@ class Google_Service_YouTube_VideoContentDetails extends Google_Model
   {
     return $this->countryRestriction;
   }
-
+  
   public function setDefinition($definition)
   {
     $this->definition = $definition;
@@ -9732,7 +8078,7 @@ class Google_Service_YouTube_VideoContentDetails extends Google_Model
   {
     return $this->definition;
   }
-
+  
   public function setDimension($dimension)
   {
     $this->dimension = $dimension;
@@ -9742,7 +8088,7 @@ class Google_Service_YouTube_VideoContentDetails extends Google_Model
   {
     return $this->dimension;
   }
-
+  
   public function setDuration($duration)
   {
     $this->duration = $duration;
@@ -9752,7 +8098,7 @@ class Google_Service_YouTube_VideoContentDetails extends Google_Model
   {
     return $this->duration;
   }
-
+  
   public function setLicensedContent($licensedContent)
   {
     $this->licensedContent = $licensedContent;
@@ -9762,7 +8108,7 @@ class Google_Service_YouTube_VideoContentDetails extends Google_Model
   {
     return $this->licensedContent;
   }
-
+  
   public function setRegionRestriction(Google_Service_YouTube_VideoContentDetailsRegionRestriction $regionRestriction)
   {
     $this->regionRestriction = $regionRestriction;
@@ -9772,6 +8118,7 @@ class Google_Service_YouTube_VideoContentDetails extends Google_Model
   {
     return $this->regionRestriction;
   }
+  
 }
 
 class Google_Service_YouTube_VideoContentDetailsRegionRestriction extends Google_Collection
@@ -9788,7 +8135,7 @@ class Google_Service_YouTube_VideoContentDetailsRegionRestriction extends Google
   {
     return $this->allowed;
   }
-
+  
   public function setBlocked($blocked)
   {
     $this->blocked = $blocked;
@@ -9798,6 +8145,7 @@ class Google_Service_YouTube_VideoContentDetailsRegionRestriction extends Google
   {
     return $this->blocked;
   }
+  
 }
 
 class Google_Service_YouTube_VideoConversionPing extends Google_Model
@@ -9814,7 +8162,7 @@ class Google_Service_YouTube_VideoConversionPing extends Google_Model
   {
     return $this->context;
   }
-
+  
   public function setConversionUrl($conversionUrl)
   {
     $this->conversionUrl = $conversionUrl;
@@ -9824,6 +8172,7 @@ class Google_Service_YouTube_VideoConversionPing extends Google_Model
   {
     return $this->conversionUrl;
   }
+  
 }
 
 class Google_Service_YouTube_VideoConversionPings extends Google_Collection
@@ -9840,6 +8189,7 @@ class Google_Service_YouTube_VideoConversionPings extends Google_Collection
   {
     return $this->pings;
   }
+  
 }
 
 class Google_Service_YouTube_VideoFileDetails extends Google_Collection
@@ -9867,7 +8217,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->audioStreams;
   }
-
+  
   public function setBitrateBps($bitrateBps)
   {
     $this->bitrateBps = $bitrateBps;
@@ -9877,7 +8227,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->bitrateBps;
   }
-
+  
   public function setContainer($container)
   {
     $this->container = $container;
@@ -9887,7 +8237,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->container;
   }
-
+  
   public function setCreationTime($creationTime)
   {
     $this->creationTime = $creationTime;
@@ -9897,7 +8247,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->creationTime;
   }
-
+  
   public function setDurationMs($durationMs)
   {
     $this->durationMs = $durationMs;
@@ -9907,7 +8257,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->durationMs;
   }
-
+  
   public function setFileName($fileName)
   {
     $this->fileName = $fileName;
@@ -9917,7 +8267,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->fileName;
   }
-
+  
   public function setFileSize($fileSize)
   {
     $this->fileSize = $fileSize;
@@ -9927,7 +8277,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->fileSize;
   }
-
+  
   public function setFileType($fileType)
   {
     $this->fileType = $fileType;
@@ -9937,7 +8287,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->fileType;
   }
-
+  
   public function setRecordingLocation(Google_Service_YouTube_GeoPoint $recordingLocation)
   {
     $this->recordingLocation = $recordingLocation;
@@ -9947,7 +8297,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->recordingLocation;
   }
-
+  
   public function setVideoStreams($videoStreams)
   {
     $this->videoStreams = $videoStreams;
@@ -9957,6 +8307,7 @@ class Google_Service_YouTube_VideoFileDetails extends Google_Collection
   {
     return $this->videoStreams;
   }
+  
 }
 
 class Google_Service_YouTube_VideoFileDetailsAudioStream extends Google_Model
@@ -9975,7 +8326,7 @@ class Google_Service_YouTube_VideoFileDetailsAudioStream extends Google_Model
   {
     return $this->bitrateBps;
   }
-
+  
   public function setChannelCount($channelCount)
   {
     $this->channelCount = $channelCount;
@@ -9985,7 +8336,7 @@ class Google_Service_YouTube_VideoFileDetailsAudioStream extends Google_Model
   {
     return $this->channelCount;
   }
-
+  
   public function setCodec($codec)
   {
     $this->codec = $codec;
@@ -9995,7 +8346,7 @@ class Google_Service_YouTube_VideoFileDetailsAudioStream extends Google_Model
   {
     return $this->codec;
   }
-
+  
   public function setVendor($vendor)
   {
     $this->vendor = $vendor;
@@ -10005,6 +8356,7 @@ class Google_Service_YouTube_VideoFileDetailsAudioStream extends Google_Model
   {
     return $this->vendor;
   }
+  
 }
 
 class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
@@ -10027,7 +8379,7 @@ class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
   {
     return $this->aspectRatio;
   }
-
+  
   public function setBitrateBps($bitrateBps)
   {
     $this->bitrateBps = $bitrateBps;
@@ -10037,7 +8389,7 @@ class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
   {
     return $this->bitrateBps;
   }
-
+  
   public function setCodec($codec)
   {
     $this->codec = $codec;
@@ -10047,7 +8399,7 @@ class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
   {
     return $this->codec;
   }
-
+  
   public function setFrameRateFps($frameRateFps)
   {
     $this->frameRateFps = $frameRateFps;
@@ -10057,7 +8409,7 @@ class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
   {
     return $this->frameRateFps;
   }
-
+  
   public function setHeightPixels($heightPixels)
   {
     $this->heightPixels = $heightPixels;
@@ -10067,7 +8419,7 @@ class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
   {
     return $this->heightPixels;
   }
-
+  
   public function setRotation($rotation)
   {
     $this->rotation = $rotation;
@@ -10077,7 +8429,7 @@ class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
   {
     return $this->rotation;
   }
-
+  
   public function setVendor($vendor)
   {
     $this->vendor = $vendor;
@@ -10087,7 +8439,7 @@ class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
   {
     return $this->vendor;
   }
-
+  
   public function setWidthPixels($widthPixels)
   {
     $this->widthPixels = $widthPixels;
@@ -10097,6 +8449,7 @@ class Google_Service_YouTube_VideoFileDetailsVideoStream extends Google_Model
   {
     return $this->widthPixels;
   }
+  
 }
 
 class Google_Service_YouTube_VideoGetRatingResponse extends Google_Collection
@@ -10115,7 +8468,7 @@ class Google_Service_YouTube_VideoGetRatingResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -10125,7 +8478,7 @@ class Google_Service_YouTube_VideoGetRatingResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -10135,6 +8488,7 @@ class Google_Service_YouTube_VideoGetRatingResponse extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_YouTube_VideoListResponse extends Google_Collection
@@ -10161,7 +8515,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEventId($eventId)
   {
     $this->eventId = $eventId;
@@ -10171,7 +8525,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->eventId;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -10181,7 +8535,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -10191,7 +8545,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -10201,7 +8555,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPageInfo(Google_Service_YouTube_PageInfo $pageInfo)
   {
     $this->pageInfo = $pageInfo;
@@ -10211,7 +8565,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->pageInfo;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -10221,7 +8575,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->prevPageToken;
   }
-
+  
   public function setTokenPagination(Google_Service_YouTube_TokenPagination $tokenPagination)
   {
     $this->tokenPagination = $tokenPagination;
@@ -10231,7 +8585,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->tokenPagination;
   }
-
+  
   public function setVisitorId($visitorId)
   {
     $this->visitorId = $visitorId;
@@ -10241,6 +8595,7 @@ class Google_Service_YouTube_VideoListResponse extends Google_Collection
   {
     return $this->visitorId;
   }
+  
 }
 
 class Google_Service_YouTube_VideoLiveStreamingDetails extends Google_Model
@@ -10260,7 +8615,7 @@ class Google_Service_YouTube_VideoLiveStreamingDetails extends Google_Model
   {
     return $this->actualEndTime;
   }
-
+  
   public function setActualStartTime($actualStartTime)
   {
     $this->actualStartTime = $actualStartTime;
@@ -10270,7 +8625,7 @@ class Google_Service_YouTube_VideoLiveStreamingDetails extends Google_Model
   {
     return $this->actualStartTime;
   }
-
+  
   public function setConcurrentViewers($concurrentViewers)
   {
     $this->concurrentViewers = $concurrentViewers;
@@ -10280,7 +8635,7 @@ class Google_Service_YouTube_VideoLiveStreamingDetails extends Google_Model
   {
     return $this->concurrentViewers;
   }
-
+  
   public function setScheduledEndTime($scheduledEndTime)
   {
     $this->scheduledEndTime = $scheduledEndTime;
@@ -10290,7 +8645,7 @@ class Google_Service_YouTube_VideoLiveStreamingDetails extends Google_Model
   {
     return $this->scheduledEndTime;
   }
-
+  
   public function setScheduledStartTime($scheduledStartTime)
   {
     $this->scheduledStartTime = $scheduledStartTime;
@@ -10300,6 +8655,7 @@ class Google_Service_YouTube_VideoLiveStreamingDetails extends Google_Model
   {
     return $this->scheduledStartTime;
   }
+  
 }
 
 class Google_Service_YouTube_VideoMonetizationDetails extends Google_Model
@@ -10316,6 +8672,7 @@ class Google_Service_YouTube_VideoMonetizationDetails extends Google_Model
   {
     return $this->access;
   }
+  
 }
 
 class Google_Service_YouTube_VideoPlayer extends Google_Model
@@ -10331,6 +8688,7 @@ class Google_Service_YouTube_VideoPlayer extends Google_Model
   {
     return $this->embedHtml;
   }
+  
 }
 
 class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
@@ -10354,7 +8712,7 @@ class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
   {
     return $this->editorSuggestionsAvailability;
   }
-
+  
   public function setFileDetailsAvailability($fileDetailsAvailability)
   {
     $this->fileDetailsAvailability = $fileDetailsAvailability;
@@ -10364,7 +8722,7 @@ class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
   {
     return $this->fileDetailsAvailability;
   }
-
+  
   public function setProcessingFailureReason($processingFailureReason)
   {
     $this->processingFailureReason = $processingFailureReason;
@@ -10374,7 +8732,7 @@ class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
   {
     return $this->processingFailureReason;
   }
-
+  
   public function setProcessingIssuesAvailability($processingIssuesAvailability)
   {
     $this->processingIssuesAvailability = $processingIssuesAvailability;
@@ -10384,7 +8742,7 @@ class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
   {
     return $this->processingIssuesAvailability;
   }
-
+  
   public function setProcessingProgress(Google_Service_YouTube_VideoProcessingDetailsProcessingProgress $processingProgress)
   {
     $this->processingProgress = $processingProgress;
@@ -10394,7 +8752,7 @@ class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
   {
     return $this->processingProgress;
   }
-
+  
   public function setProcessingStatus($processingStatus)
   {
     $this->processingStatus = $processingStatus;
@@ -10404,7 +8762,7 @@ class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
   {
     return $this->processingStatus;
   }
-
+  
   public function setTagSuggestionsAvailability($tagSuggestionsAvailability)
   {
     $this->tagSuggestionsAvailability = $tagSuggestionsAvailability;
@@ -10414,7 +8772,7 @@ class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
   {
     return $this->tagSuggestionsAvailability;
   }
-
+  
   public function setThumbnailsAvailability($thumbnailsAvailability)
   {
     $this->thumbnailsAvailability = $thumbnailsAvailability;
@@ -10424,6 +8782,7 @@ class Google_Service_YouTube_VideoProcessingDetails extends Google_Model
   {
     return $this->thumbnailsAvailability;
   }
+  
 }
 
 class Google_Service_YouTube_VideoProcessingDetailsProcessingProgress extends Google_Model
@@ -10441,7 +8800,7 @@ class Google_Service_YouTube_VideoProcessingDetailsProcessingProgress extends Go
   {
     return $this->partsProcessed;
   }
-
+  
   public function setPartsTotal($partsTotal)
   {
     $this->partsTotal = $partsTotal;
@@ -10451,7 +8810,7 @@ class Google_Service_YouTube_VideoProcessingDetailsProcessingProgress extends Go
   {
     return $this->partsTotal;
   }
-
+  
   public function setTimeLeftMs($timeLeftMs)
   {
     $this->timeLeftMs = $timeLeftMs;
@@ -10461,6 +8820,7 @@ class Google_Service_YouTube_VideoProcessingDetailsProcessingProgress extends Go
   {
     return $this->timeLeftMs;
   }
+  
 }
 
 class Google_Service_YouTube_VideoProjectDetails extends Google_Collection
@@ -10476,6 +8836,7 @@ class Google_Service_YouTube_VideoProjectDetails extends Google_Collection
   {
     return $this->tags;
   }
+  
 }
 
 class Google_Service_YouTube_VideoRating extends Google_Model
@@ -10492,7 +8853,7 @@ class Google_Service_YouTube_VideoRating extends Google_Model
   {
     return $this->rating;
   }
-
+  
   public function setVideoId($videoId)
   {
     $this->videoId = $videoId;
@@ -10502,6 +8863,7 @@ class Google_Service_YouTube_VideoRating extends Google_Model
   {
     return $this->videoId;
   }
+  
 }
 
 class Google_Service_YouTube_VideoRecordingDetails extends Google_Model
@@ -10520,7 +8882,7 @@ class Google_Service_YouTube_VideoRecordingDetails extends Google_Model
   {
     return $this->location;
   }
-
+  
   public function setLocationDescription($locationDescription)
   {
     $this->locationDescription = $locationDescription;
@@ -10530,7 +8892,7 @@ class Google_Service_YouTube_VideoRecordingDetails extends Google_Model
   {
     return $this->locationDescription;
   }
-
+  
   public function setRecordingDate($recordingDate)
   {
     $this->recordingDate = $recordingDate;
@@ -10540,6 +8902,7 @@ class Google_Service_YouTube_VideoRecordingDetails extends Google_Model
   {
     return $this->recordingDate;
   }
+  
 }
 
 class Google_Service_YouTube_VideoSnippet extends Google_Collection
@@ -10564,7 +8927,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->categoryId;
   }
-
+  
   public function setChannelId($channelId)
   {
     $this->channelId = $channelId;
@@ -10574,7 +8937,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->channelId;
   }
-
+  
   public function setChannelTitle($channelTitle)
   {
     $this->channelTitle = $channelTitle;
@@ -10584,7 +8947,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->channelTitle;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -10594,7 +8957,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->description;
   }
-
+  
   public function setLiveBroadcastContent($liveBroadcastContent)
   {
     $this->liveBroadcastContent = $liveBroadcastContent;
@@ -10604,7 +8967,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->liveBroadcastContent;
   }
-
+  
   public function setPublishedAt($publishedAt)
   {
     $this->publishedAt = $publishedAt;
@@ -10614,7 +8977,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->publishedAt;
   }
-
+  
   public function setTags($tags)
   {
     $this->tags = $tags;
@@ -10624,7 +8987,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->tags;
   }
-
+  
   public function setThumbnails(Google_Service_YouTube_ThumbnailDetails $thumbnails)
   {
     $this->thumbnails = $thumbnails;
@@ -10634,7 +8997,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->thumbnails;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -10644,6 +9007,7 @@ class Google_Service_YouTube_VideoSnippet extends Google_Collection
   {
     return $this->title;
   }
+  
 }
 
 class Google_Service_YouTube_VideoStatistics extends Google_Model
@@ -10663,7 +9027,7 @@ class Google_Service_YouTube_VideoStatistics extends Google_Model
   {
     return $this->commentCount;
   }
-
+  
   public function setDislikeCount($dislikeCount)
   {
     $this->dislikeCount = $dislikeCount;
@@ -10673,7 +9037,7 @@ class Google_Service_YouTube_VideoStatistics extends Google_Model
   {
     return $this->dislikeCount;
   }
-
+  
   public function setFavoriteCount($favoriteCount)
   {
     $this->favoriteCount = $favoriteCount;
@@ -10683,7 +9047,7 @@ class Google_Service_YouTube_VideoStatistics extends Google_Model
   {
     return $this->favoriteCount;
   }
-
+  
   public function setLikeCount($likeCount)
   {
     $this->likeCount = $likeCount;
@@ -10693,7 +9057,7 @@ class Google_Service_YouTube_VideoStatistics extends Google_Model
   {
     return $this->likeCount;
   }
-
+  
   public function setViewCount($viewCount)
   {
     $this->viewCount = $viewCount;
@@ -10703,6 +9067,7 @@ class Google_Service_YouTube_VideoStatistics extends Google_Model
   {
     return $this->viewCount;
   }
+  
 }
 
 class Google_Service_YouTube_VideoStatus extends Google_Model
@@ -10712,7 +9077,6 @@ class Google_Service_YouTube_VideoStatus extends Google_Model
   public $license;
   public $privacyStatus;
   public $publicStatsViewable;
-  public $publishAt;
   public $rejectionReason;
   public $uploadStatus;
 
@@ -10725,7 +9089,7 @@ class Google_Service_YouTube_VideoStatus extends Google_Model
   {
     return $this->embeddable;
   }
-
+  
   public function setFailureReason($failureReason)
   {
     $this->failureReason = $failureReason;
@@ -10735,7 +9099,7 @@ class Google_Service_YouTube_VideoStatus extends Google_Model
   {
     return $this->failureReason;
   }
-
+  
   public function setLicense($license)
   {
     $this->license = $license;
@@ -10745,7 +9109,7 @@ class Google_Service_YouTube_VideoStatus extends Google_Model
   {
     return $this->license;
   }
-
+  
   public function setPrivacyStatus($privacyStatus)
   {
     $this->privacyStatus = $privacyStatus;
@@ -10755,7 +9119,7 @@ class Google_Service_YouTube_VideoStatus extends Google_Model
   {
     return $this->privacyStatus;
   }
-
+  
   public function setPublicStatsViewable($publicStatsViewable)
   {
     $this->publicStatsViewable = $publicStatsViewable;
@@ -10765,17 +9129,7 @@ class Google_Service_YouTube_VideoStatus extends Google_Model
   {
     return $this->publicStatsViewable;
   }
-
-  public function setPublishAt($publishAt)
-  {
-    $this->publishAt = $publishAt;
-  }
-
-  public function getPublishAt()
-  {
-    return $this->publishAt;
-  }
-
+  
   public function setRejectionReason($rejectionReason)
   {
     $this->rejectionReason = $rejectionReason;
@@ -10785,7 +9139,7 @@ class Google_Service_YouTube_VideoStatus extends Google_Model
   {
     return $this->rejectionReason;
   }
-
+  
   public function setUploadStatus($uploadStatus)
   {
     $this->uploadStatus = $uploadStatus;
@@ -10795,6 +9149,7 @@ class Google_Service_YouTube_VideoStatus extends Google_Model
   {
     return $this->uploadStatus;
   }
+  
 }
 
 class Google_Service_YouTube_VideoSuggestions extends Google_Collection
@@ -10815,7 +9170,7 @@ class Google_Service_YouTube_VideoSuggestions extends Google_Collection
   {
     return $this->editorSuggestions;
   }
-
+  
   public function setProcessingErrors($processingErrors)
   {
     $this->processingErrors = $processingErrors;
@@ -10825,7 +9180,7 @@ class Google_Service_YouTube_VideoSuggestions extends Google_Collection
   {
     return $this->processingErrors;
   }
-
+  
   public function setProcessingHints($processingHints)
   {
     $this->processingHints = $processingHints;
@@ -10835,7 +9190,7 @@ class Google_Service_YouTube_VideoSuggestions extends Google_Collection
   {
     return $this->processingHints;
   }
-
+  
   public function setProcessingWarnings($processingWarnings)
   {
     $this->processingWarnings = $processingWarnings;
@@ -10845,7 +9200,7 @@ class Google_Service_YouTube_VideoSuggestions extends Google_Collection
   {
     return $this->processingWarnings;
   }
-
+  
   public function setTagSuggestions($tagSuggestions)
   {
     $this->tagSuggestions = $tagSuggestions;
@@ -10855,6 +9210,7 @@ class Google_Service_YouTube_VideoSuggestions extends Google_Collection
   {
     return $this->tagSuggestions;
   }
+  
 }
 
 class Google_Service_YouTube_VideoSuggestionsTagSuggestion extends Google_Collection
@@ -10871,7 +9227,7 @@ class Google_Service_YouTube_VideoSuggestionsTagSuggestion extends Google_Collec
   {
     return $this->categoryRestricts;
   }
-
+  
   public function setTag($tag)
   {
     $this->tag = $tag;
@@ -10881,6 +9237,7 @@ class Google_Service_YouTube_VideoSuggestionsTagSuggestion extends Google_Collec
   {
     return $this->tag;
   }
+  
 }
 
 class Google_Service_YouTube_VideoTopicDetails extends Google_Collection
@@ -10897,7 +9254,7 @@ class Google_Service_YouTube_VideoTopicDetails extends Google_Collection
   {
     return $this->relevantTopicIds;
   }
-
+  
   public function setTopicIds($topicIds)
   {
     $this->topicIds = $topicIds;
@@ -10907,6 +9264,7 @@ class Google_Service_YouTube_VideoTopicDetails extends Google_Collection
   {
     return $this->topicIds;
   }
+  
 }
 
 class Google_Service_YouTube_WatchSettings extends Google_Model
@@ -10924,7 +9282,7 @@ class Google_Service_YouTube_WatchSettings extends Google_Model
   {
     return $this->backgroundColor;
   }
-
+  
   public function setFeaturedPlaylistId($featuredPlaylistId)
   {
     $this->featuredPlaylistId = $featuredPlaylistId;
@@ -10934,7 +9292,7 @@ class Google_Service_YouTube_WatchSettings extends Google_Model
   {
     return $this->featuredPlaylistId;
   }
-
+  
   public function setTextColor($textColor)
   {
     $this->textColor = $textColor;
@@ -10944,4 +9302,5 @@ class Google_Service_YouTube_WatchSettings extends Google_Model
   {
     return $this->textColor;
   }
+  
 }

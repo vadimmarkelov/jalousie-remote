@@ -31,13 +31,7 @@
  */
 class Google_Service_SQLAdmin extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
-  const CLOUD_PLATFORM = "https://www.googleapis.com/auth/cloud-platform";
-  /** Manage your Google SQL Service instances. */
-  const SQLSERVICE_ADMIN = "https://www.googleapis.com/auth/sqlservice.admin";
-
   public $backupRuns;
-  public $flags;
   public $instances;
   public $operations;
   public $sslCerts;
@@ -52,447 +46,435 @@ class Google_Service_SQLAdmin extends Google_Service
   public function __construct(Google_Client $client)
   {
     parent::__construct($client);
-    $this->servicePath = 'sql/v1beta3/';
+    $this->servicePath = 'sql/v1beta3/projects/';
     $this->version = 'v1beta3';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/sqlservice.admin",
+      "https://www.googleapis.com/auth/cloud-platform"
+    );
+    
     $this->serviceName = 'sqladmin';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->backupRuns = new Google_Service_SQLAdmin_BackupRuns_Resource(
         $this,
         $this->serviceName,
         'backupRuns',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'projects/{project}/instances/{instance}/backupRuns/{backupConfiguration}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "{project}/instances/{instance}/backupRuns/{backupConfiguration}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'backupConfiguration' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'dueTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'projects/{project}/instances/{instance}/backupRuns',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'backupConfiguration' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),
-          )
+                "backupConfiguration" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "dueTime" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "{project}/instances/{instance}/backupRuns",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "backupConfiguration" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),
         )
-    );
-    $this->flags = new Google_Service_SQLAdmin_Flags_Resource(
-        $this,
-        $this->serviceName,
-        'flags',
-        array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'flags',
-              'httpMethod' => 'GET',
-              'parameters' => array(),
-            ),
-          )
-        )
+    )
     );
     $this->instances = new Google_Service_SQLAdmin_Instances_Resource(
         $this,
         $this->serviceName,
         'instances',
         array(
-          'methods' => array(
-            'clone' => array(
-              'path' => 'projects/{project}/instances/clone',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "{project}/instances/{instance}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'delete' => array(
-              'path' => 'projects/{project}/instances/{instance}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'export' => array(
-              'path' => 'projects/{project}/instances/{instance}/export',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'projects/{project}/instances/{instance}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"export" => array(
+            'path' => "{project}/instances/{instance}/export",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'import' => array(
-              'path' => 'projects/{project}/instances/{instance}/import',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'projects/{project}/instances',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'projects/{project}/instances',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "{project}/instances/{instance}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'patch' => array(
-              'path' => 'projects/{project}/instances/{instance}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'resetSslConfig' => array(
-              'path' => 'projects/{project}/instances/{instance}/resetSslConfig',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'restart' => array(
-              'path' => 'projects/{project}/instances/{instance}/restart',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"import" => array(
+            'path' => "{project}/instances/{instance}/import",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'restoreBackup' => array(
-              'path' => 'projects/{project}/instances/{instance}/restoreBackup',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'backupConfiguration' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'dueTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'setRootPassword' => array(
-              'path' => 'projects/{project}/instances/{instance}/setRootPassword',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'projects/{project}/instances/{instance}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"insert" => array(
+            'path' => "{project}/instances",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),"list" => array(
+            'path' => "{project}/instances",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "{project}/instances/{instance}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"resetSslConfig" => array(
+            'path' => "{project}/instances/{instance}/resetSslConfig",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"restart" => array(
+            'path' => "{project}/instances/{instance}/restart",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"restoreBackup" => array(
+            'path' => "{project}/instances/{instance}/restoreBackup",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "backupConfiguration" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "dueTime" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"setRootPassword" => array(
+            'path' => "{project}/instances/{instance}/setRootPassword",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"update" => array(
+            'path' => "{project}/instances/{instance}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->operations = new Google_Service_SQLAdmin_Operations_Resource(
         $this,
         $this->serviceName,
         'operations',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'projects/{project}/instances/{instance}/operations/{operation}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "{project}/instances/{instance}/operations/{operation}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'operation' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'projects/{project}/instances/{instance}/operations',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "operation" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "{project}/instances/{instance}/operations",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->sslCerts = new Google_Service_SQLAdmin_SslCerts_Resource(
         $this,
         $this->serviceName,
         'sslCerts',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "{project}/instances/{instance}/sslCerts/{sha1Fingerprint}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'sha1Fingerprint' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'sha1Fingerprint' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'projects/{project}/instances/{instance}/sslCerts',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "sha1Fingerprint" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'projects/{project}/instances/{instance}/sslCerts',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'instance' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+          ),"get" => array(
+            'path' => "{project}/instances/{instance}/sslCerts/{sha1Fingerprint}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "sha1Fingerprint" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"insert" => array(
+            'path' => "{project}/instances/{instance}/sslCerts",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "{project}/instances/{instance}/sslCerts",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "instance" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->tiers = new Google_Service_SQLAdmin_Tiers_Resource(
         $this,
         $this->serviceName,
         'tiers',
         array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'projects/{project}/tiers',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'project' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "list" => array(
+            'path' => "{project}/tiers",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "project" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -533,8 +515,7 @@ class Google_Service_SQLAdmin_BackupRuns_Resource extends Google_Service_Resourc
   }
   /**
    * Lists all backup runs associated with a given instance and configuration in
-   * the reverse chronological order of the enqueued time.
-   * (backupRuns.listBackupRuns)
+   * the reverse chronological order of the enqueued time. (backupRuns.list)
    *
    * @param string $project
    * Project ID of the project that contains the instance.
@@ -560,32 +541,6 @@ class Google_Service_SQLAdmin_BackupRuns_Resource extends Google_Service_Resourc
 }
 
 /**
- * The "flags" collection of methods.
- * Typical usage is:
- *  <code>
- *   $sqladminService = new Google_Service_SQLAdmin(...);
- *   $flags = $sqladminService->flags;
- *  </code>
- */
-class Google_Service_SQLAdmin_Flags_Resource extends Google_Service_Resource
-{
-
-  /**
-   * List all available database flags for Google Cloud SQL instances.
-   * (flags.listFlags)
-   *
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_SQLAdmin_FlagsListResponse
-   */
-  public function listFlags($optParams = array())
-  {
-    $params = array();
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_SQLAdmin_FlagsListResponse");
-  }
-}
-
-/**
  * The "instances" collection of methods.
  * Typical usage is:
  *  <code>
@@ -596,22 +551,6 @@ class Google_Service_SQLAdmin_Flags_Resource extends Google_Service_Resource
 class Google_Service_SQLAdmin_Instances_Resource extends Google_Service_Resource
 {
 
-  /**
-   * Creates a Cloud SQL instance as a clone of the source instance.
-   * (instances.cloneInstances)
-   *
-   * @param string $project
-   * Project ID of the source as well as the clone Cloud SQL instance.
-   * @param Google_InstancesCloneRequest $postBody
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_SQLAdmin_InstancesCloneResponse
-   */
-  public function cloneInstances($project, Google_Service_SQLAdmin_InstancesCloneRequest $postBody, $optParams = array())
-  {
-    $params = array('project' => $project, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('clone', array($params), "Google_Service_SQLAdmin_InstancesCloneResponse");
-  }
   /**
    * Deletes a Cloud SQL instance. (instances.delete)
    *
@@ -698,7 +637,7 @@ class Google_Service_SQLAdmin_Instances_Resource extends Google_Service_Resource
   }
   /**
    * Lists instances under a given project in the alphabetical order of the
-   * instance name. (instances.listInstances)
+   * instance name. (instances.list)
    *
    * @param string $project
    * Project ID of the project for which to list Cloud SQL instances.
@@ -863,7 +802,7 @@ class Google_Service_SQLAdmin_Operations_Resource extends Google_Service_Resourc
   /**
    * Lists all instance operations that have been performed on the given Cloud SQL
    * instance in the reverse chronological order of the start time.
-   * (operations.listOperations)
+   * (operations.list)
    *
    * @param string $project
    * Project ID of the project that contains the instance.
@@ -955,8 +894,7 @@ class Google_Service_SQLAdmin_SslCerts_Resource extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_SQLAdmin_SslCertsInsertResponse");
   }
   /**
-   * Lists all of the current SSL certificates for the instance.
-   * (sslCerts.listSslCerts)
+   * Lists all of the current SSL certificates for the instance. (sslCerts.list)
    *
    * @param string $project
    * Project ID of the project for which to list Cloud SQL instances.
@@ -986,7 +924,7 @@ class Google_Service_SQLAdmin_Tiers_Resource extends Google_Service_Resource
 
   /**
    * Lists all available service tiers for Google Cloud SQL, for example D1, D2.
-   * For related information, see Pricing. (tiers.listTiers)
+   * For related information, see Pricing. (tiers.list)
    *
    * @param string $project
    * Project ID of the project for which to list tiers.
@@ -1021,7 +959,7 @@ class Google_Service_SQLAdmin_BackupConfiguration extends Google_Model
   {
     return $this->binaryLogEnabled;
   }
-
+  
   public function setEnabled($enabled)
   {
     $this->enabled = $enabled;
@@ -1031,7 +969,7 @@ class Google_Service_SQLAdmin_BackupConfiguration extends Google_Model
   {
     return $this->enabled;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -1041,7 +979,7 @@ class Google_Service_SQLAdmin_BackupConfiguration extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1051,7 +989,7 @@ class Google_Service_SQLAdmin_BackupConfiguration extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setStartTime($startTime)
   {
     $this->startTime = $startTime;
@@ -1061,6 +999,7 @@ class Google_Service_SQLAdmin_BackupConfiguration extends Google_Model
   {
     return $this->startTime;
   }
+  
 }
 
 class Google_Service_SQLAdmin_BackupRun extends Google_Model
@@ -1085,7 +1024,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->backupConfiguration;
   }
-
+  
   public function setDueTime($dueTime)
   {
     $this->dueTime = $dueTime;
@@ -1095,7 +1034,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->dueTime;
   }
-
+  
   public function setEndTime($endTime)
   {
     $this->endTime = $endTime;
@@ -1105,7 +1044,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->endTime;
   }
-
+  
   public function setEnqueuedTime($enqueuedTime)
   {
     $this->enqueuedTime = $enqueuedTime;
@@ -1115,7 +1054,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->enqueuedTime;
   }
-
+  
   public function setError(Google_Service_SQLAdmin_OperationError $error)
   {
     $this->error = $error;
@@ -1125,7 +1064,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->error;
   }
-
+  
   public function setInstance($instance)
   {
     $this->instance = $instance;
@@ -1135,7 +1074,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->instance;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1145,7 +1084,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setStartTime($startTime)
   {
     $this->startTime = $startTime;
@@ -1155,7 +1094,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->startTime;
   }
-
+  
   public function setStatus($status)
   {
     $this->status = $status;
@@ -1165,6 +1104,7 @@ class Google_Service_SQLAdmin_BackupRun extends Google_Model
   {
     return $this->status;
   }
+  
 }
 
 class Google_Service_SQLAdmin_BackupRunsListResponse extends Google_Collection
@@ -1183,7 +1123,7 @@ class Google_Service_SQLAdmin_BackupRunsListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1193,7 +1133,7 @@ class Google_Service_SQLAdmin_BackupRunsListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -1203,118 +1143,7 @@ class Google_Service_SQLAdmin_BackupRunsListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
-}
-
-class Google_Service_SQLAdmin_BinLogCoordinates extends Google_Model
-{
-  public $binLogFileName;
-  public $binLogPosition;
-  public $kind;
-
-  public function setBinLogFileName($binLogFileName)
-  {
-    $this->binLogFileName = $binLogFileName;
-  }
-
-  public function getBinLogFileName()
-  {
-    return $this->binLogFileName;
-  }
-
-  public function setBinLogPosition($binLogPosition)
-  {
-    $this->binLogPosition = $binLogPosition;
-  }
-
-  public function getBinLogPosition()
-  {
-    return $this->binLogPosition;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-}
-
-class Google_Service_SQLAdmin_CloneContext extends Google_Model
-{
-  protected $binLogCoordinatesType = 'Google_Service_SQLAdmin_BinLogCoordinates';
-  protected $binLogCoordinatesDataType = '';
-  public $destinationInstanceName;
-  public $kind;
-  public $sourceInstanceName;
-
-  public function setBinLogCoordinates(Google_Service_SQLAdmin_BinLogCoordinates $binLogCoordinates)
-  {
-    $this->binLogCoordinates = $binLogCoordinates;
-  }
-
-  public function getBinLogCoordinates()
-  {
-    return $this->binLogCoordinates;
-  }
-
-  public function setDestinationInstanceName($destinationInstanceName)
-  {
-    $this->destinationInstanceName = $destinationInstanceName;
-  }
-
-  public function getDestinationInstanceName()
-  {
-    return $this->destinationInstanceName;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setSourceInstanceName($sourceInstanceName)
-  {
-    $this->sourceInstanceName = $sourceInstanceName;
-  }
-
-  public function getSourceInstanceName()
-  {
-    return $this->sourceInstanceName;
-  }
-}
-
-class Google_Service_SQLAdmin_DatabaseFlags extends Google_Model
-{
-  public $name;
-  public $value;
-
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-
-  public function getName()
-  {
-    return $this->name;
-  }
-
-  public function setValue($value)
-  {
-    $this->value = $value;
-  }
-
-  public function getValue()
-  {
-    return $this->value;
-  }
+  
 }
 
 class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
@@ -1344,7 +1173,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->currentDiskSize;
   }
-
+  
   public function setDatabaseVersion($databaseVersion)
   {
     $this->databaseVersion = $databaseVersion;
@@ -1354,7 +1183,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->databaseVersion;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -1364,7 +1193,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setInstance($instance)
   {
     $this->instance = $instance;
@@ -1374,7 +1203,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->instance;
   }
-
+  
   public function setIpAddresses($ipAddresses)
   {
     $this->ipAddresses = $ipAddresses;
@@ -1384,7 +1213,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->ipAddresses;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1394,7 +1223,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setMaxDiskSize($maxDiskSize)
   {
     $this->maxDiskSize = $maxDiskSize;
@@ -1404,7 +1233,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->maxDiskSize;
   }
-
+  
   public function setProject($project)
   {
     $this->project = $project;
@@ -1414,7 +1243,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->project;
   }
-
+  
   public function setRegion($region)
   {
     $this->region = $region;
@@ -1424,7 +1253,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->region;
   }
-
+  
   public function setServerCaCert(Google_Service_SQLAdmin_SslCert $serverCaCert)
   {
     $this->serverCaCert = $serverCaCert;
@@ -1434,7 +1263,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->serverCaCert;
   }
-
+  
   public function setSettings(Google_Service_SQLAdmin_Settings $settings)
   {
     $this->settings = $settings;
@@ -1444,7 +1273,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->settings;
   }
-
+  
   public function setState($state)
   {
     $this->state = $state;
@@ -1454,6 +1283,7 @@ class Google_Service_SQLAdmin_DatabaseInstance extends Google_Collection
   {
     return $this->state;
   }
+  
 }
 
 class Google_Service_SQLAdmin_ExportContext extends Google_Collection
@@ -1472,7 +1302,7 @@ class Google_Service_SQLAdmin_ExportContext extends Google_Collection
   {
     return $this->database;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1482,7 +1312,7 @@ class Google_Service_SQLAdmin_ExportContext extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setTable($table)
   {
     $this->table = $table;
@@ -1492,7 +1322,7 @@ class Google_Service_SQLAdmin_ExportContext extends Google_Collection
   {
     return $this->table;
   }
-
+  
   public function setUri($uri)
   {
     $this->uri = $uri;
@@ -1502,114 +1332,7 @@ class Google_Service_SQLAdmin_ExportContext extends Google_Collection
   {
     return $this->uri;
   }
-}
-
-class Google_Service_SQLAdmin_Flag extends Google_Collection
-{
-  public $allowedStringValues;
-  public $appliesTo;
-  public $kind;
-  public $maxValue;
-  public $minValue;
-  public $name;
-  public $type;
-
-  public function setAllowedStringValues($allowedStringValues)
-  {
-    $this->allowedStringValues = $allowedStringValues;
-  }
-
-  public function getAllowedStringValues()
-  {
-    return $this->allowedStringValues;
-  }
-
-  public function setAppliesTo($appliesTo)
-  {
-    $this->appliesTo = $appliesTo;
-  }
-
-  public function getAppliesTo()
-  {
-    return $this->appliesTo;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setMaxValue($maxValue)
-  {
-    $this->maxValue = $maxValue;
-  }
-
-  public function getMaxValue()
-  {
-    return $this->maxValue;
-  }
-
-  public function setMinValue($minValue)
-  {
-    $this->minValue = $minValue;
-  }
-
-  public function getMinValue()
-  {
-    return $this->minValue;
-  }
-
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-
-  public function getName()
-  {
-    return $this->name;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
-}
-
-class Google_Service_SQLAdmin_FlagsListResponse extends Google_Collection
-{
-  protected $itemsType = 'Google_Service_SQLAdmin_Flag';
-  protected $itemsDataType = 'array';
-  public $kind;
-
-  public function setItems($items)
-  {
-    $this->items = $items;
-  }
-
-  public function getItems()
-  {
-    return $this->items;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
+  
 }
 
 class Google_Service_SQLAdmin_ImportContext extends Google_Collection
@@ -1627,7 +1350,7 @@ class Google_Service_SQLAdmin_ImportContext extends Google_Collection
   {
     return $this->database;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1637,7 +1360,7 @@ class Google_Service_SQLAdmin_ImportContext extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setUri($uri)
   {
     $this->uri = $uri;
@@ -1647,6 +1370,7 @@ class Google_Service_SQLAdmin_ImportContext extends Google_Collection
   {
     return $this->uri;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
@@ -1676,7 +1400,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->endTime;
   }
-
+  
   public function setEnqueuedTime($enqueuedTime)
   {
     $this->enqueuedTime = $enqueuedTime;
@@ -1686,7 +1410,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->enqueuedTime;
   }
-
+  
   public function setError($error)
   {
     $this->error = $error;
@@ -1696,7 +1420,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->error;
   }
-
+  
   public function setExportContext(Google_Service_SQLAdmin_ExportContext $exportContext)
   {
     $this->exportContext = $exportContext;
@@ -1706,7 +1430,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->exportContext;
   }
-
+  
   public function setImportContext(Google_Service_SQLAdmin_ImportContext $importContext)
   {
     $this->importContext = $importContext;
@@ -1716,7 +1440,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->importContext;
   }
-
+  
   public function setInstance($instance)
   {
     $this->instance = $instance;
@@ -1726,7 +1450,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->instance;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1736,7 +1460,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -1746,7 +1470,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->operation;
   }
-
+  
   public function setOperationType($operationType)
   {
     $this->operationType = $operationType;
@@ -1756,7 +1480,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->operationType;
   }
-
+  
   public function setStartTime($startTime)
   {
     $this->startTime = $startTime;
@@ -1766,7 +1490,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->startTime;
   }
-
+  
   public function setState($state)
   {
     $this->state = $state;
@@ -1776,7 +1500,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->state;
   }
-
+  
   public function setUserEmailAddress($userEmailAddress)
   {
     $this->userEmailAddress = $userEmailAddress;
@@ -1786,6 +1510,7 @@ class Google_Service_SQLAdmin_InstanceOperation extends Google_Collection
   {
     return $this->userEmailAddress;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstanceSetRootPasswordRequest extends Google_Model
@@ -1802,48 +1527,7 @@ class Google_Service_SQLAdmin_InstanceSetRootPasswordRequest extends Google_Mode
   {
     return $this->setRootPasswordContext;
   }
-}
-
-class Google_Service_SQLAdmin_InstancesCloneRequest extends Google_Model
-{
-  protected $cloneContextType = 'Google_Service_SQLAdmin_CloneContext';
-  protected $cloneContextDataType = '';
-
-  public function setCloneContext(Google_Service_SQLAdmin_CloneContext $cloneContext)
-  {
-    $this->cloneContext = $cloneContext;
-  }
-
-  public function getCloneContext()
-  {
-    return $this->cloneContext;
-  }
-}
-
-class Google_Service_SQLAdmin_InstancesCloneResponse extends Google_Model
-{
-  public $kind;
-  public $operation;
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setOperation($operation)
-  {
-    $this->operation = $operation;
-  }
-
-  public function getOperation()
-  {
-    return $this->operation;
-  }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesDeleteResponse extends Google_Model
@@ -1860,7 +1544,7 @@ class Google_Service_SQLAdmin_InstancesDeleteResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -1870,6 +1554,7 @@ class Google_Service_SQLAdmin_InstancesDeleteResponse extends Google_Model
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesExportRequest extends Google_Model
@@ -1886,6 +1571,7 @@ class Google_Service_SQLAdmin_InstancesExportRequest extends Google_Model
   {
     return $this->exportContext;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesExportResponse extends Google_Model
@@ -1902,7 +1588,7 @@ class Google_Service_SQLAdmin_InstancesExportResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -1912,6 +1598,7 @@ class Google_Service_SQLAdmin_InstancesExportResponse extends Google_Model
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesImportRequest extends Google_Model
@@ -1928,6 +1615,7 @@ class Google_Service_SQLAdmin_InstancesImportRequest extends Google_Model
   {
     return $this->importContext;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesImportResponse extends Google_Model
@@ -1944,7 +1632,7 @@ class Google_Service_SQLAdmin_InstancesImportResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -1954,6 +1642,7 @@ class Google_Service_SQLAdmin_InstancesImportResponse extends Google_Model
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesInsertResponse extends Google_Model
@@ -1970,7 +1659,7 @@ class Google_Service_SQLAdmin_InstancesInsertResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -1980,6 +1669,7 @@ class Google_Service_SQLAdmin_InstancesInsertResponse extends Google_Model
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesListResponse extends Google_Collection
@@ -1998,7 +1688,7 @@ class Google_Service_SQLAdmin_InstancesListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2008,7 +1698,7 @@ class Google_Service_SQLAdmin_InstancesListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -2018,6 +1708,7 @@ class Google_Service_SQLAdmin_InstancesListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesResetSslConfigResponse extends Google_Model
@@ -2034,7 +1725,7 @@ class Google_Service_SQLAdmin_InstancesResetSslConfigResponse extends Google_Mod
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -2044,6 +1735,7 @@ class Google_Service_SQLAdmin_InstancesResetSslConfigResponse extends Google_Mod
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesRestartResponse extends Google_Model
@@ -2060,7 +1752,7 @@ class Google_Service_SQLAdmin_InstancesRestartResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -2070,6 +1762,7 @@ class Google_Service_SQLAdmin_InstancesRestartResponse extends Google_Model
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesRestoreBackupResponse extends Google_Model
@@ -2086,7 +1779,7 @@ class Google_Service_SQLAdmin_InstancesRestoreBackupResponse extends Google_Mode
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -2096,6 +1789,7 @@ class Google_Service_SQLAdmin_InstancesRestoreBackupResponse extends Google_Mode
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesSetRootPasswordResponse extends Google_Model
@@ -2112,7 +1806,7 @@ class Google_Service_SQLAdmin_InstancesSetRootPasswordResponse extends Google_Mo
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -2122,6 +1816,7 @@ class Google_Service_SQLAdmin_InstancesSetRootPasswordResponse extends Google_Mo
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_InstancesUpdateResponse extends Google_Model
@@ -2138,7 +1833,7 @@ class Google_Service_SQLAdmin_InstancesUpdateResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -2148,13 +1843,13 @@ class Google_Service_SQLAdmin_InstancesUpdateResponse extends Google_Model
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_IpConfiguration extends Google_Collection
 {
   public $authorizedNetworks;
   public $enabled;
-  public $requireSsl;
 
   public function setAuthorizedNetworks($authorizedNetworks)
   {
@@ -2165,7 +1860,7 @@ class Google_Service_SQLAdmin_IpConfiguration extends Google_Collection
   {
     return $this->authorizedNetworks;
   }
-
+  
   public function setEnabled($enabled)
   {
     $this->enabled = $enabled;
@@ -2175,16 +1870,7 @@ class Google_Service_SQLAdmin_IpConfiguration extends Google_Collection
   {
     return $this->enabled;
   }
-
-  public function setRequireSsl($requireSsl)
-  {
-    $this->requireSsl = $requireSsl;
-  }
-
-  public function getRequireSsl()
-  {
-    return $this->requireSsl;
-  }
+  
 }
 
 class Google_Service_SQLAdmin_IpMapping extends Google_Model
@@ -2201,7 +1887,7 @@ class Google_Service_SQLAdmin_IpMapping extends Google_Model
   {
     return $this->ipAddress;
   }
-
+  
   public function setTimeToRetire($timeToRetire)
   {
     $this->timeToRetire = $timeToRetire;
@@ -2211,6 +1897,7 @@ class Google_Service_SQLAdmin_IpMapping extends Google_Model
   {
     return $this->timeToRetire;
   }
+  
 }
 
 class Google_Service_SQLAdmin_LocationPreference extends Google_Model
@@ -2228,7 +1915,7 @@ class Google_Service_SQLAdmin_LocationPreference extends Google_Model
   {
     return $this->followGaeApplication;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2238,7 +1925,7 @@ class Google_Service_SQLAdmin_LocationPreference extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setZone($zone)
   {
     $this->zone = $zone;
@@ -2248,6 +1935,7 @@ class Google_Service_SQLAdmin_LocationPreference extends Google_Model
   {
     return $this->zone;
   }
+  
 }
 
 class Google_Service_SQLAdmin_OperationError extends Google_Model
@@ -2264,7 +1952,7 @@ class Google_Service_SQLAdmin_OperationError extends Google_Model
   {
     return $this->code;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2274,6 +1962,7 @@ class Google_Service_SQLAdmin_OperationError extends Google_Model
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_SQLAdmin_OperationsListResponse extends Google_Collection
@@ -2292,7 +1981,7 @@ class Google_Service_SQLAdmin_OperationsListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2302,7 +1991,7 @@ class Google_Service_SQLAdmin_OperationsListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -2312,6 +2001,7 @@ class Google_Service_SQLAdmin_OperationsListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
+  
 }
 
 class Google_Service_SQLAdmin_SetRootPasswordContext extends Google_Model
@@ -2328,7 +2018,7 @@ class Google_Service_SQLAdmin_SetRootPasswordContext extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPassword($password)
   {
     $this->password = $password;
@@ -2338,6 +2028,7 @@ class Google_Service_SQLAdmin_SetRootPasswordContext extends Google_Model
   {
     return $this->password;
   }
+  
 }
 
 class Google_Service_SQLAdmin_Settings extends Google_Collection
@@ -2346,8 +2037,6 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   public $authorizedGaeApplications;
   protected $backupConfigurationType = 'Google_Service_SQLAdmin_BackupConfiguration';
   protected $backupConfigurationDataType = 'array';
-  protected $databaseFlagsType = 'Google_Service_SQLAdmin_DatabaseFlags';
-  protected $databaseFlagsDataType = 'array';
   protected $ipConfigurationType = 'Google_Service_SQLAdmin_IpConfiguration';
   protected $ipConfigurationDataType = '';
   public $kind;
@@ -2367,7 +2056,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->activationPolicy;
   }
-
+  
   public function setAuthorizedGaeApplications($authorizedGaeApplications)
   {
     $this->authorizedGaeApplications = $authorizedGaeApplications;
@@ -2377,7 +2066,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->authorizedGaeApplications;
   }
-
+  
   public function setBackupConfiguration($backupConfiguration)
   {
     $this->backupConfiguration = $backupConfiguration;
@@ -2387,17 +2076,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->backupConfiguration;
   }
-
-  public function setDatabaseFlags($databaseFlags)
-  {
-    $this->databaseFlags = $databaseFlags;
-  }
-
-  public function getDatabaseFlags()
-  {
-    return $this->databaseFlags;
-  }
-
+  
   public function setIpConfiguration(Google_Service_SQLAdmin_IpConfiguration $ipConfiguration)
   {
     $this->ipConfiguration = $ipConfiguration;
@@ -2407,7 +2086,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->ipConfiguration;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2417,7 +2096,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setLocationPreference(Google_Service_SQLAdmin_LocationPreference $locationPreference)
   {
     $this->locationPreference = $locationPreference;
@@ -2427,7 +2106,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->locationPreference;
   }
-
+  
   public function setPricingPlan($pricingPlan)
   {
     $this->pricingPlan = $pricingPlan;
@@ -2437,7 +2116,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->pricingPlan;
   }
-
+  
   public function setReplicationType($replicationType)
   {
     $this->replicationType = $replicationType;
@@ -2447,7 +2126,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->replicationType;
   }
-
+  
   public function setSettingsVersion($settingsVersion)
   {
     $this->settingsVersion = $settingsVersion;
@@ -2457,7 +2136,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->settingsVersion;
   }
-
+  
   public function setTier($tier)
   {
     $this->tier = $tier;
@@ -2467,6 +2146,7 @@ class Google_Service_SQLAdmin_Settings extends Google_Collection
   {
     return $this->tier;
   }
+  
 }
 
 class Google_Service_SQLAdmin_SslCert extends Google_Model
@@ -2489,7 +2169,7 @@ class Google_Service_SQLAdmin_SslCert extends Google_Model
   {
     return $this->cert;
   }
-
+  
   public function setCertSerialNumber($certSerialNumber)
   {
     $this->certSerialNumber = $certSerialNumber;
@@ -2499,7 +2179,7 @@ class Google_Service_SQLAdmin_SslCert extends Google_Model
   {
     return $this->certSerialNumber;
   }
-
+  
   public function setCommonName($commonName)
   {
     $this->commonName = $commonName;
@@ -2509,7 +2189,7 @@ class Google_Service_SQLAdmin_SslCert extends Google_Model
   {
     return $this->commonName;
   }
-
+  
   public function setCreateTime($createTime)
   {
     $this->createTime = $createTime;
@@ -2519,7 +2199,7 @@ class Google_Service_SQLAdmin_SslCert extends Google_Model
   {
     return $this->createTime;
   }
-
+  
   public function setExpirationTime($expirationTime)
   {
     $this->expirationTime = $expirationTime;
@@ -2529,7 +2209,7 @@ class Google_Service_SQLAdmin_SslCert extends Google_Model
   {
     return $this->expirationTime;
   }
-
+  
   public function setInstance($instance)
   {
     $this->instance = $instance;
@@ -2539,7 +2219,7 @@ class Google_Service_SQLAdmin_SslCert extends Google_Model
   {
     return $this->instance;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2549,7 +2229,7 @@ class Google_Service_SQLAdmin_SslCert extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setSha1Fingerprint($sha1Fingerprint)
   {
     $this->sha1Fingerprint = $sha1Fingerprint;
@@ -2559,6 +2239,7 @@ class Google_Service_SQLAdmin_SslCert extends Google_Model
   {
     return $this->sha1Fingerprint;
   }
+  
 }
 
 class Google_Service_SQLAdmin_SslCertDetail extends Google_Model
@@ -2576,7 +2257,7 @@ class Google_Service_SQLAdmin_SslCertDetail extends Google_Model
   {
     return $this->certInfo;
   }
-
+  
   public function setCertPrivateKey($certPrivateKey)
   {
     $this->certPrivateKey = $certPrivateKey;
@@ -2586,6 +2267,7 @@ class Google_Service_SQLAdmin_SslCertDetail extends Google_Model
   {
     return $this->certPrivateKey;
   }
+  
 }
 
 class Google_Service_SQLAdmin_SslCertsDeleteResponse extends Google_Model
@@ -2602,7 +2284,7 @@ class Google_Service_SQLAdmin_SslCertsDeleteResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -2612,6 +2294,7 @@ class Google_Service_SQLAdmin_SslCertsDeleteResponse extends Google_Model
   {
     return $this->operation;
   }
+  
 }
 
 class Google_Service_SQLAdmin_SslCertsInsertRequest extends Google_Model
@@ -2627,6 +2310,7 @@ class Google_Service_SQLAdmin_SslCertsInsertRequest extends Google_Model
   {
     return $this->commonName;
   }
+  
 }
 
 class Google_Service_SQLAdmin_SslCertsInsertResponse extends Google_Model
@@ -2646,7 +2330,7 @@ class Google_Service_SQLAdmin_SslCertsInsertResponse extends Google_Model
   {
     return $this->clientCert;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2656,7 +2340,7 @@ class Google_Service_SQLAdmin_SslCertsInsertResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setServerCaCert(Google_Service_SQLAdmin_SslCert $serverCaCert)
   {
     $this->serverCaCert = $serverCaCert;
@@ -2666,6 +2350,7 @@ class Google_Service_SQLAdmin_SslCertsInsertResponse extends Google_Model
   {
     return $this->serverCaCert;
   }
+  
 }
 
 class Google_Service_SQLAdmin_SslCertsListResponse extends Google_Collection
@@ -2683,7 +2368,7 @@ class Google_Service_SQLAdmin_SslCertsListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2693,36 +2378,37 @@ class Google_Service_SQLAdmin_SslCertsListResponse extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_SQLAdmin_Tier extends Google_Collection
 {
-  public $diskQuota;
-  public $rAM;
+  public $DiskQuota;
+  public $RAM;
   public $kind;
   public $region;
   public $tier;
 
-  public function setDiskQuota($diskQuota)
+  public function setDiskQuota($DiskQuota)
   {
-    $this->diskQuota = $diskQuota;
+    $this->DiskQuota = $DiskQuota;
   }
 
   public function getDiskQuota()
   {
-    return $this->diskQuota;
+    return $this->DiskQuota;
   }
-
-  public function setRAM($rAM)
+  
+  public function setRAM($RAM)
   {
-    $this->rAM = $rAM;
+    $this->RAM = $RAM;
   }
 
   public function getRAM()
   {
-    return $this->rAM;
+    return $this->RAM;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2732,7 +2418,7 @@ class Google_Service_SQLAdmin_Tier extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setRegion($region)
   {
     $this->region = $region;
@@ -2742,7 +2428,7 @@ class Google_Service_SQLAdmin_Tier extends Google_Collection
   {
     return $this->region;
   }
-
+  
   public function setTier($tier)
   {
     $this->tier = $tier;
@@ -2752,6 +2438,7 @@ class Google_Service_SQLAdmin_Tier extends Google_Collection
   {
     return $this->tier;
   }
+  
 }
 
 class Google_Service_SQLAdmin_TiersListResponse extends Google_Collection
@@ -2769,7 +2456,7 @@ class Google_Service_SQLAdmin_TiersListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2779,4 +2466,5 @@ class Google_Service_SQLAdmin_TiersListResponse extends Google_Collection
   {
     return $this->kind;
   }
+  
 }

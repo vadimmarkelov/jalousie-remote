@@ -31,13 +31,6 @@
  */
 class Google_Service_YouTubeAnalytics extends Google_Service
 {
-  /** View YouTube Analytics monetary reports for your YouTube content. */
-  const YT_ANALYTICS_MONETARY_READONLY = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
-  /** View YouTube Analytics reports for your YouTube content. */
-  const YT_ANALYTICS_READONLY = "https://www.googleapis.com/auth/yt-analytics.readonly";
-
-  public $batchReportDefinitions;
-  public $batchReports;
   public $reports;
   
 
@@ -51,171 +44,78 @@ class Google_Service_YouTubeAnalytics extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'youtube/analytics/v1/';
     $this->version = 'v1';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/yt-analytics.readonly",
+      "https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+    );
+    
     $this->serviceName = 'youtubeAnalytics';
 
-    $this->batchReportDefinitions = new Google_Service_YouTubeAnalytics_BatchReportDefinitions_Resource(
-        $this,
+    $client->addService(
         $this->serviceName,
-        'batchReportDefinitions',
-        array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'batchReportDefinitions',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),
-          )
-        )
+        $this->version,
+        $this->availableScopes
     );
-    $this->batchReports = new Google_Service_YouTubeAnalytics_BatchReports_Resource(
-        $this,
-        $this->serviceName,
-        'batchReports',
-        array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'batchReports',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'batchReportDefinitionId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),
-          )
-        )
-    );
+
     $this->reports = new Google_Service_YouTubeAnalytics_Reports_Resource(
         $this,
         $this->serviceName,
         'reports',
         array(
-          'methods' => array(
-            'query' => array(
-              'path' => 'reports',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'ids' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "query" => array(
+            'path' => "reports",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "ids" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'start-date' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'end-date' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'metrics' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'max-results' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'sort' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'dimensions' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'start-index' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'filters' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "start_date" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "end_date" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "metrics" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "max_results" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "sort" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "dimensions" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "start_index" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "filters" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
 
-
-/**
- * The "batchReportDefinitions" collection of methods.
- * Typical usage is:
- *  <code>
- *   $youtubeAnalyticsService = new Google_Service_YouTubeAnalytics(...);
- *   $batchReportDefinitions = $youtubeAnalyticsService->batchReportDefinitions;
- *  </code>
- */
-class Google_Service_YouTubeAnalytics_BatchReportDefinitions_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Retrieves a list of available batch report definitions.
-   * (batchReportDefinitions.listBatchReportDefinitions)
-   *
-   * @param string $onBehalfOfContentOwner
-   * The onBehalfOfContentOwner parameter identifies the content owner that the user is acting on
-    * behalf of.
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_YouTubeAnalytics_BatchReportDefinitionList
-   */
-  public function listBatchReportDefinitions($onBehalfOfContentOwner, $optParams = array())
-  {
-    $params = array('onBehalfOfContentOwner' => $onBehalfOfContentOwner);
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTubeAnalytics_BatchReportDefinitionList");
-  }
-}
-
-/**
- * The "batchReports" collection of methods.
- * Typical usage is:
- *  <code>
- *   $youtubeAnalyticsService = new Google_Service_YouTubeAnalytics(...);
- *   $batchReports = $youtubeAnalyticsService->batchReports;
- *  </code>
- */
-class Google_Service_YouTubeAnalytics_BatchReports_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Retrieves a list of processed batch reports. (batchReports.listBatchReports)
-   *
-   * @param string $batchReportDefinitionId
-   * The batchReportDefinitionId parameter specifies the ID of the batch reportort definition for
-    * which you are retrieving reports.
-   * @param string $onBehalfOfContentOwner
-   * The onBehalfOfContentOwner parameter identifies the content owner that the user is acting on
-    * behalf of.
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_YouTubeAnalytics_BatchReportList
-   */
-  public function listBatchReports($batchReportDefinitionId, $onBehalfOfContentOwner, $optParams = array())
-  {
-    $params = array('batchReportDefinitionId' => $batchReportDefinitionId, 'onBehalfOfContentOwner' => $onBehalfOfContentOwner);
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_YouTubeAnalytics_BatchReportList");
-  }
-}
 
 /**
  * The "reports" collection of methods.
@@ -239,9 +139,9 @@ class Google_Service_YouTubeAnalytics_Reports_Resource extends Google_Service_Re
   - To request data for a YouTube CMS
     * content owner, set the ids parameter value to contentOwner==OWNER_NAME, where OWNER_NAME is the
     * CMS name of the content owner.
-   * @param string $startDate
+   * @param string $start_date
    * The start date for fetching YouTube Analytics data. The value should be in YYYY-MM-DD format.
-   * @param string $endDate
+   * @param string $end_date
    * The end date for fetching YouTube Analytics data. The value should be in YYYY-MM-DD format.
    * @param string $metrics
    * A comma-separated list of YouTube Analytics metrics, such as views or likes,dislikes. See the
@@ -249,7 +149,7 @@ class Google_Service_YouTubeAnalytics_Reports_Resource extends Google_Service_Re
     * available in each report, and see the Metrics document for definitions of those metrics.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int max-results
+   * @opt_param int max_results
    * The maximum number of rows to include in the response.
    * @opt_param string sort
    * A comma-separated list of dimensions or metrics that determine the sort order for YouTube
@@ -260,7 +160,7 @@ class Google_Service_YouTubeAnalytics_Reports_Resource extends Google_Service_Re
     * the Available Reports document for a list of the reports that you can retrieve and the
     * dimensions used for those reports. Also see the Dimensions document for definitions of those
     * dimensions.
-   * @opt_param int start-index
+   * @opt_param int start_index
    * An index of the first entity to retrieve. Use this parameter as a pagination mechanism along
     * with the max-results parameter (one-based, inclusive).
    * @opt_param string filters
@@ -272,9 +172,9 @@ class Google_Service_YouTubeAnalytics_Reports_Resource extends Google_Service_Re
     * include data for the given video in Italy.
    * @return Google_Service_YouTubeAnalytics_ResultTable
    */
-  public function query($ids, $startDate, $endDate, $metrics, $optParams = array())
+  public function query($ids, $start_date, $end_date, $metrics, $optParams = array())
   {
-    $params = array('ids' => $ids, 'start-date' => $startDate, 'end-date' => $endDate, 'metrics' => $metrics);
+    $params = array('ids' => $ids, 'start-date' => $start_date, 'end-date' => $end_date, 'metrics' => $metrics);
     $params = array_merge($params, $optParams);
     return $this->call('query', array($params), "Google_Service_YouTubeAnalytics_ResultTable");
   }
@@ -282,270 +182,6 @@ class Google_Service_YouTubeAnalytics_Reports_Resource extends Google_Service_Re
 
 
 
-
-class Google_Service_YouTubeAnalytics_BatchReportDefinitionList extends Google_Collection
-{
-  protected $itemsType = 'Google_Service_YouTubeAnalytics_BatchReportDefinitionTemplate';
-  protected $itemsDataType = 'array';
-  public $kind;
-
-  public function setItems($items)
-  {
-    $this->items = $items;
-  }
-
-  public function getItems()
-  {
-    return $this->items;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-}
-
-class Google_Service_YouTubeAnalytics_BatchReportDefinitionTemplate extends Google_Collection
-{
-  protected $defaultOutputType = 'Google_Service_YouTubeAnalytics_BatchReportDefinitionTemplateDefaultOutput';
-  protected $defaultOutputDataType = 'array';
-  public $id;
-  public $name;
-  public $status;
-  public $type;
-
-  public function setDefaultOutput($defaultOutput)
-  {
-    $this->defaultOutput = $defaultOutput;
-  }
-
-  public function getDefaultOutput()
-  {
-    return $this->defaultOutput;
-  }
-
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-
-  public function getName()
-  {
-    return $this->name;
-  }
-
-  public function setStatus($status)
-  {
-    $this->status = $status;
-  }
-
-  public function getStatus()
-  {
-    return $this->status;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
-}
-
-class Google_Service_YouTubeAnalytics_BatchReportDefinitionTemplateDefaultOutput extends Google_Model
-{
-  public $format;
-  public $type;
-
-  public function setFormat($format)
-  {
-    $this->format = $format;
-  }
-
-  public function getFormat()
-  {
-    return $this->format;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
-}
-
-class Google_Service_YouTubeAnalytics_BatchReportList extends Google_Collection
-{
-  protected $itemsType = 'Google_Service_YouTubeAnalytics_BatchReportTemplate';
-  protected $itemsDataType = 'array';
-  public $kind;
-
-  public function setItems($items)
-  {
-    $this->items = $items;
-  }
-
-  public function getItems()
-  {
-    return $this->items;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-}
-
-class Google_Service_YouTubeAnalytics_BatchReportTemplate extends Google_Collection
-{
-  public $id;
-  protected $outputsType = 'Google_Service_YouTubeAnalytics_BatchReportTemplateOutputs';
-  protected $outputsDataType = 'array';
-  public $reportId;
-  protected $timeSpanType = 'Google_Service_YouTubeAnalytics_BatchReportTemplateTimeSpan';
-  protected $timeSpanDataType = '';
-  public $timeUpdated;
-
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  public function setOutputs($outputs)
-  {
-    $this->outputs = $outputs;
-  }
-
-  public function getOutputs()
-  {
-    return $this->outputs;
-  }
-
-  public function setReportId($reportId)
-  {
-    $this->reportId = $reportId;
-  }
-
-  public function getReportId()
-  {
-    return $this->reportId;
-  }
-
-  public function setTimeSpan(Google_Service_YouTubeAnalytics_BatchReportTemplateTimeSpan $timeSpan)
-  {
-    $this->timeSpan = $timeSpan;
-  }
-
-  public function getTimeSpan()
-  {
-    return $this->timeSpan;
-  }
-
-  public function setTimeUpdated($timeUpdated)
-  {
-    $this->timeUpdated = $timeUpdated;
-  }
-
-  public function getTimeUpdated()
-  {
-    return $this->timeUpdated;
-  }
-}
-
-class Google_Service_YouTubeAnalytics_BatchReportTemplateOutputs extends Google_Model
-{
-  public $downloadUrl;
-  public $format;
-  public $type;
-
-  public function setDownloadUrl($downloadUrl)
-  {
-    $this->downloadUrl = $downloadUrl;
-  }
-
-  public function getDownloadUrl()
-  {
-    return $this->downloadUrl;
-  }
-
-  public function setFormat($format)
-  {
-    $this->format = $format;
-  }
-
-  public function getFormat()
-  {
-    return $this->format;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
-}
-
-class Google_Service_YouTubeAnalytics_BatchReportTemplateTimeSpan extends Google_Model
-{
-  public $endTime;
-  public $startTime;
-
-  public function setEndTime($endTime)
-  {
-    $this->endTime = $endTime;
-  }
-
-  public function getEndTime()
-  {
-    return $this->endTime;
-  }
-
-  public function setStartTime($startTime)
-  {
-    $this->startTime = $startTime;
-  }
-
-  public function getStartTime()
-  {
-    return $this->startTime;
-  }
-}
 
 class Google_Service_YouTubeAnalytics_ResultTable extends Google_Collection
 {
@@ -563,7 +199,7 @@ class Google_Service_YouTubeAnalytics_ResultTable extends Google_Collection
   {
     return $this->columnHeaders;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -573,7 +209,7 @@ class Google_Service_YouTubeAnalytics_ResultTable extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setRows($rows)
   {
     $this->rows = $rows;
@@ -583,6 +219,7 @@ class Google_Service_YouTubeAnalytics_ResultTable extends Google_Collection
   {
     return $this->rows;
   }
+  
 }
 
 class Google_Service_YouTubeAnalytics_ResultTableColumnHeaders extends Google_Model
@@ -600,7 +237,7 @@ class Google_Service_YouTubeAnalytics_ResultTableColumnHeaders extends Google_Mo
   {
     return $this->columnType;
   }
-
+  
   public function setDataType($dataType)
   {
     $this->dataType = $dataType;
@@ -610,7 +247,7 @@ class Google_Service_YouTubeAnalytics_ResultTableColumnHeaders extends Google_Mo
   {
     return $this->dataType;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -620,4 +257,5 @@ class Google_Service_YouTubeAnalytics_ResultTableColumnHeaders extends Google_Mo
   {
     return $this->name;
   }
+  
 }

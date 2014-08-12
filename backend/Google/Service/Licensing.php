@@ -31,8 +31,6 @@
  */
 class Google_Service_Licensing extends Google_Service
 {
-
-
   public $licenseAssignments;
   
 
@@ -46,163 +44,170 @@ class Google_Service_Licensing extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'apps/licensing/v1/product/';
     $this->version = 'v1';
+    
     $this->serviceName = 'licensing';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->licenseAssignments = new Google_Service_Licensing_LicenseAssignments_Resource(
         $this,
         $this->serviceName,
         'licenseAssignments',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => '{productId}/sku/{skuId}/user/{userId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'productId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "{productId}/sku/{skuId}/user/{userId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "productId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'skuId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => '{productId}/sku/{skuId}/user/{userId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'productId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "skuId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'skuId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => '{productId}/sku/{skuId}/user',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'productId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'skuId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'listForProduct' => array(
-              'path' => '{productId}/users',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'productId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'customerId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'listForProductAndSku' => array(
-              'path' => '{productId}/sku/{skuId}/users',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'productId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "{productId}/sku/{skuId}/user/{userId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "productId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'skuId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'customerId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'patch' => array(
-              'path' => '{productId}/sku/{skuId}/user/{userId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'productId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "skuId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'skuId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => '{productId}/sku/{skuId}/user/{userId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'productId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'skuId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),"insert" => array(
+            'path' => "{productId}/sku/{skuId}/user",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "productId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "skuId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"listForProduct" => array(
+            'path' => "{productId}/users",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "productId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "customerId" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"listForProductAndSku" => array(
+            'path' => "{productId}/sku/{skuId}/users",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "productId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "skuId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "customerId" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "{productId}/sku/{skuId}/user/{userId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "productId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "skuId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"update" => array(
+            'path' => "{productId}/sku/{skuId}/user/{userId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "productId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "skuId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -382,7 +387,7 @@ class Google_Service_Licensing_LicenseAssignment extends Google_Model
   {
     return $this->etags;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -392,7 +397,7 @@ class Google_Service_Licensing_LicenseAssignment extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setProductId($productId)
   {
     $this->productId = $productId;
@@ -402,7 +407,7 @@ class Google_Service_Licensing_LicenseAssignment extends Google_Model
   {
     return $this->productId;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -412,7 +417,7 @@ class Google_Service_Licensing_LicenseAssignment extends Google_Model
   {
     return $this->selfLink;
   }
-
+  
   public function setSkuId($skuId)
   {
     $this->skuId = $skuId;
@@ -422,7 +427,7 @@ class Google_Service_Licensing_LicenseAssignment extends Google_Model
   {
     return $this->skuId;
   }
-
+  
   public function setUserId($userId)
   {
     $this->userId = $userId;
@@ -432,6 +437,7 @@ class Google_Service_Licensing_LicenseAssignment extends Google_Model
   {
     return $this->userId;
   }
+  
 }
 
 class Google_Service_Licensing_LicenseAssignmentInsert extends Google_Model
@@ -447,6 +453,7 @@ class Google_Service_Licensing_LicenseAssignmentInsert extends Google_Model
   {
     return $this->userId;
   }
+  
 }
 
 class Google_Service_Licensing_LicenseAssignmentList extends Google_Collection
@@ -466,7 +473,7 @@ class Google_Service_Licensing_LicenseAssignmentList extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -476,7 +483,7 @@ class Google_Service_Licensing_LicenseAssignmentList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -486,7 +493,7 @@ class Google_Service_Licensing_LicenseAssignmentList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -496,4 +503,5 @@ class Google_Service_Licensing_LicenseAssignmentList extends Google_Collection
   {
     return $this->nextPageToken;
   }
+  
 }

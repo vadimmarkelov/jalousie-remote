@@ -51,7 +51,7 @@ angular.module('jalousieRemoteApp')
             max = 1;
               // this can also be found dynamically when the data is not static
               // max = Math.max.apply(Math, _.map(data, ((val)-> val.count)))
-
+            //var m = data.reduce(function(memo,i){ return i.total>memo?i.total:memo});  
             // set the height based on the calculations above
             svg.attr('height', height);
 
@@ -65,7 +65,7 @@ angular.module('jalousieRemoteApp')
                 //.on("click", function(d, i){return scope.onClick({item: d});})
                 .attr("height", scope.lineHeight) // height of each bar
                 .attr("width", function(d){
-                    return (d.up/(d.up+d.down))/(max/width);
+                    return (d.open/(d.open+d.close))/(max/width);
                   }) // initial width of 0 for transition
                 .attr("x", 10) // half of the 20 side margin specified above
                 .attr("y", function(d, i){
@@ -77,10 +77,10 @@ angular.module('jalousieRemoteApp')
                 //.on("click", function(d, i){return scope.onClick({item: d});})
                 .attr("height", scope.lineHeight) // height of each bar
                 .attr("width", function(d){
-                    return (1-(d.up/(d.up+d.down)))/(max/width);
+                    return (1-(d.open/(d.open+d.close)))/(max/width);
                   }) // initial width of 0 for transition
                 .attr("x",function(d){
-                    return 10 + ((d.up/(d.up+d.down)))/(max/width);
+                    return 10 + ((d.open/(d.open+d.close)))/(max/width);
                   }) // half of the 20 side margin specified above
                 .attr("y", function(d, i){
                   	return i * (scope.lineHeight + 5);
@@ -92,12 +92,12 @@ angular.module('jalousieRemoteApp')
                 t1.append("text")
                 .attr('font-family', 'FontAwesome')
                 .style("text-anchor", function(d){
-                	return (d.up/(d.up+d.down))<0.3?"end":"start";
+                	return (d.open/(d.open+d.close))<0.3?"end":"start";
                 })
                 .attr("fill", "#fff")
                 .attr("y", function(d, i){return i * (scope.lineHeight + 5) + 22;})
                 .attr("x", function(d){
-                	return (d.up/(d.up+d.down))<0.3?(width):(15);
+                	return (d.open/(d.open+d.close))<0.3?(width):(15);
                 })
                 .text(function(d,i){return '\uf007 '+d[scope.label];});
 
@@ -107,10 +107,10 @@ angular.module('jalousieRemoteApp')
                 .attr("fill", "#fff")
                 .attr("y", function(d, i){return i * (scope.lineHeight + 5) + 22;})
                 .attr("x", function(d){
-                    return 5 + ((d.up/(d.up+d.down)))/(max/width);
+                    return 5 + ((d.open/(d.open+d.close)))/(max/width);
                   })
                 .text(function(d,i){
-                	return ((d.up/(d.up+d.down))/(max/width))<30?'':'\uf062 '+(d.up);
+                	return ((d.open/(d.open+d.close))/(max/width))<30?'':'\uf062 '+(d.open);
                 });
 
                 t1.append("text")
@@ -119,10 +119,10 @@ angular.module('jalousieRemoteApp')
                 .attr("fill", "#fff")
                 .attr("y", function(d, i){return i * (scope.lineHeight + 5) + 22;})
                 .attr("x", function(d){
-                    return 15 + ((d.up/(d.up+d.down)))/(max/width);
+                    return 15 + ((d.open/(d.open+d.close)))/(max/width);
                   })
                 .text(function(d,i){
-                	return ((1-(d.up/(d.up+d.down)))/(max/width))<30?'':(d.down)+' \uf063';
+                	return ((1-(d.open/(d.open+d.close)))/(max/width))<30?'':(d.close)+' \uf063';
                 });
 
           };

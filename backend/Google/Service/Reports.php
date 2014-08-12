@@ -31,13 +31,7 @@
  */
 class Google_Service_Reports extends Google_Service
 {
-  /** View audit reports of Google Apps for your domain. */
-  const ADMIN_REPORTS_AUDIT_READONLY = "https://www.googleapis.com/auth/admin.reports.audit.readonly";
-  /** View usage reports of Google Apps for your domain. */
-  const ADMIN_REPORTS_USAGE_READONLY = "https://www.googleapis.com/auth/admin.reports.usage.readonly";
-
   public $activities;
-  public $channels;
   public $customerUsageReports;
   public $userUsageReport;
   
@@ -52,202 +46,141 @@ class Google_Service_Reports extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'admin/reports/v1/';
     $this->version = 'reports_v1';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/admin.reports.usage.readonly",
+      "https://www.googleapis.com/auth/admin.reports.audit.readonly"
+    );
+    
     $this->serviceName = 'admin';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->activities = new Google_Service_Reports_Activities_Resource(
         $this,
         $this->serviceName,
         'activities',
         array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'activity/users/{userKey}/applications/{applicationName}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'userKey' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "list" => array(
+            'path' => "activity/users/{userKey}/applications/{applicationName}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "userKey" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'applicationName' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'startTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'actorIpAddress' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'eventName' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'filters' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'endTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'customerId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'watch' => array(
-              'path' => 'activity/users/{userKey}/applications/{applicationName}/watch',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'userKey' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "applicationName" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'applicationName' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'startTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'actorIpAddress' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'eventName' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'filters' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'endTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'customerId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "startTime" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "actorIpAddress" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "eventName" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "filters" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "endTime" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
-    );
-    $this->channels = new Google_Service_Reports_Channels_Resource(
-        $this,
-        $this->serviceName,
-        'channels',
-        array(
-          'methods' => array(
-            'stop' => array(
-              'path' => '/admin/reports_v1/channels/stop',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),
-          )
-        )
+    )
     );
     $this->customerUsageReports = new Google_Service_Reports_CustomerUsageReports_Resource(
         $this,
         $this->serviceName,
         'customerUsageReports',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'usage/dates/{date}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'date' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "usage/dates/{date}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "date" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'customerId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'parameters' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "parameters" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->userUsageReport = new Google_Service_Reports_UserUsageReport_Resource(
         $this,
         $this->serviceName,
         'userUsageReport',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'usage/users/{userKey}/dates/{date}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'userKey' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "usage/users/{userKey}/dates/{date}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "userKey" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'date' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'parameters' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'filters' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'customerId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "date" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "parameters" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "filters" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -266,7 +199,7 @@ class Google_Service_Reports_Activities_Resource extends Google_Service_Resource
 
   /**
    * Retrieves a list of activities for a specific customer and application.
-   * (activities.listActivities)
+   * (activities.list)
    *
    * @param string $userKey
    * Represents the profile id or the user email for which the data should be filtered. When 'all' is
@@ -290,8 +223,6 @@ class Google_Service_Reports_Activities_Resource extends Google_Service_Resource
     * name][operator][parameter2 value],...
    * @opt_param string endTime
    * Return events which occured at or before this time.
-   * @opt_param string customerId
-   * Represents the customer for which the data is to be fetched.
    * @return Google_Service_Reports_Activities
    */
   public function listActivities($userKey, $applicationName, $optParams = array())
@@ -299,67 +230,6 @@ class Google_Service_Reports_Activities_Resource extends Google_Service_Resource
     $params = array('userKey' => $userKey, 'applicationName' => $applicationName);
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_Reports_Activities");
-  }
-  /**
-   * Push changes to activities (activities.watch)
-   *
-   * @param string $userKey
-   * Represents the profile id or the user email for which the data should be filtered. When 'all' is
-    * specified as the userKey, it returns usageReports for all users.
-   * @param string $applicationName
-   * Application name for which the events are to be retrieved.
-   * @param Google_Channel $postBody
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string startTime
-   * Return events which occured at or after this time.
-   * @opt_param string actorIpAddress
-   * IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.
-   * @opt_param int maxResults
-   * Number of activity records to be shown in each page.
-   * @opt_param string eventName
-   * Name of the event being queried.
-   * @opt_param string pageToken
-   * Token to specify next page.
-   * @opt_param string filters
-   * Event parameters in the form [parameter1 name][operator][parameter1 value],[parameter2
-    * name][operator][parameter2 value],...
-   * @opt_param string endTime
-   * Return events which occured at or before this time.
-   * @opt_param string customerId
-   * Represents the customer for which the data is to be fetched.
-   * @return Google_Service_Reports_Channel
-   */
-  public function watch($userKey, $applicationName, Google_Service_Reports_Channel $postBody, $optParams = array())
-  {
-    $params = array('userKey' => $userKey, 'applicationName' => $applicationName, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('watch', array($params), "Google_Service_Reports_Channel");
-  }
-}
-
-/**
- * The "channels" collection of methods.
- * Typical usage is:
- *  <code>
- *   $adminService = new Google_Service_Reports(...);
- *   $channels = $adminService->channels;
- *  </code>
- */
-class Google_Service_Reports_Channels_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Stop watching resources through this channel (channels.stop)
-   *
-   * @param Google_Channel $postBody
-   * @param array $optParams Optional parameters.
-   */
-  public function stop(Google_Service_Reports_Channel $postBody, $optParams = array())
-  {
-    $params = array('postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('stop', array($params));
   }
 }
 
@@ -384,8 +254,6 @@ class Google_Service_Reports_CustomerUsageReports_Resource extends Google_Servic
    *
    * @opt_param string pageToken
    * Token to specify next page.
-   * @opt_param string customerId
-   * Represents the customer for which the data is to be fetched.
    * @opt_param string parameters
    * Represents the application name, parameter name pairs to fetch in csv as app_name1:param_name1,
     * app_name2:param_name2.
@@ -429,8 +297,6 @@ class Google_Service_Reports_UserUsageReport_Resource extends Google_Service_Res
    * Token to specify next page.
    * @opt_param string filters
    * Represents the set of filters including parameter operator value.
-   * @opt_param string customerId
-   * Represents the customer for which the data is to be fetched.
    * @return Google_Service_Reports_UsageReports
    */
   public function get($userKey, $date, $optParams = array())
@@ -461,7 +327,7 @@ class Google_Service_Reports_Activities extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -471,7 +337,7 @@ class Google_Service_Reports_Activities extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -481,7 +347,7 @@ class Google_Service_Reports_Activities extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -491,6 +357,7 @@ class Google_Service_Reports_Activities extends Google_Collection
   {
     return $this->nextPageToken;
   }
+  
 }
 
 class Google_Service_Reports_Activity extends Google_Collection
@@ -515,7 +382,7 @@ class Google_Service_Reports_Activity extends Google_Collection
   {
     return $this->actor;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -525,7 +392,7 @@ class Google_Service_Reports_Activity extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setEvents($events)
   {
     $this->events = $events;
@@ -535,7 +402,7 @@ class Google_Service_Reports_Activity extends Google_Collection
   {
     return $this->events;
   }
-
+  
   public function setId(Google_Service_Reports_ActivityId $id)
   {
     $this->id = $id;
@@ -545,7 +412,7 @@ class Google_Service_Reports_Activity extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setIpAddress($ipAddress)
   {
     $this->ipAddress = $ipAddress;
@@ -555,7 +422,7 @@ class Google_Service_Reports_Activity extends Google_Collection
   {
     return $this->ipAddress;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -565,7 +432,7 @@ class Google_Service_Reports_Activity extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setOwnerDomain($ownerDomain)
   {
     $this->ownerDomain = $ownerDomain;
@@ -575,6 +442,7 @@ class Google_Service_Reports_Activity extends Google_Collection
   {
     return $this->ownerDomain;
   }
+  
 }
 
 class Google_Service_Reports_ActivityActor extends Google_Model
@@ -593,7 +461,7 @@ class Google_Service_Reports_ActivityActor extends Google_Model
   {
     return $this->callerType;
   }
-
+  
   public function setEmail($email)
   {
     $this->email = $email;
@@ -603,7 +471,7 @@ class Google_Service_Reports_ActivityActor extends Google_Model
   {
     return $this->email;
   }
-
+  
   public function setKey($key)
   {
     $this->key = $key;
@@ -613,7 +481,7 @@ class Google_Service_Reports_ActivityActor extends Google_Model
   {
     return $this->key;
   }
-
+  
   public function setProfileId($profileId)
   {
     $this->profileId = $profileId;
@@ -623,6 +491,7 @@ class Google_Service_Reports_ActivityActor extends Google_Model
   {
     return $this->profileId;
   }
+  
 }
 
 class Google_Service_Reports_ActivityEvents extends Google_Collection
@@ -641,7 +510,7 @@ class Google_Service_Reports_ActivityEvents extends Google_Collection
   {
     return $this->name;
   }
-
+  
   public function setParameters($parameters)
   {
     $this->parameters = $parameters;
@@ -651,7 +520,7 @@ class Google_Service_Reports_ActivityEvents extends Google_Collection
   {
     return $this->parameters;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -661,6 +530,7 @@ class Google_Service_Reports_ActivityEvents extends Google_Collection
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Reports_ActivityEventsParameters extends Google_Model
@@ -679,7 +549,7 @@ class Google_Service_Reports_ActivityEventsParameters extends Google_Model
   {
     return $this->boolValue;
   }
-
+  
   public function setIntValue($intValue)
   {
     $this->intValue = $intValue;
@@ -689,7 +559,7 @@ class Google_Service_Reports_ActivityEventsParameters extends Google_Model
   {
     return $this->intValue;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -699,7 +569,7 @@ class Google_Service_Reports_ActivityEventsParameters extends Google_Model
   {
     return $this->name;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -709,6 +579,7 @@ class Google_Service_Reports_ActivityEventsParameters extends Google_Model
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_Reports_ActivityId extends Google_Model
@@ -727,7 +598,7 @@ class Google_Service_Reports_ActivityId extends Google_Model
   {
     return $this->applicationName;
   }
-
+  
   public function setCustomerId($customerId)
   {
     $this->customerId = $customerId;
@@ -737,7 +608,7 @@ class Google_Service_Reports_ActivityId extends Google_Model
   {
     return $this->customerId;
   }
-
+  
   public function setTime($time)
   {
     $this->time = $time;
@@ -747,7 +618,7 @@ class Google_Service_Reports_ActivityId extends Google_Model
   {
     return $this->time;
   }
-
+  
   public function setUniqueQualifier($uniqueQualifier)
   {
     $this->uniqueQualifier = $uniqueQualifier;
@@ -757,120 +628,7 @@ class Google_Service_Reports_ActivityId extends Google_Model
   {
     return $this->uniqueQualifier;
   }
-}
-
-class Google_Service_Reports_Channel extends Google_Model
-{
-  public $address;
-  public $expiration;
-  public $id;
-  public $kind;
-  public $params;
-  public $payload;
-  public $resourceId;
-  public $resourceUri;
-  public $token;
-  public $type;
-
-  public function setAddress($address)
-  {
-    $this->address = $address;
-  }
-
-  public function getAddress()
-  {
-    return $this->address;
-  }
-
-  public function setExpiration($expiration)
-  {
-    $this->expiration = $expiration;
-  }
-
-  public function getExpiration()
-  {
-    return $this->expiration;
-  }
-
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setParams($params)
-  {
-    $this->params = $params;
-  }
-
-  public function getParams()
-  {
-    return $this->params;
-  }
-
-  public function setPayload($payload)
-  {
-    $this->payload = $payload;
-  }
-
-  public function getPayload()
-  {
-    return $this->payload;
-  }
-
-  public function setResourceId($resourceId)
-  {
-    $this->resourceId = $resourceId;
-  }
-
-  public function getResourceId()
-  {
-    return $this->resourceId;
-  }
-
-  public function setResourceUri($resourceUri)
-  {
-    $this->resourceUri = $resourceUri;
-  }
-
-  public function getResourceUri()
-  {
-    return $this->resourceUri;
-  }
-
-  public function setToken($token)
-  {
-    $this->token = $token;
-  }
-
-  public function getToken()
-  {
-    return $this->token;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
+  
 }
 
 class Google_Service_Reports_UsageReport extends Google_Collection
@@ -892,7 +650,7 @@ class Google_Service_Reports_UsageReport extends Google_Collection
   {
     return $this->date;
   }
-
+  
   public function setEntity(Google_Service_Reports_UsageReportEntity $entity)
   {
     $this->entity = $entity;
@@ -902,7 +660,7 @@ class Google_Service_Reports_UsageReport extends Google_Collection
   {
     return $this->entity;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -912,7 +670,7 @@ class Google_Service_Reports_UsageReport extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -922,7 +680,7 @@ class Google_Service_Reports_UsageReport extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setParameters($parameters)
   {
     $this->parameters = $parameters;
@@ -932,6 +690,7 @@ class Google_Service_Reports_UsageReport extends Google_Collection
   {
     return $this->parameters;
   }
+  
 }
 
 class Google_Service_Reports_UsageReportEntity extends Google_Model
@@ -950,7 +709,7 @@ class Google_Service_Reports_UsageReportEntity extends Google_Model
   {
     return $this->customerId;
   }
-
+  
   public function setProfileId($profileId)
   {
     $this->profileId = $profileId;
@@ -960,7 +719,7 @@ class Google_Service_Reports_UsageReportEntity extends Google_Model
   {
     return $this->profileId;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -970,7 +729,7 @@ class Google_Service_Reports_UsageReportEntity extends Google_Model
   {
     return $this->type;
   }
-
+  
   public function setUserEmail($userEmail)
   {
     $this->userEmail = $userEmail;
@@ -980,6 +739,7 @@ class Google_Service_Reports_UsageReportEntity extends Google_Model
   {
     return $this->userEmail;
   }
+  
 }
 
 class Google_Service_Reports_UsageReportParameters extends Google_Collection
@@ -1000,7 +760,7 @@ class Google_Service_Reports_UsageReportParameters extends Google_Collection
   {
     return $this->boolValue;
   }
-
+  
   public function setDatetimeValue($datetimeValue)
   {
     $this->datetimeValue = $datetimeValue;
@@ -1010,7 +770,7 @@ class Google_Service_Reports_UsageReportParameters extends Google_Collection
   {
     return $this->datetimeValue;
   }
-
+  
   public function setIntValue($intValue)
   {
     $this->intValue = $intValue;
@@ -1020,7 +780,7 @@ class Google_Service_Reports_UsageReportParameters extends Google_Collection
   {
     return $this->intValue;
   }
-
+  
   public function setMsgValue($msgValue)
   {
     $this->msgValue = $msgValue;
@@ -1030,7 +790,7 @@ class Google_Service_Reports_UsageReportParameters extends Google_Collection
   {
     return $this->msgValue;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -1040,7 +800,7 @@ class Google_Service_Reports_UsageReportParameters extends Google_Collection
   {
     return $this->name;
   }
-
+  
   public function setStringValue($stringValue)
   {
     $this->stringValue = $stringValue;
@@ -1050,6 +810,7 @@ class Google_Service_Reports_UsageReportParameters extends Google_Collection
   {
     return $this->stringValue;
   }
+  
 }
 
 class Google_Service_Reports_UsageReports extends Google_Collection
@@ -1071,7 +832,7 @@ class Google_Service_Reports_UsageReports extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1081,7 +842,7 @@ class Google_Service_Reports_UsageReports extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -1091,7 +852,7 @@ class Google_Service_Reports_UsageReports extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setUsageReports($usageReports)
   {
     $this->usageReports = $usageReports;
@@ -1101,7 +862,7 @@ class Google_Service_Reports_UsageReports extends Google_Collection
   {
     return $this->usageReports;
   }
-
+  
   public function setWarnings($warnings)
   {
     $this->warnings = $warnings;
@@ -1111,6 +872,7 @@ class Google_Service_Reports_UsageReports extends Google_Collection
   {
     return $this->warnings;
   }
+  
 }
 
 class Google_Service_Reports_UsageReportsWarnings extends Google_Collection
@@ -1129,7 +891,7 @@ class Google_Service_Reports_UsageReportsWarnings extends Google_Collection
   {
     return $this->code;
   }
-
+  
   public function setData($data)
   {
     $this->data = $data;
@@ -1139,7 +901,7 @@ class Google_Service_Reports_UsageReportsWarnings extends Google_Collection
   {
     return $this->data;
   }
-
+  
   public function setMessage($message)
   {
     $this->message = $message;
@@ -1149,6 +911,7 @@ class Google_Service_Reports_UsageReportsWarnings extends Google_Collection
   {
     return $this->message;
   }
+  
 }
 
 class Google_Service_Reports_UsageReportsWarningsData extends Google_Model
@@ -1165,7 +928,7 @@ class Google_Service_Reports_UsageReportsWarningsData extends Google_Model
   {
     return $this->key;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -1175,4 +938,5 @@ class Google_Service_Reports_UsageReportsWarningsData extends Google_Model
   {
     return $this->value;
   }
+  
 }

@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 
 include('login.php');
 
@@ -20,6 +21,7 @@ switch($command){
 		$model->put(); // save the instance to the datastore
 		$memcache->set("lastState", '[{"currentState": "'.$command.'", "user": "'.$author.'"}]');
 		$memcache->delete("thelog");
+		$memcache->delete("thestats");
 		return;
 	break;
 
@@ -43,6 +45,20 @@ switch($command){
 				$response=$cachedlog;
 			echo($response);
 		}
+
+		return;
+	break;
+
+	case "getstats":
+		header('Content-Type: application/json');
+		
+		$cachedstats=$memcache->get("thestats");
+		if($cachedstats===false) {
+			$response=json_encode(JalousieModel::getStats());
+			$memcache->set("thestats", $response);
+		} else 
+			$response=$cachedstats;
+		echo $response;
 
 		return;
 	break;

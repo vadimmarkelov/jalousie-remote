@@ -20,11 +20,6 @@
  */
 class Google_Config
 {
-  const GZIP_DISABLED = true;
-  const GZIP_ENABLED = false;
-  const GZIP_UPLOADS_ENABLED = true;
-  const GZIP_UPLOADS_DISABLED = false;
-  const USE_AUTO_IO_SELECTION = "auto";
   private $configuration;
 
   /**
@@ -42,7 +37,7 @@ class Google_Config
 
       // Which Authentication, Storage and HTTP IO classes to use.
       'auth_class'    => 'Google_Auth_OAuth2',
-      'io_class'      => self::USE_AUTO_IO_SELECTION,
+      'io_class'      => 'Google_IO_Stream',
       'cache_class'   => 'Google_Cache_File',
 
       // Don't change these unless you're working against a special development
@@ -51,19 +46,6 @@ class Google_Config
 
       // Definition of class specific values, like file paths and so on.
       'classes' => array(
-        'Google_IO_Abstract' => array(
-          'request_timeout_seconds' => 100,
-        ),
-        'Google_Http_Request' => array(
-          // Disable the use of gzip on calls if set to true. Defaults to false.
-          'disable_gzip' => self::GZIP_ENABLED,
-
-          // We default gzip to disabled on uploads even if gzip is otherwise
-          // enabled, due to some issues seen with small packet sizes for uploads.
-          // Please test with this option before enabling gzip for uploads in
-          // a production environment.
-          'enable_gzip_for_uploads' => self::GZIP_UPLOADS_DISABLED,
-        ),
         // If you want to pass in OAuth 2.0 settings, they will need to be
         // structured like this.
         'Google_Auth_OAuth2' => array(
@@ -80,7 +62,6 @@ class Google_Config
           // Other parameters.
           'access_type' => 'online',
           'approval_prompt' => 'auto',
-          'login_hint' => '',
           'request_visible_actions' => '',
           'federated_signon_certs_url' =>
               'https://www.googleapis.com/oauth2/v1/certs',
@@ -123,7 +104,7 @@ class Google_Config
       $this->configuration['classes'][$class] = $config;
     }
   }
-
+  
   public function getClassConfig($class, $key = null)
   {
     if (!isset($this->configuration['classes'][$class])) {
@@ -153,7 +134,7 @@ class Google_Config
   {
     return $this->configuration['auth_class'];
   }
-
+  
   /**
    * Set the auth class.
    *
@@ -169,7 +150,7 @@ class Google_Config
     }
     $this->configuration['auth_class'] = $class;
   }
-
+  
   /**
    * Set the IO class.
    *
@@ -282,16 +263,7 @@ class Google_Config
   {
     $this->setAuthConfig('approval_prompt', $approval);
   }
-
-  /**
-   * Set the login hint (email address or sub identifier)
-   * @param $hint string
-   */
-  public function setLoginHint($hint)
-  {
-    $this->setAuthConfig('login_hint', $hint);
-  }
-
+  
   /**
    * Set the developer key for the auth class. Note that this is separate value
    * from the client ID - if it looks like a URL, its a client ID!
@@ -309,7 +281,7 @@ class Google_Config
   {
     return $this->configuration['base_path'];
   }
-
+  
   /**
    * Set the auth configuration for the current auth class.
    * @param $key - the key to set

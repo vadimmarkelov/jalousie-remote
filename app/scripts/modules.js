@@ -58,6 +58,7 @@ angular.module('RAFpolyfill',[])
     }
 }]);
 
+/* jshint ignore:start */
 angular.module('d3',[])
 .factory('d3',[function(){
   'use strict';
@@ -71,3 +72,4 @@ angular.module('d3',[])
   // end d3 source
   return d3;
 }]);
+/* jshint ignore:end */

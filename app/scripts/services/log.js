@@ -8,7 +8,7 @@
  * Factory in the jalousieRemoteApp.
  */
 angular.module('jalousieRemoteApp')
-  .factory('log',['$http', '$q', '$location', '$rootScope', 'RESTbase', 'logLength', 'requestAnimationFrame', function ($http, $q, $location, $rootScope, RESTbase, logLength, requestAnimationFrame) {
+  .factory('log',['$http', '$q', '$location', '$rootScope', 'RESTbase', 'logLength', 'requestAnimationFrame', 'stats', function ($http, $q, $location, $rootScope, RESTbase, logLength, requestAnimationFrame, stats) {
     // Service logic
     var httpUri = RESTbase+'cmd?command=getlog',
         logCollection = [],
@@ -22,7 +22,7 @@ angular.module('jalousieRemoteApp')
     AFhandler.call();
 
     var getNewItems = function (data){
-        return data.filter(function(i) {return logCollection.map(function(i){return i.id;}).indexOf(i.id) < 0;}).slice(0,logLength);
+        return data.filter(function(i) {return logCollection.map(function(ii){return ii.id;}).indexOf(i.id) < 0;}).slice(0,logLength);
     };
 
     var getLog = function(commandCount){
@@ -34,12 +34,9 @@ angular.module('jalousieRemoteApp')
         $http.get(httpUri+(commandCount?('&count='+commandCount):''))
                 .success(function (data) {
                   var newItems = getNewItems(data);
-                  if(newItems.length) {
-                      //send notification about some new activity of users
-                    });
-                  }
                   logCollection = data.slice(0,logLength);
                   if(newItems.length) {
+                    stats.refresh();
                     def.notify(newItems);
                   }
                 })

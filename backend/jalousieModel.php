@@ -75,13 +75,45 @@ class jalousieModel extends Model {
     $query->setLimit($count);
 
     parent::addOrder($query,"time","descending");
-
     $results = parent::executeQuery($query);
     if($json) 
       $extracted = self::extractQueryResultsJSON($results);
     else 
       $extracted = self::extractQueryResults($results);
     return $extracted;
+  }
+
+  public static function getStats() {
+    $query = parent::createQuery(self::MODEL_KIND);
+    //$state_filter = parent::createStringFilter("currentState", $state);
+    //$filter = parent::createCompositeFilter([$state_filter]);
+    //$query->setFilter($filter);
+
+    //$query->setLimit($count);
+
+    parent::addOrder($query,"user","descending");
+
+    $results = parent::executeQuery($query);
+    $extracted = self::extractQueryResultsPlain($results);
+    $users = []; 
+    $currUserName="";
+    $currUser = null;
+    array_walk($extracted, function($p, $key) use (&$users, &$currUser, &$currUserName){
+      if($p["user"]!=$currUserName){
+        If($currUser!=null) {
+          $currUser["total"]=$currUser["open"]+$currUser["close"];
+          $users[]=$currUser;
+        }
+        $currUser = ["user" => $p["user"], "open" => 0, "close" => 0, "total" => 0];
+        $currUserName = $p["user"];
+      }
+      $currUser[$p["currentState"]]++;
+    });
+    usort($users, function($a, $b){
+      if($a["total"]==$b["total"]) return 0;
+      return $a["total"]<$b["total"]?1:-1;
+    });
+    return $users;
   }
 
   /**
@@ -127,6 +159,23 @@ class jalousieModel extends Model {
       $the_model->setKeyName($key_name);
       // Cache this read feed.
       $the_model->onItemWrite();
+
+      $query_results[] = $the_model;
+    }
+    return $query_results;
+  }
+
+  protected static function extractQueryResultsPlain($results) {
+    $query_results = [];
+    foreach($results as $result) {
+      $id = @$result['entity']['key']['path'][0]['id'];
+      $key_name = @$result['entity']['key']['path'][0]['name'];
+      $props = $result['entity']['properties'];
+      $currentState = $props["currentState"]->getStringValue();
+      $user = $props["user"]->getStringValue();
+      $time = $props["time"]->getDateTimeValue();
+
+      $the_model = ["currentState"=>$currentState,"user"=>$user,"time"=>$time,"id"=>$id];
 
       $query_results[] = $the_model;
     }

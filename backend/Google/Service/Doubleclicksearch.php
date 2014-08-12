@@ -31,12 +31,8 @@
  */
 class Google_Service_Doubleclicksearch extends Google_Service
 {
-  /** View and manage your advertising data in DoubleClick Search. */
-  const DOUBLECLICKSEARCH = "https://www.googleapis.com/auth/doubleclicksearch";
-
   public $conversion;
   public $reports;
-  public $savedColumns;
   
 
   /**
@@ -49,193 +45,171 @@ class Google_Service_Doubleclicksearch extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'doubleclicksearch/v2/';
     $this->version = 'v2';
+    
     $this->serviceName = 'doubleclicksearch';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->conversion = new Google_Service_Doubleclicksearch_Conversion_Resource(
         $this,
         $this->serviceName,
         'conversion',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'agencyId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "agencyId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'advertiserId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'engineAccountId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'endDate' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
-                'rowCount' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
-                'startDate' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
-                'startRow' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
-                'adGroupId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'campaignId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'adId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'criterionId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'conversion',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'patch' => array(
-              'path' => 'conversion',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'advertiserId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "advertiserId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'agencyId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'endDate' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
-                'engineAccountId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'rowCount' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
-                'startDate' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
-                'startRow' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'conversion',
-              'httpMethod' => 'PUT',
-              'parameters' => array(),
-            ),'updateAvailability' => array(
-              'path' => 'conversion/updateAvailability',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),
-          )
+                "engineAccountId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "endDate" => array(
+                  "location" => "query",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+                "rowCount" => array(
+                  "location" => "query",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+                "startDate" => array(
+                  "location" => "query",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+                "startRow" => array(
+                  "location" => "query",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+                "adGroupId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "campaignId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "adId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "criterionId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"insert" => array(
+            'path' => "conversion",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),"patch" => array(
+            'path' => "conversion",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "advertiserId" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "agencyId" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "endDate" => array(
+                  "location" => "query",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+                "engineAccountId" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "rowCount" => array(
+                  "location" => "query",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+                "startDate" => array(
+                  "location" => "query",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+                "startRow" => array(
+                  "location" => "query",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+              ),
+          ),"update" => array(
+            'path' => "conversion",
+            'httpMethod' => "PUT",
+            'parameters' => array(  ),
+          ),
         )
+    )
     );
     $this->reports = new Google_Service_Doubleclicksearch_Reports_Resource(
         $this,
         $this->serviceName,
         'reports',
         array(
-          'methods' => array(
-            'generate' => array(
-              'path' => 'reports/generate',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'get' => array(
-              'path' => 'reports/{reportId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'reportId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "generate" => array(
+            'path' => "reports/generate",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),"get" => array(
+            'path' => "reports/{reportId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "reportId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'getFile' => array(
-              'path' => 'reports/{reportId}/files/{reportFragment}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'reportId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'reportFragment' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),'request' => array(
-              'path' => 'reports',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),
-          )
+          ),"getFile" => array(
+            'path' => "reports/{reportId}/files/{reportFragment}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "reportId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "reportFragment" => array(
+                  "location" => "path",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+              ),
+          ),"request" => array(
+            'path' => "reports",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),
         )
-    );
-    $this->savedColumns = new Google_Service_Doubleclicksearch_SavedColumns_Resource(
-        $this,
-        $this->serviceName,
-        'savedColumns',
-        array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'agency/{agencyId}/advertiser/{advertiserId}/savedcolumns',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'agencyId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'advertiserId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),
-          )
-        )
+    )
     );
   }
 }
@@ -343,20 +317,6 @@ class Google_Service_Doubleclicksearch_Conversion_Resource extends Google_Servic
     $params = array_merge($params, $optParams);
     return $this->call('update', array($params), "Google_Service_Doubleclicksearch_ConversionList");
   }
-  /**
-   * Updates the availabilities of a batch of floodlight activities in DoubleClick
-   * Search. (conversion.updateAvailability)
-   *
-   * @param Google_UpdateAvailabilityRequest $postBody
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Doubleclicksearch_UpdateAvailabilityResponse
-   */
-  public function updateAvailability(Google_Service_Doubleclicksearch_UpdateAvailabilityRequest $postBody, $optParams = array())
-  {
-    $params = array('postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('updateAvailability', array($params), "Google_Service_Doubleclicksearch_UpdateAvailabilityResponse");
-  }
 }
 
 /**
@@ -427,110 +387,10 @@ class Google_Service_Doubleclicksearch_Reports_Resource extends Google_Service_R
   }
 }
 
-/**
- * The "savedColumns" collection of methods.
- * Typical usage is:
- *  <code>
- *   $doubleclicksearchService = new Google_Service_Doubleclicksearch(...);
- *   $savedColumns = $doubleclicksearchService->savedColumns;
- *  </code>
- */
-class Google_Service_Doubleclicksearch_SavedColumns_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Retrieve the list of saved columns for a specified advertiser.
-   * (savedColumns.listSavedColumns)
-   *
-   * @param string $agencyId
-   * DS ID of the agency.
-   * @param string $advertiserId
-   * DS ID of the advertiser.
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Doubleclicksearch_SavedColumnList
-   */
-  public function listSavedColumns($agencyId, $advertiserId, $optParams = array())
-  {
-    $params = array('agencyId' => $agencyId, 'advertiserId' => $advertiserId);
-    $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Doubleclicksearch_SavedColumnList");
-  }
-}
 
 
 
-
-class Google_Service_Doubleclicksearch_Availability extends Google_Model
-{
-  public $advertiserId;
-  public $agencyId;
-  public $availabilityTimestamp;
-  public $segmentationId;
-  public $segmentationName;
-  public $segmentationType;
-
-  public function setAdvertiserId($advertiserId)
-  {
-    $this->advertiserId = $advertiserId;
-  }
-
-  public function getAdvertiserId()
-  {
-    return $this->advertiserId;
-  }
-
-  public function setAgencyId($agencyId)
-  {
-    $this->agencyId = $agencyId;
-  }
-
-  public function getAgencyId()
-  {
-    return $this->agencyId;
-  }
-
-  public function setAvailabilityTimestamp($availabilityTimestamp)
-  {
-    $this->availabilityTimestamp = $availabilityTimestamp;
-  }
-
-  public function getAvailabilityTimestamp()
-  {
-    return $this->availabilityTimestamp;
-  }
-
-  public function setSegmentationId($segmentationId)
-  {
-    $this->segmentationId = $segmentationId;
-  }
-
-  public function getSegmentationId()
-  {
-    return $this->segmentationId;
-  }
-
-  public function setSegmentationName($segmentationName)
-  {
-    $this->segmentationName = $segmentationName;
-  }
-
-  public function getSegmentationName()
-  {
-    return $this->segmentationName;
-  }
-
-  public function setSegmentationType($segmentationType)
-  {
-    $this->segmentationType = $segmentationType;
-  }
-
-  public function getSegmentationType()
-  {
-    return $this->segmentationType;
-  }
-}
-
-class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
+class Google_Service_Doubleclicksearch_Conversion extends Google_Model
 {
   public $adGroupId;
   public $adId;
@@ -543,13 +403,8 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   public $conversionTimestamp;
   public $criterionId;
   public $currencyCode;
-  protected $customDimensionType = 'Google_Service_Doubleclicksearch_CustomDimension';
-  protected $customDimensionDataType = 'array';
-  protected $customMetricType = 'Google_Service_Doubleclicksearch_CustomMetric';
-  protected $customMetricDataType = 'array';
   public $dsConversionId;
   public $engineAccountId;
-  public $floodlightOrderId;
   public $quantityMillis;
   public $revenueMicros;
   public $segmentationId;
@@ -567,7 +422,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->adGroupId;
   }
-
+  
   public function setAdId($adId)
   {
     $this->adId = $adId;
@@ -577,7 +432,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->adId;
   }
-
+  
   public function setAdvertiserId($advertiserId)
   {
     $this->advertiserId = $advertiserId;
@@ -587,7 +442,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->advertiserId;
   }
-
+  
   public function setAgencyId($agencyId)
   {
     $this->agencyId = $agencyId;
@@ -597,7 +452,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->agencyId;
   }
-
+  
   public function setCampaignId($campaignId)
   {
     $this->campaignId = $campaignId;
@@ -607,7 +462,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->campaignId;
   }
-
+  
   public function setClickId($clickId)
   {
     $this->clickId = $clickId;
@@ -617,7 +472,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->clickId;
   }
-
+  
   public function setConversionId($conversionId)
   {
     $this->conversionId = $conversionId;
@@ -627,7 +482,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->conversionId;
   }
-
+  
   public function setConversionModifiedTimestamp($conversionModifiedTimestamp)
   {
     $this->conversionModifiedTimestamp = $conversionModifiedTimestamp;
@@ -637,7 +492,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->conversionModifiedTimestamp;
   }
-
+  
   public function setConversionTimestamp($conversionTimestamp)
   {
     $this->conversionTimestamp = $conversionTimestamp;
@@ -647,7 +502,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->conversionTimestamp;
   }
-
+  
   public function setCriterionId($criterionId)
   {
     $this->criterionId = $criterionId;
@@ -657,7 +512,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->criterionId;
   }
-
+  
   public function setCurrencyCode($currencyCode)
   {
     $this->currencyCode = $currencyCode;
@@ -667,27 +522,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->currencyCode;
   }
-
-  public function setCustomDimension($customDimension)
-  {
-    $this->customDimension = $customDimension;
-  }
-
-  public function getCustomDimension()
-  {
-    return $this->customDimension;
-  }
-
-  public function setCustomMetric($customMetric)
-  {
-    $this->customMetric = $customMetric;
-  }
-
-  public function getCustomMetric()
-  {
-    return $this->customMetric;
-  }
-
+  
   public function setDsConversionId($dsConversionId)
   {
     $this->dsConversionId = $dsConversionId;
@@ -697,7 +532,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->dsConversionId;
   }
-
+  
   public function setEngineAccountId($engineAccountId)
   {
     $this->engineAccountId = $engineAccountId;
@@ -707,17 +542,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->engineAccountId;
   }
-
-  public function setFloodlightOrderId($floodlightOrderId)
-  {
-    $this->floodlightOrderId = $floodlightOrderId;
-  }
-
-  public function getFloodlightOrderId()
-  {
-    return $this->floodlightOrderId;
-  }
-
+  
   public function setQuantityMillis($quantityMillis)
   {
     $this->quantityMillis = $quantityMillis;
@@ -727,7 +552,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->quantityMillis;
   }
-
+  
   public function setRevenueMicros($revenueMicros)
   {
     $this->revenueMicros = $revenueMicros;
@@ -737,7 +562,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->revenueMicros;
   }
-
+  
   public function setSegmentationId($segmentationId)
   {
     $this->segmentationId = $segmentationId;
@@ -747,7 +572,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->segmentationId;
   }
-
+  
   public function setSegmentationName($segmentationName)
   {
     $this->segmentationName = $segmentationName;
@@ -757,7 +582,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->segmentationName;
   }
-
+  
   public function setSegmentationType($segmentationType)
   {
     $this->segmentationType = $segmentationType;
@@ -767,7 +592,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->segmentationType;
   }
-
+  
   public function setState($state)
   {
     $this->state = $state;
@@ -777,7 +602,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->state;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -787,6 +612,7 @@ class Google_Service_Doubleclicksearch_Conversion extends Google_Collection
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Doubleclicksearch_ConversionList extends Google_Collection
@@ -804,7 +630,7 @@ class Google_Service_Doubleclicksearch_ConversionList extends Google_Collection
   {
     return $this->conversion;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -814,58 +640,7 @@ class Google_Service_Doubleclicksearch_ConversionList extends Google_Collection
   {
     return $this->kind;
   }
-}
-
-class Google_Service_Doubleclicksearch_CustomDimension extends Google_Model
-{
-  public $name;
-  public $value;
-
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-
-  public function getName()
-  {
-    return $this->name;
-  }
-
-  public function setValue($value)
-  {
-    $this->value = $value;
-  }
-
-  public function getValue()
-  {
-    return $this->value;
-  }
-}
-
-class Google_Service_Doubleclicksearch_CustomMetric extends Google_Model
-{
-  public $name;
-  public $value;
-
-  public function setName($name)
-  {
-    $this->name = $name;
-  }
-
-  public function getName()
-  {
-    return $this->name;
-  }
-
-  public function setValue($value)
-  {
-    $this->value = $value;
-  }
-
-  public function getValue()
-  {
-    return $this->value;
-  }
+  
 }
 
 class Google_Service_Doubleclicksearch_Report extends Google_Collection
@@ -891,7 +666,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->files;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -901,7 +676,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setIsReportReady($isReportReady)
   {
     $this->isReportReady = $isReportReady;
@@ -911,7 +686,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->isReportReady;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -921,7 +696,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setRequest(Google_Service_Doubleclicksearch_ReportRequest $request)
   {
     $this->request = $request;
@@ -931,7 +706,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->request;
   }
-
+  
   public function setRowCount($rowCount)
   {
     $this->rowCount = $rowCount;
@@ -941,7 +716,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->rowCount;
   }
-
+  
   public function setRows($rows)
   {
     $this->rows = $rows;
@@ -951,7 +726,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->rows;
   }
-
+  
   public function setStatisticsCurrencyCode($statisticsCurrencyCode)
   {
     $this->statisticsCurrencyCode = $statisticsCurrencyCode;
@@ -961,7 +736,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->statisticsCurrencyCode;
   }
-
+  
   public function setStatisticsTimeZone($statisticsTimeZone)
   {
     $this->statisticsTimeZone = $statisticsTimeZone;
@@ -971,98 +746,7 @@ class Google_Service_Doubleclicksearch_Report extends Google_Collection
   {
     return $this->statisticsTimeZone;
   }
-}
-
-class Google_Service_Doubleclicksearch_ReportApiColumnSpec extends Google_Model
-{
-  public $columnName;
-  public $customDimensionName;
-  public $endDate;
-  public $groupByColumn;
-  public $headerText;
-  public $platformSource;
-  public $savedColumnName;
-  public $startDate;
-
-  public function setColumnName($columnName)
-  {
-    $this->columnName = $columnName;
-  }
-
-  public function getColumnName()
-  {
-    return $this->columnName;
-  }
-
-  public function setCustomDimensionName($customDimensionName)
-  {
-    $this->customDimensionName = $customDimensionName;
-  }
-
-  public function getCustomDimensionName()
-  {
-    return $this->customDimensionName;
-  }
-
-  public function setEndDate($endDate)
-  {
-    $this->endDate = $endDate;
-  }
-
-  public function getEndDate()
-  {
-    return $this->endDate;
-  }
-
-  public function setGroupByColumn($groupByColumn)
-  {
-    $this->groupByColumn = $groupByColumn;
-  }
-
-  public function getGroupByColumn()
-  {
-    return $this->groupByColumn;
-  }
-
-  public function setHeaderText($headerText)
-  {
-    $this->headerText = $headerText;
-  }
-
-  public function getHeaderText()
-  {
-    return $this->headerText;
-  }
-
-  public function setPlatformSource($platformSource)
-  {
-    $this->platformSource = $platformSource;
-  }
-
-  public function getPlatformSource()
-  {
-    return $this->platformSource;
-  }
-
-  public function setSavedColumnName($savedColumnName)
-  {
-    $this->savedColumnName = $savedColumnName;
-  }
-
-  public function getSavedColumnName()
-  {
-    return $this->savedColumnName;
-  }
-
-  public function setStartDate($startDate)
-  {
-    $this->startDate = $startDate;
-  }
-
-  public function getStartDate()
-  {
-    return $this->startDate;
-  }
+  
 }
 
 class Google_Service_Doubleclicksearch_ReportFiles extends Google_Model
@@ -1079,7 +763,7 @@ class Google_Service_Doubleclicksearch_ReportFiles extends Google_Model
   {
     return $this->byteCount;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -1089,17 +773,17 @@ class Google_Service_Doubleclicksearch_ReportFiles extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
 {
-  protected $columnsType = 'Google_Service_Doubleclicksearch_ReportApiColumnSpec';
+  protected $columnsType = 'Google_Service_Doubleclicksearch_ReportRequestColumns';
   protected $columnsDataType = 'array';
   public $downloadFormat;
   protected $filtersType = 'Google_Service_Doubleclicksearch_ReportRequestFilters';
   protected $filtersDataType = 'array';
   public $includeDeletedEntities;
-  public $includeRemovedEntities;
   public $maxRowsPerFile;
   protected $orderByType = 'Google_Service_Doubleclicksearch_ReportRequestOrderBy';
   protected $orderByDataType = 'array';
@@ -1122,7 +806,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->columns;
   }
-
+  
   public function setDownloadFormat($downloadFormat)
   {
     $this->downloadFormat = $downloadFormat;
@@ -1132,7 +816,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->downloadFormat;
   }
-
+  
   public function setFilters($filters)
   {
     $this->filters = $filters;
@@ -1142,7 +826,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->filters;
   }
-
+  
   public function setIncludeDeletedEntities($includeDeletedEntities)
   {
     $this->includeDeletedEntities = $includeDeletedEntities;
@@ -1152,17 +836,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->includeDeletedEntities;
   }
-
-  public function setIncludeRemovedEntities($includeRemovedEntities)
-  {
-    $this->includeRemovedEntities = $includeRemovedEntities;
-  }
-
-  public function getIncludeRemovedEntities()
-  {
-    return $this->includeRemovedEntities;
-  }
-
+  
   public function setMaxRowsPerFile($maxRowsPerFile)
   {
     $this->maxRowsPerFile = $maxRowsPerFile;
@@ -1172,7 +846,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->maxRowsPerFile;
   }
-
+  
   public function setOrderBy($orderBy)
   {
     $this->orderBy = $orderBy;
@@ -1182,7 +856,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->orderBy;
   }
-
+  
   public function setReportScope(Google_Service_Doubleclicksearch_ReportRequestReportScope $reportScope)
   {
     $this->reportScope = $reportScope;
@@ -1192,7 +866,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->reportScope;
   }
-
+  
   public function setReportType($reportType)
   {
     $this->reportType = $reportType;
@@ -1202,7 +876,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->reportType;
   }
-
+  
   public function setRowCount($rowCount)
   {
     $this->rowCount = $rowCount;
@@ -1212,7 +886,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->rowCount;
   }
-
+  
   public function setStartRow($startRow)
   {
     $this->startRow = $startRow;
@@ -1222,7 +896,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->startRow;
   }
-
+  
   public function setStatisticsCurrency($statisticsCurrency)
   {
     $this->statisticsCurrency = $statisticsCurrency;
@@ -1232,7 +906,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->statisticsCurrency;
   }
-
+  
   public function setTimeRange(Google_Service_Doubleclicksearch_ReportRequestTimeRange $timeRange)
   {
     $this->timeRange = $timeRange;
@@ -1242,7 +916,7 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->timeRange;
   }
-
+  
   public function setVerifySingleTimeZone($verifySingleTimeZone)
   {
     $this->verifySingleTimeZone = $verifySingleTimeZone;
@@ -1252,16 +926,88 @@ class Google_Service_Doubleclicksearch_ReportRequest extends Google_Collection
   {
     return $this->verifySingleTimeZone;
   }
+  
+}
+
+class Google_Service_Doubleclicksearch_ReportRequestColumns extends Google_Model
+{
+  public $columnName;
+  public $endDate;
+  public $groupByColumn;
+  public $headerText;
+  public $savedColumnName;
+  public $startDate;
+
+  public function setColumnName($columnName)
+  {
+    $this->columnName = $columnName;
+  }
+
+  public function getColumnName()
+  {
+    return $this->columnName;
+  }
+  
+  public function setEndDate($endDate)
+  {
+    $this->endDate = $endDate;
+  }
+
+  public function getEndDate()
+  {
+    return $this->endDate;
+  }
+  
+  public function setGroupByColumn($groupByColumn)
+  {
+    $this->groupByColumn = $groupByColumn;
+  }
+
+  public function getGroupByColumn()
+  {
+    return $this->groupByColumn;
+  }
+  
+  public function setHeaderText($headerText)
+  {
+    $this->headerText = $headerText;
+  }
+
+  public function getHeaderText()
+  {
+    return $this->headerText;
+  }
+  
+  public function setSavedColumnName($savedColumnName)
+  {
+    $this->savedColumnName = $savedColumnName;
+  }
+
+  public function getSavedColumnName()
+  {
+    return $this->savedColumnName;
+  }
+  
+  public function setStartDate($startDate)
+  {
+    $this->startDate = $startDate;
+  }
+
+  public function getStartDate()
+  {
+    return $this->startDate;
+  }
+  
 }
 
 class Google_Service_Doubleclicksearch_ReportRequestFilters extends Google_Collection
 {
-  protected $columnType = 'Google_Service_Doubleclicksearch_ReportApiColumnSpec';
+  protected $columnType = 'Google_Service_Doubleclicksearch_ReportRequestFiltersColumn';
   protected $columnDataType = '';
   public $operator;
   public $values;
 
-  public function setColumn(Google_Service_Doubleclicksearch_ReportApiColumnSpec $column)
+  public function setColumn(Google_Service_Doubleclicksearch_ReportRequestFiltersColumn $column)
   {
     $this->column = $column;
   }
@@ -1270,7 +1016,7 @@ class Google_Service_Doubleclicksearch_ReportRequestFilters extends Google_Colle
   {
     return $this->column;
   }
-
+  
   public function setOperator($operator)
   {
     $this->operator = $operator;
@@ -1280,7 +1026,7 @@ class Google_Service_Doubleclicksearch_ReportRequestFilters extends Google_Colle
   {
     return $this->operator;
   }
-
+  
   public function setValues($values)
   {
     $this->values = $values;
@@ -1290,15 +1036,43 @@ class Google_Service_Doubleclicksearch_ReportRequestFilters extends Google_Colle
   {
     return $this->values;
   }
+  
+}
+
+class Google_Service_Doubleclicksearch_ReportRequestFiltersColumn extends Google_Model
+{
+  public $columnName;
+  public $savedColumnName;
+
+  public function setColumnName($columnName)
+  {
+    $this->columnName = $columnName;
+  }
+
+  public function getColumnName()
+  {
+    return $this->columnName;
+  }
+  
+  public function setSavedColumnName($savedColumnName)
+  {
+    $this->savedColumnName = $savedColumnName;
+  }
+
+  public function getSavedColumnName()
+  {
+    return $this->savedColumnName;
+  }
+  
 }
 
 class Google_Service_Doubleclicksearch_ReportRequestOrderBy extends Google_Model
 {
-  protected $columnType = 'Google_Service_Doubleclicksearch_ReportApiColumnSpec';
+  protected $columnType = 'Google_Service_Doubleclicksearch_ReportRequestOrderByColumn';
   protected $columnDataType = '';
   public $sortOrder;
 
-  public function setColumn(Google_Service_Doubleclicksearch_ReportApiColumnSpec $column)
+  public function setColumn(Google_Service_Doubleclicksearch_ReportRequestOrderByColumn $column)
   {
     $this->column = $column;
   }
@@ -1307,7 +1081,7 @@ class Google_Service_Doubleclicksearch_ReportRequestOrderBy extends Google_Model
   {
     return $this->column;
   }
-
+  
   public function setSortOrder($sortOrder)
   {
     $this->sortOrder = $sortOrder;
@@ -1317,6 +1091,34 @@ class Google_Service_Doubleclicksearch_ReportRequestOrderBy extends Google_Model
   {
     return $this->sortOrder;
   }
+  
+}
+
+class Google_Service_Doubleclicksearch_ReportRequestOrderByColumn extends Google_Model
+{
+  public $columnName;
+  public $savedColumnName;
+
+  public function setColumnName($columnName)
+  {
+    $this->columnName = $columnName;
+  }
+
+  public function getColumnName()
+  {
+    return $this->columnName;
+  }
+  
+  public function setSavedColumnName($savedColumnName)
+  {
+    $this->savedColumnName = $savedColumnName;
+  }
+
+  public function getSavedColumnName()
+  {
+    return $this->savedColumnName;
+  }
+  
 }
 
 class Google_Service_Doubleclicksearch_ReportRequestReportScope extends Google_Model
@@ -1338,7 +1140,7 @@ class Google_Service_Doubleclicksearch_ReportRequestReportScope extends Google_M
   {
     return $this->adGroupId;
   }
-
+  
   public function setAdId($adId)
   {
     $this->adId = $adId;
@@ -1348,7 +1150,7 @@ class Google_Service_Doubleclicksearch_ReportRequestReportScope extends Google_M
   {
     return $this->adId;
   }
-
+  
   public function setAdvertiserId($advertiserId)
   {
     $this->advertiserId = $advertiserId;
@@ -1358,7 +1160,7 @@ class Google_Service_Doubleclicksearch_ReportRequestReportScope extends Google_M
   {
     return $this->advertiserId;
   }
-
+  
   public function setAgencyId($agencyId)
   {
     $this->agencyId = $agencyId;
@@ -1368,7 +1170,7 @@ class Google_Service_Doubleclicksearch_ReportRequestReportScope extends Google_M
   {
     return $this->agencyId;
   }
-
+  
   public function setCampaignId($campaignId)
   {
     $this->campaignId = $campaignId;
@@ -1378,7 +1180,7 @@ class Google_Service_Doubleclicksearch_ReportRequestReportScope extends Google_M
   {
     return $this->campaignId;
   }
-
+  
   public function setEngineAccountId($engineAccountId)
   {
     $this->engineAccountId = $engineAccountId;
@@ -1388,7 +1190,7 @@ class Google_Service_Doubleclicksearch_ReportRequestReportScope extends Google_M
   {
     return $this->engineAccountId;
   }
-
+  
   public function setKeywordId($keywordId)
   {
     $this->keywordId = $keywordId;
@@ -1398,6 +1200,7 @@ class Google_Service_Doubleclicksearch_ReportRequestReportScope extends Google_M
   {
     return $this->keywordId;
   }
+  
 }
 
 class Google_Service_Doubleclicksearch_ReportRequestTimeRange extends Google_Model
@@ -1416,7 +1219,7 @@ class Google_Service_Doubleclicksearch_ReportRequestTimeRange extends Google_Mod
   {
     return $this->changedAttributesSinceTimestamp;
   }
-
+  
   public function setChangedMetricsSinceTimestamp($changedMetricsSinceTimestamp)
   {
     $this->changedMetricsSinceTimestamp = $changedMetricsSinceTimestamp;
@@ -1426,7 +1229,7 @@ class Google_Service_Doubleclicksearch_ReportRequestTimeRange extends Google_Mod
   {
     return $this->changedMetricsSinceTimestamp;
   }
-
+  
   public function setEndDate($endDate)
   {
     $this->endDate = $endDate;
@@ -1436,7 +1239,7 @@ class Google_Service_Doubleclicksearch_ReportRequestTimeRange extends Google_Mod
   {
     return $this->endDate;
   }
-
+  
   public function setStartDate($startDate)
   {
     $this->startDate = $startDate;
@@ -1446,100 +1249,5 @@ class Google_Service_Doubleclicksearch_ReportRequestTimeRange extends Google_Mod
   {
     return $this->startDate;
   }
-}
-
-class Google_Service_Doubleclicksearch_SavedColumn extends Google_Model
-{
-  public $kind;
-  public $savedColumnName;
-  public $type;
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setSavedColumnName($savedColumnName)
-  {
-    $this->savedColumnName = $savedColumnName;
-  }
-
-  public function getSavedColumnName()
-  {
-    return $this->savedColumnName;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
-}
-
-class Google_Service_Doubleclicksearch_SavedColumnList extends Google_Collection
-{
-  protected $itemsType = 'Google_Service_Doubleclicksearch_SavedColumn';
-  protected $itemsDataType = 'array';
-  public $kind;
-
-  public function setItems($items)
-  {
-    $this->items = $items;
-  }
-
-  public function getItems()
-  {
-    return $this->items;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-}
-
-class Google_Service_Doubleclicksearch_UpdateAvailabilityRequest extends Google_Collection
-{
-  protected $availabilitiesType = 'Google_Service_Doubleclicksearch_Availability';
-  protected $availabilitiesDataType = 'array';
-
-  public function setAvailabilities($availabilities)
-  {
-    $this->availabilities = $availabilities;
-  }
-
-  public function getAvailabilities()
-  {
-    return $this->availabilities;
-  }
-}
-
-class Google_Service_Doubleclicksearch_UpdateAvailabilityResponse extends Google_Collection
-{
-  protected $availabilitiesType = 'Google_Service_Doubleclicksearch_Availability';
-  protected $availabilitiesDataType = 'array';
-
-  public function setAvailabilities($availabilities)
-  {
-    $this->availabilities = $availabilities;
-  }
-
-  public function getAvailabilities()
-  {
-    return $this->availabilities;
-  }
+  
 }

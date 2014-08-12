@@ -8,17 +8,27 @@
  * Factory in the jalousieRemoteApp.
  */
 angular.module('jalousieRemoteApp')
-  .factory('stats', ['RESTbase' function (RESTbase) {
+  .factory('stats', ['$http', '$q', 'RESTbase', function ($http, $q, RESTbase) {
     
-    var httpUri = RESTbase+'cmd?command=getstats';
+    var httpUri = RESTbase+'cmd?command=getstats',
+        def=$q.defer();
 
-    var getStats = function () {
+    var fetchStats = function () {
+        def.notify();
+        $http.get(httpUri)
+                .success(function (data) {
+                    def.notify(data);
+                });
+    };
 
+    var refresh = function () {
+      fetchStats();
     };
 
     // Public API here
     return {
-      getStats: getStats
-      }
-    };
-  }]);
+      getStats: function(){return def.promise;},
+      refresh: refresh
+      };
+    }
+  ]);

@@ -31,9 +31,6 @@
  */
 class Google_Service_Admin extends Google_Service
 {
-  /** Manage email messages of users on your domain. */
-  const EMAIL_MIGRATION = "https://www.googleapis.com/auth/email.migration";
-
   public $mail;
   
 
@@ -47,27 +44,38 @@ class Google_Service_Admin extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'email/v2/users/';
     $this->version = 'email_migration_v2';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/email.migration"
+    );
+    
     $this->serviceName = 'admin';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->mail = new Google_Service_Admin_Mail_Resource(
         $this,
         $this->serviceName,
         'mail',
         array(
-          'methods' => array(
-            'insert' => array(
-              'path' => '{userKey}/mail',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'userKey' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "insert" => array(
+            'path' => "{userKey}/mail",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "userKey" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -124,7 +132,7 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->isDeleted;
   }
-
+  
   public function setIsDraft($isDraft)
   {
     $this->isDraft = $isDraft;
@@ -134,7 +142,7 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->isDraft;
   }
-
+  
   public function setIsInbox($isInbox)
   {
     $this->isInbox = $isInbox;
@@ -144,7 +152,7 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->isInbox;
   }
-
+  
   public function setIsSent($isSent)
   {
     $this->isSent = $isSent;
@@ -154,7 +162,7 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->isSent;
   }
-
+  
   public function setIsStarred($isStarred)
   {
     $this->isStarred = $isStarred;
@@ -164,7 +172,7 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->isStarred;
   }
-
+  
   public function setIsTrash($isTrash)
   {
     $this->isTrash = $isTrash;
@@ -174,7 +182,7 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->isTrash;
   }
-
+  
   public function setIsUnread($isUnread)
   {
     $this->isUnread = $isUnread;
@@ -184,7 +192,7 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->isUnread;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -194,7 +202,7 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setLabels($labels)
   {
     $this->labels = $labels;
@@ -204,4 +212,5 @@ class Google_Service_Admin_MailItem extends Google_Collection
   {
     return $this->labels;
   }
+  
 }

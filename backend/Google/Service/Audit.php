@@ -31,8 +31,6 @@
  */
 class Google_Service_Audit extends Google_Service
 {
-
-
   public $activities;
   
 
@@ -46,68 +44,75 @@ class Google_Service_Audit extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'apps/reporting/audit/v1/';
     $this->version = 'v1';
+    
     $this->serviceName = 'audit';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->activities = new Google_Service_Audit_Activities_Resource(
         $this,
         $this->serviceName,
         'activities',
         array(
-          'methods' => array(
-            'list' => array(
-              'path' => '{customerId}/{applicationId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'customerId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "list" => array(
+            'path' => "{customerId}/{applicationId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "customerId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'applicationId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'actorEmail' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'actorApplicationId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'actorIpAddress' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'caller' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'eventName' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'startTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'endTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'continuationToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "applicationId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "actorEmail" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "actorApplicationId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "actorIpAddress" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "caller" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "eventName" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "startTime" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "endTime" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "continuationToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -126,7 +131,7 @@ class Google_Service_Audit_Activities_Resource extends Google_Service_Resource
 
   /**
    * Retrieves a list of activities for a specific customer and application.
-   * (activities.listActivities)
+   * (activities.list)
    *
    * @param string $customerId
    * Represents the customer who is the owner of target object on which action was performed.
@@ -182,7 +187,7 @@ class Google_Service_Audit_Activities extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -192,7 +197,7 @@ class Google_Service_Audit_Activities extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNext($next)
   {
     $this->next = $next;
@@ -202,6 +207,7 @@ class Google_Service_Audit_Activities extends Google_Collection
   {
     return $this->next;
   }
+  
 }
 
 class Google_Service_Audit_Activity extends Google_Collection
@@ -225,7 +231,7 @@ class Google_Service_Audit_Activity extends Google_Collection
   {
     return $this->actor;
   }
-
+  
   public function setEvents($events)
   {
     $this->events = $events;
@@ -235,7 +241,7 @@ class Google_Service_Audit_Activity extends Google_Collection
   {
     return $this->events;
   }
-
+  
   public function setId(Google_Service_Audit_ActivityId $id)
   {
     $this->id = $id;
@@ -245,7 +251,7 @@ class Google_Service_Audit_Activity extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setIpAddress($ipAddress)
   {
     $this->ipAddress = $ipAddress;
@@ -255,7 +261,7 @@ class Google_Service_Audit_Activity extends Google_Collection
   {
     return $this->ipAddress;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -265,7 +271,7 @@ class Google_Service_Audit_Activity extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setOwnerDomain($ownerDomain)
   {
     $this->ownerDomain = $ownerDomain;
@@ -275,6 +281,7 @@ class Google_Service_Audit_Activity extends Google_Collection
   {
     return $this->ownerDomain;
   }
+  
 }
 
 class Google_Service_Audit_ActivityActor extends Google_Model
@@ -293,7 +300,7 @@ class Google_Service_Audit_ActivityActor extends Google_Model
   {
     return $this->applicationId;
   }
-
+  
   public function setCallerType($callerType)
   {
     $this->callerType = $callerType;
@@ -303,7 +310,7 @@ class Google_Service_Audit_ActivityActor extends Google_Model
   {
     return $this->callerType;
   }
-
+  
   public function setEmail($email)
   {
     $this->email = $email;
@@ -313,7 +320,7 @@ class Google_Service_Audit_ActivityActor extends Google_Model
   {
     return $this->email;
   }
-
+  
   public function setKey($key)
   {
     $this->key = $key;
@@ -323,6 +330,7 @@ class Google_Service_Audit_ActivityActor extends Google_Model
   {
     return $this->key;
   }
+  
 }
 
 class Google_Service_Audit_ActivityEvents extends Google_Collection
@@ -341,7 +349,7 @@ class Google_Service_Audit_ActivityEvents extends Google_Collection
   {
     return $this->eventType;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -351,7 +359,7 @@ class Google_Service_Audit_ActivityEvents extends Google_Collection
   {
     return $this->name;
   }
-
+  
   public function setParameters($parameters)
   {
     $this->parameters = $parameters;
@@ -361,6 +369,7 @@ class Google_Service_Audit_ActivityEvents extends Google_Collection
   {
     return $this->parameters;
   }
+  
 }
 
 class Google_Service_Audit_ActivityEventsParameters extends Google_Model
@@ -377,7 +386,7 @@ class Google_Service_Audit_ActivityEventsParameters extends Google_Model
   {
     return $this->name;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -387,6 +396,7 @@ class Google_Service_Audit_ActivityEventsParameters extends Google_Model
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_Audit_ActivityId extends Google_Model
@@ -405,7 +415,7 @@ class Google_Service_Audit_ActivityId extends Google_Model
   {
     return $this->applicationId;
   }
-
+  
   public function setCustomerId($customerId)
   {
     $this->customerId = $customerId;
@@ -415,7 +425,7 @@ class Google_Service_Audit_ActivityId extends Google_Model
   {
     return $this->customerId;
   }
-
+  
   public function setTime($time)
   {
     $this->time = $time;
@@ -425,7 +435,7 @@ class Google_Service_Audit_ActivityId extends Google_Model
   {
     return $this->time;
   }
-
+  
   public function setUniqQualifier($uniqQualifier)
   {
     $this->uniqQualifier = $uniqQualifier;
@@ -435,4 +445,5 @@ class Google_Service_Audit_ActivityId extends Google_Model
   {
     return $this->uniqQualifier;
   }
+  
 }

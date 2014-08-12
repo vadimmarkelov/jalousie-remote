@@ -31,11 +31,6 @@
  */
 class Google_Service_Calendar extends Google_Service
 {
-  /** Manage your calendars. */
-  const CALENDAR = "https://www.googleapis.com/auth/calendar";
-  /** View your calendars. */
-  const CALENDAR_READONLY = "https://www.googleapis.com/auth/calendar.readonly";
-
   public $acl;
   public $calendarList;
   public $calendars;
@@ -56,816 +51,691 @@ class Google_Service_Calendar extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'calendar/v3/';
     $this->version = 'v3';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/calendar.readonly",
+      "https://www.googleapis.com/auth/calendar"
+    );
+    
     $this->serviceName = 'calendar';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->acl = new Google_Service_Calendar_Acl_Resource(
         $this,
         $this->serviceName,
         'acl',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'calendars/{calendarId}/acl/{ruleId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "calendars/{calendarId}/acl/{ruleId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'ruleId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'calendars/{calendarId}/acl/{ruleId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "ruleId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'ruleId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'calendars/{calendarId}/acl',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'calendars/{calendarId}/acl',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "calendars/{calendarId}/acl/{ruleId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'syncToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'showDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'patch' => array(
-              'path' => 'calendars/{calendarId}/acl/{ruleId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "ruleId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'ruleId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'calendars/{calendarId}/acl/{ruleId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'ruleId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'watch' => array(
-              'path' => 'calendars/{calendarId}/acl/watch',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"insert" => array(
+            'path' => "calendars/{calendarId}/acl",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'syncToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'showDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),
-          )
+              ),
+          ),"list" => array(
+            'path' => "calendars/{calendarId}/acl",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "calendars/{calendarId}/acl/{ruleId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "ruleId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"update" => array(
+            'path' => "calendars/{calendarId}/acl/{ruleId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "ruleId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->calendarList = new Google_Service_Calendar_CalendarList_Resource(
         $this,
         $this->serviceName,
         'calendarList',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'users/me/calendarList/{calendarId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "users/me/calendarList/{calendarId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'users/me/calendarList/{calendarId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"get" => array(
+            'path' => "users/me/calendarList/{calendarId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'users/me/calendarList',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'colorRgbFormat' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'users/me/calendarList',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'syncToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'showDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'minAccessRole' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'showHidden' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
+          ),"insert" => array(
+            'path' => "users/me/calendarList",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "colorRgbFormat" => array(
+                  "location" => "query",
+                  "type" => "boolean",
               ),
-            ),'patch' => array(
-              'path' => 'users/me/calendarList/{calendarId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"list" => array(
+            'path' => "users/me/calendarList",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "showHidden" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "minAccessRole" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "users/me/calendarList/{calendarId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'colorRgbFormat' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'update' => array(
-              'path' => 'users/me/calendarList/{calendarId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "colorRgbFormat" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "users/me/calendarList/{calendarId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'colorRgbFormat' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'watch' => array(
-              'path' => 'users/me/calendarList/watch',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'syncToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'showDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'minAccessRole' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'showHidden' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
+                "colorRgbFormat" => array(
+                  "location" => "query",
+                  "type" => "boolean",
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
     $this->calendars = new Google_Service_Calendar_Calendars_Resource(
         $this,
         $this->serviceName,
         'calendars',
         array(
-          'methods' => array(
-            'clear' => array(
-              'path' => 'calendars/{calendarId}/clear',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "clear" => array(
+            'path' => "calendars/{calendarId}/clear",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'delete' => array(
-              'path' => 'calendars/{calendarId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"delete" => array(
+            'path' => "calendars/{calendarId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'calendars/{calendarId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"get" => array(
+            'path' => "calendars/{calendarId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'calendars',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'patch' => array(
-              'path' => 'calendars/{calendarId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"insert" => array(
+            'path' => "calendars",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),"patch" => array(
+            'path' => "calendars/{calendarId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'calendars/{calendarId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"update" => array(
+            'path' => "calendars/{calendarId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
     $this->channels = new Google_Service_Calendar_Channels_Resource(
         $this,
         $this->serviceName,
         'channels',
         array(
-          'methods' => array(
-            'stop' => array(
-              'path' => 'channels/stop',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),
-          )
+    'methods' => array(
+          "stop" => array(
+            'path' => "channels/stop",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),
         )
+    )
     );
     $this->colors = new Google_Service_Calendar_Colors_Resource(
         $this,
         $this->serviceName,
         'colors',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'colors',
-              'httpMethod' => 'GET',
-              'parameters' => array(),
-            ),
-          )
+    'methods' => array(
+          "get" => array(
+            'path' => "colors",
+            'httpMethod' => "GET",
+            'parameters' => array(  ),
+          ),
         )
+    )
     );
     $this->events = new Google_Service_Calendar_Events_Resource(
         $this,
         $this->serviceName,
         'events',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'calendars/{calendarId}/events/{eventId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "calendars/{calendarId}/events/{eventId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'eventId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'sendNotifications' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'get' => array(
-              'path' => 'calendars/{calendarId}/events/{eventId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "eventId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'eventId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'timeZone' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'alwaysIncludeEmail' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxAttendees' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'import' => array(
-              'path' => 'calendars/{calendarId}/events/import',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
+                "sendNotifications" => array(
+                  "location" => "query",
+                  "type" => "boolean",
               ),
-            ),'insert' => array(
-              'path' => 'calendars/{calendarId}/events',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'sendNotifications' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxAttendees' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'instances' => array(
-              'path' => 'calendars/{calendarId}/events/{eventId}/instances',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "calendars/{calendarId}/events/{eventId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'eventId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'showDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'timeMax' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'alwaysIncludeEmail' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'timeMin' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'timeZone' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'originalStart' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxAttendees' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'calendars/{calendarId}/events',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "eventId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'orderBy' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'showHiddenInvitations' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'syncToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'showDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'iCalUID' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'updatedMin' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'singleEvents' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'timeMax' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'alwaysIncludeEmail' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'q' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'timeMin' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'timeZone' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'privateExtendedProperty' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'sharedExtendedProperty' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'maxAttendees' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'move' => array(
-              'path' => 'calendars/{calendarId}/events/{eventId}/move',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'eventId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'destination' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'sendNotifications' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
+                "timeZone" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'patch' => array(
-              'path' => 'calendars/{calendarId}/events/{eventId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'eventId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'sendNotifications' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'alwaysIncludeEmail' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxAttendees' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
+                "alwaysIncludeEmail" => array(
+                  "location" => "query",
+                  "type" => "boolean",
               ),
-            ),'quickAdd' => array(
-              'path' => 'calendars/{calendarId}/events/quickAdd',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'text' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'sendNotifications' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
+                "maxAttendees" => array(
+                  "location" => "query",
+                  "type" => "integer",
               ),
-            ),'update' => array(
-              'path' => 'calendars/{calendarId}/events/{eventId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'eventId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'sendNotifications' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'alwaysIncludeEmail' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxAttendees' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'watch' => array(
-              'path' => 'calendars/{calendarId}/events/watch',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'calendarId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"import" => array(
+            'path' => "calendars/{calendarId}/events/import",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'orderBy' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'showHiddenInvitations' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'syncToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'showDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'iCalUID' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'updatedMin' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'singleEvents' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'timeMax' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'alwaysIncludeEmail' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'q' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'timeMin' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'timeZone' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'privateExtendedProperty' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'sharedExtendedProperty' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'maxAttendees' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),
-          )
+              ),
+          ),"insert" => array(
+            'path' => "calendars/{calendarId}/events",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "sendNotifications" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxAttendees" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"instances" => array(
+            'path' => "calendars/{calendarId}/events/{eventId}/instances",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "eventId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "showDeleted" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "timeMax" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "alwaysIncludeEmail" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "timeMin" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "timeZone" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "originalStart" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxAttendees" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"list" => array(
+            'path' => "calendars/{calendarId}/events",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "orderBy" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "showHiddenInvitations" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "showDeleted" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "iCalUID" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "updatedMin" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "singleEvents" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "alwaysIncludeEmail" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "q" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "timeMin" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "timeZone" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "timeMax" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxAttendees" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"move" => array(
+            'path' => "calendars/{calendarId}/events/{eventId}/move",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "eventId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "destination" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "sendNotifications" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "calendars/{calendarId}/events/{eventId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "eventId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "sendNotifications" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "alwaysIncludeEmail" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxAttendees" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"quickAdd" => array(
+            'path' => "calendars/{calendarId}/events/quickAdd",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "text" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "sendNotifications" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "calendars/{calendarId}/events/{eventId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "eventId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "sendNotifications" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "alwaysIncludeEmail" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxAttendees" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"watch" => array(
+            'path' => "calendars/{calendarId}/events/watch",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "calendarId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "orderBy" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "showHiddenInvitations" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "showDeleted" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "iCalUID" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "updatedMin" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "singleEvents" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "alwaysIncludeEmail" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "q" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "timeMin" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "timeZone" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "timeMax" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxAttendees" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->freebusy = new Google_Service_Calendar_Freebusy_Resource(
         $this,
         $this->serviceName,
         'freebusy',
         array(
-          'methods' => array(
-            'query' => array(
-              'path' => 'freeBusy',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),
-          )
+    'methods' => array(
+          "query" => array(
+            'path' => "freeBusy",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),
         )
+    )
     );
     $this->settings = new Google_Service_Calendar_Settings_Resource(
         $this,
         $this->serviceName,
         'settings',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'users/me/settings/{setting}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'setting' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "users/me/settings/{setting}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "setting" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'users/me/settings',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'syncToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'watch' => array(
-              'path' => 'users/me/settings/watch',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'syncToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-              ),
-            ),
-          )
+          ),"list" => array(
+            'path' => "users/me/settings",
+            'httpMethod' => "GET",
+            'parameters' => array(  ),
+          ),
         )
+    )
     );
   }
 }
@@ -929,32 +799,11 @@ class Google_Service_Calendar_Acl_Resource extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_Calendar_AclRule");
   }
   /**
-   * Returns the rules in the access control list for the calendar. (acl.listAcl)
+   * Returns the rules in the access control list for the calendar. (acl.list)
    *
    * @param string $calendarId
    * Calendar identifier.
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string pageToken
-   * Token specifying which result page to return. Optional.
-   * @opt_param string syncToken
-   * Token obtained from the nextSyncToken field returned on the last page of results from the
-    * previous list request. It makes the result of this list request contain only entries that have
-    * changed since then. All entries deleted since the previous list request will always be in the
-    * result set and it is not allowed to set showDeleted to False.
-  If the syncToken expires, the
-    * server will respond with a 410 GONE response code and the client should clear its storage and
-    * perform a full synchronization without any syncToken.
-  Learn more about incremental
-    * synchronization.
-  Optional. The default is to return all entries.
-   * @opt_param int maxResults
-   * Maximum number of entries returned on one result page. By default the value is 100 entries. The
-    * page size can never be larger than 250 entries. Optional.
-   * @opt_param bool showDeleted
-   * Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to
-    * "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is
-    * False.
    * @return Google_Service_Calendar_Acl
    */
   public function listAcl($calendarId, $optParams = array())
@@ -997,42 +846,6 @@ class Google_Service_Calendar_Acl_Resource extends Google_Service_Resource
     $params = array('calendarId' => $calendarId, 'ruleId' => $ruleId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
     return $this->call('update', array($params), "Google_Service_Calendar_AclRule");
-  }
-  /**
-   * Watch for changes to ACL resources. (acl.watch)
-   *
-   * @param string $calendarId
-   * Calendar identifier.
-   * @param Google_Channel $postBody
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string pageToken
-   * Token specifying which result page to return. Optional.
-   * @opt_param string syncToken
-   * Token obtained from the nextSyncToken field returned on the last page of results from the
-    * previous list request. It makes the result of this list request contain only entries that have
-    * changed since then. All entries deleted since the previous list request will always be in the
-    * result set and it is not allowed to set showDeleted to False.
-  If the syncToken expires, the
-    * server will respond with a 410 GONE response code and the client should clear its storage and
-    * perform a full synchronization without any syncToken.
-  Learn more about incremental
-    * synchronization.
-  Optional. The default is to return all entries.
-   * @opt_param int maxResults
-   * Maximum number of entries returned on one result page. By default the value is 100 entries. The
-    * page size can never be larger than 250 entries. Optional.
-   * @opt_param bool showDeleted
-   * Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to
-    * "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is
-    * False.
-   * @return Google_Service_Calendar_Channel
-   */
-  public function watch($calendarId, Google_Service_Calendar_Channel $postBody, $optParams = array())
-  {
-    $params = array('calendarId' => $calendarId, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('watch', array($params), "Google_Service_Calendar_Channel");
   }
 }
 
@@ -1081,8 +894,8 @@ class Google_Service_Calendar_CalendarList_Resource extends Google_Service_Resou
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool colorRgbFormat
-   * Whether to use the foregroundColor and backgroundColor fields to write the calendar colors
-    * (RGB). If this feature is used, the index-based colorId field will be set to the best matching
+   * Whether to use the 'foregroundColor' and 'backgroundColor' fields to write the calendar colors
+    * (RGB). If this feature is used, the index-based 'colorId' field will be set to the best matching
     * option automatically. Optional. The default is False.
    * @return Google_Service_Calendar_CalendarListEntry
    */
@@ -1093,37 +906,19 @@ class Google_Service_Calendar_CalendarList_Resource extends Google_Service_Resou
     return $this->call('insert', array($params), "Google_Service_Calendar_CalendarListEntry");
   }
   /**
-   * Returns entries on the user's calendar list. (calendarList.listCalendarList)
+   * Returns entries on the user's calendar list. (calendarList.list)
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string syncToken
-   * Token obtained from the nextSyncToken field returned on the last page of results from the
-    * previous list request. It makes the result of this list request contain only entries that have
-    * changed since then. If only read-only fields such as calendar properties or ACLs have changed,
-    * the entry won't be returned. All entries deleted and hidden since the previous list request will
-    * always be in the result set and it is not allowed to set showDeleted neither showHidden to
-    * False.
-  To ensure client state consistency minAccessRole query parameter cannot be specified
-    * together with nextSyncToken.
-  If the syncToken expires, the server will respond with a 410 GONE
-    * response code and the client should clear its storage and perform a full synchronization without
-    * any syncToken.
-  Learn more about incremental synchronization.
-  Optional. The default is to return
-    * all entries.
-   * @opt_param bool showDeleted
-   * Whether to include deleted calendar list entries in the result. Optional. The default is False.
-   * @opt_param string minAccessRole
-   * The minimum access role for the user in the returned entires. Optional. The default is no
-    * restriction.
-   * @opt_param int maxResults
-   * Maximum number of entries returned on one result page. By default the value is 100 entries. The
-    * page size can never be larger than 250 entries. Optional.
    * @opt_param string pageToken
    * Token specifying which result page to return. Optional.
    * @opt_param bool showHidden
    * Whether to show hidden entries. Optional. The default is False.
+   * @opt_param int maxResults
+   * Maximum number of entries returned on one result page. Optional.
+   * @opt_param string minAccessRole
+   * The minimum access role for the user in the returned entires. Optional. The default is no
+    * restriction.
    * @return Google_Service_Calendar_CalendarList
    */
   public function listCalendarList($optParams = array())
@@ -1142,8 +937,8 @@ class Google_Service_Calendar_CalendarList_Resource extends Google_Service_Resou
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool colorRgbFormat
-   * Whether to use the foregroundColor and backgroundColor fields to write the calendar colors
-    * (RGB). If this feature is used, the index-based colorId field will be set to the best matching
+   * Whether to use the 'foregroundColor' and 'backgroundColor' fields to write the calendar colors
+    * (RGB). If this feature is used, the index-based 'colorId' field will be set to the best matching
     * option automatically. Optional. The default is False.
    * @return Google_Service_Calendar_CalendarListEntry
    */
@@ -1162,8 +957,8 @@ class Google_Service_Calendar_CalendarList_Resource extends Google_Service_Resou
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool colorRgbFormat
-   * Whether to use the foregroundColor and backgroundColor fields to write the calendar colors
-    * (RGB). If this feature is used, the index-based colorId field will be set to the best matching
+   * Whether to use the 'foregroundColor' and 'backgroundColor' fields to write the calendar colors
+    * (RGB). If this feature is used, the index-based 'colorId' field will be set to the best matching
     * option automatically. Optional. The default is False.
    * @return Google_Service_Calendar_CalendarListEntry
    */
@@ -1172,47 +967,6 @@ class Google_Service_Calendar_CalendarList_Resource extends Google_Service_Resou
     $params = array('calendarId' => $calendarId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
     return $this->call('update', array($params), "Google_Service_Calendar_CalendarListEntry");
-  }
-  /**
-   * Watch for changes to CalendarList resources. (calendarList.watch)
-   *
-   * @param Google_Channel $postBody
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string syncToken
-   * Token obtained from the nextSyncToken field returned on the last page of results from the
-    * previous list request. It makes the result of this list request contain only entries that have
-    * changed since then. If only read-only fields such as calendar properties or ACLs have changed,
-    * the entry won't be returned. All entries deleted and hidden since the previous list request will
-    * always be in the result set and it is not allowed to set showDeleted neither showHidden to
-    * False.
-  To ensure client state consistency minAccessRole query parameter cannot be specified
-    * together with nextSyncToken.
-  If the syncToken expires, the server will respond with a 410 GONE
-    * response code and the client should clear its storage and perform a full synchronization without
-    * any syncToken.
-  Learn more about incremental synchronization.
-  Optional. The default is to return
-    * all entries.
-   * @opt_param bool showDeleted
-   * Whether to include deleted calendar list entries in the result. Optional. The default is False.
-   * @opt_param string minAccessRole
-   * The minimum access role for the user in the returned entires. Optional. The default is no
-    * restriction.
-   * @opt_param int maxResults
-   * Maximum number of entries returned on one result page. By default the value is 100 entries. The
-    * page size can never be larger than 250 entries. Optional.
-   * @opt_param string pageToken
-   * Token specifying which result page to return. Optional.
-   * @opt_param bool showHidden
-   * Whether to show hidden entries. Optional. The default is False.
-   * @return Google_Service_Calendar_Channel
-   */
-  public function watch(Google_Service_Calendar_Channel $postBody, $optParams = array())
-  {
-    $params = array('postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('watch', array($params), "Google_Service_Calendar_Channel");
   }
 }
 
@@ -1405,7 +1159,7 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
    * @opt_param string timeZone
    * Time zone used in the response. Optional. The default is the time zone of the calendar.
    * @opt_param bool alwaysIncludeEmail
-   * Whether to always include a value in the email field for the organizer, creator and attendees,
+   * Whether to always include a value in the "email" field for the organizer, creator and attendees,
     * even if no real email is available (i.e. a generated, non-working value will be provided). The
     * use of this option is discouraged and should only be used by clients which cannot handle the
     * absence of an email address value in the mentioned places. Optional. The default is False.
@@ -1468,20 +1222,19 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool showDeleted
-   * Whether to include deleted events (with status equals "cancelled") in the result. Cancelled
-    * instances of recurring events will still be included if singleEvents is False. Optional. The
+   * Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled
+    * instances of recurring events will still be included if 'singleEvents' is False. Optional. The
     * default is False.
    * @opt_param string timeMax
    * Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to
     * filter by start time.
    * @opt_param bool alwaysIncludeEmail
-   * Whether to always include a value in the email field for the organizer, creator and attendees,
+   * Whether to always include a value in the "email" field for the organizer, creator and attendees,
     * even if no real email is available (i.e. a generated, non-working value will be provided). The
     * use of this option is discouraged and should only be used by clients which cannot handle the
     * absence of an email address value in the mentioned places. Optional. The default is False.
    * @opt_param int maxResults
-   * Maximum number of events returned on one result page. By default the value is 250 events. The
-    * page size can never be larger than 2500 events. Optional.
+   * Maximum number of events returned on one result page. Optional.
    * @opt_param string pageToken
    * Token specifying which result page to return. Optional.
    * @opt_param string timeMin
@@ -1503,7 +1256,7 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
     return $this->call('instances', array($params), "Google_Service_Calendar_Events");
   }
   /**
-   * Returns events on the specified calendar. (events.listEvents)
+   * Returns events on the specified calendar. (events.list)
    *
    * @param string $calendarId
    * Calendar identifier.
@@ -1514,55 +1267,28 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
     * order.
    * @opt_param bool showHiddenInvitations
    * Whether to include hidden invitations in the result. Optional. The default is False.
-   * @opt_param string syncToken
-   * Token obtained from the nextSyncToken field returned on the last page of results from the
-    * previous list request. It makes the result of this list request contain only entries that have
-    * changed since then. All events deleted since the previous list request will always be in the
-    * result set and it is not allowed to set showDeleted to False.
-  There are several query parameters
-    * that cannot be specified together with nextSyncToken to ensure consistency of the client state.
-    * These are:
-  - iCalUID
-  - orderBy
-  - privateExtendedProperty
-  - q
-  - sharedExtendedProperty
-  -
-    * timeMin
-  - timeMax
-  - updatedMin If the syncToken expires, the server will respond with a 410
-    * GONE response code and the client should clear its storage and perform a full synchronization
-    * without any syncToken.
-  Learn more about incremental synchronization.
-  Optional. The default is to
-    * return all entries.
    * @opt_param bool showDeleted
-   * Whether to include deleted events (with status equals "cancelled") in the result. Cancelled
+   * Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled
     * instances of recurring events (but not the underlying recurring event) will still be included if
-    * showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only
-    * single instances of deleted events (but not the underlying recurring events) are returned.
-    * Optional. The default is False.
+    * 'showDeleted' and 'singleEvents' are both False. If 'showDeleted' and 'singleEvents' are both
+    * True, only single instances of deleted events (but not the underlying recurring events) are
+    * returned. Optional. The default is False.
    * @opt_param string iCalUID
-   * Specifies event ID in the iCalendar format to be included in the response. Optional.
+   * Specifies iCalendar UID (iCalUID) of events to be included in the response. Optional.
    * @opt_param string updatedMin
-   * Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. When
-    * specified, entries deleted since this time will always be included regardless of showDeleted.
+   * Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by.
     * Optional. The default is not to filter by last modification time.
    * @opt_param bool singleEvents
    * Whether to expand recurring events into instances and only return single one-off events and
     * instances of recurring events, but not the underlying recurring events themselves. Optional. The
     * default is False.
-   * @opt_param string timeMax
-   * Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to
-    * filter by start time.
    * @opt_param bool alwaysIncludeEmail
-   * Whether to always include a value in the email field for the organizer, creator and attendees,
+   * Whether to always include a value in the "email" field for the organizer, creator and attendees,
     * even if no real email is available (i.e. a generated, non-working value will be provided). The
     * use of this option is discouraged and should only be used by clients which cannot handle the
     * absence of an email address value in the mentioned places. Optional. The default is False.
    * @opt_param int maxResults
-   * Maximum number of events returned on one result page. By default the value is 250 events. The
-    * page size can never be larger than 2500 events. Optional.
+   * Maximum number of events returned on one result page. Optional.
    * @opt_param string q
    * Free text search terms to find events that match these terms in any field, except for extended
     * properties. Optional.
@@ -1573,14 +1299,9 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
     * filter by end time.
    * @opt_param string timeZone
    * Time zone used in the response. Optional. The default is the time zone of the calendar.
-   * @opt_param string privateExtendedProperty
-   * Extended properties constraint specified as propertyName=value. Matches only private properties.
-    * This parameter might be repeated multiple times to return events that match all given
-    * constraints.
-   * @opt_param string sharedExtendedProperty
-   * Extended properties constraint specified as propertyName=value. Matches only shared properties.
-    * This parameter might be repeated multiple times to return events that match all given
-    * constraints.
+   * @opt_param string timeMax
+   * Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to
+    * filter by start time.
    * @opt_param int maxAttendees
    * The maximum number of attendees to include in the response. If there are more than the specified
     * number of attendees, only the participant is returned. Optional.
@@ -1629,7 +1350,7 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
    * Whether to send notifications about the event update (e.g. attendee's responses, title changes,
     * etc.). Optional. The default is False.
    * @opt_param bool alwaysIncludeEmail
-   * Whether to always include a value in the email field for the organizer, creator and attendees,
+   * Whether to always include a value in the "email" field for the organizer, creator and attendees,
     * even if no real email is available (i.e. a generated, non-working value will be provided). The
     * use of this option is discouraged and should only be used by clients which cannot handle the
     * absence of an email address value in the mentioned places. Optional. The default is False.
@@ -1677,7 +1398,7 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
    * Whether to send notifications about the event update (e.g. attendee's responses, title changes,
     * etc.). Optional. The default is False.
    * @opt_param bool alwaysIncludeEmail
-   * Whether to always include a value in the email field for the organizer, creator and attendees,
+   * Whether to always include a value in the "email" field for the organizer, creator and attendees,
     * even if no real email is available (i.e. a generated, non-working value will be provided). The
     * use of this option is discouraged and should only be used by clients which cannot handle the
     * absence of an email address value in the mentioned places. Optional. The default is False.
@@ -1705,55 +1426,28 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
     * order.
    * @opt_param bool showHiddenInvitations
    * Whether to include hidden invitations in the result. Optional. The default is False.
-   * @opt_param string syncToken
-   * Token obtained from the nextSyncToken field returned on the last page of results from the
-    * previous list request. It makes the result of this list request contain only entries that have
-    * changed since then. All events deleted since the previous list request will always be in the
-    * result set and it is not allowed to set showDeleted to False.
-  There are several query parameters
-    * that cannot be specified together with nextSyncToken to ensure consistency of the client state.
-    * These are:
-  - iCalUID
-  - orderBy
-  - privateExtendedProperty
-  - q
-  - sharedExtendedProperty
-  -
-    * timeMin
-  - timeMax
-  - updatedMin If the syncToken expires, the server will respond with a 410
-    * GONE response code and the client should clear its storage and perform a full synchronization
-    * without any syncToken.
-  Learn more about incremental synchronization.
-  Optional. The default is to
-    * return all entries.
    * @opt_param bool showDeleted
-   * Whether to include deleted events (with status equals "cancelled") in the result. Cancelled
+   * Whether to include deleted events (with 'status' equals 'cancelled') in the result. Cancelled
     * instances of recurring events (but not the underlying recurring event) will still be included if
-    * showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only
-    * single instances of deleted events (but not the underlying recurring events) are returned.
-    * Optional. The default is False.
+    * 'showDeleted' and 'singleEvents' are both False. If 'showDeleted' and 'singleEvents' are both
+    * True, only single instances of deleted events (but not the underlying recurring events) are
+    * returned. Optional. The default is False.
    * @opt_param string iCalUID
-   * Specifies event ID in the iCalendar format to be included in the response. Optional.
+   * Specifies iCalendar UID (iCalUID) of events to be included in the response. Optional.
    * @opt_param string updatedMin
-   * Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. When
-    * specified, entries deleted since this time will always be included regardless of showDeleted.
+   * Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by.
     * Optional. The default is not to filter by last modification time.
    * @opt_param bool singleEvents
    * Whether to expand recurring events into instances and only return single one-off events and
     * instances of recurring events, but not the underlying recurring events themselves. Optional. The
     * default is False.
-   * @opt_param string timeMax
-   * Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to
-    * filter by start time.
    * @opt_param bool alwaysIncludeEmail
-   * Whether to always include a value in the email field for the organizer, creator and attendees,
+   * Whether to always include a value in the "email" field for the organizer, creator and attendees,
     * even if no real email is available (i.e. a generated, non-working value will be provided). The
     * use of this option is discouraged and should only be used by clients which cannot handle the
     * absence of an email address value in the mentioned places. Optional. The default is False.
    * @opt_param int maxResults
-   * Maximum number of events returned on one result page. By default the value is 250 events. The
-    * page size can never be larger than 2500 events. Optional.
+   * Maximum number of events returned on one result page. Optional.
    * @opt_param string q
    * Free text search terms to find events that match these terms in any field, except for extended
     * properties. Optional.
@@ -1764,14 +1458,9 @@ class Google_Service_Calendar_Events_Resource extends Google_Service_Resource
     * filter by end time.
    * @opt_param string timeZone
    * Time zone used in the response. Optional. The default is the time zone of the calendar.
-   * @opt_param string privateExtendedProperty
-   * Extended properties constraint specified as propertyName=value. Matches only private properties.
-    * This parameter might be repeated multiple times to return events that match all given
-    * constraints.
-   * @opt_param string sharedExtendedProperty
-   * Extended properties constraint specified as propertyName=value. Matches only shared properties.
-    * This parameter might be repeated multiple times to return events that match all given
-    * constraints.
+   * @opt_param string timeMax
+   * Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to
+    * filter by start time.
    * @opt_param int maxAttendees
    * The maximum number of attendees to include in the response. If there are more than the specified
     * number of attendees, only the participant is returned. Optional.
@@ -1837,25 +1526,9 @@ class Google_Service_Calendar_Settings_Resource extends Google_Service_Resource
     return $this->call('get', array($params), "Google_Service_Calendar_Setting");
   }
   /**
-   * Returns all user settings for the authenticated user. (settings.listSettings)
+   * Returns all user settings for the authenticated user. (settings.list)
    *
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string pageToken
-   * Token specifying which result page to return. Optional.
-   * @opt_param int maxResults
-   * Maximum number of entries returned on one result page. By default the value is 100 entries. The
-    * page size can never be larger than 250 entries. Optional.
-   * @opt_param string syncToken
-   * Token obtained from the nextSyncToken field returned on the last page of results from the
-    * previous list request. It makes the result of this list request contain only entries that have
-    * changed since then.
-  If the syncToken expires, the server will respond with a 410 GONE response
-    * code and the client should clear its storage and perform a full synchronization without any
-    * syncToken.
-  Learn more about incremental synchronization.
-  Optional. The default is to return all
-    * entries.
    * @return Google_Service_Calendar_Settings
    */
   public function listSettings($optParams = array())
@@ -1863,35 +1536,6 @@ class Google_Service_Calendar_Settings_Resource extends Google_Service_Resource
     $params = array();
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_Calendar_Settings");
-  }
-  /**
-   * Watch for changes to Settings resources. (settings.watch)
-   *
-   * @param Google_Channel $postBody
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string pageToken
-   * Token specifying which result page to return. Optional.
-   * @opt_param int maxResults
-   * Maximum number of entries returned on one result page. By default the value is 100 entries. The
-    * page size can never be larger than 250 entries. Optional.
-   * @opt_param string syncToken
-   * Token obtained from the nextSyncToken field returned on the last page of results from the
-    * previous list request. It makes the result of this list request contain only entries that have
-    * changed since then.
-  If the syncToken expires, the server will respond with a 410 GONE response
-    * code and the client should clear its storage and perform a full synchronization without any
-    * syncToken.
-  Learn more about incremental synchronization.
-  Optional. The default is to return all
-    * entries.
-   * @return Google_Service_Calendar_Channel
-   */
-  public function watch(Google_Service_Calendar_Channel $postBody, $optParams = array())
-  {
-    $params = array('postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('watch', array($params), "Google_Service_Calendar_Channel");
   }
 }
 
@@ -1905,7 +1549,6 @@ class Google_Service_Calendar_Acl extends Google_Collection
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
-  public $nextSyncToken;
 
   public function setEtag($etag)
   {
@@ -1916,7 +1559,7 @@ class Google_Service_Calendar_Acl extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -1926,7 +1569,7 @@ class Google_Service_Calendar_Acl extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1936,7 +1579,7 @@ class Google_Service_Calendar_Acl extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -1946,16 +1589,7 @@ class Google_Service_Calendar_Acl extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
-  public function setNextSyncToken($nextSyncToken)
-  {
-    $this->nextSyncToken = $nextSyncToken;
-  }
-
-  public function getNextSyncToken()
-  {
-    return $this->nextSyncToken;
-  }
+  
 }
 
 class Google_Service_Calendar_AclRule extends Google_Model
@@ -1976,7 +1610,7 @@ class Google_Service_Calendar_AclRule extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -1986,7 +1620,7 @@ class Google_Service_Calendar_AclRule extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1996,7 +1630,7 @@ class Google_Service_Calendar_AclRule extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setRole($role)
   {
     $this->role = $role;
@@ -2006,7 +1640,7 @@ class Google_Service_Calendar_AclRule extends Google_Model
   {
     return $this->role;
   }
-
+  
   public function setScope(Google_Service_Calendar_AclRuleScope $scope)
   {
     $this->scope = $scope;
@@ -2016,6 +1650,7 @@ class Google_Service_Calendar_AclRule extends Google_Model
   {
     return $this->scope;
   }
+  
 }
 
 class Google_Service_Calendar_AclRuleScope extends Google_Model
@@ -2032,7 +1667,7 @@ class Google_Service_Calendar_AclRuleScope extends Google_Model
   {
     return $this->type;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -2042,6 +1677,7 @@ class Google_Service_Calendar_AclRuleScope extends Google_Model
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_Calendar_Calendar extends Google_Model
@@ -2063,7 +1699,7 @@ class Google_Service_Calendar_Calendar extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -2073,7 +1709,7 @@ class Google_Service_Calendar_Calendar extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2083,7 +1719,7 @@ class Google_Service_Calendar_Calendar extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2093,7 +1729,7 @@ class Google_Service_Calendar_Calendar extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setLocation($location)
   {
     $this->location = $location;
@@ -2103,7 +1739,7 @@ class Google_Service_Calendar_Calendar extends Google_Model
   {
     return $this->location;
   }
-
+  
   public function setSummary($summary)
   {
     $this->summary = $summary;
@@ -2113,7 +1749,7 @@ class Google_Service_Calendar_Calendar extends Google_Model
   {
     return $this->summary;
   }
-
+  
   public function setTimeZone($timeZone)
   {
     $this->timeZone = $timeZone;
@@ -2123,6 +1759,7 @@ class Google_Service_Calendar_Calendar extends Google_Model
   {
     return $this->timeZone;
   }
+  
 }
 
 class Google_Service_Calendar_CalendarList extends Google_Collection
@@ -2132,7 +1769,6 @@ class Google_Service_Calendar_CalendarList extends Google_Collection
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
-  public $nextSyncToken;
 
   public function setEtag($etag)
   {
@@ -2143,7 +1779,7 @@ class Google_Service_Calendar_CalendarList extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -2153,7 +1789,7 @@ class Google_Service_Calendar_CalendarList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2163,7 +1799,7 @@ class Google_Service_Calendar_CalendarList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -2173,16 +1809,7 @@ class Google_Service_Calendar_CalendarList extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
-  public function setNextSyncToken($nextSyncToken)
-  {
-    $this->nextSyncToken = $nextSyncToken;
-  }
-
-  public function getNextSyncToken()
-  {
-    return $this->nextSyncToken;
-  }
+  
 }
 
 class Google_Service_Calendar_CalendarListEntry extends Google_Collection
@@ -2192,7 +1819,6 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   public $colorId;
   protected $defaultRemindersType = 'Google_Service_Calendar_EventReminder';
   protected $defaultRemindersDataType = 'array';
-  public $deleted;
   public $description;
   public $etag;
   public $foregroundColor;
@@ -2200,8 +1826,6 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   public $id;
   public $kind;
   public $location;
-  protected $notificationSettingsType = 'Google_Service_Calendar_CalendarListEntryNotificationSettings';
-  protected $notificationSettingsDataType = '';
   public $primary;
   public $selected;
   public $summary;
@@ -2217,7 +1841,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->accessRole;
   }
-
+  
   public function setBackgroundColor($backgroundColor)
   {
     $this->backgroundColor = $backgroundColor;
@@ -2227,7 +1851,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->backgroundColor;
   }
-
+  
   public function setColorId($colorId)
   {
     $this->colorId = $colorId;
@@ -2237,7 +1861,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->colorId;
   }
-
+  
   public function setDefaultReminders($defaultReminders)
   {
     $this->defaultReminders = $defaultReminders;
@@ -2247,17 +1871,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->defaultReminders;
   }
-
-  public function setDeleted($deleted)
-  {
-    $this->deleted = $deleted;
-  }
-
-  public function getDeleted()
-  {
-    return $this->deleted;
-  }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -2267,7 +1881,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->description;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -2277,7 +1891,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setForegroundColor($foregroundColor)
   {
     $this->foregroundColor = $foregroundColor;
@@ -2287,7 +1901,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->foregroundColor;
   }
-
+  
   public function setHidden($hidden)
   {
     $this->hidden = $hidden;
@@ -2297,7 +1911,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->hidden;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2307,7 +1921,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2317,7 +1931,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setLocation($location)
   {
     $this->location = $location;
@@ -2327,17 +1941,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->location;
   }
-
-  public function setNotificationSettings(Google_Service_Calendar_CalendarListEntryNotificationSettings $notificationSettings)
-  {
-    $this->notificationSettings = $notificationSettings;
-  }
-
-  public function getNotificationSettings()
-  {
-    return $this->notificationSettings;
-  }
-
+  
   public function setPrimary($primary)
   {
     $this->primary = $primary;
@@ -2347,7 +1951,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->primary;
   }
-
+  
   public function setSelected($selected)
   {
     $this->selected = $selected;
@@ -2357,7 +1961,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->selected;
   }
-
+  
   public function setSummary($summary)
   {
     $this->summary = $summary;
@@ -2367,7 +1971,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->summary;
   }
-
+  
   public function setSummaryOverride($summaryOverride)
   {
     $this->summaryOverride = $summaryOverride;
@@ -2377,7 +1981,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->summaryOverride;
   }
-
+  
   public function setTimeZone($timeZone)
   {
     $this->timeZone = $timeZone;
@@ -2387,48 +1991,7 @@ class Google_Service_Calendar_CalendarListEntry extends Google_Collection
   {
     return $this->timeZone;
   }
-}
-
-class Google_Service_Calendar_CalendarListEntryNotificationSettings extends Google_Collection
-{
-  protected $notificationsType = 'Google_Service_Calendar_CalendarNotification';
-  protected $notificationsDataType = 'array';
-
-  public function setNotifications($notifications)
-  {
-    $this->notifications = $notifications;
-  }
-
-  public function getNotifications()
-  {
-    return $this->notifications;
-  }
-}
-
-class Google_Service_Calendar_CalendarNotification extends Google_Model
-{
-  public $method;
-  public $type;
-
-  public function setMethod($method)
-  {
-    $this->method = $method;
-  }
-
-  public function getMethod()
-  {
-    return $this->method;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
+  
 }
 
 class Google_Service_Calendar_Channel extends Google_Model
@@ -2453,7 +2016,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->address;
   }
-
+  
   public function setExpiration($expiration)
   {
     $this->expiration = $expiration;
@@ -2463,7 +2026,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->expiration;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2473,7 +2036,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2483,7 +2046,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setParams($params)
   {
     $this->params = $params;
@@ -2493,7 +2056,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->params;
   }
-
+  
   public function setPayload($payload)
   {
     $this->payload = $payload;
@@ -2503,7 +2066,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->payload;
   }
-
+  
   public function setResourceId($resourceId)
   {
     $this->resourceId = $resourceId;
@@ -2513,7 +2076,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->resourceId;
   }
-
+  
   public function setResourceUri($resourceUri)
   {
     $this->resourceUri = $resourceUri;
@@ -2523,7 +2086,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->resourceUri;
   }
-
+  
   public function setToken($token)
   {
     $this->token = $token;
@@ -2533,7 +2096,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->token;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -2543,6 +2106,7 @@ class Google_Service_Calendar_Channel extends Google_Model
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Calendar_ColorDefinition extends Google_Model
@@ -2559,7 +2123,7 @@ class Google_Service_Calendar_ColorDefinition extends Google_Model
   {
     return $this->background;
   }
-
+  
   public function setForeground($foreground)
   {
     $this->foreground = $foreground;
@@ -2569,6 +2133,7 @@ class Google_Service_Calendar_ColorDefinition extends Google_Model
   {
     return $this->foreground;
   }
+  
 }
 
 class Google_Service_Calendar_Colors extends Google_Model
@@ -2589,7 +2154,7 @@ class Google_Service_Calendar_Colors extends Google_Model
   {
     return $this->calendar;
   }
-
+  
   public function setEvent($event)
   {
     $this->event = $event;
@@ -2599,7 +2164,7 @@ class Google_Service_Calendar_Colors extends Google_Model
   {
     return $this->event;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2609,7 +2174,7 @@ class Google_Service_Calendar_Colors extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -2619,6 +2184,7 @@ class Google_Service_Calendar_Colors extends Google_Model
   {
     return $this->updated;
   }
+  
 }
 
 class Google_Service_Calendar_Error extends Google_Model
@@ -2635,7 +2201,7 @@ class Google_Service_Calendar_Error extends Google_Model
   {
     return $this->domain;
   }
-
+  
   public function setReason($reason)
   {
     $this->reason = $reason;
@@ -2645,6 +2211,7 @@ class Google_Service_Calendar_Error extends Google_Model
   {
     return $this->reason;
   }
+  
 }
 
 class Google_Service_Calendar_Event extends Google_Collection
@@ -2705,7 +2272,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->anyoneCanAddSelf;
   }
-
+  
   public function setAttendees($attendees)
   {
     $this->attendees = $attendees;
@@ -2715,7 +2282,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->attendees;
   }
-
+  
   public function setAttendeesOmitted($attendeesOmitted)
   {
     $this->attendeesOmitted = $attendeesOmitted;
@@ -2725,7 +2292,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->attendeesOmitted;
   }
-
+  
   public function setColorId($colorId)
   {
     $this->colorId = $colorId;
@@ -2735,7 +2302,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->colorId;
   }
-
+  
   public function setCreated($created)
   {
     $this->created = $created;
@@ -2745,7 +2312,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->created;
   }
-
+  
   public function setCreator(Google_Service_Calendar_EventCreator $creator)
   {
     $this->creator = $creator;
@@ -2755,7 +2322,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->creator;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -2765,7 +2332,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->description;
   }
-
+  
   public function setEnd(Google_Service_Calendar_EventDateTime $end)
   {
     $this->end = $end;
@@ -2775,7 +2342,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->end;
   }
-
+  
   public function setEndTimeUnspecified($endTimeUnspecified)
   {
     $this->endTimeUnspecified = $endTimeUnspecified;
@@ -2785,7 +2352,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->endTimeUnspecified;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -2795,7 +2362,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setExtendedProperties(Google_Service_Calendar_EventExtendedProperties $extendedProperties)
   {
     $this->extendedProperties = $extendedProperties;
@@ -2805,7 +2372,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->extendedProperties;
   }
-
+  
   public function setGadget(Google_Service_Calendar_EventGadget $gadget)
   {
     $this->gadget = $gadget;
@@ -2815,7 +2382,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->gadget;
   }
-
+  
   public function setGuestsCanInviteOthers($guestsCanInviteOthers)
   {
     $this->guestsCanInviteOthers = $guestsCanInviteOthers;
@@ -2825,7 +2392,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->guestsCanInviteOthers;
   }
-
+  
   public function setGuestsCanModify($guestsCanModify)
   {
     $this->guestsCanModify = $guestsCanModify;
@@ -2835,7 +2402,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->guestsCanModify;
   }
-
+  
   public function setGuestsCanSeeOtherGuests($guestsCanSeeOtherGuests)
   {
     $this->guestsCanSeeOtherGuests = $guestsCanSeeOtherGuests;
@@ -2845,7 +2412,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->guestsCanSeeOtherGuests;
   }
-
+  
   public function setHangoutLink($hangoutLink)
   {
     $this->hangoutLink = $hangoutLink;
@@ -2855,7 +2422,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->hangoutLink;
   }
-
+  
   public function setHtmlLink($htmlLink)
   {
     $this->htmlLink = $htmlLink;
@@ -2865,7 +2432,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->htmlLink;
   }
-
+  
   public function setICalUID($iCalUID)
   {
     $this->iCalUID = $iCalUID;
@@ -2875,7 +2442,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->iCalUID;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2885,7 +2452,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2895,7 +2462,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setLocation($location)
   {
     $this->location = $location;
@@ -2905,7 +2472,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->location;
   }
-
+  
   public function setLocked($locked)
   {
     $this->locked = $locked;
@@ -2915,7 +2482,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->locked;
   }
-
+  
   public function setOrganizer(Google_Service_Calendar_EventOrganizer $organizer)
   {
     $this->organizer = $organizer;
@@ -2925,7 +2492,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->organizer;
   }
-
+  
   public function setOriginalStartTime(Google_Service_Calendar_EventDateTime $originalStartTime)
   {
     $this->originalStartTime = $originalStartTime;
@@ -2935,7 +2502,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->originalStartTime;
   }
-
+  
   public function setPrivateCopy($privateCopy)
   {
     $this->privateCopy = $privateCopy;
@@ -2945,7 +2512,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->privateCopy;
   }
-
+  
   public function setRecurrence($recurrence)
   {
     $this->recurrence = $recurrence;
@@ -2955,7 +2522,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->recurrence;
   }
-
+  
   public function setRecurringEventId($recurringEventId)
   {
     $this->recurringEventId = $recurringEventId;
@@ -2965,7 +2532,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->recurringEventId;
   }
-
+  
   public function setReminders(Google_Service_Calendar_EventReminders $reminders)
   {
     $this->reminders = $reminders;
@@ -2975,7 +2542,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->reminders;
   }
-
+  
   public function setSequence($sequence)
   {
     $this->sequence = $sequence;
@@ -2985,7 +2552,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->sequence;
   }
-
+  
   public function setSource(Google_Service_Calendar_EventSource $source)
   {
     $this->source = $source;
@@ -2995,7 +2562,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->source;
   }
-
+  
   public function setStart(Google_Service_Calendar_EventDateTime $start)
   {
     $this->start = $start;
@@ -3005,7 +2572,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->start;
   }
-
+  
   public function setStatus($status)
   {
     $this->status = $status;
@@ -3015,7 +2582,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->status;
   }
-
+  
   public function setSummary($summary)
   {
     $this->summary = $summary;
@@ -3025,7 +2592,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->summary;
   }
-
+  
   public function setTransparency($transparency)
   {
     $this->transparency = $transparency;
@@ -3035,7 +2602,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->transparency;
   }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -3045,7 +2612,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->updated;
   }
-
+  
   public function setVisibility($visibility)
   {
     $this->visibility = $visibility;
@@ -3055,6 +2622,7 @@ class Google_Service_Calendar_Event extends Google_Collection
   {
     return $this->visibility;
   }
+  
 }
 
 class Google_Service_Calendar_EventAttendee extends Google_Model
@@ -3079,7 +2647,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->additionalGuests;
   }
-
+  
   public function setComment($comment)
   {
     $this->comment = $comment;
@@ -3089,7 +2657,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->comment;
   }
-
+  
   public function setDisplayName($displayName)
   {
     $this->displayName = $displayName;
@@ -3099,7 +2667,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setEmail($email)
   {
     $this->email = $email;
@@ -3109,7 +2677,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->email;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -3119,7 +2687,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setOptional($optional)
   {
     $this->optional = $optional;
@@ -3129,7 +2697,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->optional;
   }
-
+  
   public function setOrganizer($organizer)
   {
     $this->organizer = $organizer;
@@ -3139,7 +2707,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->organizer;
   }
-
+  
   public function setResource($resource)
   {
     $this->resource = $resource;
@@ -3149,7 +2717,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->resource;
   }
-
+  
   public function setResponseStatus($responseStatus)
   {
     $this->responseStatus = $responseStatus;
@@ -3159,7 +2727,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->responseStatus;
   }
-
+  
   public function setSelf($self)
   {
     $this->self = $self;
@@ -3169,6 +2737,7 @@ class Google_Service_Calendar_EventAttendee extends Google_Model
   {
     return $this->self;
   }
+  
 }
 
 class Google_Service_Calendar_EventCreator extends Google_Model
@@ -3187,7 +2756,7 @@ class Google_Service_Calendar_EventCreator extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setEmail($email)
   {
     $this->email = $email;
@@ -3197,7 +2766,7 @@ class Google_Service_Calendar_EventCreator extends Google_Model
   {
     return $this->email;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -3207,7 +2776,7 @@ class Google_Service_Calendar_EventCreator extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setSelf($self)
   {
     $this->self = $self;
@@ -3217,6 +2786,7 @@ class Google_Service_Calendar_EventCreator extends Google_Model
   {
     return $this->self;
   }
+  
 }
 
 class Google_Service_Calendar_EventDateTime extends Google_Model
@@ -3234,7 +2804,7 @@ class Google_Service_Calendar_EventDateTime extends Google_Model
   {
     return $this->date;
   }
-
+  
   public function setDateTime($dateTime)
   {
     $this->dateTime = $dateTime;
@@ -3244,7 +2814,7 @@ class Google_Service_Calendar_EventDateTime extends Google_Model
   {
     return $this->dateTime;
   }
-
+  
   public function setTimeZone($timeZone)
   {
     $this->timeZone = $timeZone;
@@ -3254,6 +2824,7 @@ class Google_Service_Calendar_EventDateTime extends Google_Model
   {
     return $this->timeZone;
   }
+  
 }
 
 class Google_Service_Calendar_EventExtendedProperties extends Google_Model
@@ -3270,7 +2841,7 @@ class Google_Service_Calendar_EventExtendedProperties extends Google_Model
   {
     return $this->private;
   }
-
+  
   public function setShared($shared)
   {
     $this->shared = $shared;
@@ -3280,6 +2851,7 @@ class Google_Service_Calendar_EventExtendedProperties extends Google_Model
   {
     return $this->shared;
   }
+  
 }
 
 class Google_Service_Calendar_EventGadget extends Google_Model
@@ -3302,7 +2874,7 @@ class Google_Service_Calendar_EventGadget extends Google_Model
   {
     return $this->display;
   }
-
+  
   public function setHeight($height)
   {
     $this->height = $height;
@@ -3312,7 +2884,7 @@ class Google_Service_Calendar_EventGadget extends Google_Model
   {
     return $this->height;
   }
-
+  
   public function setIconLink($iconLink)
   {
     $this->iconLink = $iconLink;
@@ -3322,7 +2894,7 @@ class Google_Service_Calendar_EventGadget extends Google_Model
   {
     return $this->iconLink;
   }
-
+  
   public function setLink($link)
   {
     $this->link = $link;
@@ -3332,7 +2904,7 @@ class Google_Service_Calendar_EventGadget extends Google_Model
   {
     return $this->link;
   }
-
+  
   public function setPreferences($preferences)
   {
     $this->preferences = $preferences;
@@ -3342,7 +2914,7 @@ class Google_Service_Calendar_EventGadget extends Google_Model
   {
     return $this->preferences;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -3352,7 +2924,7 @@ class Google_Service_Calendar_EventGadget extends Google_Model
   {
     return $this->title;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -3362,7 +2934,7 @@ class Google_Service_Calendar_EventGadget extends Google_Model
   {
     return $this->type;
   }
-
+  
   public function setWidth($width)
   {
     $this->width = $width;
@@ -3372,6 +2944,7 @@ class Google_Service_Calendar_EventGadget extends Google_Model
   {
     return $this->width;
   }
+  
 }
 
 class Google_Service_Calendar_EventOrganizer extends Google_Model
@@ -3390,7 +2963,7 @@ class Google_Service_Calendar_EventOrganizer extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setEmail($email)
   {
     $this->email = $email;
@@ -3400,7 +2973,7 @@ class Google_Service_Calendar_EventOrganizer extends Google_Model
   {
     return $this->email;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -3410,7 +2983,7 @@ class Google_Service_Calendar_EventOrganizer extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setSelf($self)
   {
     $this->self = $self;
@@ -3420,6 +2993,7 @@ class Google_Service_Calendar_EventOrganizer extends Google_Model
   {
     return $this->self;
   }
+  
 }
 
 class Google_Service_Calendar_EventReminder extends Google_Model
@@ -3436,7 +3010,7 @@ class Google_Service_Calendar_EventReminder extends Google_Model
   {
     return $this->method;
   }
-
+  
   public function setMinutes($minutes)
   {
     $this->minutes = $minutes;
@@ -3446,6 +3020,7 @@ class Google_Service_Calendar_EventReminder extends Google_Model
   {
     return $this->minutes;
   }
+  
 }
 
 class Google_Service_Calendar_EventReminders extends Google_Collection
@@ -3463,7 +3038,7 @@ class Google_Service_Calendar_EventReminders extends Google_Collection
   {
     return $this->overrides;
   }
-
+  
   public function setUseDefault($useDefault)
   {
     $this->useDefault = $useDefault;
@@ -3473,6 +3048,7 @@ class Google_Service_Calendar_EventReminders extends Google_Collection
   {
     return $this->useDefault;
   }
+  
 }
 
 class Google_Service_Calendar_EventSource extends Google_Model
@@ -3489,7 +3065,7 @@ class Google_Service_Calendar_EventSource extends Google_Model
   {
     return $this->title;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -3499,6 +3075,7 @@ class Google_Service_Calendar_EventSource extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Calendar_Events extends Google_Collection
@@ -3512,7 +3089,6 @@ class Google_Service_Calendar_Events extends Google_Collection
   protected $itemsDataType = 'array';
   public $kind;
   public $nextPageToken;
-  public $nextSyncToken;
   public $summary;
   public $timeZone;
   public $updated;
@@ -3526,7 +3102,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->accessRole;
   }
-
+  
   public function setDefaultReminders($defaultReminders)
   {
     $this->defaultReminders = $defaultReminders;
@@ -3536,7 +3112,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->defaultReminders;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -3546,7 +3122,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->description;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -3556,7 +3132,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -3566,7 +3142,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3576,7 +3152,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -3586,17 +3162,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
-  public function setNextSyncToken($nextSyncToken)
-  {
-    $this->nextSyncToken = $nextSyncToken;
-  }
-
-  public function getNextSyncToken()
-  {
-    return $this->nextSyncToken;
-  }
-
+  
   public function setSummary($summary)
   {
     $this->summary = $summary;
@@ -3606,7 +3172,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->summary;
   }
-
+  
   public function setTimeZone($timeZone)
   {
     $this->timeZone = $timeZone;
@@ -3616,7 +3182,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->timeZone;
   }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -3626,6 +3192,7 @@ class Google_Service_Calendar_Events extends Google_Collection
   {
     return $this->updated;
   }
+  
 }
 
 class Google_Service_Calendar_FreeBusyCalendar extends Google_Collection
@@ -3644,7 +3211,7 @@ class Google_Service_Calendar_FreeBusyCalendar extends Google_Collection
   {
     return $this->busy;
   }
-
+  
   public function setErrors($errors)
   {
     $this->errors = $errors;
@@ -3654,6 +3221,7 @@ class Google_Service_Calendar_FreeBusyCalendar extends Google_Collection
   {
     return $this->errors;
   }
+  
 }
 
 class Google_Service_Calendar_FreeBusyGroup extends Google_Collection
@@ -3671,7 +3239,7 @@ class Google_Service_Calendar_FreeBusyGroup extends Google_Collection
   {
     return $this->calendars;
   }
-
+  
   public function setErrors($errors)
   {
     $this->errors = $errors;
@@ -3681,6 +3249,7 @@ class Google_Service_Calendar_FreeBusyGroup extends Google_Collection
   {
     return $this->errors;
   }
+  
 }
 
 class Google_Service_Calendar_FreeBusyRequest extends Google_Collection
@@ -3702,7 +3271,7 @@ class Google_Service_Calendar_FreeBusyRequest extends Google_Collection
   {
     return $this->calendarExpansionMax;
   }
-
+  
   public function setGroupExpansionMax($groupExpansionMax)
   {
     $this->groupExpansionMax = $groupExpansionMax;
@@ -3712,7 +3281,7 @@ class Google_Service_Calendar_FreeBusyRequest extends Google_Collection
   {
     return $this->groupExpansionMax;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -3722,7 +3291,7 @@ class Google_Service_Calendar_FreeBusyRequest extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setTimeMax($timeMax)
   {
     $this->timeMax = $timeMax;
@@ -3732,7 +3301,7 @@ class Google_Service_Calendar_FreeBusyRequest extends Google_Collection
   {
     return $this->timeMax;
   }
-
+  
   public function setTimeMin($timeMin)
   {
     $this->timeMin = $timeMin;
@@ -3742,7 +3311,7 @@ class Google_Service_Calendar_FreeBusyRequest extends Google_Collection
   {
     return $this->timeMin;
   }
-
+  
   public function setTimeZone($timeZone)
   {
     $this->timeZone = $timeZone;
@@ -3752,6 +3321,7 @@ class Google_Service_Calendar_FreeBusyRequest extends Google_Collection
   {
     return $this->timeZone;
   }
+  
 }
 
 class Google_Service_Calendar_FreeBusyRequestItem extends Google_Model
@@ -3767,6 +3337,7 @@ class Google_Service_Calendar_FreeBusyRequestItem extends Google_Model
   {
     return $this->id;
   }
+  
 }
 
 class Google_Service_Calendar_FreeBusyResponse extends Google_Model
@@ -3788,7 +3359,7 @@ class Google_Service_Calendar_FreeBusyResponse extends Google_Model
   {
     return $this->calendars;
   }
-
+  
   public function setGroups($groups)
   {
     $this->groups = $groups;
@@ -3798,7 +3369,7 @@ class Google_Service_Calendar_FreeBusyResponse extends Google_Model
   {
     return $this->groups;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3808,7 +3379,7 @@ class Google_Service_Calendar_FreeBusyResponse extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setTimeMax($timeMax)
   {
     $this->timeMax = $timeMax;
@@ -3818,7 +3389,7 @@ class Google_Service_Calendar_FreeBusyResponse extends Google_Model
   {
     return $this->timeMax;
   }
-
+  
   public function setTimeMin($timeMin)
   {
     $this->timeMin = $timeMin;
@@ -3828,6 +3399,7 @@ class Google_Service_Calendar_FreeBusyResponse extends Google_Model
   {
     return $this->timeMin;
   }
+  
 }
 
 class Google_Service_Calendar_Setting extends Google_Model
@@ -3846,7 +3418,7 @@ class Google_Service_Calendar_Setting extends Google_Model
   {
     return $this->etag;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -3856,7 +3428,7 @@ class Google_Service_Calendar_Setting extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3866,7 +3438,7 @@ class Google_Service_Calendar_Setting extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -3876,6 +3448,7 @@ class Google_Service_Calendar_Setting extends Google_Model
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_Calendar_Settings extends Google_Collection
@@ -3884,8 +3457,6 @@ class Google_Service_Calendar_Settings extends Google_Collection
   protected $itemsType = 'Google_Service_Calendar_Setting';
   protected $itemsDataType = 'array';
   public $kind;
-  public $nextPageToken;
-  public $nextSyncToken;
 
   public function setEtag($etag)
   {
@@ -3896,7 +3467,7 @@ class Google_Service_Calendar_Settings extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -3906,7 +3477,7 @@ class Google_Service_Calendar_Settings extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3916,26 +3487,7 @@ class Google_Service_Calendar_Settings extends Google_Collection
   {
     return $this->kind;
   }
-
-  public function setNextPageToken($nextPageToken)
-  {
-    $this->nextPageToken = $nextPageToken;
-  }
-
-  public function getNextPageToken()
-  {
-    return $this->nextPageToken;
-  }
-
-  public function setNextSyncToken($nextSyncToken)
-  {
-    $this->nextSyncToken = $nextSyncToken;
-  }
-
-  public function getNextSyncToken()
-  {
-    return $this->nextSyncToken;
-  }
+  
 }
 
 class Google_Service_Calendar_TimePeriod extends Google_Model
@@ -3952,7 +3504,7 @@ class Google_Service_Calendar_TimePeriod extends Google_Model
   {
     return $this->end;
   }
-
+  
   public function setStart($start)
   {
     $this->start = $start;
@@ -3962,4 +3514,5 @@ class Google_Service_Calendar_TimePeriod extends Google_Model
   {
     return $this->start;
   }
+  
 }

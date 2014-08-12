@@ -32,8 +32,6 @@
 class Google_Service_Freebase extends Google_Service
 {
 
-
-
   private $base_methods;
 
   /**
@@ -46,152 +44,159 @@ class Google_Service_Freebase extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'freebase/v1/';
     $this->version = 'v1';
+    
     $this->serviceName = 'freebase';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->base_methods = new Google_Service_Resource(
         $this,
         $this->serviceName,
         '',
         array(
-          'methods' => array(
-            'reconcile' => array(
-              'path' => 'reconcile',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'lang' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'confidence' => array(
-                  'location' => 'query',
-                  'type' => 'number',
-                ),
-                'name' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'kind' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'prop' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'limit' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
+        'methods' => array(
+              "reconcile" => array(
+                'path' => "reconcile",
+                'httpMethod' => "GET",
+                'parameters' => array(
+                    "lang" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "confidence" => array(
+                      "location" => "query",
+                      "type" => "number",
+                  ),
+                    "name" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "kind" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "prop" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "limit" => array(
+                      "location" => "query",
+                      "type" => "integer",
+                  ),
+                  ),
+              ),"search" => array(
+                'path' => "search",
+                'httpMethod' => "GET",
+                'parameters' => array(
+                    "domain" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "help" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "query" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "scoring" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "cursor" => array(
+                      "location" => "query",
+                      "type" => "integer",
+                  ),
+                    "prefixed" => array(
+                      "location" => "query",
+                      "type" => "boolean",
+                  ),
+                    "exact" => array(
+                      "location" => "query",
+                      "type" => "boolean",
+                  ),
+                    "mid" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "encode" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "type" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "as_of_time" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "stemmed" => array(
+                      "location" => "query",
+                      "type" => "boolean",
+                  ),
+                    "format" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "spell" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "with" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "lang" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "indent" => array(
+                      "location" => "query",
+                      "type" => "boolean",
+                  ),
+                    "filter" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "callback" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "without" => array(
+                      "location" => "query",
+                      "type" => "string",
+                      'repeated' => true,
+                  ),
+                    "limit" => array(
+                      "location" => "query",
+                      "type" => "integer",
+                  ),
+                    "output" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "mql_output" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                  ),
               ),
-            ),'search' => array(
-              'path' => 'search',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'domain' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'help' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'query' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'scoring' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'cursor' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'prefixed' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'exact' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'mid' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'encode' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'type' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'as_of_time' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'stemmed' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'format' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'spell' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'with' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'lang' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'indent' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'filter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'callback' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'without' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'limit' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'output' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'mql_output' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-              ),
-            ),
-          )
+            )
         )
     );
   }
@@ -303,7 +308,7 @@ class Google_Service_Freebase_ReconcileCandidate extends Google_Model
   {
     return $this->confidence;
   }
-
+  
   public function setLang($lang)
   {
     $this->lang = $lang;
@@ -313,7 +318,7 @@ class Google_Service_Freebase_ReconcileCandidate extends Google_Model
   {
     return $this->lang;
   }
-
+  
   public function setMid($mid)
   {
     $this->mid = $mid;
@@ -323,7 +328,7 @@ class Google_Service_Freebase_ReconcileCandidate extends Google_Model
   {
     return $this->mid;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -333,7 +338,7 @@ class Google_Service_Freebase_ReconcileCandidate extends Google_Model
   {
     return $this->name;
   }
-
+  
   public function setNotable(Google_Service_Freebase_ReconcileCandidateNotable $notable)
   {
     $this->notable = $notable;
@@ -343,6 +348,7 @@ class Google_Service_Freebase_ReconcileCandidate extends Google_Model
   {
     return $this->notable;
   }
+  
 }
 
 class Google_Service_Freebase_ReconcileCandidateNotable extends Google_Model
@@ -359,7 +365,7 @@ class Google_Service_Freebase_ReconcileCandidateNotable extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -369,6 +375,7 @@ class Google_Service_Freebase_ReconcileCandidateNotable extends Google_Model
   {
     return $this->name;
   }
+  
 }
 
 class Google_Service_Freebase_ReconcileGet extends Google_Collection
@@ -391,7 +398,7 @@ class Google_Service_Freebase_ReconcileGet extends Google_Collection
   {
     return $this->candidate;
   }
-
+  
   public function setCosts(Google_Service_Freebase_ReconcileGetCosts $costs)
   {
     $this->costs = $costs;
@@ -401,7 +408,7 @@ class Google_Service_Freebase_ReconcileGet extends Google_Collection
   {
     return $this->costs;
   }
-
+  
   public function setMatch(Google_Service_Freebase_ReconcileCandidate $match)
   {
     $this->match = $match;
@@ -411,7 +418,7 @@ class Google_Service_Freebase_ReconcileGet extends Google_Collection
   {
     return $this->match;
   }
-
+  
   public function setWarning($warning)
   {
     $this->warning = $warning;
@@ -421,6 +428,7 @@ class Google_Service_Freebase_ReconcileGet extends Google_Collection
   {
     return $this->warning;
   }
+  
 }
 
 class Google_Service_Freebase_ReconcileGetCosts extends Google_Model
@@ -437,7 +445,7 @@ class Google_Service_Freebase_ReconcileGetCosts extends Google_Model
   {
     return $this->hits;
   }
-
+  
   public function setMs($ms)
   {
     $this->ms = $ms;
@@ -447,6 +455,7 @@ class Google_Service_Freebase_ReconcileGetCosts extends Google_Model
   {
     return $this->ms;
   }
+  
 }
 
 class Google_Service_Freebase_ReconcileGetWarning extends Google_Model
@@ -464,7 +473,7 @@ class Google_Service_Freebase_ReconcileGetWarning extends Google_Model
   {
     return $this->location;
   }
-
+  
   public function setMessage($message)
   {
     $this->message = $message;
@@ -474,7 +483,7 @@ class Google_Service_Freebase_ReconcileGetWarning extends Google_Model
   {
     return $this->message;
   }
-
+  
   public function setReason($reason)
   {
     $this->reason = $reason;
@@ -484,4 +493,5 @@ class Google_Service_Freebase_ReconcileGetWarning extends Google_Model
   {
     return $this->reason;
   }
+  
 }

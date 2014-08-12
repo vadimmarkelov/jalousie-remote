@@ -31,8 +31,6 @@
  */
 class Google_Service_GroupsMigration extends Google_Service
 {
-
-
   public $archive;
   
 
@@ -46,27 +44,34 @@ class Google_Service_GroupsMigration extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'groups/v1/groups/';
     $this->version = 'v1';
+    
     $this->serviceName = 'groupsmigration';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->archive = new Google_Service_GroupsMigration_Archive_Resource(
         $this,
         $this->serviceName,
         'archive',
         array(
-          'methods' => array(
-            'insert' => array(
-              'path' => '{groupId}/archive',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'groupId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "insert" => array(
+            'path' => "{groupId}/archive",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "groupId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -116,7 +121,7 @@ class Google_Service_GroupsMigration_Groups extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setResponseCode($responseCode)
   {
     $this->responseCode = $responseCode;
@@ -126,4 +131,5 @@ class Google_Service_GroupsMigration_Groups extends Google_Model
   {
     return $this->responseCode;
   }
+  
 }

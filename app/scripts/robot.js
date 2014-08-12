@@ -1,5 +1,5 @@
 function Log(commandCount){
-
+    'use strict';
     var _URL='cmd?command=getlog'+(commandCount?('&count='+commandCount):'');
 
     var _request;
@@ -41,15 +41,15 @@ function Log(commandCount){
 // MIT license
  
 (function() {
+  'use strict';
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
-                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
     }
  
-    if (!window.requestAnimationFrame)
+    if (!window.requestAnimationFrame) {
         window.requestAnimationFrame = function(callback, element) {
             var currTime = new Date().getTime();
             var timeToCall = Math.max(0, 16 - (currTime - lastTime));
@@ -58,14 +58,17 @@ function Log(commandCount){
             lastTime = currTime + timeToCall;
             return id;
         };
+      }
  
-    if (!window.cancelAnimationFrame)
+    if (!window.cancelAnimationFrame) {
         window.cancelAnimationFrame = function(id) {
             clearTimeout(id);
         };
+      }
 }());
 
 $(function(){
+  'use strict';
   var TheLog= new Log(1);
 
   var tickIndicator=$('.progress .progress-bar');
@@ -77,7 +80,7 @@ $(function(){
     pageHasBeenActive=true;
     requestAnimationFrame(AFhandler);
   };
-  AFhandler();
+  AFhandler.call();
 
   var updateTick=function(){
     if(!pageHasBeenActive){
@@ -87,7 +90,7 @@ $(function(){
     timer+=5;
     tickIndicator.css('width',timer+'%');
     tickIndicator.attr('aria-valuenow',timer);
-    if(timer>=100) timer=0,update();
+    if(timer>=100) {timer=0; update();}
   };
   
   var update=function(){
@@ -102,7 +105,7 @@ $(function(){
             $('body').css('background-color', 'green');
             break;
 
-        };
+        }
         $('.user').html(data[0].user);
     })
     .fail(function(){

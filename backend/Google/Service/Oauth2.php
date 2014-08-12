@@ -31,15 +31,6 @@
  */
 class Google_Service_Oauth2 extends Google_Service
 {
-  /** Know your basic profile info and list of people in your circles.. */
-  const PLUS_LOGIN = "https://www.googleapis.com/auth/plus.login";
-  /** Know who you are on Google. */
-  const PLUS_ME = "https://www.googleapis.com/auth/plus.me";
-  /** View your email address. */
-  const USERINFO_EMAIL = "https://www.googleapis.com/auth/userinfo.email";
-  /** View your basic profile info. */
-  const USERINFO_PROFILE = "https://www.googleapis.com/auth/userinfo.profile";
-
   public $userinfo;
   public $userinfo_v2_me;
   private $base_methods;
@@ -54,57 +45,71 @@ class Google_Service_Oauth2 extends Google_Service
     parent::__construct($client);
     $this->servicePath = '';
     $this->version = 'v2';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/plus.me"
+    );
+    
     $this->serviceName = 'oauth2';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->userinfo = new Google_Service_Oauth2_Userinfo_Resource(
         $this,
         $this->serviceName,
         'userinfo',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'oauth2/v2/userinfo',
-              'httpMethod' => 'GET',
-              'parameters' => array(),
-            ),
-          )
+    'methods' => array(
+          "get" => array(
+            'path' => "oauth2/v2/userinfo",
+            'httpMethod' => "GET",
+            'parameters' => array(  ),
+          ),
         )
+    )
     );
     $this->userinfo_v2_me = new Google_Service_Oauth2_UserinfoV2Me_Resource(
         $this,
         $this->serviceName,
         'me',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'userinfo/v2/me',
-              'httpMethod' => 'GET',
-              'parameters' => array(),
-            ),
-          )
+    'methods' => array(
+          "get" => array(
+            'path' => "userinfo/v2/me",
+            'httpMethod' => "GET",
+            'parameters' => array(  ),
+          ),
         )
+    )
     );
     $this->base_methods = new Google_Service_Resource(
         $this,
         $this->serviceName,
         '',
         array(
-          'methods' => array(
-            'tokeninfo' => array(
-              'path' => 'oauth2/v2/tokeninfo',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'access_token' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'id_token' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
+        'methods' => array(
+              "tokeninfo" => array(
+                'path' => "oauth2/v2/tokeninfo",
+                'httpMethod' => "POST",
+                'parameters' => array(
+                    "access_token" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                    "id_token" => array(
+                      "location" => "query",
+                      "type" => "string",
+                  ),
+                  ),
               ),
-            ),
-          )
+            )
         )
     );
   }
@@ -143,13 +148,13 @@ class Google_Service_Oauth2_Userinfo_Resource extends Google_Service_Resource
    * (userinfo.get)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Oauth2_Userinfoplus
+   * @return Google_Service_Oauth2_Userinfo
    */
   public function get($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Oauth2_Userinfoplus");
+    return $this->call('get', array($params), "Google_Service_Oauth2_Userinfo");
   }
 }
 
@@ -181,13 +186,13 @@ class Google_Service_Oauth2_UserinfoV2Me_Resource extends Google_Service_Resourc
    * (me.get)
    *
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Oauth2_Userinfoplus
+   * @return Google_Service_Oauth2_Userinfo
    */
   public function get($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Oauth2_Userinfoplus");
+    return $this->call('get', array($params), "Google_Service_Oauth2_Userinfo");
   }
 }
 
@@ -196,25 +201,25 @@ class Google_Service_Oauth2_UserinfoV2Me_Resource extends Google_Service_Resourc
 
 class Google_Service_Oauth2_Tokeninfo extends Google_Model
 {
-  public $accessType;
+  public $access_type;
   public $audience;
   public $email;
-  public $expiresIn;
-  public $issuedTo;
+  public $expires_in;
+  public $issued_to;
   public $scope;
-  public $userId;
-  public $verifiedEmail;
+  public $user_id;
+  public $verified_email;
 
-  public function setAccessType($accessType)
+  public function setAccess_type($access_type)
   {
-    $this->accessType = $accessType;
+    $this->access_type = $access_type;
   }
 
-  public function getAccessType()
+  public function getAccess_type()
   {
-    return $this->accessType;
+    return $this->access_type;
   }
-
+  
   public function setAudience($audience)
   {
     $this->audience = $audience;
@@ -224,7 +229,7 @@ class Google_Service_Oauth2_Tokeninfo extends Google_Model
   {
     return $this->audience;
   }
-
+  
   public function setEmail($email)
   {
     $this->email = $email;
@@ -234,27 +239,27 @@ class Google_Service_Oauth2_Tokeninfo extends Google_Model
   {
     return $this->email;
   }
-
-  public function setExpiresIn($expiresIn)
+  
+  public function setExpires_in($expires_in)
   {
-    $this->expiresIn = $expiresIn;
+    $this->expires_in = $expires_in;
   }
 
-  public function getExpiresIn()
+  public function getExpires_in()
   {
-    return $this->expiresIn;
+    return $this->expires_in;
+  }
+  
+  public function setIssued_to($issued_to)
+  {
+    $this->issued_to = $issued_to;
   }
 
-  public function setIssuedTo($issuedTo)
+  public function getIssued_to()
   {
-    $this->issuedTo = $issuedTo;
+    return $this->issued_to;
   }
-
-  public function getIssuedTo()
-  {
-    return $this->issuedTo;
-  }
-
+  
   public function setScope($scope)
   {
     $this->scope = $scope;
@@ -264,41 +269,43 @@ class Google_Service_Oauth2_Tokeninfo extends Google_Model
   {
     return $this->scope;
   }
-
-  public function setUserId($userId)
+  
+  public function setUser_id($user_id)
   {
-    $this->userId = $userId;
+    $this->user_id = $user_id;
   }
 
-  public function getUserId()
+  public function getUser_id()
   {
-    return $this->userId;
+    return $this->user_id;
+  }
+  
+  public function setVerified_email($verified_email)
+  {
+    $this->verified_email = $verified_email;
   }
 
-  public function setVerifiedEmail($verifiedEmail)
+  public function getVerified_email()
   {
-    $this->verifiedEmail = $verifiedEmail;
+    return $this->verified_email;
   }
-
-  public function getVerifiedEmail()
-  {
-    return $this->verifiedEmail;
-  }
+  
 }
 
-class Google_Service_Oauth2_Userinfoplus extends Google_Model
+class Google_Service_Oauth2_Userinfo extends Google_Model
 {
   public $email;
-  public $familyName;
+  public $family_name;
   public $gender;
-  public $givenName;
+  public $given_name;
   public $hd;
   public $id;
   public $link;
   public $locale;
   public $name;
   public $picture;
-  public $verifiedEmail;
+  public $timezone;
+  public $verified_email;
 
   public function setEmail($email)
   {
@@ -309,17 +316,17 @@ class Google_Service_Oauth2_Userinfoplus extends Google_Model
   {
     return $this->email;
   }
-
-  public function setFamilyName($familyName)
+  
+  public function setFamily_name($family_name)
   {
-    $this->familyName = $familyName;
+    $this->family_name = $family_name;
   }
 
-  public function getFamilyName()
+  public function getFamily_name()
   {
-    return $this->familyName;
+    return $this->family_name;
   }
-
+  
   public function setGender($gender)
   {
     $this->gender = $gender;
@@ -329,17 +336,17 @@ class Google_Service_Oauth2_Userinfoplus extends Google_Model
   {
     return $this->gender;
   }
-
-  public function setGivenName($givenName)
+  
+  public function setGiven_name($given_name)
   {
-    $this->givenName = $givenName;
+    $this->given_name = $given_name;
   }
 
-  public function getGivenName()
+  public function getGiven_name()
   {
-    return $this->givenName;
+    return $this->given_name;
   }
-
+  
   public function setHd($hd)
   {
     $this->hd = $hd;
@@ -349,7 +356,7 @@ class Google_Service_Oauth2_Userinfoplus extends Google_Model
   {
     return $this->hd;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -359,7 +366,7 @@ class Google_Service_Oauth2_Userinfoplus extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setLink($link)
   {
     $this->link = $link;
@@ -369,7 +376,7 @@ class Google_Service_Oauth2_Userinfoplus extends Google_Model
   {
     return $this->link;
   }
-
+  
   public function setLocale($locale)
   {
     $this->locale = $locale;
@@ -379,7 +386,7 @@ class Google_Service_Oauth2_Userinfoplus extends Google_Model
   {
     return $this->locale;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -389,7 +396,7 @@ class Google_Service_Oauth2_Userinfoplus extends Google_Model
   {
     return $this->name;
   }
-
+  
   public function setPicture($picture)
   {
     $this->picture = $picture;
@@ -399,14 +406,25 @@ class Google_Service_Oauth2_Userinfoplus extends Google_Model
   {
     return $this->picture;
   }
-
-  public function setVerifiedEmail($verifiedEmail)
+  
+  public function setTimezone($timezone)
   {
-    $this->verifiedEmail = $verifiedEmail;
+    $this->timezone = $timezone;
   }
 
-  public function getVerifiedEmail()
+  public function getTimezone()
   {
-    return $this->verifiedEmail;
+    return $this->timezone;
   }
+  
+  public function setVerified_email($verified_email)
+  {
+    $this->verified_email = $verified_email;
+  }
+
+  public function getVerified_email()
+  {
+    return $this->verified_email;
+  }
+  
 }

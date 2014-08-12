@@ -31,11 +31,6 @@
  */
 class Google_Service_Blogger extends Google_Service
 {
-  /** Manage your Blogger account. */
-  const BLOGGER = "https://www.googleapis.com/auth/blogger";
-  /** View your Blogger account. */
-  const BLOGGER_READONLY = "https://www.googleapis.com/auth/blogger.readonly";
-
   public $blogUserInfos;
   public $blogs;
   public $comments;
@@ -56,831 +51,745 @@ class Google_Service_Blogger extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'blogger/v3/';
     $this->version = 'v3';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/blogger",
+      "https://www.googleapis.com/auth/blogger.readonly"
+    );
+    
     $this->serviceName = 'blogger';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->blogUserInfos = new Google_Service_Blogger_BlogUserInfos_Resource(
         $this,
         $this->serviceName,
         'blogUserInfos',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'users/{userId}/blogs/{blogId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "users/{userId}/blogs/{blogId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'maxPosts' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),
-          )
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "maxPosts" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->blogs = new Google_Service_Blogger_Blogs_Resource(
         $this,
         $this->serviceName,
         'blogs',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'blogs/{blogId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "blogs/{blogId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'maxPosts' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'getByUrl' => array(
-              'path' => 'blogs/byurl',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'url' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "maxPosts" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"getByUrl" => array(
+            'path' => "blogs/byurl",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "url" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'listByUser' => array(
-              'path' => 'users/{userId}/blogs',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"listByUser" => array(
+            'path' => "users/{userId}/blogs",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'fetchUserInfo' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'status' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'role' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "fetchUserInfo" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "view" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->comments = new Google_Service_Blogger_Comments_Resource(
         $this,
         $this->serviceName,
         'comments',
         array(
-          'methods' => array(
-            'approve' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}/comments/{commentId}/approve',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "approve" => array(
+            'path' => "blogs/{blogId}/posts/{postId}/comments/{commentId}/approve",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'commentId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'delete' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}/comments/{commentId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'commentId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}/comments/{commentId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "commentId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'commentId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}/comments',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"delete" => array(
+            'path' => "blogs/{blogId}/posts/{postId}/comments/{commentId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'status' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+                "commentId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"get" => array(
+            'path' => "blogs/{blogId}/posts/{postId}/comments/{commentId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "commentId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "blogs/{blogId}/posts/{postId}/comments",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "startDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "endDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "fetchBodies" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "statuses" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'repeated' => true,
-                ),
-                'startDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'endDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'fetchBodies' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'listByBlog' => array(
-              'path' => 'blogs/{blogId}/comments',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'startDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'endDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'fetchBodies' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
+                "view" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'markAsSpam' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}/comments/{commentId}/spam',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'commentId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'removeContent' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"listByBlog" => array(
+            'path' => "blogs/{blogId}/comments",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'commentId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+                "startDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "endDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "fetchBodies" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"markAsSpam" => array(
+            'path' => "blogs/{blogId}/posts/{postId}/comments/{commentId}/spam",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "commentId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"removeContent" => array(
+            'path' => "blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "commentId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->pageViews = new Google_Service_Blogger_PageViews_Resource(
         $this,
         $this->serviceName,
         'pageViews',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'blogs/{blogId}/pageviews',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "blogs/{blogId}/pageviews",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'range' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
               ),
-            ),
-          )
+                "range" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'repeated' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->pages = new Google_Service_Blogger_Pages_Resource(
         $this,
         $this->serviceName,
         'pages',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'blogs/{blogId}/pages/{pageId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "blogs/{blogId}/pages/{pageId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'blogs/{blogId}/pages/{pageId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "pageId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'blogs/{blogId}/pages',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'isDraft' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'blogs/{blogId}/pages',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "blogs/{blogId}/pages/{pageId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'status' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+                "pageId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "view" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"insert" => array(
+            'path' => "blogs/{blogId}/pages",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "blogs/{blogId}/pages",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "fetchBodies" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "statuses" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'repeated' => true,
-                ),
-                'fetchBodies' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'patch' => array(
-              'path' => 'blogs/{blogId}/pages/{pageId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'pageId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'revert' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'publish' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
+                "view" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'update' => array(
-              'path' => 'blogs/{blogId}/pages/{pageId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'pageId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'revert' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'publish' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),
-          )
+          ),"patch" => array(
+            'path' => "blogs/{blogId}/pages/{pageId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"update" => array(
+            'path' => "blogs/{blogId}/pages/{pageId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->postUserInfos = new Google_Service_Blogger_PostUserInfos_Resource(
         $this,
         $this->serviceName,
         'postUserInfos',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'users/{userId}/blogs/{blogId}/posts/{postId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "users/{userId}/blogs/{blogId}/posts/{postId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'maxComments' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'users/{userId}/blogs/{blogId}/posts',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'orderBy' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'startDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'endDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'labels' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'status' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+                "maxComments" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"list" => array(
+            'path' => "users/{userId}/blogs/{blogId}/posts",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "orderBy" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "startDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "endDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "labels" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "fetchBodies" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "statuses" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'repeated' => true,
-                ),
-                'fetchBodies' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),
-          )
+                "view" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->posts = new Google_Service_Blogger_Posts_Resource(
         $this,
         $this->serviceName,
         'posts',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "blogs/{blogId}/posts/{postId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'fetchBody' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxComments' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'fetchImages' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'getByPath' => array(
-              'path' => 'blogs/{blogId}/posts/bypath',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'path' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'maxComments' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'blogs/{blogId}/posts',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "blogs/{blogId}/posts/{postId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'fetchImages' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'isDraft' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'fetchBody' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'list' => array(
-              'path' => 'blogs/{blogId}/posts',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'orderBy' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'startDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'endDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'labels' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'fetchImages' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'status' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+                "maxComments" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "view" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"getByPath" => array(
+            'path' => "blogs/{blogId}/posts/bypath",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "path" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "maxComments" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "view" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"insert" => array(
+            'path' => "blogs/{blogId}/posts",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "isDraft" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"list" => array(
+            'path' => "blogs/{blogId}/posts",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "orderBy" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "startDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "endDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "labels" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "fetchImages" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "fetchBodies" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "statuses" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'repeated' => true,
-                ),
-                'fetchBodies' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'view' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'patch' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'revert' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'publish' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'fetchBody' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxComments' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'fetchImages' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
+                "view" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'publish' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}/publish',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'publishDate' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'revert' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}/revert',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"patch" => array(
+            'path' => "blogs/{blogId}/posts/{postId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'search' => array(
-              'path' => 'blogs/{blogId}/posts/search',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'q' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'orderBy' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'fetchBodies' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'update' => array(
-              'path' => 'blogs/{blogId}/posts/{postId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'blogId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'postId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'revert' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'publish' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'fetchBody' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxComments' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'fetchImages' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),
-          )
+          ),"publish" => array(
+            'path' => "blogs/{blogId}/posts/{postId}/publish",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "publishDate" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"revert" => array(
+            'path' => "blogs/{blogId}/posts/{postId}/revert",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"search" => array(
+            'path' => "blogs/{blogId}/posts/search",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "q" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "orderBy" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "fetchBodies" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "blogs/{blogId}/posts/{postId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "blogId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "postId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->users = new Google_Service_Blogger_Users_Resource(
         $this,
         $this->serviceName,
         'users',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'users/{userId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'userId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "users/{userId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "userId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -931,7 +840,7 @@ class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
 {
 
   /**
-   * Gets one blog by ID. (blogs.get)
+   * Gets one blog by id. (blogs.get)
    *
    * @param string $blogId
    * The ID of the blog to get.
@@ -939,8 +848,6 @@ class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
    *
    * @opt_param string maxPosts
    * Maximum number of posts to pull back with the blog.
-   * @opt_param string view
-   * Access level with which to view the blog. Note that some fields require elevated access.
    * @return Google_Service_Blogger_Blog
    */
   public function get($blogId, $optParams = array())
@@ -955,9 +862,6 @@ class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
    * @param string $url
    * The URL of the blog to retrieve.
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string view
-   * Access level with which to view the blog. Note that some fields require elevated access.
    * @return Google_Service_Blogger_Blog
    */
   public function getByUrl($url, $optParams = array())
@@ -976,14 +880,8 @@ class Google_Service_Blogger_Blogs_Resource extends Google_Service_Resource
    *
    * @opt_param bool fetchUserInfo
    * Whether the response is a list of blogs with per-user information instead of just blogs.
-   * @opt_param string status
-   * Blog statuses to include in the result (default: Live blogs only). Note that ADMIN access is
-    * required to view deleted blogs.
-   * @opt_param string role
-   * User access types for blogs to include in the results, e.g. AUTHOR will return blogs where the
-    * user has author level access. If no roles are specified, defaults to ADMIN and AUTHOR roles.
    * @opt_param string view
-   * Access level with which to view the blogs. Note that some fields require elevated access.
+   *
    * @return Google_Service_Blogger_BlogList
    */
   public function listByUser($userId, $optParams = array())
@@ -1009,7 +907,7 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * Marks a comment as not spam. (comments.approve)
    *
    * @param string $blogId
-   * The ID of the Blog.
+   * The Id of the Blog.
    * @param string $postId
    * The ID of the Post.
    * @param string $commentId
@@ -1024,10 +922,10 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
     return $this->call('approve', array($params), "Google_Service_Blogger_Comment");
   }
   /**
-   * Delete a comment by ID. (comments.delete)
+   * Delete a comment by id. (comments.delete)
    *
    * @param string $blogId
-   * The ID of the Blog.
+   * The Id of the Blog.
    * @param string $postId
    * The ID of the Post.
    * @param string $commentId
@@ -1041,7 +939,7 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
     return $this->call('delete', array($params));
   }
   /**
-   * Gets one comment by ID. (comments.get)
+   * Gets one comment by id. (comments.get)
    *
    * @param string $blogId
    * ID of the blog to containing the comment.
@@ -1050,11 +948,6 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * @param string $commentId
    * The ID of the comment to get.
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string view
-   * Access level for the requested comment (default: READER). Note that some comments will require
-    * elevated permissions, for example comments where the parent posts which is in a draft state, or
-    * comments that are pending moderation.
    * @return Google_Service_Blogger_Comment
    */
   public function get($blogId, $postId, $commentId, $optParams = array())
@@ -1064,15 +957,13 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
     return $this->call('get', array($params), "Google_Service_Blogger_Comment");
   }
   /**
-   * Retrieves the comments for a post, possibly filtered. (comments.listComments)
+   * Retrieves the comments for a post, possibly filtered. (comments.list)
    *
    * @param string $blogId
    * ID of the blog to fetch comments from.
    * @param string $postId
    * ID of the post to fetch posts from.
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param string status
    *
    * @opt_param string startDate
    * Earliest date of comment to fetch, a date-time with RFC 3339 formatting.
@@ -1084,9 +975,10 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * Continuation token if request is paged.
    * @opt_param bool fetchBodies
    * Whether the body content of the comments is included.
+   * @opt_param string statuses
+   *
    * @opt_param string view
-   * Access level with which to view the returned result. Note that some fields require elevated
-    * access.
+   *
    * @return Google_Service_Blogger_CommentList
    */
   public function listComments($blogId, $postId, $optParams = array())
@@ -1125,7 +1017,7 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * Marks a comment as spam. (comments.markAsSpam)
    *
    * @param string $blogId
-   * The ID of the Blog.
+   * The Id of the Blog.
    * @param string $postId
    * The ID of the Post.
    * @param string $commentId
@@ -1143,7 +1035,7 @@ class Google_Service_Blogger_Comments_Resource extends Google_Service_Resource
    * Removes the content of a comment. (comments.removeContent)
    *
    * @param string $blogId
-   * The ID of the Blog.
+   * The Id of the Blog.
    * @param string $postId
    * The ID of the Post.
    * @param string $commentId
@@ -1201,10 +1093,10 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
 {
 
   /**
-   * Delete a page by ID. (pages.delete)
+   * Delete a page by id. (pages.delete)
    *
    * @param string $blogId
-   * The ID of the Blog.
+   * The Id of the Blog.
    * @param string $pageId
    * The ID of the Page.
    * @param array $optParams Optional parameters.
@@ -1216,7 +1108,7 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
     return $this->call('delete', array($params));
   }
   /**
-   * Gets one blog page by ID. (pages.get)
+   * Gets one blog page by id. (pages.get)
    *
    * @param string $blogId
    * ID of the blog containing the page.
@@ -1241,9 +1133,6 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    * ID of the blog to add the page to.
    * @param Google_Page $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param bool isDraft
-   * Whether to create the page as a draft (default: false).
    * @return Google_Service_Blogger_Page
    */
   public function insert($blogId, Google_Service_Blogger_Page $postBody, $optParams = array())
@@ -1254,19 +1143,18 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
   }
   /**
    * Retrieves the pages for a blog, optionally including non-LIVE statuses.
-   * (pages.listPages)
+   * (pages.list)
    *
    * @param string $blogId
    * ID of the blog to fetch pages from.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string status
-   *
    * @opt_param bool fetchBodies
    * Whether to retrieve the Page bodies.
+   * @opt_param string statuses
+   *
    * @opt_param string view
-   * Access level with which to view the returned result. Note that some fields require elevated
-    * access.
+   *
    * @return Google_Service_Blogger_PageList
    */
   public function listPages($blogId, $optParams = array())
@@ -1284,11 +1172,6 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    * The ID of the Page.
    * @param Google_Page $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param bool revert
-   * Whether a revert action should be performed when the page is updated (default: false).
-   * @opt_param bool publish
-   * Whether a publish action should be performed when the page is updated (default: false).
    * @return Google_Service_Blogger_Page
    */
   public function patch($blogId, $pageId, Google_Service_Blogger_Page $postBody, $optParams = array())
@@ -1306,11 +1189,6 @@ class Google_Service_Blogger_Pages_Resource extends Google_Service_Resource
    * The ID of the Page.
    * @param Google_Page $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param bool revert
-   * Whether a revert action should be performed when the page is updated (default: false).
-   * @opt_param bool publish
-   * Whether a publish action should be performed when the page is updated (default: false).
    * @return Google_Service_Blogger_Page
    */
   public function update($blogId, $pageId, Google_Service_Blogger_Page $postBody, $optParams = array())
@@ -1333,9 +1211,7 @@ class Google_Service_Blogger_PostUserInfos_Resource extends Google_Service_Resou
 {
 
   /**
-   * Gets one post and user info pair, by post ID and user ID. The post user info
-   * contains per-user information about the post, such as access rights, specific
-   * to the user. (postUserInfos.get)
+   * Gets one post and user info pair by postId and userId. (postUserInfos.get)
    *
    * @param string $userId
    * ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote
@@ -1357,9 +1233,8 @@ class Google_Service_Blogger_PostUserInfos_Resource extends Google_Service_Resou
     return $this->call('get', array($params), "Google_Service_Blogger_PostUserInfo");
   }
   /**
-   * Retrieves a list of post and post user info pairs, possibly filtered. The
-   * post user info contains per-user information about the post, such as access
-   * rights, specific to the user. (postUserInfos.listPostUserInfos)
+   * Retrieves a list of post and user info pairs, possibly filtered.
+   * (postUserInfos.list)
    *
    * @param string $userId
    * ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote
@@ -1369,7 +1244,7 @@ class Google_Service_Blogger_PostUserInfos_Resource extends Google_Service_Resou
    * @param array $optParams Optional parameters.
    *
    * @opt_param string orderBy
-   * Sort order applied to search results. Default is published.
+   * Sort search results
    * @opt_param string startDate
    * Earliest post date to fetch, a date-time with RFC 3339 formatting.
    * @opt_param string endDate
@@ -1380,13 +1255,12 @@ class Google_Service_Blogger_PostUserInfos_Resource extends Google_Service_Resou
    * Maximum number of posts to fetch.
    * @opt_param string pageToken
    * Continuation token if the request is paged.
-   * @opt_param string status
-   *
    * @opt_param bool fetchBodies
-   * Whether the body content of posts is included. Default is false.
+   * Whether the body content of posts is included.
+   * @opt_param string statuses
+   *
    * @opt_param string view
-   * Access level with which to view the returned result. Note that some fields require elevated
-    * access.
+   *
    * @return Google_Service_Blogger_PostUserInfosList
    */
   public function listPostUserInfos($userId, $blogId, $optParams = array())
@@ -1409,10 +1283,10 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
 {
 
   /**
-   * Delete a post by ID. (posts.delete)
+   * Delete a post by id. (posts.delete)
    *
    * @param string $blogId
-   * The ID of the Blog.
+   * The Id of the Blog.
    * @param string $postId
    * The ID of the Post.
    * @param array $optParams Optional parameters.
@@ -1424,7 +1298,7 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
     return $this->call('delete', array($params));
   }
   /**
-   * Get a post by ID. (posts.get)
+   * Get a post by id. (posts.get)
    *
    * @param string $blogId
    * ID of the blog to fetch the post from.
@@ -1432,16 +1306,10 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * The ID of the post
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool fetchBody
-   * Whether the body content of the post is included (default: true). This should be set to false
-    * when the post bodies are not required, to help minimize traffic.
    * @opt_param string maxComments
    * Maximum number of comments to pull back on a post.
-   * @opt_param bool fetchImages
-   * Whether image URL metadata for each post is included (default: false).
    * @opt_param string view
-   * Access level with which to view the returned result. Note that some fields require elevated
-    * access.
+   *
    * @return Google_Service_Blogger_Post
    */
   public function get($blogId, $postId, $optParams = array())
@@ -1462,8 +1330,7 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * @opt_param string maxComments
    * Maximum number of comments to pull back on a post.
    * @opt_param string view
-   * Access level with which to view the returned result. Note that some fields require elevated
-    * access.
+   *
    * @return Google_Service_Blogger_Post
    */
   public function getByPath($blogId, $path, $optParams = array())
@@ -1480,12 +1347,8 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * @param Google_Post $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool fetchImages
-   * Whether image URL metadata for each post is included in the returned result (default: false).
    * @opt_param bool isDraft
-   * Whether to create the post as a draft (default: false).
-   * @opt_param bool fetchBody
-   * Whether the body content of the post is included with the result (default: true).
+   * Whether to create the post as a draft
    * @return Google_Service_Blogger_Post
    */
   public function insert($blogId, Google_Service_Blogger_Post $postBody, $optParams = array())
@@ -1495,7 +1358,7 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_Blogger_Post");
   }
   /**
-   * Retrieves a list of posts, possibly filtered. (posts.listPosts)
+   * Retrieves a list of posts, possibly filtered. (posts.list)
    *
    * @param string $blogId
    * ID of the blog to fetch posts from.
@@ -1515,14 +1378,13 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * Whether image URL metadata for each post is included.
    * @opt_param string pageToken
    * Continuation token if the request is paged.
-   * @opt_param string status
-   * Statuses to include in the results.
    * @opt_param bool fetchBodies
    * Whether the body content of posts is included (default: true). This should be set to false when
     * the post bodies are not required, to help minimize traffic.
+   * @opt_param string statuses
+   *
    * @opt_param string view
-   * Access level with which to view the returned result. Note that some fields require escalated
-    * access.
+   *
    * @return Google_Service_Blogger_PostList
    */
   public function listPosts($blogId, $optParams = array())
@@ -1540,17 +1402,6 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * The ID of the Post.
    * @param Google_Post $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param bool revert
-   * Whether a revert action should be performed when the post is updated (default: false).
-   * @opt_param bool publish
-   * Whether a publish action should be performed when the post is updated (default: false).
-   * @opt_param bool fetchBody
-   * Whether the body content of the post is included with the result (default: true).
-   * @opt_param string maxComments
-   * Maximum number of comments to retrieve with the returned post.
-   * @opt_param bool fetchImages
-   * Whether image URL metadata for each post is included in the returned result (default: false).
    * @return Google_Service_Blogger_Post
    */
   public function patch($blogId, $postId, Google_Service_Blogger_Post $postBody, $optParams = array())
@@ -1560,8 +1411,7 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
     return $this->call('patch', array($params), "Google_Service_Blogger_Post");
   }
   /**
-   * Publishes a draft post, optionally at the specific time of the given
-   * publishDate parameter. (posts.publish)
+   * Publish a draft post. (posts.publish)
    *
    * @param string $blogId
    * The ID of the Blog.
@@ -1570,9 +1420,7 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string publishDate
-   * Optional date and time to schedule the publishing of the Blog. If no publishDate parameter is
-    * given, the post is either published at the a previously saved schedule date (if present), or the
-    * current time. If a future date is given, the post will be scheduled to be published.
+   * The date and time to schedule the publishing of the Blog.
    * @return Google_Service_Blogger_Post
    */
   public function publish($blogId, $postId, $optParams = array())
@@ -1628,17 +1476,6 @@ class Google_Service_Blogger_Posts_Resource extends Google_Service_Resource
    * The ID of the Post.
    * @param Google_Post $postBody
    * @param array $optParams Optional parameters.
-   *
-   * @opt_param bool revert
-   * Whether a revert action should be performed when the post is updated (default: false).
-   * @opt_param bool publish
-   * Whether a publish action should be performed when the post is updated (default: false).
-   * @opt_param bool fetchBody
-   * Whether the body content of the post is included with the result (default: true).
-   * @opt_param string maxComments
-   * Maximum number of comments to retrieve with the returned post.
-   * @opt_param bool fetchImages
-   * Whether image URL metadata for each post is included in the returned result (default: false).
    * @return Google_Service_Blogger_Post
    */
   public function update($blogId, $postId, Google_Service_Blogger_Post $postBody, $optParams = array())
@@ -1661,7 +1498,7 @@ class Google_Service_Blogger_Users_Resource extends Google_Service_Resource
 {
 
   /**
-   * Gets one user by ID. (users.get)
+   * Gets one user by id. (users.get)
    *
    * @param string $userId
    * The ID of the user to get.
@@ -1694,7 +1531,6 @@ class Google_Service_Blogger_Blog extends Google_Model
   protected $postsDataType = '';
   public $published;
   public $selfLink;
-  public $status;
   public $updated;
   public $url;
 
@@ -1707,7 +1543,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->customMetaData;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -1717,7 +1553,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->description;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -1727,7 +1563,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1737,7 +1573,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setLocale(Google_Service_Blogger_BlogLocale $locale)
   {
     $this->locale = $locale;
@@ -1747,7 +1583,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->locale;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -1757,7 +1593,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->name;
   }
-
+  
   public function setPages(Google_Service_Blogger_BlogPages $pages)
   {
     $this->pages = $pages;
@@ -1767,7 +1603,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->pages;
   }
-
+  
   public function setPosts(Google_Service_Blogger_BlogPosts $posts)
   {
     $this->posts = $posts;
@@ -1777,7 +1613,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->posts;
   }
-
+  
   public function setPublished($published)
   {
     $this->published = $published;
@@ -1787,7 +1623,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->published;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -1797,17 +1633,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->selfLink;
   }
-
-  public function setStatus($status)
-  {
-    $this->status = $status;
-  }
-
-  public function getStatus()
-  {
-    return $this->status;
-  }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -1817,7 +1643,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->updated;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -1827,6 +1653,7 @@ class Google_Service_Blogger_Blog extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_BlogList extends Google_Collection
@@ -1846,7 +1673,7 @@ class Google_Service_Blogger_BlogList extends Google_Collection
   {
     return $this->blogUserInfos;
   }
-
+  
   public function setItems($items)
   {
     $this->items = $items;
@@ -1856,7 +1683,7 @@ class Google_Service_Blogger_BlogList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1866,6 +1693,7 @@ class Google_Service_Blogger_BlogList extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_Blogger_BlogLocale extends Google_Model
@@ -1883,7 +1711,7 @@ class Google_Service_Blogger_BlogLocale extends Google_Model
   {
     return $this->country;
   }
-
+  
   public function setLanguage($language)
   {
     $this->language = $language;
@@ -1893,7 +1721,7 @@ class Google_Service_Blogger_BlogLocale extends Google_Model
   {
     return $this->language;
   }
-
+  
   public function setVariant($variant)
   {
     $this->variant = $variant;
@@ -1903,6 +1731,7 @@ class Google_Service_Blogger_BlogLocale extends Google_Model
   {
     return $this->variant;
   }
+  
 }
 
 class Google_Service_Blogger_BlogPages extends Google_Model
@@ -1919,7 +1748,7 @@ class Google_Service_Blogger_BlogPages extends Google_Model
   {
     return $this->selfLink;
   }
-
+  
   public function setTotalItems($totalItems)
   {
     $this->totalItems = $totalItems;
@@ -1929,6 +1758,7 @@ class Google_Service_Blogger_BlogPages extends Google_Model
   {
     return $this->totalItems;
   }
+  
 }
 
 class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
@@ -1937,7 +1767,6 @@ class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
   public $hasAdminAccess;
   public $kind;
   public $photosAlbumKey;
-  public $role;
   public $userId;
 
   public function setBlogId($blogId)
@@ -1949,7 +1778,7 @@ class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
   {
     return $this->blogId;
   }
-
+  
   public function setHasAdminAccess($hasAdminAccess)
   {
     $this->hasAdminAccess = $hasAdminAccess;
@@ -1959,7 +1788,7 @@ class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
   {
     return $this->hasAdminAccess;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1969,7 +1798,7 @@ class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPhotosAlbumKey($photosAlbumKey)
   {
     $this->photosAlbumKey = $photosAlbumKey;
@@ -1979,17 +1808,7 @@ class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
   {
     return $this->photosAlbumKey;
   }
-
-  public function setRole($role)
-  {
-    $this->role = $role;
-  }
-
-  public function getRole()
-  {
-    return $this->role;
-  }
-
+  
   public function setUserId($userId)
   {
     $this->userId = $userId;
@@ -1999,6 +1818,7 @@ class Google_Service_Blogger_BlogPerUserInfo extends Google_Model
   {
     return $this->userId;
   }
+  
 }
 
 class Google_Service_Blogger_BlogPosts extends Google_Collection
@@ -2017,7 +1837,7 @@ class Google_Service_Blogger_BlogPosts extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -2027,7 +1847,7 @@ class Google_Service_Blogger_BlogPosts extends Google_Collection
   {
     return $this->selfLink;
   }
-
+  
   public function setTotalItems($totalItems)
   {
     $this->totalItems = $totalItems;
@@ -2037,14 +1857,15 @@ class Google_Service_Blogger_BlogPosts extends Google_Collection
   {
     return $this->totalItems;
   }
+  
 }
 
 class Google_Service_Blogger_BlogUserInfo extends Google_Model
 {
   protected $blogType = 'Google_Service_Blogger_Blog';
   protected $blogDataType = '';
-  protected $blogUserInfoType = 'Google_Service_Blogger_BlogPerUserInfo';
-  protected $blogUserInfoDataType = '';
+  protected $blog_user_infoType = 'Google_Service_Blogger_BlogPerUserInfo';
+  protected $blog_user_infoDataType = '';
   public $kind;
 
   public function setBlog(Google_Service_Blogger_Blog $blog)
@@ -2056,17 +1877,17 @@ class Google_Service_Blogger_BlogUserInfo extends Google_Model
   {
     return $this->blog;
   }
-
-  public function setBlogUserInfo(Google_Service_Blogger_BlogPerUserInfo $blogUserInfo)
+  
+  public function setBlog_user_info(Google_Service_Blogger_BlogPerUserInfo $blog_user_info)
   {
-    $this->blogUserInfo = $blogUserInfo;
+    $this->blog_user_info = $blog_user_info;
   }
 
-  public function getBlogUserInfo()
+  public function getBlog_user_info()
   {
-    return $this->blogUserInfo;
+    return $this->blog_user_info;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2076,6 +1897,7 @@ class Google_Service_Blogger_BlogUserInfo extends Google_Model
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_Blogger_Comment extends Google_Model
@@ -2105,7 +1927,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->author;
   }
-
+  
   public function setBlog(Google_Service_Blogger_CommentBlog $blog)
   {
     $this->blog = $blog;
@@ -2115,7 +1937,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->blog;
   }
-
+  
   public function setContent($content)
   {
     $this->content = $content;
@@ -2125,7 +1947,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->content;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2135,7 +1957,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setInReplyTo(Google_Service_Blogger_CommentInReplyTo $inReplyTo)
   {
     $this->inReplyTo = $inReplyTo;
@@ -2145,7 +1967,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->inReplyTo;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2155,7 +1977,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPost(Google_Service_Blogger_CommentPost $post)
   {
     $this->post = $post;
@@ -2165,7 +1987,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->post;
   }
-
+  
   public function setPublished($published)
   {
     $this->published = $published;
@@ -2175,7 +1997,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->published;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -2185,7 +2007,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->selfLink;
   }
-
+  
   public function setStatus($status)
   {
     $this->status = $status;
@@ -2195,7 +2017,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->status;
   }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -2205,6 +2027,7 @@ class Google_Service_Blogger_Comment extends Google_Model
   {
     return $this->updated;
   }
+  
 }
 
 class Google_Service_Blogger_CommentAuthor extends Google_Model
@@ -2224,7 +2047,7 @@ class Google_Service_Blogger_CommentAuthor extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2234,7 +2057,7 @@ class Google_Service_Blogger_CommentAuthor extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setImage(Google_Service_Blogger_CommentAuthorImage $image)
   {
     $this->image = $image;
@@ -2244,7 +2067,7 @@ class Google_Service_Blogger_CommentAuthor extends Google_Model
   {
     return $this->image;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -2254,6 +2077,7 @@ class Google_Service_Blogger_CommentAuthor extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_CommentAuthorImage extends Google_Model
@@ -2269,6 +2093,7 @@ class Google_Service_Blogger_CommentAuthorImage extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_CommentBlog extends Google_Model
@@ -2284,6 +2109,7 @@ class Google_Service_Blogger_CommentBlog extends Google_Model
   {
     return $this->id;
   }
+  
 }
 
 class Google_Service_Blogger_CommentInReplyTo extends Google_Model
@@ -2299,6 +2125,7 @@ class Google_Service_Blogger_CommentInReplyTo extends Google_Model
   {
     return $this->id;
   }
+  
 }
 
 class Google_Service_Blogger_CommentList extends Google_Collection
@@ -2318,7 +2145,7 @@ class Google_Service_Blogger_CommentList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2328,7 +2155,7 @@ class Google_Service_Blogger_CommentList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -2338,7 +2165,7 @@ class Google_Service_Blogger_CommentList extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setPrevPageToken($prevPageToken)
   {
     $this->prevPageToken = $prevPageToken;
@@ -2348,6 +2175,7 @@ class Google_Service_Blogger_CommentList extends Google_Collection
   {
     return $this->prevPageToken;
   }
+  
 }
 
 class Google_Service_Blogger_CommentPost extends Google_Model
@@ -2363,6 +2191,7 @@ class Google_Service_Blogger_CommentPost extends Google_Model
   {
     return $this->id;
   }
+  
 }
 
 class Google_Service_Blogger_Page extends Google_Model
@@ -2390,7 +2219,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->author;
   }
-
+  
   public function setBlog(Google_Service_Blogger_PageBlog $blog)
   {
     $this->blog = $blog;
@@ -2400,7 +2229,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->blog;
   }
-
+  
   public function setContent($content)
   {
     $this->content = $content;
@@ -2410,7 +2239,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->content;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2420,7 +2249,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2430,7 +2259,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPublished($published)
   {
     $this->published = $published;
@@ -2440,7 +2269,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->published;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -2450,7 +2279,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->selfLink;
   }
-
+  
   public function setStatus($status)
   {
     $this->status = $status;
@@ -2460,7 +2289,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->status;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -2470,7 +2299,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->title;
   }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -2480,7 +2309,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->updated;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -2490,6 +2319,7 @@ class Google_Service_Blogger_Page extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_PageAuthor extends Google_Model
@@ -2509,7 +2339,7 @@ class Google_Service_Blogger_PageAuthor extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2519,7 +2349,7 @@ class Google_Service_Blogger_PageAuthor extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setImage(Google_Service_Blogger_PageAuthorImage $image)
   {
     $this->image = $image;
@@ -2529,7 +2359,7 @@ class Google_Service_Blogger_PageAuthor extends Google_Model
   {
     return $this->image;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -2539,6 +2369,7 @@ class Google_Service_Blogger_PageAuthor extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_PageAuthorImage extends Google_Model
@@ -2554,6 +2385,7 @@ class Google_Service_Blogger_PageAuthorImage extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_PageBlog extends Google_Model
@@ -2569,6 +2401,7 @@ class Google_Service_Blogger_PageBlog extends Google_Model
   {
     return $this->id;
   }
+  
 }
 
 class Google_Service_Blogger_PageList extends Google_Collection
@@ -2586,7 +2419,7 @@ class Google_Service_Blogger_PageList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2596,6 +2429,7 @@ class Google_Service_Blogger_PageList extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_Blogger_Pageviews extends Google_Collection
@@ -2614,7 +2448,7 @@ class Google_Service_Blogger_Pageviews extends Google_Collection
   {
     return $this->blogId;
   }
-
+  
   public function setCounts($counts)
   {
     $this->counts = $counts;
@@ -2624,7 +2458,7 @@ class Google_Service_Blogger_Pageviews extends Google_Collection
   {
     return $this->counts;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2634,6 +2468,7 @@ class Google_Service_Blogger_Pageviews extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_Blogger_PageviewsCounts extends Google_Model
@@ -2650,7 +2485,7 @@ class Google_Service_Blogger_PageviewsCounts extends Google_Model
   {
     return $this->count;
   }
-
+  
   public function setTimeRange($timeRange)
   {
     $this->timeRange = $timeRange;
@@ -2660,6 +2495,7 @@ class Google_Service_Blogger_PageviewsCounts extends Google_Model
   {
     return $this->timeRange;
   }
+  
 }
 
 class Google_Service_Blogger_Post extends Google_Collection
@@ -2678,7 +2514,6 @@ class Google_Service_Blogger_Post extends Google_Collection
   protected $locationType = 'Google_Service_Blogger_PostLocation';
   protected $locationDataType = '';
   public $published;
-  public $readerComments;
   protected $repliesType = 'Google_Service_Blogger_PostReplies';
   protected $repliesDataType = '';
   public $selfLink;
@@ -2697,7 +2532,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->author;
   }
-
+  
   public function setBlog(Google_Service_Blogger_PostBlog $blog)
   {
     $this->blog = $blog;
@@ -2707,7 +2542,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->blog;
   }
-
+  
   public function setContent($content)
   {
     $this->content = $content;
@@ -2717,7 +2552,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->content;
   }
-
+  
   public function setCustomMetaData($customMetaData)
   {
     $this->customMetaData = $customMetaData;
@@ -2727,7 +2562,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->customMetaData;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2737,7 +2572,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setImages($images)
   {
     $this->images = $images;
@@ -2747,7 +2582,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->images;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2757,7 +2592,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setLabels($labels)
   {
     $this->labels = $labels;
@@ -2767,7 +2602,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->labels;
   }
-
+  
   public function setLocation(Google_Service_Blogger_PostLocation $location)
   {
     $this->location = $location;
@@ -2777,7 +2612,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->location;
   }
-
+  
   public function setPublished($published)
   {
     $this->published = $published;
@@ -2787,17 +2622,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->published;
   }
-
-  public function setReaderComments($readerComments)
-  {
-    $this->readerComments = $readerComments;
-  }
-
-  public function getReaderComments()
-  {
-    return $this->readerComments;
-  }
-
+  
   public function setReplies(Google_Service_Blogger_PostReplies $replies)
   {
     $this->replies = $replies;
@@ -2807,7 +2632,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->replies;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -2817,7 +2642,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->selfLink;
   }
-
+  
   public function setStatus($status)
   {
     $this->status = $status;
@@ -2827,7 +2652,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->status;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -2837,7 +2662,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->title;
   }
-
+  
   public function setTitleLink($titleLink)
   {
     $this->titleLink = $titleLink;
@@ -2847,7 +2672,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->titleLink;
   }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -2857,7 +2682,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->updated;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -2867,6 +2692,7 @@ class Google_Service_Blogger_Post extends Google_Collection
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_PostAuthor extends Google_Model
@@ -2886,7 +2712,7 @@ class Google_Service_Blogger_PostAuthor extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -2896,7 +2722,7 @@ class Google_Service_Blogger_PostAuthor extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setImage(Google_Service_Blogger_PostAuthorImage $image)
   {
     $this->image = $image;
@@ -2906,7 +2732,7 @@ class Google_Service_Blogger_PostAuthor extends Google_Model
   {
     return $this->image;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -2916,6 +2742,7 @@ class Google_Service_Blogger_PostAuthor extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_PostAuthorImage extends Google_Model
@@ -2931,6 +2758,7 @@ class Google_Service_Blogger_PostAuthorImage extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_PostBlog extends Google_Model
@@ -2946,6 +2774,7 @@ class Google_Service_Blogger_PostBlog extends Google_Model
   {
     return $this->id;
   }
+  
 }
 
 class Google_Service_Blogger_PostImages extends Google_Model
@@ -2961,6 +2790,7 @@ class Google_Service_Blogger_PostImages extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_PostList extends Google_Collection
@@ -2979,7 +2809,7 @@ class Google_Service_Blogger_PostList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2989,7 +2819,7 @@ class Google_Service_Blogger_PostList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -2999,6 +2829,7 @@ class Google_Service_Blogger_PostList extends Google_Collection
   {
     return $this->nextPageToken;
   }
+  
 }
 
 class Google_Service_Blogger_PostLocation extends Google_Model
@@ -3017,7 +2848,7 @@ class Google_Service_Blogger_PostLocation extends Google_Model
   {
     return $this->lat;
   }
-
+  
   public function setLng($lng)
   {
     $this->lng = $lng;
@@ -3027,7 +2858,7 @@ class Google_Service_Blogger_PostLocation extends Google_Model
   {
     return $this->lng;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -3037,7 +2868,7 @@ class Google_Service_Blogger_PostLocation extends Google_Model
   {
     return $this->name;
   }
-
+  
   public function setSpan($span)
   {
     $this->span = $span;
@@ -3047,6 +2878,7 @@ class Google_Service_Blogger_PostLocation extends Google_Model
   {
     return $this->span;
   }
+  
 }
 
 class Google_Service_Blogger_PostPerUserInfo extends Google_Model
@@ -3066,7 +2898,7 @@ class Google_Service_Blogger_PostPerUserInfo extends Google_Model
   {
     return $this->blogId;
   }
-
+  
   public function setHasEditAccess($hasEditAccess)
   {
     $this->hasEditAccess = $hasEditAccess;
@@ -3076,7 +2908,7 @@ class Google_Service_Blogger_PostPerUserInfo extends Google_Model
   {
     return $this->hasEditAccess;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3086,7 +2918,7 @@ class Google_Service_Blogger_PostPerUserInfo extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPostId($postId)
   {
     $this->postId = $postId;
@@ -3096,7 +2928,7 @@ class Google_Service_Blogger_PostPerUserInfo extends Google_Model
   {
     return $this->postId;
   }
-
+  
   public function setUserId($userId)
   {
     $this->userId = $userId;
@@ -3106,6 +2938,7 @@ class Google_Service_Blogger_PostPerUserInfo extends Google_Model
   {
     return $this->userId;
   }
+  
 }
 
 class Google_Service_Blogger_PostReplies extends Google_Collection
@@ -3124,7 +2957,7 @@ class Google_Service_Blogger_PostReplies extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -3134,7 +2967,7 @@ class Google_Service_Blogger_PostReplies extends Google_Collection
   {
     return $this->selfLink;
   }
-
+  
   public function setTotalItems($totalItems)
   {
     $this->totalItems = $totalItems;
@@ -3144,6 +2977,7 @@ class Google_Service_Blogger_PostReplies extends Google_Collection
   {
     return $this->totalItems;
   }
+  
 }
 
 class Google_Service_Blogger_PostUserInfo extends Google_Model
@@ -3151,8 +2985,8 @@ class Google_Service_Blogger_PostUserInfo extends Google_Model
   public $kind;
   protected $postType = 'Google_Service_Blogger_Post';
   protected $postDataType = '';
-  protected $postUserInfoType = 'Google_Service_Blogger_PostPerUserInfo';
-  protected $postUserInfoDataType = '';
+  protected $post_user_infoType = 'Google_Service_Blogger_PostPerUserInfo';
+  protected $post_user_infoDataType = '';
 
   public function setKind($kind)
   {
@@ -3163,7 +2997,7 @@ class Google_Service_Blogger_PostUserInfo extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPost(Google_Service_Blogger_Post $post)
   {
     $this->post = $post;
@@ -3173,16 +3007,17 @@ class Google_Service_Blogger_PostUserInfo extends Google_Model
   {
     return $this->post;
   }
-
-  public function setPostUserInfo(Google_Service_Blogger_PostPerUserInfo $postUserInfo)
+  
+  public function setPost_user_info(Google_Service_Blogger_PostPerUserInfo $post_user_info)
   {
-    $this->postUserInfo = $postUserInfo;
+    $this->post_user_info = $post_user_info;
   }
 
-  public function getPostUserInfo()
+  public function getPost_user_info()
   {
-    return $this->postUserInfo;
+    return $this->post_user_info;
   }
+  
 }
 
 class Google_Service_Blogger_PostUserInfosList extends Google_Collection
@@ -3201,7 +3036,7 @@ class Google_Service_Blogger_PostUserInfosList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3211,7 +3046,7 @@ class Google_Service_Blogger_PostUserInfosList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -3221,6 +3056,7 @@ class Google_Service_Blogger_PostUserInfosList extends Google_Collection
   {
     return $this->nextPageToken;
   }
+  
 }
 
 class Google_Service_Blogger_User extends Google_Model
@@ -3246,7 +3082,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->about;
   }
-
+  
   public function setBlogs(Google_Service_Blogger_UserBlogs $blogs)
   {
     $this->blogs = $blogs;
@@ -3256,7 +3092,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->blogs;
   }
-
+  
   public function setCreated($created)
   {
     $this->created = $created;
@@ -3266,7 +3102,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->created;
   }
-
+  
   public function setDisplayName($displayName)
   {
     $this->displayName = $displayName;
@@ -3276,7 +3112,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -3286,7 +3122,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -3296,7 +3132,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setLocale(Google_Service_Blogger_UserLocale $locale)
   {
     $this->locale = $locale;
@@ -3306,7 +3142,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->locale;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -3316,7 +3152,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->selfLink;
   }
-
+  
   public function setUrl($url)
   {
     $this->url = $url;
@@ -3326,6 +3162,7 @@ class Google_Service_Blogger_User extends Google_Model
   {
     return $this->url;
   }
+  
 }
 
 class Google_Service_Blogger_UserBlogs extends Google_Model
@@ -3341,6 +3178,7 @@ class Google_Service_Blogger_UserBlogs extends Google_Model
   {
     return $this->selfLink;
   }
+  
 }
 
 class Google_Service_Blogger_UserLocale extends Google_Model
@@ -3358,7 +3196,7 @@ class Google_Service_Blogger_UserLocale extends Google_Model
   {
     return $this->country;
   }
-
+  
   public function setLanguage($language)
   {
     $this->language = $language;
@@ -3368,7 +3206,7 @@ class Google_Service_Blogger_UserLocale extends Google_Model
   {
     return $this->language;
   }
-
+  
   public function setVariant($variant)
   {
     $this->variant = $variant;
@@ -3378,4 +3216,5 @@ class Google_Service_Blogger_UserLocale extends Google_Model
   {
     return $this->variant;
   }
+  
 }

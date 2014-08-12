@@ -31,11 +31,6 @@
  */
 class Google_Service_Fusiontables extends Google_Service
 {
-  /** Manage your Fusion Tables. */
-  const FUSIONTABLES = "https://www.googleapis.com/auth/fusiontables";
-  /** View your Fusion Tables. */
-  const FUSIONTABLES_READONLY = "https://www.googleapis.com/auth/fusiontables.readonly";
-
   public $column;
   public $query;
   public $style;
@@ -53,484 +48,496 @@ class Google_Service_Fusiontables extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'fusiontables/v1/';
     $this->version = 'v1';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/fusiontables",
+      "https://www.googleapis.com/auth/fusiontables.readonly"
+    );
+    
     $this->serviceName = 'fusiontables';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->column = new Google_Service_Fusiontables_Column_Resource(
         $this,
         $this->serviceName,
         'column',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'tables/{tableId}/columns/{columnId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "tables/{tableId}/columns/{columnId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'columnId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'tables/{tableId}/columns/{columnId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "columnId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'columnId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'tables/{tableId}/columns',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'tables/{tableId}/columns',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "tables/{tableId}/columns/{columnId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'patch' => array(
-              'path' => 'tables/{tableId}/columns/{columnId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "columnId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'columnId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'tables/{tableId}/columns/{columnId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'columnId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+          ),"insert" => array(
+            'path' => "tables/{tableId}/columns",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "tables/{tableId}/columns",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "tables/{tableId}/columns/{columnId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "columnId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"update" => array(
+            'path' => "tables/{tableId}/columns/{columnId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "columnId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->query = new Google_Service_Fusiontables_Query_Resource(
         $this,
         $this->serviceName,
         'query',
         array(
-          'methods' => array(
-            'sql' => array(
-              'path' => 'query',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'sql' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "sql" => array(
+            'path' => "query",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "sql" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'typed' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'hdrs' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'sqlGet' => array(
-              'path' => 'query',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'sql' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "typed" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "hdrs" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"sqlGet" => array(
+            'path' => "query",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "sql" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'typed' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'hdrs' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),
-          )
+                "typed" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "hdrs" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->style = new Google_Service_Fusiontables_Style_Resource(
         $this,
         $this->serviceName,
         'style',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'tables/{tableId}/styles/{styleId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "tables/{tableId}/styles/{styleId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'styleId' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'tables/{tableId}/styles/{styleId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "styleId" => array(
+                  "location" => "path",
+                  "type" => "integer",
                   'required' => true,
-                ),
-                'styleId' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'tables/{tableId}/styles',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'tables/{tableId}/styles',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "tables/{tableId}/styles/{styleId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'patch' => array(
-              'path' => 'tables/{tableId}/styles/{styleId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "styleId" => array(
+                  "location" => "path",
+                  "type" => "integer",
                   'required' => true,
-                ),
-                'styleId' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'tables/{tableId}/styles/{styleId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'styleId' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+          ),"insert" => array(
+            'path' => "tables/{tableId}/styles",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "tables/{tableId}/styles",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "tables/{tableId}/styles/{styleId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "styleId" => array(
+                  "location" => "path",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+              ),
+          ),"update" => array(
+            'path' => "tables/{tableId}/styles/{styleId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "styleId" => array(
+                  "location" => "path",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->table = new Google_Service_Fusiontables_Table_Resource(
         $this,
         $this->serviceName,
         'table',
         array(
-          'methods' => array(
-            'copy' => array(
-              'path' => 'tables/{tableId}/copy',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "copy" => array(
+            'path' => "tables/{tableId}/copy",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'copyPresentation' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'delete' => array(
-              'path' => 'tables/{tableId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "copyPresentation" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"delete" => array(
+            'path' => "tables/{tableId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'tables/{tableId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"get" => array(
+            'path' => "tables/{tableId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'importRows' => array(
-              'path' => 'tables/{tableId}/import',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"importRows" => array(
+            'path' => "tables/{tableId}/import",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'startLine' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'isStrict' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'encoding' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'delimiter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'endLine' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'importTable' => array(
-              'path' => 'tables/import',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'name' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+                "startLine" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "isStrict" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "encoding" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "delimiter" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "endLine" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"importTable" => array(
+            'path' => "tables/import",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "name" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'delimiter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'encoding' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'tables',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'list' => array(
-              'path' => 'tables',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
+                "delimiter" => array(
+                  "location" => "query",
+                  "type" => "string",
               ),
-            ),'patch' => array(
-              'path' => 'tables/{tableId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "encoding" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"insert" => array(
+            'path' => "tables",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),"list" => array(
+            'path' => "tables",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "tables/{tableId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'replaceViewDefinition' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),'update' => array(
-              'path' => 'tables/{tableId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "replaceViewDefinition" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),"update" => array(
+            'path' => "tables/{tableId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'replaceViewDefinition' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),
-          )
+                "replaceViewDefinition" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->template = new Google_Service_Fusiontables_Template_Resource(
         $this,
         $this->serviceName,
         'template',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'tables/{tableId}/templates/{templateId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "tables/{tableId}/templates/{templateId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'templateId' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'tables/{tableId}/templates/{templateId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "templateId" => array(
+                  "location" => "path",
+                  "type" => "integer",
                   'required' => true,
-                ),
-                'templateId' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'tables/{tableId}/templates',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'tables/{tableId}/templates',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "tables/{tableId}/templates/{templateId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
               ),
-            ),'patch' => array(
-              'path' => 'tables/{tableId}/templates/{templateId}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "templateId" => array(
+                  "location" => "path",
+                  "type" => "integer",
                   'required' => true,
-                ),
-                'templateId' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'tables/{tableId}/templates/{templateId}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'tableId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'templateId' => array(
-                  'location' => 'path',
-                  'type' => 'integer',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+          ),"insert" => array(
+            'path' => "tables/{tableId}/templates",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "tables/{tableId}/templates",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "tables/{tableId}/templates/{templateId}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "templateId" => array(
+                  "location" => "path",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+              ),
+          ),"update" => array(
+            'path' => "tables/{tableId}/templates/{templateId}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "tableId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "templateId" => array(
+                  "location" => "path",
+                  "type" => "integer",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -594,7 +601,7 @@ class Google_Service_Fusiontables_Column_Resource extends Google_Service_Resourc
     return $this->call('insert', array($params), "Google_Service_Fusiontables_Column");
   }
   /**
-   * Retrieves a list of columns. (column.listColumn)
+   * Retrieves a list of columns. (column.list)
    *
    * @param string $tableId
    * Table whose columns are being listed.
@@ -761,7 +768,7 @@ class Google_Service_Fusiontables_Style_Resource extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_Fusiontables_StyleSetting");
   }
   /**
-   * Retrieves a list of styles. (style.listStyle)
+   * Retrieves a list of styles. (style.list)
    *
    * @param string $tableId
    * Table whose styles are being listed
@@ -939,7 +946,7 @@ class Google_Service_Fusiontables_Table_Resource extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_Fusiontables_Table");
   }
   /**
-   * Retrieves a list of tables a user owns. (table.listTable)
+   * Retrieves a list of tables a user owns. (table.list)
    *
    * @param array $optParams Optional parameters.
    *
@@ -1056,7 +1063,7 @@ class Google_Service_Fusiontables_Template_Resource extends Google_Service_Resou
     return $this->call('insert', array($params), "Google_Service_Fusiontables_Template");
   }
   /**
-   * Retrieves a list of templates. (template.listTemplate)
+   * Retrieves a list of templates. (template.list)
    *
    * @param string $tableId
    * Identifier for the table whose templates are being requested
@@ -1132,7 +1139,7 @@ class Google_Service_Fusiontables_Bucket extends Google_Model
   {
     return $this->color;
   }
-
+  
   public function setIcon($icon)
   {
     $this->icon = $icon;
@@ -1142,7 +1149,7 @@ class Google_Service_Fusiontables_Bucket extends Google_Model
   {
     return $this->icon;
   }
-
+  
   public function setMax($max)
   {
     $this->max = $max;
@@ -1152,7 +1159,7 @@ class Google_Service_Fusiontables_Bucket extends Google_Model
   {
     return $this->max;
   }
-
+  
   public function setMin($min)
   {
     $this->min = $min;
@@ -1162,7 +1169,7 @@ class Google_Service_Fusiontables_Bucket extends Google_Model
   {
     return $this->min;
   }
-
+  
   public function setOpacity($opacity)
   {
     $this->opacity = $opacity;
@@ -1172,7 +1179,7 @@ class Google_Service_Fusiontables_Bucket extends Google_Model
   {
     return $this->opacity;
   }
-
+  
   public function setWeight($weight)
   {
     $this->weight = $weight;
@@ -1182,6 +1189,7 @@ class Google_Service_Fusiontables_Bucket extends Google_Model
   {
     return $this->weight;
   }
+  
 }
 
 class Google_Service_Fusiontables_Column extends Google_Model
@@ -1189,8 +1197,6 @@ class Google_Service_Fusiontables_Column extends Google_Model
   protected $baseColumnType = 'Google_Service_Fusiontables_ColumnBaseColumn';
   protected $baseColumnDataType = '';
   public $columnId;
-  public $description;
-  public $graphPredicate;
   public $kind;
   public $name;
   public $type;
@@ -1204,7 +1210,7 @@ class Google_Service_Fusiontables_Column extends Google_Model
   {
     return $this->baseColumn;
   }
-
+  
   public function setColumnId($columnId)
   {
     $this->columnId = $columnId;
@@ -1214,27 +1220,7 @@ class Google_Service_Fusiontables_Column extends Google_Model
   {
     return $this->columnId;
   }
-
-  public function setDescription($description)
-  {
-    $this->description = $description;
-  }
-
-  public function getDescription()
-  {
-    return $this->description;
-  }
-
-  public function setGraphPredicate($graphPredicate)
-  {
-    $this->graphPredicate = $graphPredicate;
-  }
-
-  public function getGraphPredicate()
-  {
-    return $this->graphPredicate;
-  }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1244,7 +1230,7 @@ class Google_Service_Fusiontables_Column extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -1254,7 +1240,7 @@ class Google_Service_Fusiontables_Column extends Google_Model
   {
     return $this->name;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -1264,6 +1250,7 @@ class Google_Service_Fusiontables_Column extends Google_Model
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Fusiontables_ColumnBaseColumn extends Google_Model
@@ -1280,7 +1267,7 @@ class Google_Service_Fusiontables_ColumnBaseColumn extends Google_Model
   {
     return $this->columnId;
   }
-
+  
   public function setTableIndex($tableIndex)
   {
     $this->tableIndex = $tableIndex;
@@ -1290,6 +1277,7 @@ class Google_Service_Fusiontables_ColumnBaseColumn extends Google_Model
   {
     return $this->tableIndex;
   }
+  
 }
 
 class Google_Service_Fusiontables_ColumnList extends Google_Collection
@@ -1309,7 +1297,7 @@ class Google_Service_Fusiontables_ColumnList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1319,7 +1307,7 @@ class Google_Service_Fusiontables_ColumnList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -1329,7 +1317,7 @@ class Google_Service_Fusiontables_ColumnList extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setTotalItems($totalItems)
   {
     $this->totalItems = $totalItems;
@@ -1339,6 +1327,7 @@ class Google_Service_Fusiontables_ColumnList extends Google_Collection
   {
     return $this->totalItems;
   }
+  
 }
 
 class Google_Service_Fusiontables_Geometry extends Google_Collection
@@ -1356,7 +1345,7 @@ class Google_Service_Fusiontables_Geometry extends Google_Collection
   {
     return $this->geometries;
   }
-
+  
   public function setGeometry($geometry)
   {
     $this->geometry = $geometry;
@@ -1366,7 +1355,7 @@ class Google_Service_Fusiontables_Geometry extends Google_Collection
   {
     return $this->geometry;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -1376,6 +1365,7 @@ class Google_Service_Fusiontables_Geometry extends Google_Collection
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Fusiontables_Import extends Google_Model
@@ -1392,7 +1382,7 @@ class Google_Service_Fusiontables_Import extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setNumRowsReceived($numRowsReceived)
   {
     $this->numRowsReceived = $numRowsReceived;
@@ -1402,6 +1392,7 @@ class Google_Service_Fusiontables_Import extends Google_Model
   {
     return $this->numRowsReceived;
   }
+  
 }
 
 class Google_Service_Fusiontables_Line extends Google_Collection
@@ -1418,7 +1409,7 @@ class Google_Service_Fusiontables_Line extends Google_Collection
   {
     return $this->coordinates;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -1428,6 +1419,7 @@ class Google_Service_Fusiontables_Line extends Google_Collection
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Fusiontables_LineStyle extends Google_Model
@@ -1449,7 +1441,7 @@ class Google_Service_Fusiontables_LineStyle extends Google_Model
   {
     return $this->strokeColor;
   }
-
+  
   public function setStrokeColorStyler(Google_Service_Fusiontables_StyleFunction $strokeColorStyler)
   {
     $this->strokeColorStyler = $strokeColorStyler;
@@ -1459,7 +1451,7 @@ class Google_Service_Fusiontables_LineStyle extends Google_Model
   {
     return $this->strokeColorStyler;
   }
-
+  
   public function setStrokeOpacity($strokeOpacity)
   {
     $this->strokeOpacity = $strokeOpacity;
@@ -1469,7 +1461,7 @@ class Google_Service_Fusiontables_LineStyle extends Google_Model
   {
     return $this->strokeOpacity;
   }
-
+  
   public function setStrokeWeight($strokeWeight)
   {
     $this->strokeWeight = $strokeWeight;
@@ -1479,7 +1471,7 @@ class Google_Service_Fusiontables_LineStyle extends Google_Model
   {
     return $this->strokeWeight;
   }
-
+  
   public function setStrokeWeightStyler(Google_Service_Fusiontables_StyleFunction $strokeWeightStyler)
   {
     $this->strokeWeightStyler = $strokeWeightStyler;
@@ -1489,6 +1481,7 @@ class Google_Service_Fusiontables_LineStyle extends Google_Model
   {
     return $this->strokeWeightStyler;
   }
+  
 }
 
 class Google_Service_Fusiontables_Point extends Google_Collection
@@ -1505,7 +1498,7 @@ class Google_Service_Fusiontables_Point extends Google_Collection
   {
     return $this->coordinates;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -1515,6 +1508,7 @@ class Google_Service_Fusiontables_Point extends Google_Collection
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Fusiontables_PointStyle extends Google_Model
@@ -1532,7 +1526,7 @@ class Google_Service_Fusiontables_PointStyle extends Google_Model
   {
     return $this->iconName;
   }
-
+  
   public function setIconStyler(Google_Service_Fusiontables_StyleFunction $iconStyler)
   {
     $this->iconStyler = $iconStyler;
@@ -1542,6 +1536,7 @@ class Google_Service_Fusiontables_PointStyle extends Google_Model
   {
     return $this->iconStyler;
   }
+  
 }
 
 class Google_Service_Fusiontables_Polygon extends Google_Collection
@@ -1558,7 +1553,7 @@ class Google_Service_Fusiontables_Polygon extends Google_Collection
   {
     return $this->coordinates;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -1568,6 +1563,7 @@ class Google_Service_Fusiontables_Polygon extends Google_Collection
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Fusiontables_PolygonStyle extends Google_Model
@@ -1593,7 +1589,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->fillColor;
   }
-
+  
   public function setFillColorStyler(Google_Service_Fusiontables_StyleFunction $fillColorStyler)
   {
     $this->fillColorStyler = $fillColorStyler;
@@ -1603,7 +1599,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->fillColorStyler;
   }
-
+  
   public function setFillOpacity($fillOpacity)
   {
     $this->fillOpacity = $fillOpacity;
@@ -1613,7 +1609,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->fillOpacity;
   }
-
+  
   public function setStrokeColor($strokeColor)
   {
     $this->strokeColor = $strokeColor;
@@ -1623,7 +1619,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->strokeColor;
   }
-
+  
   public function setStrokeColorStyler(Google_Service_Fusiontables_StyleFunction $strokeColorStyler)
   {
     $this->strokeColorStyler = $strokeColorStyler;
@@ -1633,7 +1629,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->strokeColorStyler;
   }
-
+  
   public function setStrokeOpacity($strokeOpacity)
   {
     $this->strokeOpacity = $strokeOpacity;
@@ -1643,7 +1639,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->strokeOpacity;
   }
-
+  
   public function setStrokeWeight($strokeWeight)
   {
     $this->strokeWeight = $strokeWeight;
@@ -1653,7 +1649,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->strokeWeight;
   }
-
+  
   public function setStrokeWeightStyler(Google_Service_Fusiontables_StyleFunction $strokeWeightStyler)
   {
     $this->strokeWeightStyler = $strokeWeightStyler;
@@ -1663,6 +1659,7 @@ class Google_Service_Fusiontables_PolygonStyle extends Google_Model
   {
     return $this->strokeWeightStyler;
   }
+  
 }
 
 class Google_Service_Fusiontables_Sqlresponse extends Google_Collection
@@ -1680,7 +1677,7 @@ class Google_Service_Fusiontables_Sqlresponse extends Google_Collection
   {
     return $this->columns;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1690,7 +1687,7 @@ class Google_Service_Fusiontables_Sqlresponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setRows($rows)
   {
     $this->rows = $rows;
@@ -1700,6 +1697,7 @@ class Google_Service_Fusiontables_Sqlresponse extends Google_Collection
   {
     return $this->rows;
   }
+  
 }
 
 class Google_Service_Fusiontables_StyleFunction extends Google_Collection
@@ -1720,7 +1718,7 @@ class Google_Service_Fusiontables_StyleFunction extends Google_Collection
   {
     return $this->buckets;
   }
-
+  
   public function setColumnName($columnName)
   {
     $this->columnName = $columnName;
@@ -1730,7 +1728,7 @@ class Google_Service_Fusiontables_StyleFunction extends Google_Collection
   {
     return $this->columnName;
   }
-
+  
   public function setGradient(Google_Service_Fusiontables_StyleFunctionGradient $gradient)
   {
     $this->gradient = $gradient;
@@ -1740,7 +1738,7 @@ class Google_Service_Fusiontables_StyleFunction extends Google_Collection
   {
     return $this->gradient;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1750,6 +1748,7 @@ class Google_Service_Fusiontables_StyleFunction extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_Fusiontables_StyleFunctionGradient extends Google_Collection
@@ -1768,7 +1767,7 @@ class Google_Service_Fusiontables_StyleFunctionGradient extends Google_Collectio
   {
     return $this->colors;
   }
-
+  
   public function setMax($max)
   {
     $this->max = $max;
@@ -1778,7 +1777,7 @@ class Google_Service_Fusiontables_StyleFunctionGradient extends Google_Collectio
   {
     return $this->max;
   }
-
+  
   public function setMin($min)
   {
     $this->min = $min;
@@ -1788,6 +1787,7 @@ class Google_Service_Fusiontables_StyleFunctionGradient extends Google_Collectio
   {
     return $this->min;
   }
+  
 }
 
 class Google_Service_Fusiontables_StyleFunctionGradientColors extends Google_Model
@@ -1804,7 +1804,7 @@ class Google_Service_Fusiontables_StyleFunctionGradientColors extends Google_Mod
   {
     return $this->color;
   }
-
+  
   public function setOpacity($opacity)
   {
     $this->opacity = $opacity;
@@ -1814,6 +1814,7 @@ class Google_Service_Fusiontables_StyleFunctionGradientColors extends Google_Mod
   {
     return $this->opacity;
   }
+  
 }
 
 class Google_Service_Fusiontables_StyleSetting extends Google_Model
@@ -1838,7 +1839,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setMarkerOptions(Google_Service_Fusiontables_PointStyle $markerOptions)
   {
     $this->markerOptions = $markerOptions;
@@ -1848,7 +1849,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->markerOptions;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -1858,7 +1859,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->name;
   }
-
+  
   public function setPolygonOptions(Google_Service_Fusiontables_PolygonStyle $polygonOptions)
   {
     $this->polygonOptions = $polygonOptions;
@@ -1868,7 +1869,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->polygonOptions;
   }
-
+  
   public function setPolylineOptions(Google_Service_Fusiontables_LineStyle $polylineOptions)
   {
     $this->polylineOptions = $polylineOptions;
@@ -1878,7 +1879,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->polylineOptions;
   }
-
+  
   public function setStyleId($styleId)
   {
     $this->styleId = $styleId;
@@ -1888,7 +1889,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->styleId;
   }
-
+  
   public function setTableId($tableId)
   {
     $this->tableId = $tableId;
@@ -1898,6 +1899,7 @@ class Google_Service_Fusiontables_StyleSetting extends Google_Model
   {
     return $this->tableId;
   }
+  
 }
 
 class Google_Service_Fusiontables_StyleSettingList extends Google_Collection
@@ -1917,7 +1919,7 @@ class Google_Service_Fusiontables_StyleSettingList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1927,7 +1929,7 @@ class Google_Service_Fusiontables_StyleSettingList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -1937,7 +1939,7 @@ class Google_Service_Fusiontables_StyleSettingList extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setTotalItems($totalItems)
   {
     $this->totalItems = $totalItems;
@@ -1947,6 +1949,7 @@ class Google_Service_Fusiontables_StyleSettingList extends Google_Collection
   {
     return $this->totalItems;
   }
+  
 }
 
 class Google_Service_Fusiontables_Table extends Google_Collection
@@ -1972,7 +1975,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->attribution;
   }
-
+  
   public function setAttributionLink($attributionLink)
   {
     $this->attributionLink = $attributionLink;
@@ -1982,7 +1985,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->attributionLink;
   }
-
+  
   public function setBaseTableIds($baseTableIds)
   {
     $this->baseTableIds = $baseTableIds;
@@ -1992,7 +1995,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->baseTableIds;
   }
-
+  
   public function setColumns($columns)
   {
     $this->columns = $columns;
@@ -2002,7 +2005,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->columns;
   }
-
+  
   public function setDescription($description)
   {
     $this->description = $description;
@@ -2012,7 +2015,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->description;
   }
-
+  
   public function setIsExportable($isExportable)
   {
     $this->isExportable = $isExportable;
@@ -2022,7 +2025,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->isExportable;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2032,7 +2035,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -2042,7 +2045,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->name;
   }
-
+  
   public function setSql($sql)
   {
     $this->sql = $sql;
@@ -2052,7 +2055,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->sql;
   }
-
+  
   public function setTableId($tableId)
   {
     $this->tableId = $tableId;
@@ -2062,6 +2065,7 @@ class Google_Service_Fusiontables_Table extends Google_Collection
   {
     return $this->tableId;
   }
+  
 }
 
 class Google_Service_Fusiontables_TableList extends Google_Collection
@@ -2080,7 +2084,7 @@ class Google_Service_Fusiontables_TableList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2090,7 +2094,7 @@ class Google_Service_Fusiontables_TableList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -2100,6 +2104,7 @@ class Google_Service_Fusiontables_TableList extends Google_Collection
   {
     return $this->nextPageToken;
   }
+  
 }
 
 class Google_Service_Fusiontables_Template extends Google_Collection
@@ -2120,7 +2125,7 @@ class Google_Service_Fusiontables_Template extends Google_Collection
   {
     return $this->automaticColumnNames;
   }
-
+  
   public function setBody($body)
   {
     $this->body = $body;
@@ -2130,7 +2135,7 @@ class Google_Service_Fusiontables_Template extends Google_Collection
   {
     return $this->body;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2140,7 +2145,7 @@ class Google_Service_Fusiontables_Template extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setName($name)
   {
     $this->name = $name;
@@ -2150,7 +2155,7 @@ class Google_Service_Fusiontables_Template extends Google_Collection
   {
     return $this->name;
   }
-
+  
   public function setTableId($tableId)
   {
     $this->tableId = $tableId;
@@ -2160,7 +2165,7 @@ class Google_Service_Fusiontables_Template extends Google_Collection
   {
     return $this->tableId;
   }
-
+  
   public function setTemplateId($templateId)
   {
     $this->templateId = $templateId;
@@ -2170,6 +2175,7 @@ class Google_Service_Fusiontables_Template extends Google_Collection
   {
     return $this->templateId;
   }
+  
 }
 
 class Google_Service_Fusiontables_TemplateList extends Google_Collection
@@ -2189,7 +2195,7 @@ class Google_Service_Fusiontables_TemplateList extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -2199,7 +2205,7 @@ class Google_Service_Fusiontables_TemplateList extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -2209,7 +2215,7 @@ class Google_Service_Fusiontables_TemplateList extends Google_Collection
   {
     return $this->nextPageToken;
   }
-
+  
   public function setTotalItems($totalItems)
   {
     $this->totalItems = $totalItems;
@@ -2219,4 +2225,5 @@ class Google_Service_Fusiontables_TemplateList extends Google_Collection
   {
     return $this->totalItems;
   }
+  
 }

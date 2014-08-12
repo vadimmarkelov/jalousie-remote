@@ -15,7 +15,7 @@
         "info": "This is the WebApp to control Jalousie on the windows at Room 709.",
         "pleaselogin": "Please login to get access on jalouse ;)",
         "loading": "Loading...",
-        "stats": "Statistics of users commands:"
+        "stats": "Usage statistics:"
     },
     "error": {
         "ajaxfail": "Oops... there are some issues with server.<br/>We are very sorry :(",

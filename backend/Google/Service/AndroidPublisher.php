@@ -31,9 +31,6 @@
  */
 class Google_Service_AndroidPublisher extends Google_Service
 {
-  /** View and manage your Google Play Android Developer account. */
-  const ANDROIDPUBLISHER = "https://www.googleapis.com/auth/androidpublisher";
-
   public $inapppurchases;
   public $purchases;
   
@@ -48,87 +45,94 @@ class Google_Service_AndroidPublisher extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'androidpublisher/v1.1/applications/';
     $this->version = 'v1.1';
+    
     $this->serviceName = 'androidpublisher';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->inapppurchases = new Google_Service_AndroidPublisher_Inapppurchases_Resource(
         $this,
         $this->serviceName,
         'inapppurchases',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => '{packageName}/inapp/{productId}/purchases/{token}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'packageName' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "{packageName}/inapp/{productId}/purchases/{token}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "packageName" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'productId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'token' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+                "productId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "token" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
     $this->purchases = new Google_Service_AndroidPublisher_Purchases_Resource(
         $this,
         $this->serviceName,
         'purchases',
         array(
-          'methods' => array(
-            'cancel' => array(
-              'path' => '{packageName}/subscriptions/{subscriptionId}/purchases/{token}/cancel',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'packageName' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "cancel" => array(
+            'path' => "{packageName}/subscriptions/{subscriptionId}/purchases/{token}/cancel",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "packageName" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'subscriptionId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'token' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => '{packageName}/subscriptions/{subscriptionId}/purchases/{token}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'packageName' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "subscriptionId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'subscriptionId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'token' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+                "token" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"get" => array(
+            'path' => "{packageName}/subscriptions/{subscriptionId}/purchases/{token}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "packageName" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "subscriptionId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+                "token" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -239,7 +243,7 @@ class Google_Service_AndroidPublisher_InappPurchase extends Google_Model
   {
     return $this->consumptionState;
   }
-
+  
   public function setDeveloperPayload($developerPayload)
   {
     $this->developerPayload = $developerPayload;
@@ -249,7 +253,7 @@ class Google_Service_AndroidPublisher_InappPurchase extends Google_Model
   {
     return $this->developerPayload;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -259,7 +263,7 @@ class Google_Service_AndroidPublisher_InappPurchase extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setPurchaseState($purchaseState)
   {
     $this->purchaseState = $purchaseState;
@@ -269,7 +273,7 @@ class Google_Service_AndroidPublisher_InappPurchase extends Google_Model
   {
     return $this->purchaseState;
   }
-
+  
   public function setPurchaseTime($purchaseTime)
   {
     $this->purchaseTime = $purchaseTime;
@@ -279,6 +283,7 @@ class Google_Service_AndroidPublisher_InappPurchase extends Google_Model
   {
     return $this->purchaseTime;
   }
+  
 }
 
 class Google_Service_AndroidPublisher_SubscriptionPurchase extends Google_Model
@@ -297,7 +302,7 @@ class Google_Service_AndroidPublisher_SubscriptionPurchase extends Google_Model
   {
     return $this->autoRenewing;
   }
-
+  
   public function setInitiationTimestampMsec($initiationTimestampMsec)
   {
     $this->initiationTimestampMsec = $initiationTimestampMsec;
@@ -307,7 +312,7 @@ class Google_Service_AndroidPublisher_SubscriptionPurchase extends Google_Model
   {
     return $this->initiationTimestampMsec;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -317,7 +322,7 @@ class Google_Service_AndroidPublisher_SubscriptionPurchase extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setValidUntilTimestampMsec($validUntilTimestampMsec)
   {
     $this->validUntilTimestampMsec = $validUntilTimestampMsec;
@@ -327,4 +332,5 @@ class Google_Service_AndroidPublisher_SubscriptionPurchase extends Google_Model
   {
     return $this->validUntilTimestampMsec;
   }
+  
 }

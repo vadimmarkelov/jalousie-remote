@@ -31,8 +31,6 @@
  */
 class Google_Service_Pagespeedonline extends Google_Service
 {
-
-
   public $pagespeedapi;
   
 
@@ -46,48 +44,59 @@ class Google_Service_Pagespeedonline extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'pagespeedonline/v1/';
     $this->version = 'v1';
+    
     $this->serviceName = 'pagespeedonline';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->pagespeedapi = new Google_Service_Pagespeedonline_Pagespeedapi_Resource(
         $this,
         $this->serviceName,
         'pagespeedapi',
         array(
-          'methods' => array(
-            'runpagespeed' => array(
-              'path' => 'runPagespeed',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'url' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+    'methods' => array(
+          "runpagespeed" => array(
+            'path' => "runPagespeed",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "url" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'screenshot' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'locale' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'rule' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                ),
-                'strategy' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'filter_third_party_resources' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
-            ),
-          )
+                "screenshot" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "locale" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "snapshots" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "strategy" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "rule" => array(
+                  "location" => "query",
+                  "type" => "string",
+                  'repeated' => true,
+              ),
+                "filter_third_party_resources" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -117,10 +126,12 @@ class Google_Service_Pagespeedonline_Pagespeedapi_Resource extends Google_Servic
    * Indicates if binary data containing a screenshot should be included
    * @opt_param string locale
    * The locale used to localize formatted results
-   * @opt_param string rule
-   * A Page Speed rule to run; if none are given, all rules are run
+   * @opt_param bool snapshots
+   * Indicates if binary data containing snapshot images should be included
    * @opt_param string strategy
    * The analysis strategy to use
+   * @opt_param string rule
+   * A Page Speed rule to run; if none are given, all rules are run
    * @opt_param bool filter_third_party_resources
    * Indicates if third party resources should be filtered out before PageSpeed analysis.
    * @return Google_Service_Pagespeedonline_Result
@@ -145,6 +156,8 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   public $kind;
   protected $pageStatsType = 'Google_Service_Pagespeedonline_ResultPageStats';
   protected $pageStatsDataType = '';
+  protected $requestType = 'Google_Service_Pagespeedonline_ResultRequest';
+  protected $requestDataType = '';
   public $responseCode;
   public $score;
   protected $screenshotType = 'Google_Service_Pagespeedonline_ResultScreenshot';
@@ -162,7 +175,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->formattedResults;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -172,7 +185,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setInvalidRules($invalidRules)
   {
     $this->invalidRules = $invalidRules;
@@ -182,7 +195,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->invalidRules;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -192,7 +205,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setPageStats(Google_Service_Pagespeedonline_ResultPageStats $pageStats)
   {
     $this->pageStats = $pageStats;
@@ -202,7 +215,17 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->pageStats;
   }
+  
+  public function setRequest(Google_Service_Pagespeedonline_ResultRequest $request)
+  {
+    $this->request = $request;
+  }
 
+  public function getRequest()
+  {
+    return $this->request;
+  }
+  
   public function setResponseCode($responseCode)
   {
     $this->responseCode = $responseCode;
@@ -212,7 +235,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->responseCode;
   }
-
+  
   public function setScore($score)
   {
     $this->score = $score;
@@ -222,7 +245,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->score;
   }
-
+  
   public function setScreenshot(Google_Service_Pagespeedonline_ResultScreenshot $screenshot)
   {
     $this->screenshot = $screenshot;
@@ -232,7 +255,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->screenshot;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -242,7 +265,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->title;
   }
-
+  
   public function setVersion(Google_Service_Pagespeedonline_ResultVersion $version)
   {
     $this->version = $version;
@@ -252,6 +275,7 @@ class Google_Service_Pagespeedonline_Result extends Google_Collection
   {
     return $this->version;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResults extends Google_Model
@@ -269,7 +293,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResults extends Google_Model
   {
     return $this->locale;
   }
-
+  
   public function setRuleResults($ruleResults)
   {
     $this->ruleResults = $ruleResults;
@@ -279,6 +303,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResults extends Google_Model
   {
     return $this->ruleResults;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement extends Google_Collection
@@ -297,7 +322,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement ex
   {
     return $this->localizedRuleName;
   }
-
+  
   public function setRuleImpact($ruleImpact)
   {
     $this->ruleImpact = $ruleImpact;
@@ -307,7 +332,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement ex
   {
     return $this->ruleImpact;
   }
-
+  
   public function setUrlBlocks($urlBlocks)
   {
     $this->urlBlocks = $urlBlocks;
@@ -317,6 +342,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElement ex
   {
     return $this->urlBlocks;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocks extends Google_Collection
@@ -335,7 +361,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->header;
   }
-
+  
   public function setUrls($urls)
   {
     $this->urls = $urls;
@@ -345,6 +371,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->urls;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksHeader extends Google_Collection
@@ -362,7 +389,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->args;
   }
-
+  
   public function setFormat($format)
   {
     $this->format = $format;
@@ -372,6 +399,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->format;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksHeaderArgs extends Google_Model
@@ -388,7 +416,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->type;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -398,6 +426,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrls extends Google_Collection
@@ -416,7 +445,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->details;
   }
-
+  
   public function setResult(Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrlsResult $result)
   {
     $this->result = $result;
@@ -426,6 +455,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->result;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrlsDetails extends Google_Collection
@@ -443,7 +473,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->args;
   }
-
+  
   public function setFormat($format)
   {
     $this->format = $format;
@@ -453,6 +483,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->format;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrlsDetailsArgs extends Google_Model
@@ -469,7 +500,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->type;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -479,6 +510,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrlsResult extends Google_Collection
@@ -496,7 +528,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->args;
   }
-
+  
   public function setFormat($format)
   {
     $this->format = $format;
@@ -506,6 +538,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->format;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrlBlocksUrlsResultArgs extends Google_Model
@@ -522,7 +555,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->type;
   }
-
+  
   public function setValue($value)
   {
     $this->value = $value;
@@ -532,6 +565,7 @@ class Google_Service_Pagespeedonline_ResultFormattedResultsRuleResultsElementUrl
   {
     return $this->value;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
@@ -559,7 +593,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->cssResponseBytes;
   }
-
+  
   public function setFlashResponseBytes($flashResponseBytes)
   {
     $this->flashResponseBytes = $flashResponseBytes;
@@ -569,7 +603,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->flashResponseBytes;
   }
-
+  
   public function setHtmlResponseBytes($htmlResponseBytes)
   {
     $this->htmlResponseBytes = $htmlResponseBytes;
@@ -579,7 +613,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->htmlResponseBytes;
   }
-
+  
   public function setImageResponseBytes($imageResponseBytes)
   {
     $this->imageResponseBytes = $imageResponseBytes;
@@ -589,7 +623,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->imageResponseBytes;
   }
-
+  
   public function setJavascriptResponseBytes($javascriptResponseBytes)
   {
     $this->javascriptResponseBytes = $javascriptResponseBytes;
@@ -599,7 +633,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->javascriptResponseBytes;
   }
-
+  
   public function setNumberCssResources($numberCssResources)
   {
     $this->numberCssResources = $numberCssResources;
@@ -609,7 +643,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->numberCssResources;
   }
-
+  
   public function setNumberHosts($numberHosts)
   {
     $this->numberHosts = $numberHosts;
@@ -619,7 +653,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->numberHosts;
   }
-
+  
   public function setNumberJsResources($numberJsResources)
   {
     $this->numberJsResources = $numberJsResources;
@@ -629,7 +663,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->numberJsResources;
   }
-
+  
   public function setNumberResources($numberResources)
   {
     $this->numberResources = $numberResources;
@@ -639,7 +673,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->numberResources;
   }
-
+  
   public function setNumberStaticResources($numberStaticResources)
   {
     $this->numberStaticResources = $numberStaticResources;
@@ -649,7 +683,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->numberStaticResources;
   }
-
+  
   public function setOtherResponseBytes($otherResponseBytes)
   {
     $this->otherResponseBytes = $otherResponseBytes;
@@ -659,7 +693,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->otherResponseBytes;
   }
-
+  
   public function setTextResponseBytes($textResponseBytes)
   {
     $this->textResponseBytes = $textResponseBytes;
@@ -669,7 +703,7 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->textResponseBytes;
   }
-
+  
   public function setTotalRequestBytes($totalRequestBytes)
   {
     $this->totalRequestBytes = $totalRequestBytes;
@@ -679,13 +713,52 @@ class Google_Service_Pagespeedonline_ResultPageStats extends Google_Model
   {
     return $this->totalRequestBytes;
   }
+  
+}
+
+class Google_Service_Pagespeedonline_ResultRequest extends Google_Model
+{
+  public $filter_third_party_resources;
+  public $strategy;
+  public $url;
+
+  public function setFilter_third_party_resources($filter_third_party_resources)
+  {
+    $this->filter_third_party_resources = $filter_third_party_resources;
+  }
+
+  public function getFilter_third_party_resources()
+  {
+    return $this->filter_third_party_resources;
+  }
+  
+  public function setStrategy($strategy)
+  {
+    $this->strategy = $strategy;
+  }
+
+  public function getStrategy()
+  {
+    return $this->strategy;
+  }
+  
+  public function setUrl($url)
+  {
+    $this->url = $url;
+  }
+
+  public function getUrl()
+  {
+    return $this->url;
+  }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultScreenshot extends Google_Model
 {
   public $data;
   public $height;
-  public $mimeType;
+  public $mime_type;
   public $width;
 
   public function setData($data)
@@ -697,7 +770,7 @@ class Google_Service_Pagespeedonline_ResultScreenshot extends Google_Model
   {
     return $this->data;
   }
-
+  
   public function setHeight($height)
   {
     $this->height = $height;
@@ -707,17 +780,17 @@ class Google_Service_Pagespeedonline_ResultScreenshot extends Google_Model
   {
     return $this->height;
   }
-
-  public function setMimeType($mimeType)
+  
+  public function setMime_type($mime_type)
   {
-    $this->mimeType = $mimeType;
+    $this->mime_type = $mime_type;
   }
 
-  public function getMimeType()
+  public function getMime_type()
   {
-    return $this->mimeType;
+    return $this->mime_type;
   }
-
+  
   public function setWidth($width)
   {
     $this->width = $width;
@@ -727,6 +800,7 @@ class Google_Service_Pagespeedonline_ResultScreenshot extends Google_Model
   {
     return $this->width;
   }
+  
 }
 
 class Google_Service_Pagespeedonline_ResultVersion extends Google_Model
@@ -743,7 +817,7 @@ class Google_Service_Pagespeedonline_ResultVersion extends Google_Model
   {
     return $this->major;
   }
-
+  
   public function setMinor($minor)
   {
     $this->minor = $minor;
@@ -753,4 +827,5 @@ class Google_Service_Pagespeedonline_ResultVersion extends Google_Model
   {
     return $this->minor;
   }
+  
 }

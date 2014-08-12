@@ -31,15 +31,8 @@
  */
 class Google_Service_Mirror extends Google_Service
 {
-  /** View your location. */
-  const GLASS_LOCATION = "https://www.googleapis.com/auth/glass.location";
-  /** View and manage your Glass timeline. */
-  const GLASS_TIMELINE = "https://www.googleapis.com/auth/glass.timeline";
-
-  public $accounts;
   public $contacts;
   public $locations;
-  public $settings;
   public $subscriptions;
   public $timeline;
   public $timeline_attachments;
@@ -55,360 +48,285 @@ class Google_Service_Mirror extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'mirror/v1/';
     $this->version = 'v1';
+    
     $this->serviceName = 'mirror';
 
-    $this->accounts = new Google_Service_Mirror_Accounts_Resource(
-        $this,
+    $client->addService(
         $this->serviceName,
-        'accounts',
-        array(
-          'methods' => array(
-            'insert' => array(
-              'path' => 'accounts/{userToken}/{accountType}/{accountName}',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'userToken' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'accountType' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'accountName' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),
-          )
-        )
+        $this->version,
+        $this->availableScopes
     );
+
     $this->contacts = new Google_Service_Mirror_Contacts_Resource(
         $this,
         $this->serviceName,
         'contacts',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'contacts/{id}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "contacts/{id}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'contacts/{id}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"get" => array(
+            'path' => "contacts/{id}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'contacts',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'list' => array(
-              'path' => 'contacts',
-              'httpMethod' => 'GET',
-              'parameters' => array(),
-            ),'patch' => array(
-              'path' => 'contacts/{id}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"insert" => array(
+            'path' => "contacts",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),"list" => array(
+            'path' => "contacts",
+            'httpMethod' => "GET",
+            'parameters' => array(  ),
+          ),"patch" => array(
+            'path' => "contacts/{id}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'contacts/{id}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"update" => array(
+            'path' => "contacts/{id}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
     $this->locations = new Google_Service_Mirror_Locations_Resource(
         $this,
         $this->serviceName,
         'locations',
         array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'locations/{id}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "get" => array(
+            'path' => "locations/{id}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'locations',
-              'httpMethod' => 'GET',
-              'parameters' => array(),
-            ),
-          )
-        )
-    );
-    $this->settings = new Google_Service_Mirror_Settings_Resource(
-        $this,
-        $this->serviceName,
-        'settings',
-        array(
-          'methods' => array(
-            'get' => array(
-              'path' => 'settings/{id}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),
-          )
+          ),"list" => array(
+            'path' => "locations",
+            'httpMethod' => "GET",
+            'parameters' => array(  ),
+          ),
         )
+    )
     );
     $this->subscriptions = new Google_Service_Mirror_Subscriptions_Resource(
         $this,
         $this->serviceName,
         'subscriptions',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'subscriptions/{id}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "subscriptions/{id}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'subscriptions',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'list' => array(
-              'path' => 'subscriptions',
-              'httpMethod' => 'GET',
-              'parameters' => array(),
-            ),'update' => array(
-              'path' => 'subscriptions/{id}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"insert" => array(
+            'path' => "subscriptions",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),"list" => array(
+            'path' => "subscriptions",
+            'httpMethod' => "GET",
+            'parameters' => array(  ),
+          ),"update" => array(
+            'path' => "subscriptions/{id}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
     $this->timeline = new Google_Service_Mirror_Timeline_Resource(
         $this,
         $this->serviceName,
         'timeline',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'timeline/{id}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "timeline/{id}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'timeline/{id}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"get" => array(
+            'path' => "timeline/{id}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'timeline',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'list' => array(
-              'path' => 'timeline',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'orderBy' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'includeDeleted' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'sourceItemId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pinnedOnly' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'bundleId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
               ),
-            ),'patch' => array(
-              'path' => 'timeline/{id}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"insert" => array(
+            'path' => "timeline",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),"list" => array(
+            'path' => "timeline",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "orderBy" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "includeDeleted" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "maxResults" => array(
+                  "location" => "query",
+                  "type" => "integer",
+              ),
+                "pageToken" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "sourceItemId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+                "pinnedOnly" => array(
+                  "location" => "query",
+                  "type" => "boolean",
+              ),
+                "bundleId" => array(
+                  "location" => "query",
+                  "type" => "string",
+              ),
+              ),
+          ),"patch" => array(
+            'path' => "timeline/{id}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'timeline/{id}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"update" => array(
+            'path' => "timeline/{id}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
     $this->timeline_attachments = new Google_Service_Mirror_TimelineAttachments_Resource(
         $this,
         $this->serviceName,
         'attachments',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'timeline/{itemId}/attachments/{attachmentId}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'itemId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "timeline/{itemId}/attachments/{attachmentId}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "itemId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'attachmentId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'timeline/{itemId}/attachments/{attachmentId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'itemId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+                "attachmentId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
-                'attachmentId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'insert' => array(
-              'path' => 'timeline/{itemId}/attachments',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'itemId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'timeline/{itemId}/attachments',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'itemId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+          ),"get" => array(
+            'path' => "timeline/{itemId}/attachments/{attachmentId}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "itemId" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+                "attachmentId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"insert" => array(
+            'path' => "timeline/{itemId}/attachments",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "itemId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),"list" => array(
+            'path' => "timeline/{itemId}/attachments",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "itemId" => array(
+                  "location" => "path",
+                  "type" => "string",
+                  'required' => true,
+              ),
+              ),
+          ),
         )
+    )
     );
   }
 }
 
-
-/**
- * The "accounts" collection of methods.
- * Typical usage is:
- *  <code>
- *   $mirrorService = new Google_Service_Mirror(...);
- *   $accounts = $mirrorService->accounts;
- *  </code>
- */
-class Google_Service_Mirror_Accounts_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Inserts a new account for a user (accounts.insert)
-   *
-   * @param string $userToken
-   * The ID for the user.
-   * @param string $accountType
-   * Account type to be passed to Android Account Manager.
-   * @param string $accountName
-   * The name of the account to be passed to the Android Account Manager.
-   * @param Google_Account $postBody
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Mirror_Account
-   */
-  public function insert($userToken, $accountType, $accountName, Google_Service_Mirror_Account $postBody, $optParams = array())
-  {
-    $params = array('userToken' => $userToken, 'accountType' => $accountType, 'accountName' => $accountName, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('insert', array($params), "Google_Service_Mirror_Account");
-  }
-}
 
 /**
  * The "contacts" collection of methods.
@@ -462,8 +380,7 @@ class Google_Service_Mirror_Contacts_Resource extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_Mirror_Contact");
   }
   /**
-   * Retrieves a list of contacts for the authenticated user.
-   * (contacts.listContacts)
+   * Retrieves a list of contacts for the authenticated user. (contacts.list)
    *
    * @param array $optParams Optional parameters.
    * @return Google_Service_Mirror_ContactsListResponse
@@ -533,7 +450,7 @@ class Google_Service_Mirror_Locations_Resource extends Google_Service_Resource
     return $this->call('get', array($params), "Google_Service_Mirror_Location");
   }
   /**
-   * Retrieves a list of locations for the user. (locations.listLocations)
+   * Retrieves a list of locations for the user. (locations.list)
    *
    * @param array $optParams Optional parameters.
    * @return Google_Service_Mirror_LocationsListResponse
@@ -543,35 +460,6 @@ class Google_Service_Mirror_Locations_Resource extends Google_Service_Resource
     $params = array();
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_Mirror_LocationsListResponse");
-  }
-}
-
-/**
- * The "settings" collection of methods.
- * Typical usage is:
- *  <code>
- *   $mirrorService = new Google_Service_Mirror(...);
- *   $settings = $mirrorService->settings;
- *  </code>
- */
-class Google_Service_Mirror_Settings_Resource extends Google_Service_Resource
-{
-
-  /**
-   * Gets a single setting by ID. (settings.get)
-   *
-   * @param string $id
-   * The ID of the setting. The following IDs are valid:
-  - locale - The key to the user’s
-    * language/locale (BCP 47 identifier) that Glassware should use to render localized content.
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_Mirror_Setting
-   */
-  public function get($id, $optParams = array())
-  {
-    $params = array('id' => $id);
-    $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Mirror_Setting");
   }
 }
 
@@ -614,7 +502,7 @@ class Google_Service_Mirror_Subscriptions_Resource extends Google_Service_Resour
   }
   /**
    * Retrieves a list of subscriptions for the authenticated user and service.
-   * (subscriptions.listSubscriptions)
+   * (subscriptions.list)
    *
    * @param array $optParams Optional parameters.
    * @return Google_Service_Mirror_SubscriptionsListResponse
@@ -695,7 +583,7 @@ class Google_Service_Mirror_Timeline_Resource extends Google_Service_Resource
   }
   /**
    * Retrieves a list of timeline items for the authenticated user.
-   * (timeline.listTimeline)
+   * (timeline.list)
    *
    * @param array $optParams Optional parameters.
    *
@@ -812,8 +700,7 @@ class Google_Service_Mirror_TimelineAttachments_Resource extends Google_Service_
     return $this->call('insert', array($params), "Google_Service_Mirror_Attachment");
   }
   /**
-   * Returns a list of attachments for a timeline item.
-   * (attachments.listTimelineAttachments)
+   * Returns a list of attachments for a timeline item. (attachments.list)
    *
    * @param string $itemId
    * The ID of the timeline item whose attachments should be listed.
@@ -831,56 +718,6 @@ class Google_Service_Mirror_TimelineAttachments_Resource extends Google_Service_
 
 
 
-class Google_Service_Mirror_Account extends Google_Collection
-{
-  protected $authTokensType = 'Google_Service_Mirror_AuthToken';
-  protected $authTokensDataType = 'array';
-  public $features;
-  public $password;
-  protected $userDataType = 'Google_Service_Mirror_UserData';
-  protected $userDataDataType = 'array';
-
-  public function setAuthTokens($authTokens)
-  {
-    $this->authTokens = $authTokens;
-  }
-
-  public function getAuthTokens()
-  {
-    return $this->authTokens;
-  }
-
-  public function setFeatures($features)
-  {
-    $this->features = $features;
-  }
-
-  public function getFeatures()
-  {
-    return $this->features;
-  }
-
-  public function setPassword($password)
-  {
-    $this->password = $password;
-  }
-
-  public function getPassword()
-  {
-    return $this->password;
-  }
-
-  public function setUserData($userData)
-  {
-    $this->userData = $userData;
-  }
-
-  public function getUserData()
-  {
-    return $this->userData;
-  }
-}
-
 class Google_Service_Mirror_Attachment extends Google_Model
 {
   public $contentType;
@@ -897,7 +734,7 @@ class Google_Service_Mirror_Attachment extends Google_Model
   {
     return $this->contentType;
   }
-
+  
   public function setContentUrl($contentUrl)
   {
     $this->contentUrl = $contentUrl;
@@ -907,7 +744,7 @@ class Google_Service_Mirror_Attachment extends Google_Model
   {
     return $this->contentUrl;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -917,7 +754,7 @@ class Google_Service_Mirror_Attachment extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setIsProcessingContent($isProcessingContent)
   {
     $this->isProcessingContent = $isProcessingContent;
@@ -927,6 +764,7 @@ class Google_Service_Mirror_Attachment extends Google_Model
   {
     return $this->isProcessingContent;
   }
+  
 }
 
 class Google_Service_Mirror_AttachmentsListResponse extends Google_Collection
@@ -944,7 +782,7 @@ class Google_Service_Mirror_AttachmentsListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -954,32 +792,7 @@ class Google_Service_Mirror_AttachmentsListResponse extends Google_Collection
   {
     return $this->kind;
   }
-}
-
-class Google_Service_Mirror_AuthToken extends Google_Model
-{
-  public $authToken;
-  public $type;
-
-  public function setAuthToken($authToken)
-  {
-    $this->authToken = $authToken;
-  }
-
-  public function getAuthToken()
-  {
-    return $this->authToken;
-  }
-
-  public function setType($type)
-  {
-    $this->type = $type;
-  }
-
-  public function getType()
-  {
-    return $this->type;
-  }
+  
 }
 
 class Google_Service_Mirror_Command extends Google_Model
@@ -995,6 +808,7 @@ class Google_Service_Mirror_Command extends Google_Model
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Mirror_Contact extends Google_Collection
@@ -1022,7 +836,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->acceptCommands;
   }
-
+  
   public function setAcceptTypes($acceptTypes)
   {
     $this->acceptTypes = $acceptTypes;
@@ -1032,7 +846,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->acceptTypes;
   }
-
+  
   public function setDisplayName($displayName)
   {
     $this->displayName = $displayName;
@@ -1042,7 +856,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->displayName;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -1052,7 +866,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setImageUrls($imageUrls)
   {
     $this->imageUrls = $imageUrls;
@@ -1062,7 +876,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->imageUrls;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1072,7 +886,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setPhoneNumber($phoneNumber)
   {
     $this->phoneNumber = $phoneNumber;
@@ -1082,7 +896,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->phoneNumber;
   }
-
+  
   public function setPriority($priority)
   {
     $this->priority = $priority;
@@ -1092,7 +906,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->priority;
   }
-
+  
   public function setSharingFeatures($sharingFeatures)
   {
     $this->sharingFeatures = $sharingFeatures;
@@ -1102,7 +916,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->sharingFeatures;
   }
-
+  
   public function setSource($source)
   {
     $this->source = $source;
@@ -1112,7 +926,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->source;
   }
-
+  
   public function setSpeakableName($speakableName)
   {
     $this->speakableName = $speakableName;
@@ -1122,7 +936,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->speakableName;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -1132,6 +946,7 @@ class Google_Service_Mirror_Contact extends Google_Collection
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_Mirror_ContactsListResponse extends Google_Collection
@@ -1149,7 +964,7 @@ class Google_Service_Mirror_ContactsListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1159,6 +974,7 @@ class Google_Service_Mirror_ContactsListResponse extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_Mirror_Location extends Google_Model
@@ -1181,7 +997,7 @@ class Google_Service_Mirror_Location extends Google_Model
   {
     return $this->accuracy;
   }
-
+  
   public function setAddress($address)
   {
     $this->address = $address;
@@ -1191,7 +1007,7 @@ class Google_Service_Mirror_Location extends Google_Model
   {
     return $this->address;
   }
-
+  
   public function setDisplayName($displayName)
   {
     $this->displayName = $displayName;
@@ -1201,7 +1017,7 @@ class Google_Service_Mirror_Location extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -1211,7 +1027,7 @@ class Google_Service_Mirror_Location extends Google_Model
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1221,7 +1037,7 @@ class Google_Service_Mirror_Location extends Google_Model
   {
     return $this->kind;
   }
-
+  
   public function setLatitude($latitude)
   {
     $this->latitude = $latitude;
@@ -1231,7 +1047,7 @@ class Google_Service_Mirror_Location extends Google_Model
   {
     return $this->latitude;
   }
-
+  
   public function setLongitude($longitude)
   {
     $this->longitude = $longitude;
@@ -1241,7 +1057,7 @@ class Google_Service_Mirror_Location extends Google_Model
   {
     return $this->longitude;
   }
-
+  
   public function setTimestamp($timestamp)
   {
     $this->timestamp = $timestamp;
@@ -1251,6 +1067,7 @@ class Google_Service_Mirror_Location extends Google_Model
   {
     return $this->timestamp;
   }
+  
 }
 
 class Google_Service_Mirror_LocationsListResponse extends Google_Collection
@@ -1268,7 +1085,7 @@ class Google_Service_Mirror_LocationsListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1278,6 +1095,7 @@ class Google_Service_Mirror_LocationsListResponse extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_Mirror_MenuItem extends Google_Collection
@@ -1298,7 +1116,7 @@ class Google_Service_Mirror_MenuItem extends Google_Collection
   {
     return $this->action;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -1308,7 +1126,7 @@ class Google_Service_Mirror_MenuItem extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setPayload($payload)
   {
     $this->payload = $payload;
@@ -1318,7 +1136,7 @@ class Google_Service_Mirror_MenuItem extends Google_Collection
   {
     return $this->payload;
   }
-
+  
   public function setRemoveWhenSelected($removeWhenSelected)
   {
     $this->removeWhenSelected = $removeWhenSelected;
@@ -1328,7 +1146,7 @@ class Google_Service_Mirror_MenuItem extends Google_Collection
   {
     return $this->removeWhenSelected;
   }
-
+  
   public function setValues($values)
   {
     $this->values = $values;
@@ -1338,6 +1156,7 @@ class Google_Service_Mirror_MenuItem extends Google_Collection
   {
     return $this->values;
   }
+  
 }
 
 class Google_Service_Mirror_MenuValue extends Google_Model
@@ -1355,7 +1174,7 @@ class Google_Service_Mirror_MenuValue extends Google_Model
   {
     return $this->displayName;
   }
-
+  
   public function setIconUrl($iconUrl)
   {
     $this->iconUrl = $iconUrl;
@@ -1365,7 +1184,7 @@ class Google_Service_Mirror_MenuValue extends Google_Model
   {
     return $this->iconUrl;
   }
-
+  
   public function setState($state)
   {
     $this->state = $state;
@@ -1375,6 +1194,7 @@ class Google_Service_Mirror_MenuValue extends Google_Model
   {
     return $this->state;
   }
+  
 }
 
 class Google_Service_Mirror_Notification extends Google_Collection
@@ -1396,7 +1216,7 @@ class Google_Service_Mirror_Notification extends Google_Collection
   {
     return $this->collection;
   }
-
+  
   public function setItemId($itemId)
   {
     $this->itemId = $itemId;
@@ -1406,7 +1226,7 @@ class Google_Service_Mirror_Notification extends Google_Collection
   {
     return $this->itemId;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -1416,7 +1236,7 @@ class Google_Service_Mirror_Notification extends Google_Collection
   {
     return $this->operation;
   }
-
+  
   public function setUserActions($userActions)
   {
     $this->userActions = $userActions;
@@ -1426,7 +1246,7 @@ class Google_Service_Mirror_Notification extends Google_Collection
   {
     return $this->userActions;
   }
-
+  
   public function setUserToken($userToken)
   {
     $this->userToken = $userToken;
@@ -1436,7 +1256,7 @@ class Google_Service_Mirror_Notification extends Google_Collection
   {
     return $this->userToken;
   }
-
+  
   public function setVerifyToken($verifyToken)
   {
     $this->verifyToken = $verifyToken;
@@ -1446,6 +1266,7 @@ class Google_Service_Mirror_Notification extends Google_Collection
   {
     return $this->verifyToken;
   }
+  
 }
 
 class Google_Service_Mirror_NotificationConfig extends Google_Model
@@ -1462,7 +1283,7 @@ class Google_Service_Mirror_NotificationConfig extends Google_Model
   {
     return $this->deliveryTime;
   }
-
+  
   public function setLevel($level)
   {
     $this->level = $level;
@@ -1472,43 +1293,7 @@ class Google_Service_Mirror_NotificationConfig extends Google_Model
   {
     return $this->level;
   }
-}
-
-class Google_Service_Mirror_Setting extends Google_Model
-{
-  public $id;
-  public $kind;
-  public $value;
-
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  public function setKind($kind)
-  {
-    $this->kind = $kind;
-  }
-
-  public function getKind()
-  {
-    return $this->kind;
-  }
-
-  public function setValue($value)
-  {
-    $this->value = $value;
-  }
-
-  public function getValue()
-  {
-    return $this->value;
-  }
+  
 }
 
 class Google_Service_Mirror_Subscription extends Google_Collection
@@ -1533,7 +1318,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->callbackUrl;
   }
-
+  
   public function setCollection($collection)
   {
     $this->collection = $collection;
@@ -1543,7 +1328,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->collection;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -1553,7 +1338,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1563,7 +1348,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNotification(Google_Service_Mirror_Notification $notification)
   {
     $this->notification = $notification;
@@ -1573,7 +1358,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->notification;
   }
-
+  
   public function setOperation($operation)
   {
     $this->operation = $operation;
@@ -1583,7 +1368,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->operation;
   }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -1593,7 +1378,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->updated;
   }
-
+  
   public function setUserToken($userToken)
   {
     $this->userToken = $userToken;
@@ -1603,7 +1388,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->userToken;
   }
-
+  
   public function setVerifyToken($verifyToken)
   {
     $this->verifyToken = $verifyToken;
@@ -1613,6 +1398,7 @@ class Google_Service_Mirror_Subscription extends Google_Collection
   {
     return $this->verifyToken;
   }
+  
 }
 
 class Google_Service_Mirror_SubscriptionsListResponse extends Google_Collection
@@ -1630,7 +1416,7 @@ class Google_Service_Mirror_SubscriptionsListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1640,6 +1426,7 @@ class Google_Service_Mirror_SubscriptionsListResponse extends Google_Collection
   {
     return $this->kind;
   }
+  
 }
 
 class Google_Service_Mirror_TimelineItem extends Google_Collection
@@ -1686,7 +1473,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->attachments;
   }
-
+  
   public function setBundleId($bundleId)
   {
     $this->bundleId = $bundleId;
@@ -1696,7 +1483,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->bundleId;
   }
-
+  
   public function setCanonicalUrl($canonicalUrl)
   {
     $this->canonicalUrl = $canonicalUrl;
@@ -1706,7 +1493,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->canonicalUrl;
   }
-
+  
   public function setCreated($created)
   {
     $this->created = $created;
@@ -1716,7 +1503,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->created;
   }
-
+  
   public function setCreator(Google_Service_Mirror_Contact $creator)
   {
     $this->creator = $creator;
@@ -1726,7 +1513,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->creator;
   }
-
+  
   public function setDisplayTime($displayTime)
   {
     $this->displayTime = $displayTime;
@@ -1736,7 +1523,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->displayTime;
   }
-
+  
   public function setEtag($etag)
   {
     $this->etag = $etag;
@@ -1746,7 +1533,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->etag;
   }
-
+  
   public function setHtml($html)
   {
     $this->html = $html;
@@ -1756,7 +1543,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->html;
   }
-
+  
   public function setId($id)
   {
     $this->id = $id;
@@ -1766,7 +1553,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->id;
   }
-
+  
   public function setInReplyTo($inReplyTo)
   {
     $this->inReplyTo = $inReplyTo;
@@ -1776,7 +1563,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->inReplyTo;
   }
-
+  
   public function setIsBundleCover($isBundleCover)
   {
     $this->isBundleCover = $isBundleCover;
@@ -1786,7 +1573,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->isBundleCover;
   }
-
+  
   public function setIsDeleted($isDeleted)
   {
     $this->isDeleted = $isDeleted;
@@ -1796,7 +1583,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->isDeleted;
   }
-
+  
   public function setIsPinned($isPinned)
   {
     $this->isPinned = $isPinned;
@@ -1806,7 +1593,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->isPinned;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1816,7 +1603,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setLocation(Google_Service_Mirror_Location $location)
   {
     $this->location = $location;
@@ -1826,7 +1613,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->location;
   }
-
+  
   public function setMenuItems($menuItems)
   {
     $this->menuItems = $menuItems;
@@ -1836,7 +1623,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->menuItems;
   }
-
+  
   public function setNotification(Google_Service_Mirror_NotificationConfig $notification)
   {
     $this->notification = $notification;
@@ -1846,7 +1633,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->notification;
   }
-
+  
   public function setPinScore($pinScore)
   {
     $this->pinScore = $pinScore;
@@ -1856,7 +1643,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->pinScore;
   }
-
+  
   public function setRecipients($recipients)
   {
     $this->recipients = $recipients;
@@ -1866,7 +1653,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->recipients;
   }
-
+  
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -1876,7 +1663,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->selfLink;
   }
-
+  
   public function setSourceItemId($sourceItemId)
   {
     $this->sourceItemId = $sourceItemId;
@@ -1886,7 +1673,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->sourceItemId;
   }
-
+  
   public function setSpeakableText($speakableText)
   {
     $this->speakableText = $speakableText;
@@ -1896,7 +1683,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->speakableText;
   }
-
+  
   public function setSpeakableType($speakableType)
   {
     $this->speakableType = $speakableType;
@@ -1906,7 +1693,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->speakableType;
   }
-
+  
   public function setText($text)
   {
     $this->text = $text;
@@ -1916,7 +1703,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->text;
   }
-
+  
   public function setTitle($title)
   {
     $this->title = $title;
@@ -1926,7 +1713,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->title;
   }
-
+  
   public function setUpdated($updated)
   {
     $this->updated = $updated;
@@ -1936,6 +1723,7 @@ class Google_Service_Mirror_TimelineItem extends Google_Collection
   {
     return $this->updated;
   }
+  
 }
 
 class Google_Service_Mirror_TimelineListResponse extends Google_Collection
@@ -1954,7 +1742,7 @@ class Google_Service_Mirror_TimelineListResponse extends Google_Collection
   {
     return $this->items;
   }
-
+  
   public function setKind($kind)
   {
     $this->kind = $kind;
@@ -1964,7 +1752,7 @@ class Google_Service_Mirror_TimelineListResponse extends Google_Collection
   {
     return $this->kind;
   }
-
+  
   public function setNextPageToken($nextPageToken)
   {
     $this->nextPageToken = $nextPageToken;
@@ -1974,6 +1762,7 @@ class Google_Service_Mirror_TimelineListResponse extends Google_Collection
   {
     return $this->nextPageToken;
   }
+  
 }
 
 class Google_Service_Mirror_UserAction extends Google_Model
@@ -1990,7 +1779,7 @@ class Google_Service_Mirror_UserAction extends Google_Model
   {
     return $this->payload;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -2000,30 +1789,5 @@ class Google_Service_Mirror_UserAction extends Google_Model
   {
     return $this->type;
   }
-}
-
-class Google_Service_Mirror_UserData extends Google_Model
-{
-  public $key;
-  public $value;
-
-  public function setKey($key)
-  {
-    $this->key = $key;
-  }
-
-  public function getKey()
-  {
-    return $this->key;
-  }
-
-  public function setValue($value)
-  {
-    $this->value = $value;
-  }
-
-  public function getValue()
-  {
-    return $this->value;
-  }
+  
 }

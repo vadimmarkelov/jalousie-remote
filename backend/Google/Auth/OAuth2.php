@@ -50,9 +50,9 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
   private $state;
 
   /**
-   * @var array The token bundle.
+   * @var string The token bundle.
    */
-  private $token = array();
+  private $token;
 
   /**
    * @var Google_Client the base client
@@ -92,41 +92,43 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
   public function authenticate($code)
   {
     if (strlen($code) == 0) {
-      throw new Google_Auth_Exception("Invalid code");
+      throw new GoogleAuth_Exception("Invalid code");
     }
 
     // We got here from the redirect from a successful authorization grant,
     // fetch the access token
-    $request = new Google_Http_Request(
-        self::OAUTH2_TOKEN_URI,
-        'POST',
-        array(),
-        array(
-          'code' => $code,
-          'grant_type' => 'authorization_code',
-          'redirect_uri' => $this->client->getClassConfig($this, 'redirect_uri'),
-          'client_id' => $this->client->getClassConfig($this, 'client_id'),
-          'client_secret' => $this->client->getClassConfig($this, 'client_secret')
+    $request = $this->client->getIo()->makeRequest(
+        new Google_Http_Request(
+            $this->client,
+            self::OAUTH2_TOKEN_URI,
+            'POST',
+            array(),
+            array(
+              'code' => $code,
+              'grant_type' => 'authorization_code',
+              'redirect_uri' => $this->client->getClassConfig($this, 'redirect_uri'),
+              'client_id' => $this->client->getClassConfig($this, 'client_id'),
+              'client_secret' => $this->client->getClassConfig($this, 'client_secret')
+            )
         )
     );
-    $request->disableGzip();
-    $response = $this->client->getIo()->makeRequest($request);
 
-    if ($response->getResponseHttpCode() == 200) {
-      $this->setAccessToken($response->getResponseBody());
+    if ($request->getResponseHttpCode() == 200) {
+      $this->setAccessToken($request->getResponseBody());
       $this->token['created'] = time();
       return $this->getAccessToken();
     } else {
-      $decodedResponse = json_decode($response->getResponseBody(), true);
+      $response = $request->getResponseBody();
+      $decodedResponse = json_decode($response, true);
       if ($decodedResponse != null && $decodedResponse['error']) {
-        $decodedResponse = $decodedResponse['error'];
+        $response = $decodedResponse['error'];
       }
       throw new Google_Auth_Exception(
           sprintf(
               "Error fetching OAuth2 access token, message: '%s'",
-              $decodedResponse
+              $response
           ),
-          $response->getResponseHttpCode()
+          $request->getResponseHttpCode()
       );
     }
   }
@@ -149,11 +151,6 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
         'approval_prompt' => $this->client->getClassConfig($this, 'approval_prompt'),
     );
 
-    $login_hint = $this->client->getClassConfig($this, 'login_hint');
-    if ($login_hint != '') {
-      $params['login_hint'] = $login_hint;
-    }
-
     // If the list of scopes contains plus.login, add request_visible_actions
     // to auth URL.
     $rva = $this->client->getClassConfig($this, 'request_visible_actions');
@@ -165,7 +162,7 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
       $params['state'] = $this->state;
     }
 
-    return self::OAUTH2_AUTH_URL . "?" . http_build_query($params, '', '&');
+    return self::OAUTH2_AUTH_URL . "?" . http_build_query($params);
   }
 
   /**
@@ -227,7 +224,7 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
             throw new Google_Auth_Exception(
                 "The OAuth 2.0 access token has expired,"
                 ." and a refresh token is not available. Refresh tokens"
-                ." are not returned for responses that were auto-approved."
+                . "are not returned for responses that were auto-approved."
             );
         }
         $this->refreshToken($this->token['refresh_token']);
@@ -269,7 +266,7 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
     if (!$assertionCredentials) {
       $assertionCredentials = $this->assertionCredentials;
     }
-
+    
     $cacheKey = $assertionCredentials->getCacheKey();
 
     if ($cacheKey) {
@@ -284,7 +281,7 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
         return;
       }
     }
-
+    
     $this->refreshTokenRequest(
         array(
           'grant_type' => 'assertion',
@@ -292,7 +289,7 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
           'assertion' => $assertionCredentials->generateAssertion(),
         )
     );
-
+    
     if ($cacheKey) {
       // Attempt to cache the token.
       $this->client->getCache()->set(
@@ -305,12 +302,12 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
   private function refreshTokenRequest($params)
   {
     $http = new Google_Http_Request(
+        $this->client,
         self::OAUTH2_TOKEN_URI,
         'POST',
         array(),
         $params
     );
-    $http->disableGzip();
     $request = $this->client->getIo()->makeRequest($http);
 
     $code = $request->getResponseHttpCode();
@@ -325,9 +322,6 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
         throw new Google_Auth_Exception("Invalid token format");
       }
 
-      if (isset($token['id_token'])) {
-        $this->token['id_token'] = $token['id_token'];
-      }
       $this->token['access_token'] = $token['access_token'];
       $this->token['expires_in'] = $token['expires_in'];
       $this->token['created'] = time();
@@ -336,32 +330,25 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
     }
   }
 
-  /**
-   * Revoke an OAuth2 access token or refresh token. This method will revoke the current access
-   * token, if a token isn't provided.
-   * @throws Google_Auth_Exception
-   * @param string|null $token The token (access token or a refresh token) that should be revoked.
-   * @return boolean Returns True if the revocation was successful, otherwise False.
-   */
+    /**
+     * Revoke an OAuth2 access token or refresh token. This method will revoke the current access
+     * token, if a token isn't provided.
+     * @throws Google_Auth_Exception
+     * @param string|null $token The token (access token or a refresh token) that should be revoked.
+     * @return boolean Returns True if the revocation was successful, otherwise False.
+     */
   public function revokeToken($token = null)
   {
     if (!$token) {
-      if (!$this->token) {
-        // Not initialized, no token to actually revoke
-        return false;
-      } elseif (array_key_exists('refresh_token', $this->token)) {
-        $token = $this->token['refresh_token'];
-      } else {
-        $token = $this->token['access_token'];
-      }
+      $token = $this->token['access_token'];
     }
     $request = new Google_Http_Request(
+        $this->client,
         self::OAUTH2_REVOKE_URI,
         'POST',
         array(),
         "token=$token"
     );
-    $request->disableGzip();
     $response = $this->client->getIo()->makeRequest($request);
     $code = $response->getResponseHttpCode();
     if ($code == 200) {
@@ -378,7 +365,7 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
    */
   public function isAccessTokenExpired()
   {
-    if (!$this->token || !isset($this->token['created'])) {
+    if (!$this->token) {
       return true;
     }
 
@@ -422,6 +409,7 @@ class Google_Auth_OAuth2 extends Google_Auth_Abstract
     // This relies on makeRequest caching certificate responses.
     $request = $this->client->getIo()->makeRequest(
         new Google_Http_Request(
+            $this->client,
             $url
         )
     );

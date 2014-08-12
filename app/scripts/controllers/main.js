@@ -8,16 +8,19 @@
  * Controller of the jalousieRemoteApp
  */
 angular.module('jalousieRemoteApp')
-  .controller('MainCtrl',['$scope', 'userData', function ($scope, userData) {
-	console.log(userData);
+  .controller('MainCtrl',['$scope', 'userData', 'stats', function ($scope, userData, stats) {
 	$scope.userName = userData.author;
 	$scope.logged = userData.author !== '';
-	$scope.label = "name";
+	$scope.label = "user";
 	$scope.lineHeight=30;
-	$scope.d3Data = [
-		{name: "markelov.vadim", up: 100, down:10},
-		{name: "qwertyu", up: 10, down:100},
-		{name: "zxcvb", up: 30, down:30},
-		{name: "mmmmmmmmmmmmmmmmmmmm", up: 1000, down:10}
-	];
+	$scope.refreshingStats = true;
+	$scope.d3Data = [];
+	stats.getStats().then(null, null, function(data){
+		if(data) {
+			$scope.refreshingStats = false;
+			$scope.d3Data=data;
+		} else {
+			$scope.refreshingStats = true;
+		}
+	});
   }]);

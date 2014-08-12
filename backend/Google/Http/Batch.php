@@ -29,12 +29,12 @@ class Google_Http_Batch
 
   /** @var array service requests to be executed. */
   private $requests = array();
-
+  
   /** @var Google_Client */
   private $client;
-
+  
   private $expected_classes = array();
-
+  
   private $base_path;
 
   public function __construct(Google_Client $client, $boundary = false)
@@ -70,11 +70,11 @@ class Google_Http_Batch
     $body .= "\n--{$this->boundary}--";
 
     $url = $this->base_path . '/batch';
-    $httpRequest = new Google_Http_Request($url, 'POST');
+    $httpRequest = new Google_Http_Request($this->client, $url, 'POST');
     $httpRequest->setRequestHeaders(
         array('Content-Type' => 'multipart/mixed; boundary=' . $this->boundary)
     );
-
+    
     $httpRequest->setPostBody($body);
     $response = $this->client->getIo()->makeRequest($httpRequest);
 
@@ -110,7 +110,7 @@ class Google_Http_Batch
           $status = $status[1];
 
           list($partHeaders, $partBody) = $this->client->getIo()->ParseHttpResponse($part, false);
-          $response = new Google_Http_Request("");
+          $response = new Google_Http_Request($this->client, "");
           $response->setResponseHttpCode($status);
           $response->setResponseHeaders($partHeaders);
           $response->setResponseBody($partBody);
@@ -124,14 +124,8 @@ class Google_Http_Batch
             $response->setExpectedClass($class);
           }
 
-          try {
-            $response = Google_Http_REST::decodeHttpResponse($response);
-            $responses[$key] = $response;
-          } catch (Google_Service_Exception $e) {
-            // Store the exception as the response, so succesful responses
-            // can be processed.
-            $responses[$key] = $e;
-          }
+          $response = Google_Http_REST::decodeHttpResponse($response);
+          $responses[$key] = $response;
         }
       }
 

@@ -31,11 +31,6 @@
  */
 class Google_Service_SiteVerification extends Google_Service
 {
-  /** Manage the list of sites and domains you control. */
-  const SITEVERIFICATION = "https://www.googleapis.com/auth/siteverification";
-  /** Manage your new site verifications with Google. */
-  const SITEVERIFICATION_VERIFY_ONLY = "https://www.googleapis.com/auth/siteverification.verify_only";
-
   public $webResource;
   
 
@@ -49,75 +44,87 @@ class Google_Service_SiteVerification extends Google_Service
     parent::__construct($client);
     $this->servicePath = 'siteVerification/v1/';
     $this->version = 'v1';
+    
+    $this->availableScopes = array(
+      "https://www.googleapis.com/auth/siteverification",
+      "https://www.googleapis.com/auth/siteverification.verify_only"
+    );
+    
     $this->serviceName = 'siteVerification';
+
+    $client->addService(
+        $this->serviceName,
+        $this->version,
+        $this->availableScopes
+    );
 
     $this->webResource = new Google_Service_SiteVerification_WebResource_Resource(
         $this,
         $this->serviceName,
         'webResource',
         array(
-          'methods' => array(
-            'delete' => array(
-              'path' => 'webResource/{id}',
-              'httpMethod' => 'DELETE',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+    'methods' => array(
+          "delete" => array(
+            'path' => "webResource/{id}",
+            'httpMethod' => "DELETE",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'get' => array(
-              'path' => 'webResource/{id}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"get" => array(
+            'path' => "webResource/{id}",
+            'httpMethod' => "GET",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'getToken' => array(
-              'path' => 'token',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'insert' => array(
-              'path' => 'webResource',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'verificationMethod' => array(
-                  'location' => 'query',
-                  'type' => 'string',
+              ),
+          ),"getToken" => array(
+            'path' => "token",
+            'httpMethod' => "POST",
+            'parameters' => array(  ),
+          ),"insert" => array(
+            'path' => "webResource",
+            'httpMethod' => "POST",
+            'parameters' => array(
+                "verificationMethod" => array(
+                  "location" => "query",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'list' => array(
-              'path' => 'webResource',
-              'httpMethod' => 'GET',
-              'parameters' => array(),
-            ),'patch' => array(
-              'path' => 'webResource/{id}',
-              'httpMethod' => 'PATCH',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"list" => array(
+            'path' => "webResource",
+            'httpMethod' => "GET",
+            'parameters' => array(  ),
+          ),"patch" => array(
+            'path' => "webResource/{id}",
+            'httpMethod' => "PATCH",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),'update' => array(
-              'path' => 'webResource/{id}',
-              'httpMethod' => 'PUT',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'path',
-                  'type' => 'string',
+              ),
+          ),"update" => array(
+            'path' => "webResource/{id}",
+            'httpMethod' => "PUT",
+            'parameters' => array(
+                "id" => array(
+                  "location" => "path",
+                  "type" => "string",
                   'required' => true,
-                ),
               ),
-            ),
-          )
+              ),
+          ),
         )
+    )
     );
   }
 }
@@ -191,8 +198,7 @@ class Google_Service_SiteVerification_WebResource_Resource extends Google_Servic
     return $this->call('insert', array($params), "Google_Service_SiteVerification_SiteVerificationWebResourceResource");
   }
   /**
-   * Get the list of your verified websites and domains.
-   * (webResource.listWebResource)
+   * Get the list of your verified websites and domains. (webResource.list)
    *
    * @param array $optParams Optional parameters.
    * @return Google_Service_SiteVerification_SiteVerificationWebResourceListResponse
@@ -254,7 +260,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceGettokenRequest
   {
     return $this->site;
   }
-
+  
   public function setVerificationMethod($verificationMethod)
   {
     $this->verificationMethod = $verificationMethod;
@@ -264,6 +270,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceGettokenRequest
   {
     return $this->verificationMethod;
   }
+  
 }
 
 class Google_Service_SiteVerification_SiteVerificationWebResourceGettokenRequestSite extends Google_Model
@@ -280,7 +287,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceGettokenRequest
   {
     return $this->identifier;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -290,6 +297,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceGettokenRequest
   {
     return $this->type;
   }
+  
 }
 
 class Google_Service_SiteVerification_SiteVerificationWebResourceGettokenResponse extends Google_Model
@@ -306,7 +314,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceGettokenRespons
   {
     return $this->method;
   }
-
+  
   public function setToken($token)
   {
     $this->token = $token;
@@ -316,6 +324,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceGettokenRespons
   {
     return $this->token;
   }
+  
 }
 
 class Google_Service_SiteVerification_SiteVerificationWebResourceListResponse extends Google_Collection
@@ -332,6 +341,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceListResponse ex
   {
     return $this->items;
   }
+  
 }
 
 class Google_Service_SiteVerification_SiteVerificationWebResourceResource extends Google_Collection
@@ -350,7 +360,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceResource extend
   {
     return $this->id;
   }
-
+  
   public function setOwners($owners)
   {
     $this->owners = $owners;
@@ -360,7 +370,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceResource extend
   {
     return $this->owners;
   }
-
+  
   public function setSite(Google_Service_SiteVerification_SiteVerificationWebResourceResourceSite $site)
   {
     $this->site = $site;
@@ -370,6 +380,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceResource extend
   {
     return $this->site;
   }
+  
 }
 
 class Google_Service_SiteVerification_SiteVerificationWebResourceResourceSite extends Google_Model
@@ -386,7 +397,7 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceResourceSite ex
   {
     return $this->identifier;
   }
-
+  
   public function setType($type)
   {
     $this->type = $type;
@@ -396,4 +407,5 @@ class Google_Service_SiteVerification_SiteVerificationWebResourceResourceSite ex
   {
     return $this->type;
   }
+  
 }
