@@ -1,6 +1,6 @@
 {
   "name": "jalousieremote",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.1",
@@ -36,6 +36,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "postinstall": "bower install",
     "test": "grunt test"
   }
 }
