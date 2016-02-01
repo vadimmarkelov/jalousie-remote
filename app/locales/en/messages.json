@@ -1,7 +1,7 @@
 {
     "authenticate": {
         "hello" : "Hello",
-        "login": "Login with Googgle account",
+        "login": "Login with Google account",
         "logout": "Logout"
     },
     "menu" : {
@@ -12,7 +12,7 @@
         "close": "Close down"
     },
     "messages": {
-        "info": "This is the WebApp to control Jalousie on the windows at Room 709.",
+        "info": "This is the WebApp to control Jalousie on the windows at Room 2.20, Ziggo, Helmond, Netherlands.",
         "pleaselogin": "Please login to get access on jalouse ;)",
         "loading": "Loading...",
         "stats": "Usage statistics:"
