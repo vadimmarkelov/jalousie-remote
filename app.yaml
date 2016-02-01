@@ -1,5 +1,5 @@
 application: jalousie-remote
-version: 21
+version: 22
 runtime: php
 api_version: 1
 
