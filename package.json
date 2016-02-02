@@ -1,6 +1,6 @@
 {
   "name": "jalousieremote",
-  "version": "1.0.0",
+  "version": "22.0.0",
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.1",
