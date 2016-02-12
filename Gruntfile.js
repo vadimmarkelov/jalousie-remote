@@ -170,11 +170,12 @@ module.exports = function (grunt) {
       app: {
         src: ['<%= settings.app %>/index.html'],
         ignorePath:  /\.\.\//,
-        exclude: ['jquery-1.11.1']
+        exclude: ['jquery-1.11.1', 'pebble-slate']
       },
       sass: {
         src: ['<%= settings.app %>/styles/{,*/}*.{scss,sass}'],
-        ignorePath: /(\.\.\/){1,2}bower_components\//
+        ignorePath: /(\.\.\/){1,2}bower_components\//,
+        exclude: ['pebble-slate']
       }
     },
 
@@ -223,7 +224,7 @@ module.exports = function (grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: ['<%= settings.app %>/index.html', '<%= settings.app %>/robot.html'],
+      html: ['<%= settings.app %>/index.html', '<%= settings.app %>/robot.html', '<%= settings.app %>/pebble.html'],
       options: {
         dest: '<%= settings.dist %>',
         flow: {
@@ -328,11 +329,11 @@ module.exports = function (grunt) {
     },
 
     // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= settings.dist %>/*.html']
-      }
-    },
+    // cdnify: {
+    //   dist: {
+    //     html: ['<%= settings.dist %>/*.html']
+    //   }
+    // },
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -440,7 +441,7 @@ module.exports = function (grunt) {
     'concat',
     'ngmin',
     'copy:dist',
-    'cdnify',
+//    'cdnify',
     'cssmin',
     'uglify',
     'filerev',

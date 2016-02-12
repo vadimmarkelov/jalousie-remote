@@ -1,0 +1,56 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="jalousie-remote-settings-pebble">
+    <meta name="author" content="Vadim Markelov">
+
+    <title>Jalousie-R Settings for Pebble App by Vadim Markelov</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css(.) styles/vendor.pebble.css -->
+    <link rel='stylesheet' type='text/css' href='bower_components/pebble-slate/dist/css/slate.min.css'>    
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/pebble.css -->
+    <link rel="stylesheet" href="styles/pebble.css">
+    <!-- endbuild -->
+</head>
+<body>
+
+    <!-- Add your site or application content here -->
+    <div class='item-container'>
+        <h1 class='title'>Jalousie-remote</h1>
+    </div>
+
+    <div class='item-container'>
+        <div class='item-container-content'>
+            <div class='item'>
+                Use this page to login with your Google credentials.
+            </div>
+        </div>
+    </div>
+
+    <div class='item-container'>
+        <div class='button-container'>
+            <input id='loginButton' type='button' class='item-button' value='LOGIN'>
+        </div>
+    </div>
+
+    <div class='item-container'>
+        <div class='button-container'>
+            <input id='submitButton' type='button' class='item-button' value='SAVE'>
+        </div>
+    </div>
+
+    <!-- build:js(.) scripts/vendor.pebble.js -->
+    <script src='bower_components/pebble-slate/dist/js/slate.min.js'></script>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/pebble.js -->
+    <script src="scripts/pebble.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

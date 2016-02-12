@@ -15,7 +15,8 @@
     "i18next": "~1.7.3",
     "ng-i18next": "~0.3.2",
     "font-awesome": "~4.1.0",
-    "jquery-1.11.1": "http://code.jquery.com/jquery-1.11.1.js"
+    "jquery-1.11.1": "http://code.jquery.com/jquery-1.11.1.js",
+    "pebble-slate": "~0.0.3"
   },
   "devDependencies": {
     "angular-mocks": "1.2.16",

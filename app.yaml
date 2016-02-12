@@ -1,5 +1,5 @@
 application: jalousie-remote
-version: 22
+version: 23
 runtime: php55
 api_version: 1
 
@@ -27,6 +27,9 @@ handlers:
 
 - url: /robot
   script: dist/robot.html
+
+- url: /pebble
+  script: dist/pebble.html
 
 - url: .*
   script: dist/index.html
