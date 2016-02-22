@@ -11,16 +11,16 @@
   }
 
   $li=new LoginInfo();
-
+  $goto=$_GET["goto"]?$_GET["goto"]:"";
   $user = UserService::getCurrentUser();
   if($user) {
-    $li->url=$url = UserService::createLogoutURL('', "google.com");
+    $li->url=$url = UserService::createLogoutURL($goto, "google.com");
     $url_linktext = "Logout";
     $li->author=$author = $user->getNickname();
     $welcomeText="Hello, ".$author."!";
   }
   else {
-    $li->url=$url = UserService::createLoginURL('');
+    $li->url=$url = UserService::createLoginURL($goto);
     $url_linktext = "Login";
     $li->author=$author = "";
     $welcomeText="Hello!";

@@ -20,7 +20,7 @@ angular.module('jalousieRemoteApp')
           },
           def=$q.defer();
 
-      var getUserData = function() {
+      var getUserData = function(goto) {
         if(userData.author !== null){
           def.resolve(userData);
           return  def.promise;
@@ -28,7 +28,7 @@ angular.module('jalousieRemoteApp')
           if(request) {
             return def.promise;
           } else {
-            request = $http.get(httpUri)
+            request = $http.get(httpUri + (goto?'?goto='+goto:''))
               .success(function (data) {
                 angular.extend(userData,data);
                 def.resolve(userData);

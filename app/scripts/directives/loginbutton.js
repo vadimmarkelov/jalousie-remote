@@ -19,7 +19,7 @@ angular.module('jalousieRemoteApp')
       link: function postLink(scope, element, attrs) {
 			scope.url='#';
 			scope.caption='messages.loading';
-			authenticate.getUserData().then(
+			authenticate.getUserData(attrs.goto).then(
 				function(userData){
 					if(userData.author) {
 						scope.caption='authenticate.logout';

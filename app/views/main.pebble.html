@@ -1,0 +1,22 @@
+<div class='item-container'>
+    <div class='item-container-content'>
+        <div class='item'>
+            <span ng-if="!logged">{{'authenticate.hello' | i18next}}!</span>
+            <span ng-if="logged">{{'authenticate.hello' | i18next}}, {{userName}}!</span>
+        </div>
+    </div>
+</div>
+
+<div class='item-container'>
+    <div class='button-container'>
+        <login-button goto='/pebble' class='item-button' />
+    </div>
+</div>
+
+<div class='item-container'>
+    <div class='button-container'>
+        <input id='submitButton' type='button' class='item-button' value='Done'>
+    </div>
+</div>
+
+
