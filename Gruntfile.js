@@ -369,6 +369,12 @@ module.exports = function (grunt) {
           src: 'bower_components/font-awesome/fonts/*',
           dest: '<%= settings.dist %>/fonts',
           flatten: true,
+        }, {
+          expand: true,
+          cwd: '.',
+          src: 'bower_components/pebble-slate/dist/fonts/*',
+          dest: '<%= settings.dist %>/fonts',
+          flatten: true,
         }]
       },
       styles: {
